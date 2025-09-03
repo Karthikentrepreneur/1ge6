@@ -1,84 +1,84 @@
-import React, { useEffect } from 'react';
-import loadBackgroudImages from '../Common/loadBackgroudImages';
+import React from 'react';
 import parse from 'html-react-parser';
-import Slider from 'react-slick';
 
 const Heroanner1 = () => {
+  // Update with your actual video path
+  const videoSrc = '/assets/videos/hero.mp4';
 
-    const heroContent = [
-        {img:'/hanna.png', subtitle:'Get unforgettable pleasure with us', title:'Let’s make your best <br> trip with us'},
-        {img:'/assets/img/hero/02.jpg', subtitle:'Get unforgettable pleasure with us', title:'Let’s make your best <br> trip with us'},
-        {img:'/assets/img/hero/03.jpg', subtitle:'Get unforgettable pleasure with us', title:'Let’s make your best <br> trip with us'},
-    ];
+  const heroContent = {
+    subtitle: 'Get unforgettable pleasure with us',
+    title: 'Let’s make your best <br> trip with us',
+  };
 
-    useEffect(() => {
-        loadBackgroudImages();
-    }, []);
+  return (
+    <section className="hero-section">
+      {/* Inline styles for the video background */}
+      <style>{`
+        .hero-1 { position: relative; overflow: hidden; }
+        .video-bg {
+          position: absolute; inset: 0;
+          width: 100%; height: 100%;
+          z-index: 0;
+        }
+        .video-bg video {
+          width: 100%; height: 100%;
+          object-fit: cover; object-position: center;
+        }
+        .video-overlay {
+          position: absolute; inset: 0;
+          background: linear-gradient(0deg, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0.25) 50%, rgba(0,0,0,0.55) 100%);
+          z-index: 1;
+        }
+        .hero-content, .counter-area {
+          position: relative; z-index: 2;
+        }
+      `}</style>
 
-    const settings = {
-        dots: false,
-        infinite: true,
-        fade: true,
-        speed: 2000,
-        slidesToShow: 1,
-        slidesToScroll: 1,
-        arrows: false,
-        autoplay: true,
-        autoplaySpeed: 4000,        
-        responsive: [
-            { breakpoint: 1399, settings: { slidesToShow: 1 } },
-            { breakpoint: 1199, settings: { slidesToShow: 1 } },
-            { breakpoint: 575, settings: { slidesToShow: 1 } }
-        ]
-    };  
+      <div className="hero-1">
+        {/* Background video */}
+        <div className="video-bg" aria-hidden="true">
+          <video
+            src="singapore.mp4"
+            autoPlay
+            muted
+            loop
+            playsInline
+            preload="auto"
+          />
+        </div>
+        <div className="video-overlay" />
 
-    return (
-        <section className="hero-section">
-            <div className="swiper hero-slider">
-                <div className="swiper-wrapper">
-                    <Slider {...settings}>
-                        {heroContent.map((item, i) => (
-                            <div key={i} className="swiper-slide">
-                                <div className="hero-1">
-                                    <div className="hero-bg bg-cover" data-background={item.img}></div>
-                                    <div className="container">
-                                        <div className="row">
-                                            <div className="col-lg-10">
-                                                <div className="hero-content">
-                                                    <div className="sub-title">
-                                                        {item.subtitle}
-                                                    </div>
-                                                    <h1>{parse(item.title)}</h1>
-                                                </div>
+        <div className="container">
+          <div className="row">
+            <div className="col-lg-10">
+              <div className="hero-content">
+                <div className="sub-title">{heroContent.subtitle}</div>
+                <h1>{parse(heroContent.title)}</h1>
+              </div>
 
-                                                <div className="counter-area">
-                                                    <div className="counter-items">
-                                                        <div className="counter-text">
-                                                            <h2><span className="count">20.5</span>k</h2>
-                                                            <p>Featured Projects</p>
-                                                        </div>
-                                                        <div className="counter-text">
-                                                            <h2><span className="count">100.5</span>k</h2>
-                                                            <p>Luxury Houses</p>
-                                                        </div>
-                                                        <div className="counter-text">
-                                                            <h2><span className="count">150.5</span>k</h2>
-                                                            <p>Satisficed Clients</p>
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        ))}
-                    </Slider>
+              <div className="counter-area">
+                <div className="counter-items">
+                  <div className="counter-text">
+                    <h2><span className="count">20.5</span>k</h2>
+                    <p>Featured Projects</p>
+                  </div>
+                  <div className="counter-text">
+                    <h2><span className="count">100.5</span>k</h2>
+                    <p>Luxury Houses</p>
+                  </div>
+                  <div className="counter-text">
+                    <h2><span className="count">150.5</span>k</h2>
+                    <p>Satisficed Clients</p>
+                  </div>
                 </div>
+              </div>
+
             </div>
-        </section>
-    );
+          </div>
+        </div>
+      </div>
+    </section>
+  );
 };
 
 export default Heroanner1;
