@@ -1,13 +1,12 @@
 import React from 'react';
-import parse from 'html-react-parser';
 
 const Heroanner1 = () => {
   // Update with your actual video path
-  const videoSrc = '/assets/videos/hero.mp4';
+  const videoSrc = 'singapore.mp4';
 
   const heroContent = {
-    subtitle: 'Get unforgettable pleasure with us',
-    title: 'Let’s make your best <br> trip with us',
+    subtitle: 'Sustainability Through Innovation',
+    title: '“Where logistics, technology, and energy meet excellence.”',
   };
 
   return (
@@ -29,8 +28,22 @@ const Heroanner1 = () => {
           background: linear-gradient(0deg, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0.25) 50%, rgba(0,0,0,0.55) 100%);
           z-index: 1;
         }
-        .hero-content, .counter-area {
+        .hero-content {
           position: relative; z-index: 2;
+          color: #fff;
+          text-align: left;
+          padding-top: 180px; /* adjust spacing as needed */
+        }
+        .hero-content h1 {
+          font-size: 2.5rem;
+          font-weight: 600;
+          line-height: 1.3;
+          margin-top: 10px;
+        }
+        .hero-content .sub-title {
+          font-size: 1.25rem;
+          font-weight: 500;
+          opacity: 0.9;
         }
       `}</style>
 
@@ -53,26 +66,8 @@ const Heroanner1 = () => {
             <div className="col-lg-10">
               <div className="hero-content">
                 <div className="sub-title">{heroContent.subtitle}</div>
-                <h1>{parse(heroContent.title)}</h1>
+                <h1>{heroContent.title}</h1>
               </div>
-
-              <div className="counter-area">
-                <div className="counter-items">
-                  <div className="counter-text">
-                    <h2><span className="count">20.5</span>k</h2>
-                    <p>Featured Projects</p>
-                  </div>
-                  <div className="counter-text">
-                    <h2><span className="count">100.5</span>k</h2>
-                    <p>Luxury Houses</p>
-                  </div>
-                  <div className="counter-text">
-                    <h2><span className="count">150.5</span>k</h2>
-                    <p>Satisficed Clients</p>
-                  </div>
-                </div>
-              </div>
-
             </div>
           </div>
         </div>
