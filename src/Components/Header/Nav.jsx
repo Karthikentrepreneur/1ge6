@@ -4,7 +4,7 @@ import { Link } from "react-router";
 export default function Nav({ setMobileToggle }) {
   return (
     <ul className="cs_nav_list fw-medium">
-      <li className="menu-item-has-children">
+      <li >
         <Link to="/">Home</Link>
       </li>
 
