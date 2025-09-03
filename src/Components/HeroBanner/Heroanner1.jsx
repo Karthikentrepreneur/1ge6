@@ -1,7 +1,6 @@
 import React from 'react';
 
 const Heroanner1 = () => {
-  // Update with your actual video path
   const videoSrc = 'singapore.mp4';
 
   const heroContent = {
@@ -11,7 +10,6 @@ const Heroanner1 = () => {
 
   return (
     <section className="hero-section">
-      {/* Inline styles for the video background */}
       <style>{`
         .hero-1 { 
           position: relative; 
@@ -19,7 +17,8 @@ const Heroanner1 = () => {
           min-height: 100vh; /* full viewport height */
           display: flex;
           align-items: center; /* vertical center */
-          justify-content: center; /* horizontal center */
+          justify-content: flex-start; /* push content left */
+          padding-left: 8%; /* add spacing from left edge */
         }
         .video-bg {
           position: absolute; inset: 0;
@@ -39,9 +38,8 @@ const Heroanner1 = () => {
           position: relative; 
           z-index: 2;
           color: #fff;
-          text-align: center; /* center text horizontally */
-          max-width: 900px;
-          padding: 0 20px;
+          text-align: left; /* align text left */
+          max-width: 650px;
         }
         .hero-content h1 {
           font-size: 2.8rem;
@@ -55,6 +53,7 @@ const Heroanner1 = () => {
           opacity: 0.9;
         }
         @media (max-width: 768px) {
+          .hero-1 { padding-left: 5%; }
           .hero-content h1 { font-size: 2rem; }
           .hero-content .sub-title { font-size: 1.1rem; }
         }
