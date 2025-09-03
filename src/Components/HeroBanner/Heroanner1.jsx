@@ -6,14 +6,21 @@ const Heroanner1 = () => {
 
   const heroContent = {
     subtitle: 'Sustainability Through Innovation',
-    title: '“Where logistics, technology, <br> and energy meet excellence.”',
+    title: '“Where logistics, technology, and energy meet excellence.”',
   };
 
   return (
     <section className="hero-section">
       {/* Inline styles for the video background */}
       <style>{`
-        .hero-1 { position: relative; overflow: hidden; }
+        .hero-1 { 
+          position: relative; 
+          overflow: hidden; 
+          min-height: 100vh; /* full viewport height */
+          display: flex;
+          align-items: center; /* vertical center */
+          justify-content: center; /* horizontal center */
+        }
         .video-bg {
           position: absolute; inset: 0;
           width: 100%; height: 100%;
@@ -29,21 +36,27 @@ const Heroanner1 = () => {
           z-index: 1;
         }
         .hero-content {
-          position: relative; z-index: 2;
+          position: relative; 
+          z-index: 2;
           color: #fff;
-          text-align: left;
-          padding-top: 180px; /* adjust spacing as needed */
+          text-align: center; /* center text horizontally */
+          max-width: 900px;
+          padding: 0 20px;
         }
         .hero-content h1 {
-          font-size: 2.5rem;
-          font-weight: 600;
-          line-height: 1.3;
-          margin-top: 10px;
+          font-size: 2.8rem;
+          font-weight: 700;
+          line-height: 1.2;
+          margin-top: 15px;
         }
         .hero-content .sub-title {
-          font-size: 1.25rem;
+          font-size: 1.3rem;
           font-weight: 500;
           opacity: 0.9;
+        }
+        @media (max-width: 768px) {
+          .hero-content h1 { font-size: 2rem; }
+          .hero-content .sub-title { font-size: 1.1rem; }
         }
       `}</style>
 
@@ -61,15 +74,9 @@ const Heroanner1 = () => {
         </div>
         <div className="video-overlay" />
 
-        <div className="container">
-          <div className="row">
-            <div className="col-lg-10">
-              <div className="hero-content">
-                <div className="sub-title">{heroContent.subtitle}</div>
-                <h1>{heroContent.title}</h1>
-              </div>
-            </div>
-          </div>
+        <div className="hero-content">
+          <div className="sub-title">{heroContent.subtitle}</div>
+          <h1>{heroContent.title}</h1>
         </div>
       </div>
     </section>
