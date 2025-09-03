@@ -6,7 +6,7 @@ import Slider from 'react-slick';
 const Heroanner1 = () => {
 
     const heroContent = [
-        {img:'/assets/img/hero/01.jpg', subtitle:'Get unforgettable pleasure with us', title:'Let’s make your best <br> trip with us'},
+        {img:'/hanna.png', subtitle:'Get unforgettable pleasure with us', title:'Let’s make your best <br> trip with us'},
         {img:'/assets/img/hero/02.jpg', subtitle:'Get unforgettable pleasure with us', title:'Let’s make your best <br> trip with us'},
         {img:'/assets/img/hero/03.jpg', subtitle:'Get unforgettable pleasure with us', title:'Let’s make your best <br> trip with us'},
     ];
