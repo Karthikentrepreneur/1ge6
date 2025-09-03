@@ -1,6 +1,6 @@
-import { useEffect, useState } from "react";
-import { Link } from "react-router-dom"; // use react-router-dom
-import Nav from "./Nav";
+import { useEffect, useState } from 'react';
+import { Link } from "react-router";
+import Nav from './Nav';
 
 export default function Header3({ variant }) {
   const [mobileToggle, setMobileToggle] = useState(false);
@@ -11,40 +11,51 @@ export default function Header3({ variant }) {
   useEffect(() => {
     const handleScroll = () => {
       const currentScrollPos = window.scrollY;
-
       if (currentScrollPos > prevScrollPos) {
-        setIsSticky("cs-gescout_sticky"); // scrolling down
+        setIsSticky('cs-gescout_sticky'); // Scrolling down
       } else if (currentScrollPos !== 0) {
-        setIsSticky("cs-gescout_show cs-gescout_sticky"); // scrolling up
+        setIsSticky('cs-gescout_show cs-gescout_sticky'); // Scrolling up
       } else {
-        setIsSticky(undefined);
+        setIsSticky();
       }
       setPrevScrollPos(currentScrollPos);
     };
 
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    return () => window.removeEventListener("scroll", handleScroll);
+    window.addEventListener('scroll', handleScroll);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
   }, [prevScrollPos]);
-
-  const stickyActive = !!isSticky;
-  const logoHeight = stickyActive ? 42 : 56;
 
   return (
     <div>
-      {/* logo sizing */}
+      {/* Inline CSS to control logo size — no imports */}
       <style>{`
-        .brand-wrap { display: flex; align-items: center; }
-        .brand-wrap img { height: ${logoHeight}px; width: auto; max-width: 200px; object-fit: contain; }
-        @media (max-width: 991px) { .brand-wrap img { height: 44px; } }
-        @media (max-width: 575px) { .brand-wrap img { height: 40px; } }
+        .cs_site_branding img {
+          height: clamp(40px, 5vw, 64px); /* normal size */
+          width: auto;
+          display: block;
+          object-fit: contain;
+        }
+        /* When header becomes sticky, gently reduce the logo size */
+        .cs_sticky_header .cs_site_branding img,
+        .cs-gescout_sticky .cs_site_branding img {
+          height: clamp(34px, 4.2vw, 56px);
+        }
+        /* Ensure the img never overflows its container */
+        .cs_main_header_left .cs_site_branding {
+          display: inline-flex;
+          align-items: center;
+          line-height: 0;
+        }
       `}</style>
 
       <header
         className={`cs_site_header header_style_2 header_style_2_2 cs_style_1 header_sticky_style1 ${
-          variant ? variant : ""
+          variant ? variant : ''
         } cs_sticky_header cs_site_header_full_width ${
-          mobileToggle ? "cs_mobile_toggle_active" : ""
-        } ${isSticky ? isSticky : ""}`}
+          mobileToggle ? 'cs_mobile_toggle_active' : ''
+        } ${isSticky ? isSticky : ''}`}
       >
         <div className="cs_top_header">
           <div className="container">
@@ -53,15 +64,11 @@ export default function Header3({ variant }) {
                 <ul className="cs_header_contact_list cs_mp_0 cs_white_color">
                   <li>
                     <i className="bi bi-envelope-fill"></i>
-                    <a href="mailto:demo@example.com" aria-label="Email link">
-                      demo@example.com
-                    </a>
+                    <a href="mailto:demo@example.com" aria-label="Email link">demo@example.com</a>
                   </li>
                   <li>
                     <i className="bi bi-telephone-fill"></i>
-                    <a href="tel:+990123456789" aria-label="Phone call link">
-                      +990 123 456 789
-                    </a>
+                    <a href="tel:+990123456789" aria-label="Phone call link">+990 123 456 789</a>
                   </li>
                   <li>
                     <i className="bi bi-geo-alt-fill"></i>
@@ -69,7 +76,6 @@ export default function Header3({ variant }) {
                   </li>
                 </ul>
               </div>
-
               <div className="cs_top_header_right">
                 <div className="cs_header_social_links_wrap">
                   <div className="cs_header_social_links top-header-social-icon">
@@ -98,13 +104,8 @@ export default function Header3({ variant }) {
           <div className="container">
             <div className="cs_main_header_in">
               <div className="cs_main_header_left">
-                <Link className="cs_site_branding brand-wrap" to="/">
-                  <img
-                    src="/one-globe.png"
-                    alt="Logo"
-                    decoding="async"
-                    fetchPriority="high"
-                  />
+                <Link className="cs_site_branding" to="/">
+                  <img src="/one-globe.png" alt="Logo" />
                 </Link>
               </div>
 
@@ -113,8 +114,8 @@ export default function Header3({ variant }) {
                   <span
                     className={
                       mobileToggle
-                        ? "cs-munu_toggle cs_teggle_active"
-                        : "cs-munu_toggle"
+                        ? 'cs-munu_toggle cs_teggle_active'
+                        : 'cs-munu_toggle'
                     }
                     onClick={() => setMobileToggle(!mobileToggle)}
                   >
@@ -127,10 +128,7 @@ export default function Header3({ variant }) {
               <div className="cs_main_header_right">
                 <div className="header-btn d-flex align-items-center">
                   <div className="main-button">
-                    <a
-                      onClick={() => setSearchToggle(!searchToggle)}
-                      className="search-trigger search-icon"
-                    >
+                    <a onClick={() => setSearchToggle(!searchToggle)} className="search-trigger search-icon">
                       <i className="bi bi-search"></i>
                     </a>
                     <Link to="/contact" className="theme-btn">
@@ -141,6 +139,7 @@ export default function Header3({ variant }) {
                   </div>
                 </div>
               </div>
+
             </div>
           </div>
         </div>
@@ -148,7 +147,7 @@ export default function Header3({ variant }) {
 
       <div className="cs_site_header_spacing_140"></div>
 
-      <div className={`search-wrap ${searchToggle ? "active" : ""}`}>
+      <div className={`search-wrap ${searchToggle ? 'active' : ''}`}>
         <div className="search-inner">
           <i
             onClick={() => setSearchToggle(!searchToggle)}
@@ -158,16 +157,13 @@ export default function Header3({ variant }) {
           <div className="search-cell">
             <form method="get">
               <div className="search-field-holder">
-                <input
-                  type="search"
-                  className="main-search-input"
-                  placeholder="Search..."
-                />
+                <input type="search" className="main-search-input" placeholder="Search..." />
               </div>
             </form>
           </div>
         </div>
       </div>
+
     </div>
   );
 }
