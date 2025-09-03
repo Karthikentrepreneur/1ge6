@@ -104,7 +104,7 @@ const About1 = () => {
 
                   <div className="about-items wow fadeInUp" data-wow-delay=".5s">
                     <div className="icon">
-                      <img src="/assets/img/icon/06.svg" alt="img" />
+                      <img src="/Container_ship.jpg" alt="img" />
                     </div>
                     <div className="content">
                       <h5>Our Reach</h5>
