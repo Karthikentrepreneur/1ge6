@@ -4,7 +4,7 @@ import { Link } from "react-router";
 export default function Nav({ setMobileToggle }) {
   return (
     <ul className="cs_nav_list fw-medium">
-      <li >
+      <li>
         <Link to="/">Home</Link>
       </li>
 
