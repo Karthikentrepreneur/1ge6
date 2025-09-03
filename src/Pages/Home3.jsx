@@ -17,16 +17,8 @@ const Home3 = () => {
     return (
         <div>
             <Heroanner1></Heroanner1>
-            <Feature1></Feature1>
-            <Category1></Category1>
             <About1></About1>
-            <Cta1></Cta1>
-            <Destination1></Destination1>
-            <DealOffers1></DealOffers1>
-            <Testimonial1></Testimonial1>
-            <Choose1></Choose1>
-            <Team1></Team1>
-            <Cta2></Cta2>
+            <Category1></Category1>
             <Blog1></Blog1>
             <Brand1></Brand1>
         </div>
