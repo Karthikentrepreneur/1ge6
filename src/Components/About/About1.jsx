@@ -3,7 +3,6 @@ import loadBackgroudImages from '../Common/loadBackgroudImages';
 import VideoModal from '../VideoModal/VideoModal';
 
 const About1 = () => {
-
   useEffect(() => {
     loadBackgroudImages();
   }, []);
@@ -32,7 +31,7 @@ const About1 = () => {
       <div className="container">
         <div className="about-wrapper">
           <div className="row g-4">
-            {/* LEFT: Images & Video */}
+            {/* LEFT IMAGE + VIDEO */}
             <div className="col-lg-6">
               <div className="about-image">
                 <img
@@ -43,7 +42,6 @@ const About1 = () => {
                 <div className="border-image">
                   <img src="/assets/img/about/border.png" alt="" />
                 </div>
-
                 <div className="vdeo-item">
                   <a onClick={handelClick} className="video-btn video-popup">
                     <i className="bi bi-play-fill"></i>
@@ -59,11 +57,8 @@ const About1 = () => {
                     data-wow-duration="1.5s"
                     data-wow-delay="0.3s"
                   />
-                  <div className="plane-shape float-bob-y">
-                    <img src="/assets/img/about/plane-shape.png" alt="" />
-                  </div>
+                  {/* Removed plane-shape.png */}
 
-                  {/* Small badge card */}
                   <div className="about-tour">
                     <div className="icon">
                       <img src="/assets/img/icon/10.svg" alt="img" />
@@ -77,16 +72,15 @@ const About1 = () => {
               </div>
             </div>
 
-            {/* RIGHT: Content */}
+            {/* RIGHT CONTENT */}
             <div className="col-lg-6">
               <div className="about-content">
                 <div className="section-title">
                   <span className="sub-title wow fadeInUp">
-                    Singapore-Headquartered Business Group
+                    Singapore Headquarters
                   </span>
                   <h2 className="wow fadeInUp" data-wow-delay=".2s">
-                    Enabling growth across<br />
-                    logistics, technology & energy
+                    1 Global Enterprises
                   </h2>
                 </div>
 
@@ -95,7 +89,6 @@ const About1 = () => {
                     <img src="/assets/img/about/Line-image.png" alt="img" />
                   </div>
 
-                  {/* Item 1 */}
                   <div className="about-items wow fadeInUp" data-wow-delay=".3s">
                     <div className="icon">
                       <img src="/assets/img/icon/05.svg" alt="img" />
@@ -103,60 +96,37 @@ const About1 = () => {
                     <div className="content">
                       <h5>Who We Are</h5>
                       <p>
-                        1 Global Enterprises Pte Ltd is a Singapore-headquartered group with
-                        diversified interests spanning Shipping, Logistics & Supply Chain,
-                        Product Distribution, Software/IT, Renewable Energy (clean/green
-                        solutions), and Trading.
+                        A diversified group with interests in Shipping,
+                        Logistics, Distribution, IT, Clean Energy & Trading.
                       </p>
                     </div>
                   </div>
 
-                  {/* Item 2 */}
                   <div className="about-items wow fadeInUp" data-wow-delay=".5s">
                     <div className="icon">
                       <img src="/assets/img/icon/06.svg" alt="img" />
                     </div>
                     <div className="content">
-                      <h5>Regional Footprint</h5>
+                      <h5>Our Reach</h5>
                       <p>
-                        Our 700+ professionals operate in 16+ countries across South-East Asia,
-                        the Indian Sub-continent, the Middle East, the USA, and the UK—delivering
-                        dependable solutions and seamless execution at scale.
+                        700+ professionals operating across South-East Asia,
+                        Middle East, USA & UK.
                       </p>
                     </div>
                   </div>
 
-                  {/* Item 3 */}
                   <div className="about-items wow fadeInUp" data-wow-delay=".7s">
                     <div className="icon">
                       <img src="/assets/img/icon/07.svg" alt="img" />
                     </div>
                     <div className="content">
-                      <h5>Expert-Led Business Units</h5>
+                      <h5>Expertise</h5>
                       <p>
-                        Each business unit is led by seasoned domain experts who ensure
-                        disciplined execution, compliance, and the successful implementation of
-                        our strategic plans across markets and industries.
+                        Each business unit is led by experts ensuring strong
+                        execution & growth.
                       </p>
                     </div>
                   </div>
-
-                  {/* Optional: quick pillars row (kept minimal, no layout changes) */}
-                  {/* You can remove this block if not needed */}
-                  <div className="about-items wow fadeInUp" data-wow-delay=".9s">
-                    <div className="icon">
-                      <img src="/assets/img/icon/06.svg" alt="img" />
-                    </div>
-                    <div className="content">
-                      <h5>What We Do</h5>
-                      <p>
-                        <strong>Shipping & Logistics</strong> • <strong>Product Distribution</strong> •{' '}
-                        <strong>Software/IT</strong> • <strong>Renewable/Clean Energy</strong> •{' '}
-                        <strong>Trading</strong>
-                      </p>
-                    </div>
-                  </div>
-                  {/* End optional block */}
                 </div>
               </div>
             </div>
