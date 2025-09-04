@@ -1,90 +1,88 @@
 import React from 'react';
 import { Link } from 'react-router';
-import Slider from 'react-slick';
 
 const Category1 = () => {
+  const categoryContent = [
+    {
+      img: '/assets/img/destination/category1.jpg',
+      subtitle: 'MARITIME SOLUTIONS',
+      title: 'Shipping & Maritime',
+      description:
+        'Comprehensive maritime solutions including vessel management, port operations, and global shipping logistics.',
+    },
+    {
+      img: '/assets/img/destination/category2.jpg',
+      subtitle: 'SUPPLY CHAIN',
+      title: 'Logistics & Supply Chain',
+      description:
+        'End-to-end supply chain management with cutting-edge technology and global network coverage.',
+    },
+    {
+      img: '/assets/img/destination/category3.jpg',
+      subtitle: 'DIGITAL SOLUTIONS',
+      title: 'Software & IT Solutions',
+      description:
+        'Custom software development, maritime technology, and digital transformation services.',
+    },
+    {
+      img: '/assets/img/destination/category4.jpg',
+      subtitle: 'CLEAN ENERGY',
+      title: 'Renewable Energy',
+      description:
+        'Clean energy solutions, sustainable technology, and environmental consulting services.',
+    },
+    {
+      img: '/assets/img/destination/category5.jpg',
+      subtitle: 'GLOBAL MARKETS',
+      title: 'Global Trading',
+      description:
+        'International trade facilitation, commodity trading, and market expansion services.',
+    },
+  ];
 
-    const settings = {
-        dots: false,
-        infinite: true,
-        speed: 2000,
-        slidesToShow: 5,
-        slidesToScroll: 1,
-        arrows: false,
-        swipeToSlide: true,
-        autoplay: true,
-        autoplaySpeed: 4000,        
-        responsive: [
-          {
-            breakpoint: 1399,
-            settings: {
-              slidesToShow: 5,
-            }
-          },
-          {
-            breakpoint: 1199,
-            settings: {
-              slidesToShow: 4,
-            }
-          },{
-            breakpoint: 575,
-            settings: {
-              slidesToShow: 1,
-            }
-          }
-        ]
-      };  
-
-      const categoryContent = [
-        {img:'/assets/img/destination/category1.jpg', subtitle:'6 Tour', title:'Adventure'},      
-        {img:'/assets/img/destination/category2.jpg', subtitle:'6 Tour', title:'Adventure'},      
-        {img:'/assets/img/destination/category3.jpg', subtitle:'6 Tour', title:'Adventure'},      
-        {img:'/assets/img/destination/category4.jpg', subtitle:'6 Tour', title:'Adventure'},      
-        {img:'/assets/img/destination/category5.jpg', subtitle:'6 Tour', title:'Adventure'},      
-      ]; 
-
-    return (
-        <section className="destination-category-section section-padding pt-0">
-            <div className="plane-shape float-bob-y">
-                <img src="/assets/img/destination/shape.png" alt="img" />
-            </div>
-            <div className="container">
-                <div className="section-title text-center">
-                    <span className="sub-title wow fadeInUp">Wonderful Place For You</span>
-                    <h2 className="wow fadeInUp wow" data-wow-delay=".2s">
-                        Browse By Destination Category
-                    </h2>
+  return (
+    <section className="destination-category-section section-padding pt-0">
+      <div className="plane-shape float-bob-y">
+        <img src="/assets/img/destination/shape.png" alt="shape" />
+      </div>
+      <div className="container">
+        <div className="section-title text-center">
+          <span className="sub-title wow fadeInUp">
+            Our Core Industries
+          </span>
+          <h2 className="wow fadeInUp" data-wow-delay=".2s">
+            Five strategic business verticals delivering comprehensive solutions across global markets
+          </h2>
+        </div>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6 mt-10">
+          {categoryContent.map((item, i) => (
+            <div key={i} className="destination-category-item">
+              <div className="category-image relative overflow-hidden rounded-xl shadow-md">
+                <img
+                  src={item.img}
+                  alt={item.title}
+                  className="w-full h-48 object-cover"
+                />
+                <div className="category-content p-4 bg-white">
+                  <h5 className="font-semibold text-lg">
+                    <Link to="/destination/destination-details">
+                      {item.title}
+                    </Link>
+                  </h5>
+                  <p className="text-sm text-gray-600 font-medium uppercase">
+                    {item.subtitle}
+                  </p>
+                  <p className="mt-2 text-gray-700 text-sm">
+                    {item.description}
+                  </p>
                 </div>
+              </div>
             </div>
-            <div className="container-fluid">
-               
-                <div className="swiper category-slider">
-                    <div className="swiper-wrapper cs_slider_gap_301">
-                    <Slider {...settings}>
-                    {categoryContent.map((item, i) => (
-                        <div key={i} className="swiper-slide">
-                            <div className="destination-category-item">
-                                <div className="category-image">
-                                    <img src={item.img} alt="img" />
-                                    <div className="category-content">
-                                        <h5>
-                                            <Link to="/destination/destination-details">{item.title}</Link>
-                                        </h5>
-                                        <p>{item.subtitle}</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        ))}
-                        </Slider>
-                    </div>
-                </div>
-                <div className="swiper-dot4 mt-5">
-                    <div className="dot"></div>
-                </div>
-            </div>
-        </section> 
-    );
+          ))}
+        </div>
+      </div>
+    </section>
+  );
 };
 
 export default Category1;
