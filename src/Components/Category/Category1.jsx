@@ -36,11 +36,11 @@ const Category1 = () => {
       };  
 
       const categoryContent = [
-        {img:'/assets/img/destination/category1.jpg', title:'Shipping'},      
-        {img:'/assets/img/destination/category2.jpg', title:'Logistics'},      
-        {img:'/assets/img/destination/category3.jpg', title:'Product Distribution'},      
-        {img:'/assets/img/destination/category4.jpg', title:'Software Development'},      
-        {img:'/assets/img/destination/category5.jpg', title:'Renewable Energy'},      
+        {img:'/shipping.png', title:'Shipping'},      
+        {img:'/logistics.png', title:'Logistics'},      
+        {img:'/product.png', title:'Product Distribution'},      
+        {img:'/software.png', title:'Software Development'},      
+        {img:'/renewable.png', title:'Renewable Energy'},      
       ]; 
 
     return (
