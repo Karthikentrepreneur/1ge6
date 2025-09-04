@@ -48,9 +48,9 @@ const Category1 = () => {
             <div className="plane-shape float-bob-y"></div>
             <div className="container">
                 <div className="section-title text-center">
-                    <span className="sub-title wow fadeInUp">Wonderful Place For You</span>
+                    <span className="sub-title wow fadeInUp"></span>
                     <h2 className="wow fadeInUp wow" data-wow-delay=".2s">
-                        Browse By Destination Category
+                        Our Core Industries
                     </h2>
                 </div>
             </div>
@@ -65,7 +65,7 @@ const Category1 = () => {
                                             <img src={item.img} alt="img" />
                                             <div className="category-content">
                                                 <h5>
-                                                    <Link to="/destination/destination-details">{item.title}</Link>
+                                                    <Link to="/">{item.title}</Link>
                                                 </h5>
                                             </div>
                                         </div>
