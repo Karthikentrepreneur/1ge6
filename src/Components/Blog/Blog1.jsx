@@ -10,97 +10,75 @@ const Blog1 = () => {
                         News & Updates
                     </span>
                     <h2 className="wow fadeInUp wow" data-wow-delay=".2s">
-                        Our Latest News & Articles
+                        Business Insights & Articles
                     </h2>
                 </div>
                 <div className="row">
-                    <div className="col-xl-4 col-lg-6 col-md-6 wow fadeInUp wow" data-wow-delay=".3s">
+                    {/* Article 1 */}
+                    <div className="col-xl-4 col-lg-6 col-md-6 wow fadeInUp" data-wow-delay=".3s">
                         <div className="news-card-items">
                             <div className="news-image">
-                                <img src="/assets/img/news/01.jpg" alt="img" />
+                                <img src="/assets/img/news/01.jpg" alt="Business Growth" />
                             </div>
-                        </div>
-                    </div>
-                    <div className="col-xl-4 col-lg-6 col-md-6 wow fadeInUp wow" data-wow-delay=".5s">
-                        <div className="news-card-items">
                             <div className="news-content">
                                 <ul className="post-meta">
-                                    <li>
-                                    <i className="bi bi-calendar"></i>
-                                        December 02, 2024
-                                    </li>
-                                    <li>
-                                    <i className="bi bi-tag-fill"></i>
-                                        New york City
-                                    </li>
+                                    <li><i className="bi bi-calendar"></i> August 25, 2025</li>
+                                    <li><i className="bi bi-tag-fill"></i> Business Strategy</li>
                                 </ul>
                                 <h3>
-                                    <Link to="/blog/blog-details">
-                                        Including Animation In Your
-                                        Design System
+                                    <Link to="/blog/business-growth">
+                                        Top Strategies for Scaling Your Business in 2025
                                     </Link>
                                 </h3>
-                                <Link to="/blog/blog-details" className="link-btn">Read More <i className="bi bi-arrow-right"></i></Link>
+                                <Link to="/blog/business-growth" className="link-btn">
+                                    Read More <i className="bi bi-arrow-right"></i>
+                                </Link>
                             </div>
                         </div>
                     </div>
-                    <div className="col-xl-4 col-lg-6 col-md-6 wow fadeInUp wow" data-wow-delay=".7s">
+
+                    {/* Article 2 */}
+                    <div className="col-xl-4 col-lg-6 col-md-6 wow fadeInUp" data-wow-delay=".5s">
                         <div className="news-card-items">
                             <div className="news-image">
-                                <img src="/assets/img/news/02.jpg" alt="img" />
+                                <img src="/assets/img/news/02.jpg" alt="Digital Transformation" />
                             </div>
-                        </div>
-                    </div>
-                    <div className="col-xl-4 col-lg-6 col-md-6 wow fadeInUp wow" data-wow-delay=".3s">
-                        <div className="news-card-items">
                             <div className="news-content">
                                 <ul className="post-meta">
-                                    <li>
-                                    <i className="bi bi-calendar"></i>
-                                        December 02, 2024
-                                    </li>
-                                    <li>
-                                    <i className="bi bi-tag-fill"></i>
-                                        New york City
-                                    </li>
+                                    <li><i className="bi bi-calendar"></i> August 18, 2025</li>
+                                    <li><i className="bi bi-tag-fill"></i> Digital Innovation</li>
                                 </ul>
                                 <h3>
-                                <Link to="/blog/blog-details">
-                                        Including Animation In Your
-                                        Design System
+                                    <Link to="/blog/digital-transformation">
+                                        How Digital Transformation is Shaping Global Markets
                                     </Link>
                                 </h3>
-                                <Link to="/blog/blog-details" className="link-btn">Read More <i className="bi bi-arrow-right"></i></Link>
+                                <Link to="/blog/digital-transformation" className="link-btn">
+                                    Read More <i className="bi bi-arrow-right"></i>
+                                </Link>
                             </div>
                         </div>
                     </div>
-                    <div className="col-xl-4 col-lg-6 col-md-6 wow fadeInUp wow" data-wow-delay=".5s">
+
+                    {/* Article 3 */}
+                    <div className="col-xl-4 col-lg-6 col-md-6 wow fadeInUp" data-wow-delay=".7s">
                         <div className="news-card-items">
                             <div className="news-image">
-                                <img src="/assets/img/news/02.jpg" alt="img" />
+                                <img src="/assets/img/news/03.jpg" alt="Sustainability" />
                             </div>
-                        </div>
-                    </div>
-                    <div className="col-xl-4 col-lg-6 col-md-6 wow fadeInUp wow" data-wow-delay=".7s">
-                        <div className="news-card-items">
                             <div className="news-content">
                                 <ul className="post-meta">
-                                    <li>
-                                    <i className="bi bi-calendar"></i>
-                                        December 02, 2024
-                                    </li>
-                                    <li>
-                                    <i className="bi bi-tag-fill"></i>
-                                        New york City
-                                    </li>
+                                    <li><i className="bi bi-calendar"></i> August 10, 2025</li>
+                                    <li><i className="bi bi-tag-fill"></i> Sustainability</li>
                                 </ul>
                                 <h3>
-                                <Link to="/blog/blog-details">
-                                        Including Animation In Your
-                                        Design System
+                                    <Link to="/blog/sustainable-business">
+                                        Building Sustainable Business Models for the Future
                                     </Link>
                                 </h3>
-                                <Link to="/blog/blog-details" className="link-btn">Read More <i className="bi bi-arrow-right"></i></Link>
+                                <Link to="/blog/sustainable-business" className="link-btn">
+                                    Read More <i className="bi bi-arrow-right"></i>
+                                </Link>
                             </div>
                         </div>
                     </div>
