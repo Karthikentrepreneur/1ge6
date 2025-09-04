@@ -7,7 +7,7 @@ function Brand1() {
     dots: false,
     infinite: true,
     speed: 500,
-    slidesToShow: 5,
+    slidesToShow: 5,   // you can reduce to 4 if you want them even bigger
     slidesToScroll: 1,
     arrows: false,
     swipeToSlide: true,
@@ -32,15 +32,19 @@ function Brand1() {
   ];
 
   const wrapStyle = { position: "relative" };
+
+  // reduce padding → less gap between logos
   const slideStyle = {
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
-    height: 90,
-    padding: "10px 16px",
+    height: 120,         // more vertical space for logos
+    padding: "0px 8px",  // smaller horizontal padding → less gap
   };
+
+  // increase logo size
   const imgStyle = {
-    maxHeight: 70,
+    maxHeight: 100,      // bigger logos (was 70 before)
     width: "auto",
     objectFit: "contain",
     opacity: 1,
