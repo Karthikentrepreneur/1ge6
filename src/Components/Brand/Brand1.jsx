@@ -55,7 +55,6 @@ function Brand1() {
   return (
     <div className="brand-section section-padding pt-0" style={wrapStyle}>
       <div className="left-shape">
-        <img src="/assets/img/brand/shape.png" alt="" />
       </div>
 
       <div className="container">
