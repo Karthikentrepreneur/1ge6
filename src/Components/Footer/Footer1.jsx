@@ -13,14 +13,15 @@ const Footer1 = () => {
         <div className="footer-widget-wrapper-new">
           <div className="row">
             {/* LOGO + Newsletter */}
-            <div
-              className="col-xl-4 col-lg-5 col-md-8 col-sm-6 wow fadeInUp wow"
-              data-wow-delay=".2s"
-            >
+            <div className="col-xl-4 col-lg-5 col-md-8 col-sm-6 wow fadeInUp" data-wow-delay=".2s">
               <div className="single-widget-items text-center">
                 <div className="widget-head">
                   <a href="#">
-                    <img src="/1global1.png" alt="1 Global Enterprises Logo" />
+                    <img
+                      src="/assets/img/logo/1global1.png"
+                      alt="1 Global Enterprises Logo"
+                      style={{ maxHeight: '120px', width: 'auto' }} // shrink logo
+                    />
                   </a>
                 </div>
                 <div className="footer-content">
@@ -43,44 +44,28 @@ const Footer1 = () => {
             </div>
 
             {/* QUICK LINKS */}
-            <div
-              className="col-xl-2 col-lg-3 col-md-4 col-sm-6 ps-lg-5 wow fadeInUp wow"
-              data-wow-delay=".4s"
-            >
+            <div className="col-xl-2 col-lg-3 col-md-4 col-sm-6 ps-lg-5 wow fadeInUp" data-wow-delay=".4s">
               <div className="single-widget-items">
                 <div className="widget-head">
                   <h4>Quick Links</h4>
                 </div>
-                <ul className="list-items">
-                  <li>
-                    <Link to="/" style={{ color: 'blue' }}>Home</Link>
-                  </li>
-                  <li>
-                    <Link to="/about" style={{ color: 'blue' }}>About Us</Link>
-                  </li>
-                  <li>
-                    <Link to="/activities" style={{ color: 'blue' }}>Activities</Link>
-                  </li>
-                  <li>
-                    <Link to="/team" style={{ color: 'blue' }}>Our Team</Link>
-                  </li>
-                  <li>
-                    <Link to="/blog" style={{ color: 'blue' }}>Blog</Link>
-                  </li>
+                <ul className="list-items footer-links">
+                  <li><Link to="/">Home</Link></li>
+                  <li><Link to="/about">About Us</Link></li>
+                  <li><Link to="/activities">Activities</Link></li>
+                  <li><Link to="/team">Our Team</Link></li>
+                  <li><Link to="/blog">Blog</Link></li>
                 </ul>
               </div>
             </div>
 
             {/* CONTACT US */}
-            <div
-              className="col-xl-4 col-lg-4 col-md-6 col-sm-6 ps-xl-5 wow fadeInUp wow"
-              data-wow-delay=".6s"
-            >
+            <div className="col-xl-4 col-lg-4 col-md-6 col-sm-6 ps-xl-5 wow fadeInUp" data-wow-delay=".6s">
               <div className="single-widget-items">
                 <div className="widget-head">
                   <h4>Contact Us</h4>
                 </div>
-                <div className="contact-info">
+                <div className="contact-info footer-text">
                   <div className="contact-items">
                     <div className="icon">
                       <i className="bi bi-geo-alt-fill"></i>
@@ -123,7 +108,7 @@ const Footer1 = () => {
         </div>
 
         {/* Footer Bottom */}
-        <div className="footer-bottom">
+        <div className="footer-bottom footer-text">
           <div className="footer-wrapper">
             <p className="wow fadeInUp" data-wow-delay=".3s">
               Copyright © <span>1 Global Enterprises,</span> All Rights Reserved.
@@ -135,6 +120,19 @@ const Footer1 = () => {
           </div>
         </div>
       </div>
+
+      {/* Footer Styling */}
+      <style>{`
+        .footer-section .footer-links a,
+        .footer-section .footer-text,
+        .footer-section .footer-text a {
+          color: black !important;
+        }
+        .footer-section .footer-links a:hover,
+        .footer-section .footer-text a:hover {
+          color: #007bff !important; /* blue hover */
+        }
+      `}</style>
     </footer>
   );
 };
