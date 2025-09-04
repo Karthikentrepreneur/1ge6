@@ -15,17 +15,17 @@ export default function Nav({ setMobileToggle }) {
       </li>
 
 
-      <li className="menu-item-has-children">
+      <li>
         <Link to="/activities" onClick={() => setMobileToggle(false)}>
         Activities
         </Link>
       </li> 
       
-      <li className="menu-item-has-children">
+      <li>
         <Link to="/team">Our Team</Link>
       </li>        
 
-      <li className="menu-item-has-children">
+      <li>
         <Link to="/blog" onClick={() => setMobileToggle(false)}>
           Blog
         </Link>
