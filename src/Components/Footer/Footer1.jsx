@@ -18,12 +18,12 @@ const Footer1 = () => {
                 <div className="widget-head">
                   <a href="#">
                     <img
-                      src="/1global1.png"
+                      src="/one-globe.png"
                       alt="1 Global Enterprises Logo"
                       style={{
                         maxHeight: '100px',
                         width: 'auto',
-                        background: 'black', // black background for logo
+                        background: 'white',
                         padding: '8px',
                         borderRadius: '6px'
                       }}
@@ -129,9 +129,10 @@ const Footer1 = () => {
           color: black !important;
         }
 
-        /* Quick Links spacing */
-        .footer-links li {
-          margin-bottom: 10px;
+        /* Quick Links and Contact Us headings */
+        .footer-section .footer-title {
+          font-weight: 600;
+          color: black !important;
         }
 
         /* Social icons: black background, white icon */
@@ -159,7 +160,7 @@ const Footer1 = () => {
           font-size: 18px;
         }
 
-        /* Adjust columns evenly to remove right gap */
+        /* Adjust columns to reduce empty space */
         .footer-widget-wrapper-new .col-xl-4 {
           flex: 0 0 33.33%;
           max-width: 33.33%;
