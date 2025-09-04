@@ -11,7 +11,7 @@ const About1 = () => {
   const [toggle, setToggle] = useState(false);
 
   const handelClick = () => {
-    setIframeSrc("https://www.youtube.com/embed/HC-tgFdIcB0");
+    setIframeSrc("singapore.mp4");
     setToggle(!toggle);
   };
   const handelClose = () => {
