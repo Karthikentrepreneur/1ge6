@@ -18,7 +18,7 @@ const Footer1 = () => {
                 <div className="widget-head">
                   <a href="#">
                     <img
-                      src="/1global1.png"
+                      src="/one-globe.png"
                       alt="1 Global Enterprises Logo"
                       style={{
                         maxHeight: '100px',
