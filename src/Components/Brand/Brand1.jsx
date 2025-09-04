@@ -1,7 +1,8 @@
+// src/Components/Brand/Brand1.jsx
 import React from "react";
 import Slider from "react-slick";
 
-const Brand1: React.FC = () => {
+function Brand1() {
   const settings = {
     dots: false,
     infinite: true,
@@ -30,22 +31,19 @@ const Brand1: React.FC = () => {
     { img: "/logosss06.png", alt: "Brand 6" },
   ];
 
-  // inline, component-scoped styles to avoid global CSS conflicts
-  const wrapStyle: React.CSSProperties = {
-    position: "relative",
-  };
-  const slideStyle: React.CSSProperties = {
+  const wrapStyle = { position: "relative" };
+  const slideStyle = {
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
-    height: 90,       // adjust if you need taller logos
+    height: 90,
     padding: "10px 16px",
   };
-  const imgStyle: React.CSSProperties = {
-    maxHeight: 70,    // keeps logos uniform height
+  const imgStyle = {
+    maxHeight: 70,
     width: "auto",
     objectFit: "contain",
-    opacity: 1,       // ensure no faded look from global rules
+    opacity: 1,
     mixBlendMode: "normal",
     filter: "none",
   };
@@ -62,7 +60,6 @@ const Brand1: React.FC = () => {
             1k + Brands Trust Us
           </h4>
 
-          {/* Pure react-slick (no swiper classes) */}
           <Slider {...settings}>
             {logos.map((item, i) => (
               <div key={i}>
@@ -76,6 +73,6 @@ const Brand1: React.FC = () => {
       </div>
     </div>
   );
-};
+}
 
 export default Brand1;
