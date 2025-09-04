@@ -11,7 +11,7 @@ const AboutPage = () => {
     return (
         <div>
             <BreadCumb
-                bgimg="/assets/img/breadcrumb/breadcrumb.jpg"
+                bgimg="/aboutbg.png"
                 Title="About Us"
             ></BreadCumb>
             <About1></About1>>
