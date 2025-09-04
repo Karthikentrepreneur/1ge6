@@ -13,7 +13,7 @@ const Footer1 = () => {
         <div className="footer-widget-wrapper-new">
           <div className="row">
             {/* LOGO + Newsletter */}
-            <div className="col-xl-4 col-lg-5 col-md-8 col-sm-6 wow fadeInUp" data-wow-delay=".2s">
+            <div className="col-xl-4 col-lg-4 col-md-6 col-sm-6 wow fadeInUp" data-wow-delay=".2s">
               <div className="single-widget-items text-center black-box">
                 <div className="widget-head">
                   <a href="#">
@@ -39,6 +39,8 @@ const Footer1 = () => {
                       Subscribe <i className="bi bi-arrow-right"></i>
                     </button>
                   </div>
+
+                  {/* SOCIAL ICONS */}
                   <div className="social-icon d-flex align-items-center justify-content-center">
                     <a href="#"><i className="bi bi-facebook"></i></a>
                     <a href="#"><i className="bi bi-twitter-x"></i></a>
@@ -50,10 +52,10 @@ const Footer1 = () => {
             </div>
 
             {/* QUICK LINKS */}
-            <div className="col-xl-2 col-lg-3 col-md-4 col-sm-6 ps-lg-5 wow fadeInUp" data-wow-delay=".4s">
+            <div className="col-xl-4 col-lg-4 col-md-6 col-sm-6 wow fadeInUp" data-wow-delay=".4s">
               <div className="single-widget-items">
                 <div className="widget-head">
-                  <h4>Quick Links</h4>
+                  <h4 className="footer-title">Quick Links</h4>
                 </div>
                 <ul className="list-items footer-links">
                   <li><Link to="/">Home</Link></li>
@@ -66,18 +68,16 @@ const Footer1 = () => {
             </div>
 
             {/* CONTACT US */}
-            <div className="col-xl-4 col-lg-4 col-md-6 col-sm-6 ps-xl-5 wow fadeInUp" data-wow-delay=".6s">
+            <div className="col-xl-4 col-lg-4 col-md-6 col-sm-6 wow fadeInUp" data-wow-delay=".6s">
               <div className="single-widget-items">
                 <div className="widget-head">
-                  <h4>Contact Us</h4>
+                  <h4 className="footer-title">Contact Us</h4>
                 </div>
                 <div className="contact-info">
                   <div className="contact-items">
-                    <div className="icon">
-                      <i className="bi bi-geo-alt-fill"></i>
-                    </div>
+                    <div className="icon"><i className="bi bi-geo-alt-fill"></i></div>
                     <div className="content">
-                      <h6 className="footer-address">
+                      <h6>
                         1 Global Enterprises Pte Ltd <br />
                         #03-01, Keppel Distripark, <br />
                         511 Kampong Bahru Road, <br />
@@ -86,17 +86,11 @@ const Footer1 = () => {
                     </div>
                   </div>
                   <div className="contact-items">
-                    <div className="icon">
-                      <i className="bi bi-envelope-fill"></i>
-                    </div>
-                    <div className="content">
-                      <h6><a href="mailto:jp@1ge.sg">jp@1ge.sg</a></h6>
-                    </div>
+                    <div className="icon"><i className="bi bi-envelope-fill"></i></div>
+                    <div className="content"><h6><a href="mailto:jp@1ge.sg">jp@1ge.sg</a></h6></div>
                   </div>
                   <div className="contact-items">
-                    <div className="icon">
-                      <i className="bi bi-telephone-fill"></i>
-                    </div>
+                    <div className="icon"><i className="bi bi-telephone-fill"></i></div>
                     <div className="content">
                       <h6>
                         <a href="tel:+6569080838">+65 69080838</a> <br />
@@ -127,34 +121,49 @@ const Footer1 = () => {
 
       {/* Styles */}
       <style>{`
-        /* All footer text black except inside black box */
-        .footer-section {
-          color: black !important;
-        }
-        .footer-section a {
-          color: black !important;
-        }
-        .footer-section a:hover {
-          color: #007bff !important;
-        }
-
-        /* Address, copyright, and bottom links forced black */
-        .footer-section .footer-address,
-        .footer-section .footer-copy,
-        .footer-section .bottom-list li,
-        .footer-section .bottom-list li a {
+        /* Global footer text black */
+        .footer-section, 
+        .footer-section a, 
+        .footer-section h4, 
+        .footer-section h6 {
           color: black !important;
         }
 
-        /* Inside black box keep white */
-        .footer-section .black-box {
-          color: white !important;
+        /* Quick Links and Contact Us headings */
+        .footer-section .footer-title {
+          font-weight: 600;
+          color: black !important;
         }
-        .footer-section .black-box a {
+
+        /* Social icons: black background, white icon */
+        .footer-section .social-icon a {
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          width: 38px;
+          height: 38px;
+          margin: 0 6px;
+          background: black;
           color: white !important;
+          border-radius: 50%;
+          font-size: 16px;
+          transition: all 0.3s ease;
         }
-        .footer-section .black-box a:hover {
-          color: #00bfff !important;
+        .footer-section .social-icon a:hover {
+          background: #007bff;
+          color: #fff !important;
+        }
+
+        /* Contact icons black */
+        .footer-section .contact-items .icon i {
+          color: black !important;
+          font-size: 18px;
+        }
+
+        /* Adjust columns to reduce empty space */
+        .footer-widget-wrapper-new .col-xl-4 {
+          flex: 0 0 33.33%;
+          max-width: 33.33%;
         }
       `}</style>
     </footer>
