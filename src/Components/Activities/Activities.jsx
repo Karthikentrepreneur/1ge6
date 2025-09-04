@@ -4,15 +4,9 @@ import { Link } from 'react-router';
 const Activities = () => {
 
     const teamContent = [
-        {img:'/assets/img/activities/01.jpg', name:'(5 Trips)', content:'California'},
+        {img:'/assets/img/activities/01.jpg', name:'(5 Trips)', content:'Singapore'},
         {img:'/assets/img/activities/02.jpg', name:'(2 Trips)', content:'Thailand'},
         {img:'/assets/img/activities/03.jpg', name:'(3 Trips)', content:'India'},
-        {img:'/assets/img/activities/04.jpg', name:'(6 Trips)', content:'Sugarland'},
-        {img:'/assets/img/activities/05.jpg', name:'(7 Trips)', content:'California'},
-        {img:'/assets/img/activities/06.jpg', name:'(8 Trips)', content:'Sugarland'},
-        {img:'/assets/img/activities/07.jpg', name:'(6 Trips)', content:'India'},
-        {img:'/assets/img/activities/08.jpg', name:'(3 Trips)', content:'California'},
-        {img:'/assets/img/activities/09.jpg', name:'(5 Trips)', content:'Thailand'},
       ];
 
     return (
