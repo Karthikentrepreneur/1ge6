@@ -9,7 +9,7 @@ const Footer1 = () => {
     }, []);
 
     return (
-        <footer className="footer-section fix bg-cover" data-background="/assets/img/footer/footer-bg.jpg">
+        <footer className="footer-section fix bg-cover" data-background="/footer.png">
             <div className="container">
                 <div className="footer-widget-wrapper-new">
                     <div className="row">
