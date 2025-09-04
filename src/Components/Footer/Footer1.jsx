@@ -13,6 +13,9 @@ const Footer1 = () => {
       data-background="/footer.png"
       aria-label="Website Footer"
     >
+      {/* Top CTA Strip */}
+     
+
       <div className="container">
         <div className="footer-widget-wrapper-new">
           <div className="row g-row">
@@ -142,29 +145,181 @@ const Footer1 = () => {
 
       {/* Styles */}
       <style>{`
+        /* ---------- Foundation ---------- */
         .footer-section {
           position: relative;
           color: #0a0a0a;
-          background: url('/footer.png') no-repeat center center / cover;
+          background: #ffffff;
           overflow: hidden;
         }
-        /* Remove the white overlay */
+        /* Soft overlay on background image */
         .footer-section::before{
-          display: none;
-        }
-        .footer-section > .container { position: relative; z-index: 1; }
-
-        /* Add a subtle dark overlay to improve text contrast */
-        .footer-section::after {
           content: "";
           position: absolute; inset: 0;
-          background: rgba(0, 0, 0, 0.45);
-          z-index: 0;
+          background: linear-gradient(180deg, rgba(255,255,255,0.92) 0%, rgba(255,255,255,0.96) 30%, rgba(255,255,255,1) 100%);
+          pointer-events: none;
+        }
+        .footer-section > .container, .footer-cta .container { position: relative; z-index: 1; }
+
+        /* ---------- CTA Strip ---------- */
+        .footer-cta {
+          background: linear-gradient(90deg, #0d0d0d 0%, #1f1f1f 100%);
+          color: #fff;
+          padding: 22px 0;
+          border-bottom: 1px solid rgba(255,255,255,0.08);
+        }
+        .cta-wrap {
+          display: flex; align-items: center; justify-content: space-between; gap: 16px;
+          flex-wrap: wrap;
+        }
+        .cta-wrap h3 {
+          margin: 0; font-weight: 700; letter-spacing: 0.2px;
+        }
+        .cta-btn {
+          display: inline-flex; align-items: center; gap: 8px;
+          background: #ffffff; color: #0d0d0d !important;
+          padding: 10px 16px; border-radius: 10px; font-weight: 600;
+          transition: transform .2s ease, box-shadow .2s ease;
+          box-shadow: 0 6px 18px rgba(0,0,0,0.15);
+        }
+        .cta-btn:hover { transform: translateY(-1px); box-shadow: 0 10px 22px rgba(0,0,0,0.18); }
+
+        /* ---------- Grid & Cards ---------- */
+        .g-row { row-gap: 28px; }
+        .cardish {
+          background: #fff; border: 1px solid #eee; border-radius: 14px;
+          padding: 22px 18px;
+          box-shadow: 0 10px 28px rgba(0,0,0,0.05);
+        }
+        .widget-head { margin-bottom: 14px; }
+        .fw-600 { font-weight: 600; }
+
+        /* ---------- Logo box ---------- */
+        .black-box {
+          background: #0d0d0d;
+          color: #fff !important;
+        }
+        .black-box .footer-logo {
+          max-height: 88px; width: auto;
+          background: #000; padding: 10px 12px; border-radius: 10px;
+          border: 1px solid rgba(255,255,255,0.06);
+        }
+        .black-box h3, .black-box p { color: #fff !important; }
+
+        /* ---------- Newsletter ---------- */
+        .footer-input {
+          display: flex; gap: 10px; margin: 12px 0 16px;
+        }
+        .footer-input input {
+          flex: 1; height: 44px; padding: 0 12px; border-radius: 10px;
+          border: 1px solid #2b2b2b; background: #111; color: #fff;
+        }
+        .footer-input input::placeholder { color: #c7c7c7; }
+        .newsletter-btn {
+          height: 44px; padding: 0 14px; border-radius: 10px; border: none;
+          background: linear-gradient(135deg, #4f8df9 0%, #2a66f0 100%);
+          color: #fff; font-weight: 600;
+          transition: transform .15s ease, box-shadow .15s ease;
+        }
+        .newsletter-btn:hover { transform: translateY(-1px); box-shadow: 0 8px 18px rgba(79,141,249,.35); }
+
+        /* ---------- Social ---------- */
+        .social-icon a {
+          display: inline-flex; align-items: center; justify-content: center;
+          width: 38px; height: 38px; margin: 0 6px;
+          background: #000; color: #fff !important; border-radius: 50%;
+          font-size: 16px; transition: transform .2s ease, background .2s ease;
+          border: 1px solid rgba(255,255,255,0.06);
+        }
+        .social-icon a:hover { transform: translateY(-2px); background: #2a66f0; }
+
+        /* ---------- Headings & Links ---------- */
+        .footer-section .footer-title {
+          font-weight: 700; color: #000 !important; margin-bottom: 12px;
+          position: relative; padding-bottom: 6px;
+        }
+        .footer-section .footer-title::after {
+          content: ""; position: absolute; bottom: 0; left: 0; width: 46px; height: 3px;
+          background: linear-gradient(135deg, #4f8df9 0%, #2a66f0 100%);
+          border-radius: 6px;
+        }
+        .footer-links {
+          display: grid; gap: 8px; margin-top: 10px;
+        }
+        .footer-links.two-col {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+          column-gap: 18px;
+        }
+        .footer-links a {
+          color: #0a0a0a; text-decoration: none; font-weight: 500;
+          position: relative; padding-left: 0; transition: color .2s ease;
+        }
+        .footer-links a::before {
+          content: "›"; position: absolute; left: -14px; opacity: 0; transition: all .2s ease;
+        }
+        .footer-links a:hover { color: #2a66f0; }
+        .footer-links a:hover::before { left: -8px; opacity: 1; }
+
+        /* ---------- Contact ---------- */
+        .contact-info { display: grid; gap: 12px; }
+        .contact-items { display: grid; grid-template-columns: 28px 1fr; gap: 10px; align-items: start; }
+        .contact-items .icon i {
+          color: #000 !important; font-size: 18px;
+        }
+        .contact-items a { color: #0a0a0a; }
+        .contact-items a:hover { color: #2a66f0; }
+
+        /* ---------- Badges ---------- */
+        .badges {
+          display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; padding: 0;
+          list-style: none;
+        }
+        .badges li {
+          background: #f4f6ff; color: #2a66f0; border: 1px solid #e5ecff;
+          padding: 6px 10px; border-radius: 999px; font-size: 12px; font-weight: 600;
         }
 
-        .cardish, .black-box {
-          position: relative;
-          z-index: 2;
+        /* ---------- Divider & Bottom ---------- */
+        .footer-divider {
+          border: none; height: 1px; margin: 22px 0 10px;
+          background: linear-gradient(90deg, rgba(0,0,0,0.08), rgba(0,0,0,0.02), rgba(0,0,0,0.08));
+        }
+        .footer-bottom .footer-wrapper {
+          display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap;
+          padding: 8px 0 18px;
+        }
+        .footer-copy { margin: 0; color: #0a0a0a; }
+        .footer-copy span { font-weight: 700; }
+        .bottom-list { display: flex; gap: 18px; margin: 0; padding: 0; list-style: none; }
+        .bottom-list a { color: #0a0a0a; font-weight: 500; }
+        .bottom-list a:hover { color: #2a66f0; }
+
+        /* ---------- Back to Top ---------- */
+        .back-to-top {
+          position: fixed; right: 18px; bottom: 18px; z-index: 10;
+          width: 42px; height: 42px; border-radius: 12px; border: none;
+          display: inline-flex; align-items: center; justify-content: center;
+          background: #0d0d0d; color: #fff; cursor: pointer;
+          box-shadow: 0 8px 20px rgba(0,0,0,0.25);
+          transition: transform .2s ease, box-shadow .2s ease, background .2s ease;
+        }
+        .back-to-top:hover { transform: translateY(-2px); background: #2a66f0; box-shadow: 0 12px 26px rgba(42,102,240,.35); }
+
+        /* ---------- Responsive ---------- */
+        @media (max-width: 1199px) {
+          .footer-links.two-col { grid-template-columns: 1fr; }
+        }
+        @media (max-width: 575px) {
+          .cta-wrap { align-items: flex-start; }
+          .cta-wrap h3 { font-size: 18px; }
+        }
+
+        /* Keep your requested black text for key areas */
+        .footer-section, 
+        .footer-section a, 
+        .footer-section h4, 
+        .footer-section h6 {
+          color: black !important;
         }
       `}</style>
     </footer>
