@@ -35,11 +35,12 @@ const Brand1 = () => {
       }; 
 
     const chooseContent = [
-        {img:'/assets/img/brand/01.png'},              
-        {img:'/assets/img/brand/01.png'},              
-        {img:'/assets/img/brand/01.png'},              
-        {img:'/assets/img/brand/01.png'},              
-        {img:'/assets/img/brand/01.png'},              
+        {img:'/logosss01.png'},              
+        {img:'/logosss02.png'},              
+        {img:'/logosss03.png'},              
+        {img:'/logosss04.png'},              
+        {img:'/logosss05.png'},
+        {img:'/logosss06.png'},              
       ]; 
 
     return (
