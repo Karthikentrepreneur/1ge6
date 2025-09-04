@@ -60,7 +60,7 @@ function Brand1() {
       <div className="container">
         <div className="brand-wrapper">
           <h4 className="brand-title wow fadeInUp" data-wow-delay=".3s">
-            1k + Brands Trust Us
+            Group Companies
           </h4>
 
           <Slider {...settings}>
