@@ -19,7 +19,7 @@ const Activities = () => {
                             <div className="activities-image">
                             <img src={item.img} alt="img" />
                                 <div className="post">
-                                {item.name}
+                            
                                 </div>
                             </div>
                             <div className="activities-content">
