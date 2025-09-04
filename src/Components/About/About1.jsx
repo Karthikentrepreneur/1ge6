@@ -25,7 +25,7 @@ const About1 = () => {
       data-background="/about-bg.png"
     >
       <div className="right-shape float-bob-x">
-        <img src="/assets/img/about/right-shape.png" alt="img" />
+        <img src="/shipping2.png" alt="img" />
       </div>
 
       <div className="container">
