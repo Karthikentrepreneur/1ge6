@@ -77,7 +77,7 @@ const Footer1 = () => {
                       <i className="bi bi-geo-alt-fill"></i>
                     </div>
                     <div className="content">
-                      <h6>
+                      <h6 className="footer-address">
                         1 Global Enterprises Pte Ltd <br />
                         #03-01, Keppel Distripark, <br />
                         511 Kampong Bahru Road, <br />
@@ -114,7 +114,7 @@ const Footer1 = () => {
         {/* Footer Bottom */}
         <div className="footer-bottom">
           <div className="footer-wrapper">
-            <p>
+            <p className="footer-copy">
               Copyright © <span>1 Global Enterprises,</span> All Rights Reserved.
             </p>
             <ul className="bottom-list">
@@ -127,7 +127,7 @@ const Footer1 = () => {
 
       {/* Styles */}
       <style>{`
-        /* Make ALL footer text black except inside black box */
+        /* All footer text black except inside black box */
         .footer-section {
           color: black !important;
         }
@@ -138,6 +138,14 @@ const Footer1 = () => {
           color: #007bff !important;
         }
 
+        /* Address, copyright, and bottom links forced black */
+        .footer-section .footer-address,
+        .footer-section .footer-copy,
+        .footer-section .bottom-list li,
+        .footer-section .bottom-list li a {
+          color: black !important;
+        }
+
         /* Inside black box keep white */
         .footer-section .black-box {
           color: white !important;
@@ -146,7 +154,7 @@ const Footer1 = () => {
           color: white !important;
         }
         .footer-section .black-box a:hover {
-          color: #00bfff !important; /* light blue hover */
+          color: #00bfff !important;
         }
       `}</style>
     </footer>
