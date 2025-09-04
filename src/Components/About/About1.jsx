@@ -22,7 +22,7 @@ const About1 = () => {
   return (
     <section
       className="about-section section-padding fix bg-cover"
-      data-background="/aboutbg.png"
+      data-background="/about-bg.png"
     >
       <div className="right-shape float-bob-x">
         <img src="/shipping2.png" alt="img" />
