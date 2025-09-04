@@ -46,7 +46,7 @@ const Category1 = () => {
     return (
         <section className="destination-category-section section-padding pt-0">
             <div className="plane-shape float-bob-y">
-                <img src="/assets/img/destination/shape.png" alt="img" />
+                <img src="" alt="img" />
             </div>
             <div className="container">
                 <div className="section-title text-center">
