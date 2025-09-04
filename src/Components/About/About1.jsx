@@ -20,14 +20,7 @@ const About1 = () => {
   };
 
   return (
-    <section
-      className="about-section section-padding fix bg-cover"
-      data-background="/about-bg.png"
-    >
-      <div className="right-shape float-bob-x">
-        <img src="/shipping2.png" alt="img" />
-      </div>
-
+    <section className="about-section section-padding fix">
       <div className="container">
         <div className="about-wrapper">
           <div className="row g-4">
@@ -57,7 +50,6 @@ const About1 = () => {
                     data-wow-duration="1.5s"
                     data-wow-delay="0.3s"
                   />
-                  {/* Removed plane-shape.png */}
 
                   <div className="about-tour">
                     <div className="icon">
@@ -72,7 +64,7 @@ const About1 = () => {
               </div>
             </div>
 
-            {/* RIGHT CONTENT */}
+            {/* RIGHT CONTENT - BRIEF */}
             <div className="col-lg-6">
               <div className="about-content">
                 <div className="section-title">
@@ -85,48 +77,12 @@ const About1 = () => {
                 </div>
 
                 <div className="about-area mt-4 mt-md-0">
-                  <div className="line-image">
-                    <img src="/assets/img/about/Line-image.png" alt="img" />
-                  </div>
-
-                  <div className="about-items wow fadeInUp" data-wow-delay=".3s">
-                    <div className="icon">
-                      <img src="/assets/img/icon/05.svg" alt="img" />
-                    </div>
-                    <div className="content">
-                      <h5>Who We Are</h5>
-                      <p>
-                        A diversified group with interests in Shipping,
-                        Logistics, Distribution, IT, Clean Energy & Trading.
-                      </p>
-                    </div>
-                  </div>
-
-                  <div className="about-items wow fadeInUp" data-wow-delay=".5s">
-                    <div className="icon">
-                      <img src="/assets/img/icon/06.svg" alt="img" />
-                    </div>
-                    <div className="content">
-                      <h5>Our Reach</h5>
-                      <p>
-                        700+ professionals operating across South-East Asia,
-                        Middle East, USA & UK.
-                      </p>
-                    </div>
-                  </div>
-
-                  <div className="about-items wow fadeInUp" data-wow-delay=".7s">
-                    <div className="icon">
-                      <img src="/assets/img/icon/07.svg" alt="img" />
-                    </div>
-                    <div className="content">
-                      <h5>Expertise</h5>
-                      <p>
-                        Each business unit is led by experts ensuring strong
-                        execution & growth.
-                      </p>
-                    </div>
-                  </div>
+                  <p className="wow fadeInUp" data-wow-delay=".3s">
+                    We are a diversified group with expertise in Shipping,
+                    Logistics, Distribution, IT, Clean Energy & Trading.  
+                    With 700+ professionals worldwide, we ensure reliable 
+                    solutions and sustainable growth across 16+ countries.
+                  </p>
                 </div>
               </div>
             </div>
@@ -139,7 +95,7 @@ const About1 = () => {
         isTrue={toggle}
         iframeSrc={iframeSrc}
         handelClose={handelClose}
-      ></VideoModal>
+      />
     </section>
   );
 };
