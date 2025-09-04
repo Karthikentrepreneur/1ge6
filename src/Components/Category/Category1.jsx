@@ -1,72 +1,90 @@
 import React from 'react';
 import { Link } from 'react-router';
+import Slider from 'react-slick';
 
 const Category1 = () => {
-  const categoryContent = [
-    {
-      img: '/assets/img/destination/category1.jpg',
-      subtitle: 'MARITIME SOLUTIONS',
-      title: 'Shipping & Maritime',
-    },
-    {
-      img: '/assets/img/destination/category2.jpg',
-      subtitle: 'SUPPLY CHAIN',
-      title: 'Logistics & Supply Chain',
-    },
-    {
-      img: '/assets/img/destination/category3.jpg',
-      subtitle: 'DIGITAL SOLUTIONS',
-      title: 'Software & IT Solutions',
-    },
-    {
-      img: '/assets/img/destination/category4.jpg',
-      subtitle: 'CLEAN ENERGY',
-      title: 'Renewable Energy',
-    },
-    {
-      img: '/assets/img/destination/category5.jpg',
-      subtitle: 'GLOBAL MARKETS',
-      title: 'Global Trading',
-    },
-  ];
 
-  return (
-    <section className="destination-category-section section-padding pt-0">
-      <div className="container">
-        <div className="section-title text-center mb-10">
-          <span className="sub-title">Our Core Industries</span>
-          <h2>
-            Five strategic business verticals delivering comprehensive solutions across global markets
-          </h2>
-        </div>
+    const settings = {
+        dots: false,
+        infinite: true,
+        speed: 2000,
+        slidesToShow: 5,
+        slidesToScroll: 1,
+        arrows: false,
+        swipeToSlide: true,
+        autoplay: true,
+        autoplaySpeed: 4000,        
+        responsive: [
+          {
+            breakpoint: 1399,
+            settings: {
+              slidesToShow: 5,
+            }
+          },
+          {
+            breakpoint: 1199,
+            settings: {
+              slidesToShow: 4,
+            }
+          },{
+            breakpoint: 575,
+            settings: {
+              slidesToShow: 1,
+            }
+          }
+        ]
+      };  
 
-        {/* 1x5 layout */}
-        <div className="grid grid-cols-5 gap-4">
-          {categoryContent.map((item, i) => (
-            <div
-              key={i}
-              className="relative group overflow-hidden rounded-xl shadow-lg"
-            >
-              <img
-                src={item.img}
-                alt={item.title}
-                className="w-full h-64 object-cover transform transition-transform duration-500 group-hover:scale-110"
-              />
-              {/* Hover overlay */}
-              <div className="absolute inset-0 bg-black/50 flex items-center justify-center opacity-0 group-hover:opacity-100 transition duration-500">
-                <div className="text-center">
-                  <h5 className="text-white text-lg font-semibold">
-                    <Link to="/destination/destination-details">{item.title}</Link>
-                  </h5>
-                  <p className="text-white/80 text-sm mt-1">{item.subtitle}</p>
-                </div>
-              </div>
+      const categoryContent = [
+        {img:'/assets/img/destination/category1.jpg', title:'Shipping'},      
+        {img:'/assets/img/destination/category2.jpg', title:'Logistics'},      
+        {img:'/assets/img/destination/category3.jpg', title:'Product Distribution'},      
+        {img:'/assets/img/destination/category4.jpg', title:'Software Development'},      
+        {img:'/assets/img/destination/category5.jpg', title:'Renewable Energy'},      
+      ]; 
+
+    return (
+        <section className="destination-category-section section-padding pt-0">
+            <div className="plane-shape float-bob-y">
+                <img src="/assets/img/destination/shape.png" alt="img" />
             </div>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
+            <div className="container">
+                <div className="section-title text-center">
+                    <span className="sub-title wow fadeInUp">Wonderful Place For You</span>
+                    <h2 className="wow fadeInUp wow" data-wow-delay=".2s">
+                        Browse By Destination Category
+                    </h2>
+                </div>
+            </div>
+            <div className="container-fluid">
+               
+                <div className="swiper category-slider">
+                    <div className="swiper-wrapper cs_slider_gap_301">
+                    <Slider {...settings}>
+                    {categoryContent.map((item, i) => (
+                        <div key={i} className="swiper-slide">
+                            <div className="destination-category-item">
+                                <div className="category-image">
+                                    <img src={item.img} alt="img" />
+                                    <div className="category-content">
+                                        <h5>
+                                            <Link to="/destination/destination-details">{item.title}</Link>
+                                        </h5>
+                                        <p>{item.subtitle}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        ))}
+                        </Slider>
+                    </div>
+                </div>
+                <div className="swiper-dot4 mt-5">
+                    <div className="dot"></div>
+                </div>
+            </div>
+        </section> 
+    );
 };
 
 export default Category1;
