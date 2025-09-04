@@ -10,8 +10,8 @@ const Counter4 = () => {
                         <img src="/assets/img/icon/35.svg" alt="img" />
                     </div>
                     <div className="counter-content">
-                        <h2><span className="count">100,000</span>+</h2>
-                        <p>Our Explorers</p>
+                        <h2><span className="count">700</span>+</h2>
+                        <p>Employees</p>
                     </div>
                 </div>
                 <div className="counter-items wow fadeInUp wow" data-wow-delay=".4s">
@@ -19,8 +19,8 @@ const Counter4 = () => {
                         <img src="/assets/img/icon/36.svg" alt="img" />
                     </div>
                     <div className="counter-content">
-                        <h2><span className="count">5,000</span>+</h2>
-                        <p>Destinations</p>
+                        <h2><span className="count">16</span>+</h2>
+                        <p>Countries</p>
                     </div>
                 </div>
                 <div className="counter-items wow fadeInUp wow" data-wow-delay=".6s">
@@ -28,8 +28,8 @@ const Counter4 = () => {
                         <img src="/assets/img/icon/37.svg" alt="img" />
                     </div>
                     <div className="counter-content">
-                        <h2><span className="count">10,000</span>+</h2>
-                        <p>More Trips</p>
+                        <h2><span className="count">6</span>+</h2>
+                        <p>Regions (Asia, Middle East, USA, UK)</p>
                     </div>
                 </div>
                 <div className="counter-items style-2 wow fadeInUp wow" data-wow-delay=".8s">
@@ -37,8 +37,8 @@ const Counter4 = () => {
                         <img src="/assets/img/icon/38.svg" alt="img" />
                     </div>
                     <div className="counter-content">
-                        <h2><span className="count">2,000</span>+</h2>
-                        <p>Luxary Hotel</p>
+                        <h2><span className="count">10</span>+</h2>
+                        <p>Business Units</p>
                     </div>
                 </div>
             </div>
