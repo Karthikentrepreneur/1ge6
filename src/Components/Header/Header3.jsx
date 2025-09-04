@@ -131,9 +131,9 @@ export default function Header3({ variant }) {
                     <a onClick={() => setSearchToggle(!searchToggle)} className="search-trigger search-icon">
                       <i className="bi bi-search"></i>
                     </a>
-                    <Link to="/contact" className="theme-btn">
+                    <Link to="/blog" className="theme-btn">
                       <span>
-                        Request A Quote <i className="bi bi-arrow-right"></i>
+                        Newsletter <i className="bi bi-arrow-right"></i>
                       </span>
                     </Link>
                   </div>
