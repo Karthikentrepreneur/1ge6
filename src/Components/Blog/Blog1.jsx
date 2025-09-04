@@ -18,7 +18,7 @@ const Blog1 = () => {
                     <div className="col-xl-4 col-lg-6 col-md-6 wow fadeInUp" data-wow-delay=".3s">
                         <div className="news-card-items">
                             <div className="news-image">
-                                <img src="/assets/img/news/01.jpg" alt="Business Growth" />
+                                <img src="/blog1.png" alt="Business Growth" />
                             </div>
                             <div className="news-content">
                                 <ul className="post-meta">
@@ -41,7 +41,7 @@ const Blog1 = () => {
                     <div className="col-xl-4 col-lg-6 col-md-6 wow fadeInUp" data-wow-delay=".5s">
                         <div className="news-card-items">
                             <div className="news-image">
-                                <img src="/assets/img/news/02.jpg" alt="Digital Transformation" />
+                                <img src="/blog2.png" alt="Digital Transformation" />
                             </div>
                             <div className="news-content">
                                 <ul className="post-meta">
@@ -64,7 +64,7 @@ const Blog1 = () => {
                     <div className="col-xl-4 col-lg-6 col-md-6 wow fadeInUp" data-wow-delay=".7s">
                         <div className="news-card-items">
                             <div className="news-image">
-                                <img src="/assets/img/news/03.jpg" alt="Sustainability" />
+                                <img src="/blog3.png" alt="Sustainability" />
                             </div>
                             <div className="news-content">
                                 <ul className="post-meta">
