@@ -12,6 +12,7 @@ const Footer1 = () => {
       className="footer-section fix bg-cover"
       data-background="/footer.png"
       aria-label="Website Footer"
+      style={{ backgroundImage: 'url(/footer.png)' }} // hard fallback so bg is guaranteed
     >
       {/* Top CTA Strip */}
 
@@ -204,16 +205,22 @@ const Footer1 = () => {
         .footer-section {
           position: relative;
           color: #0a0a0a;
-          background: transparent;   /* show background image */
+          background: transparent;        /* show background image */
           overflow: hidden;
           background-size: cover;
           background-position: center;
+          background-repeat: no-repeat;
         }
-        /* Soft overlay on background image */
+        /* SOFTER overlay so image is visible */
         .footer-section::before{
           content: "";
           position: absolute; inset: 0;
-          background: linear-gradient(180deg, rgba(255,255,255,0.92) 0%, rgba(255,255,255,0.96) 30%, rgba(255,255,255,1) 100%);
+          background: linear-gradient(
+            180deg,
+            rgba(255,255,255,0.75) 0%,
+            rgba(255,255,255,0.85) 35%,
+            rgba(255,255,255,0.95) 100%
+          );
           pointer-events: none;
         }
         .footer-section > .container, .footer-cta .container { position: relative; z-index: 1; }
@@ -345,8 +352,8 @@ const Footer1 = () => {
           display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap;
           padding: 8px 0 18px;
         }
-        .footer-copy { margin: 0; color: #0a0a0a; }
-        .footer-copy span { font-weight: 700; }
+        .footer-copy { margin: 0; color: #000 !important; }     /* force black */
+        .footer-copy span { font-weight: 700; color: #000 !important; }
         .bottom-list { display: flex; gap: 18px; margin: 0; padding: 0; list-style: none; }
         .bottom-list a { color: #0a0a0a; font-weight: 500; }
         .bottom-list a:hover { color: #2a66f0; }
