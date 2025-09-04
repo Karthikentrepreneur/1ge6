@@ -51,7 +51,7 @@ const About1 = () => {
 
                 <div className="about-image-2">
                   <img
-                    src="/assets/img/about/02.png"
+                    src="/about4.png"
                     alt="img"
                     className="wow img-custom-anim-top"
                     data-wow-duration="1.5s"
