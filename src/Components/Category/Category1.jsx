@@ -44,9 +44,8 @@ const Category1 = () => {
       ]; 
 
     return (
-        <section className="destination-category-section section-padding pt-0">
-            <div className="plane-shape float-bob-y">
-            </div>
+        <section className="destination-category-section pt-10 pb-4">
+            <div className="plane-shape float-bob-y"></div>
             <div className="container">
                 <div className="section-title text-center">
                     <span className="sub-title wow fadeInUp">Wonderful Place For You</span>
@@ -56,25 +55,23 @@ const Category1 = () => {
                 </div>
             </div>
             <div className="container-fluid">
-               
                 <div className="swiper category-slider">
                     <div className="swiper-wrapper cs_slider_gap_301">
-                    <Slider {...settings}>
-                    {categoryContent.map((item, i) => (
-                        <div key={i} className="swiper-slide">
-                            <div className="destination-category-item">
-                                <div className="category-image">
-                                    <img src={item.img} alt="img" />
-                                    <div className="category-content">
-                                        <h5>
-                                            <Link to="/destination/destination-details">{item.title}</Link>
-                                        </h5>
-                                        <p>{item.subtitle}</p>
+                        <Slider {...settings}>
+                            {categoryContent.map((item, i) => (
+                                <div key={i} className="swiper-slide">
+                                    <div className="destination-category-item">
+                                        <div className="category-image">
+                                            <img src={item.img} alt="img" />
+                                            <div className="category-content">
+                                                <h5>
+                                                    <Link to="/destination/destination-details">{item.title}</Link>
+                                                </h5>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        </div>
-                        ))}
+                            ))}
                         </Slider>
                     </div>
                 </div>
