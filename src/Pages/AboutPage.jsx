@@ -1,6 +1,6 @@
 import React from 'react';
 import BreadCumb from '../Components/Common/BreadCumb';
-import About2 from '../Components/About/About2';
+import About1 from '../Components/About/About1';
 import Choose1 from '../Components/Choose/Choose1';
 import Counter4 from '../Components/Counter/Counter4';
 import Team1 from '../Components/Team/Team1';
