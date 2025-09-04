@@ -35,7 +35,7 @@ const About1 = () => {
             <div className="col-lg-6">
               <div className="about-image">
                 <img
-                  src="/assets/img/about/01.png"
+                  src="/about3.png"
                   alt="img"
                   className="wow img-custom-anim-left"
                 />
