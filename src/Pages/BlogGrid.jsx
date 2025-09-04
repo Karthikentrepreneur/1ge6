@@ -6,7 +6,7 @@ const BlogGrid = () => {
     return (
         <div>
              <BreadCumb
-                bgimg="/assets/img/breadcrumb/breadcrumb.jpg"
+                bgimg="/footer.png"
                 Title="Blog"
             ></BreadCumb> 
             <Blog4></Blog4>          
