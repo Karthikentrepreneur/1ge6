@@ -11,7 +11,6 @@ const Heroanner1 = () => {
 
   return (
     <section className="hero-section">
-      <Header3 variant="header-transparent" />
       <style>{`
         .hero-section {
           position: relative;
