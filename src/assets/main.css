@@ -10006,3 +10006,8 @@ input.main-search-input::placeholder {
 .hero-1 .hero-content .booking-list-area .booking-list .form .single-select option{
   color: #000;
 }
+
+.after-hero-offset {
+  margin-top: -140px;
+  padding-top: 140px;
+}
