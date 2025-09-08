@@ -1,17 +1,16 @@
+// src/Components/Header/Header3.jsx
 import { useEffect, useRef, useState } from "react";
-import { Link } from "react-router-dom"; // <- v6
+import { Link } from "react-router-dom";
 import Nav from "./Nav";
 
-type Props = { variant?: "header-transparent" | string };
-
-export default function Header3({ variant }: Props) {
+export default function Header3({ variant }) {
   const [mobileToggle, setMobileToggle] = useState(false);
   const [searchToggle, setSearchToggle] = useState(false);
   const [hasScrolled, setHasScrolled] = useState(false);
   const [isScrollingUp, setIsScrollingUp] = useState(true);
-  const [headerHeight, setHeaderHeight] = useState<number>(80);
+  const [headerHeight, setHeaderHeight] = useState(80);
 
-  const headerRef = useRef<HTMLElement | null>(null);
+  const headerRef = useRef(null);
   const lastY = useRef(0);
   const ticking = useRef(false);
 
@@ -21,37 +20,37 @@ export default function Header3({ variant }: Props) {
   const logoSrc = isHero ? "/1global1.png" : "/one-globe.png";
   const textColor = isHero ? "#fff" : "#000";
 
-  // ---- measure header height (keeps spacer accurate) ----
+  // Measure header height and keep spacer synced
   useEffect(() => {
     const el = headerRef.current;
     if (!el) return;
 
     const measure = () => {
       setHeaderHeight(el.offsetHeight);
-      // also expose to CSS if you want global usage
-      document.documentElement.style.setProperty(
-        "--header-h",
-        `${el.offsetHeight}px`
-      );
+      document.documentElement.style.setProperty("--header-h", `${el.offsetHeight}px`);
     };
 
-    const ro = new ResizeObserver(measure);
-    ro.observe(el);
+    let ro;
+    if (typeof ResizeObserver !== "undefined") {
+      ro = new ResizeObserver(measure);
+      ro.observe(el);
+    }
     measure();
 
-    window.addEventListener("resize", measure);
+    const onResize = () => measure();
+    window.addEventListener("resize", onResize);
     return () => {
-      ro.disconnect();
-      window.removeEventListener("resize", measure);
+      window.removeEventListener("resize", onResize);
+      if (ro) ro.disconnect();
     };
   }, []);
 
-  // ---- scroll logic (show when scrolling up, hide when scrolling down) ----
+  // Scroll logic: compact when scrolled, reveal on scroll up
   useEffect(() => {
     const onScroll = () => {
       if (ticking.current) return;
       ticking.current = true;
-      window.requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
         const y = window.scrollY || 0;
         setHasScrolled(y > 0);
         setIsScrollingUp(y < lastY.current);
@@ -60,14 +59,13 @@ export default function Header3({ variant }: Props) {
       });
     };
 
-    onScroll(); // initialize once
+    onScroll(); // init once
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
   return (
     <div>
-      {/* Minimal styles to make it stable + pretty */}
       <style>{`
         :root { --header-h: ${headerHeight}px; }
 
@@ -76,26 +74,12 @@ export default function Header3({ variant }: Props) {
           transition: background-color .25s ease, transform .25s ease, box-shadow .25s ease, backdrop-filter .25s ease;
           will-change: transform, backdrop-filter, background-color;
         }
-
-        /* Hero mode: transparent, no shadow */
-        .site-header--hero {
-          background: transparent;
-          box-shadow: none;
-          backdrop-filter: none;
-        }
-
-        /* Solid/frosted when not on hero */
-        .site-header--solid {
-          background: rgba(255,255,255,0.7);
-          backdrop-filter: blur(10px);
-          box-shadow: 0 8px 24px rgba(0,0,0,0.08);
-        }
-
-        /* Hide on scroll down (subtle) */
-        .site-header--hide {
-          transform: translateY(-12px);
-          opacity: 0.98;
-        }
+        /* Transparent over hero */
+        .site-header--hero { background: transparent; box-shadow: none; backdrop-filter: none; }
+        /* Frosted when not on hero */
+        .site-header--solid { background: rgba(255,255,255,0.7); backdrop-filter: blur(10px); box-shadow: 0 8px 24px rgba(0,0,0,0.08); }
+        /* Slight hide on scroll down */
+        .site-header--hide { transform: translateY(-12px); opacity: 0.98; }
 
         /* Logo sizing + shrink on scroll */
         .cs_site_branding img {
@@ -107,19 +91,13 @@ export default function Header3({ variant }: Props) {
           height: clamp(34px, 4.2vw, 56px);
         }
 
-        /* Header inner layout (uses your existing classes too) */
+        /* Layout helpers */
         .cs_main_header_in {
           display: flex; align-items: center; justify-content: space-between;
           gap: 16px; min-height: 72px;
         }
-
-        /* Keep nav links legible over both modes */
         .cs_nav a { transition: color .2s ease; }
-
-        /* Spacer reserves space so content never overlaps */
         .header-spacer { height: var(--header-h); }
-
-        /* Tweak your theme button on transparent backgrounds */
         .theme-btn { border: 1px solid currentColor; }
       `}</style>
 
@@ -151,12 +129,8 @@ export default function Header3({ variant }: Props) {
               <div className="cs_main_header_center">
                 <div className="cs_nav cs_primary_font fw-medium">
                   <button
-                    className={
-                      mobileToggle
-                        ? "cs-munu_toggle cs_teggle_active"
-                        : "cs-munu_toggle"
-                    }
-                    onClick={() => setMobileToggle((v) => !v)}
+                    className={mobileToggle ? "cs-munu_toggle cs_teggle_active" : "cs-munu_toggle"}
+                    onClick={() => setMobileToggle(v => !v)}
                     aria-label="Toggle navigation"
                     aria-expanded={mobileToggle}
                     aria-controls="primary-nav"
@@ -165,11 +139,7 @@ export default function Header3({ variant }: Props) {
                     <span></span>
                   </button>
 
-                  <Nav
-                    id="primary-nav"
-                    setMobileToggle={setMobileToggle}
-                    linkColor={textColor}
-                  />
+                  <Nav id="primary-nav" setMobileToggle={setMobileToggle} linkColor={textColor} />
                 </div>
               </div>
 
@@ -178,7 +148,7 @@ export default function Header3({ variant }: Props) {
                 <div className="header-btn d-flex align-items-center">
                   <div className="main-button" style={{ display: "flex", gap: 12 }}>
                     <button
-                      onClick={() => setSearchToggle((v) => !v)}
+                      onClick={() => setSearchToggle(v => !v)}
                       className="search-trigger search-icon"
                       style={{ color: textColor, background: "transparent", border: 0 }}
                       aria-label="Open search"
@@ -205,7 +175,7 @@ export default function Header3({ variant }: Props) {
         </div>{/* /cs_main_header */}
       </header>
 
-      {/* Spacer prevents overlap with About (or any section) */}
+      {/* Spacer keeps following sections (e.g., About) from overlapping the fixed header */}
       <div className="header-spacer" />
 
       {/* Full-screen Search */}
