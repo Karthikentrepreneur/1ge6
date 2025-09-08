@@ -1,13 +1,13 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Link } from "react-router";
 import Nav from './Nav';
 
 export default function Header3({ variant }) {
   const [mobileToggle, setMobileToggle] = useState(false);
   const [isSticky, setIsSticky] = useState();
-  const [prevScrollPos, setPrevScrollPos] = useState(0);
+  const prevScrollPos = useRef(0);
   const [searchToggle, setSearchToggle] = useState(false);
-  const [hasScrolled, setHasScrolled] = useState(false);
+  const [hasScrolled, setHasScrolled] = useState(variant !== 'header-transparent');
 
   const isHero = variant === 'header-transparent' && !hasScrolled;
   const logoSrc = isHero ? '/1global1.png' : '/one-globe.png';
@@ -17,7 +17,7 @@ export default function Header3({ variant }) {
     const handleScroll = () => {
       const currentScrollPos = window.scrollY;
 
-      if (currentScrollPos > prevScrollPos) {
+      if (currentScrollPos > prevScrollPos.current) {
         setIsSticky('cs-gescout_sticky'); // Scrolling down
       } else if (currentScrollPos !== 0) {
         setIsSticky('cs-gescout_show cs-gescout_sticky'); // Scrolling up
@@ -25,15 +25,16 @@ export default function Header3({ variant }) {
         setIsSticky();
       }
 
-      setPrevScrollPos(currentScrollPos);
-      setHasScrolled(currentScrollPos > 0);
+      prevScrollPos.current = currentScrollPos;
+      setHasScrolled((prev) => prev || currentScrollPos > 0);
     };
 
     window.addEventListener('scroll', handleScroll);
+    setHasScrolled((prev) => prev || window.scrollY > 0);
     return () => {
       window.removeEventListener('scroll', handleScroll);
     };
-  }, [prevScrollPos]);
+  }, []);
 
   return (
     <div>
