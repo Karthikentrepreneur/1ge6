@@ -26,7 +26,7 @@ export default function Header3({ variant }) {
       }
 
       setPrevScrollPos(currentScrollPos);
-      setHasScrolled(currentScrollPos > 0);
+      setHasScrolled((prev) => prev || currentScrollPos > 0);
     };
 
     window.addEventListener('scroll', handleScroll);
