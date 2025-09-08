@@ -5,7 +5,12 @@ import Nav from './Nav';
 export default function Header3({ variant }) {
   const [mobileToggle, setMobileToggle] = useState(false);
   const [searchToggle, setSearchToggle] = useState(false);
-  const [hasScrolled, setHasScrolled] = useState(false);
+  const [hasScrolled, setHasScrolled] = useState(() => {
+    if (typeof window !== 'undefined') {
+      return sessionStorage.getItem('hasScrolled') === 'true';
+    }
+    return false;
+  });
 
   const isHero = variant === 'header-transparent' && !hasScrolled;
   const logoSrc = isHero ? '/1global1.png' : '/one-globe.png';
@@ -14,6 +19,7 @@ export default function Header3({ variant }) {
   useEffect(() => {
     const handleScroll = () => {
       if (window.scrollY > 0) {
+        sessionStorage.setItem('hasScrolled', 'true');
         setHasScrolled(true);
       }
     };
