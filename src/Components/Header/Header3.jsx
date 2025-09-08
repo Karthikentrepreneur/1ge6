@@ -4,28 +4,25 @@ import Nav from './Nav';
 
 export default function Header3({ variant }) {
   const [mobileToggle, setMobileToggle] = useState(false);
-  const [isSticky, setIsSticky] = useState();
-  const [prevScrollPos, setPrevScrollPos] = useState(0);
   const [searchToggle, setSearchToggle] = useState(false);
+  const [hasScrolled, setHasScrolled] = useState(false);
+
+  const isHero = variant === 'header-transparent' && !hasScrolled;
+  const logoSrc = isHero ? '/1global1.png' : '/one-globe.png';
+  const textColor = isHero ? '#fff' : '#000';
 
   useEffect(() => {
     const handleScroll = () => {
-      const currentScrollPos = window.scrollY;
-      if (currentScrollPos > prevScrollPos) {
-        setIsSticky('cs-gescout_sticky'); // Scrolling down
-      } else if (currentScrollPos !== 0) {
-        setIsSticky('cs-gescout_show cs-gescout_sticky'); // Scrolling up
-      } else {
-        setIsSticky();
+      if (window.scrollY > 0) {
+        setHasScrolled(true);
       }
-      setPrevScrollPos(currentScrollPos);
     };
 
     window.addEventListener('scroll', handleScroll);
     return () => {
       window.removeEventListener('scroll', handleScroll);
     };
-  }, [prevScrollPos]);
+  }, []);
 
   return (
     <div>
@@ -37,11 +34,6 @@ export default function Header3({ variant }) {
           display: block;
           object-fit: contain;
         }
-        /* When header becomes sticky, gently reduce the logo size */
-        .cs_sticky_header .cs_site_branding img,
-        .cs-gescout_sticky .cs_site_branding img {
-          height: clamp(34px, 4.2vw, 56px);
-        }
         /* Ensure the img never overflows its container */
         .cs_main_header_left .cs_site_branding {
           display: inline-flex;
@@ -51,18 +43,19 @@ export default function Header3({ variant }) {
       `}</style>
 
       <header
+        style={{ color: textColor }}
         className={`cs_site_header header_style_2 header_style_2_2 cs_style_1 header_sticky_style1 ${
           variant ? variant : ''
         } cs_sticky_header cs_site_header_full_width ${
           mobileToggle ? 'cs_mobile_toggle_active' : ''
-        } ${isSticky ? isSticky : ''}`}
+        }`}
       >
         <div className="cs_main_header">
           <div className="container">
             <div className="cs_main_header_in">
               <div className="cs_main_header_left">
                 <Link className="cs_site_branding" to="/">
-                  <img src="/1global1.png" alt="Logo" />
+                  <img src={logoSrc} alt="Logo" />
                 </Link>
               </div>
 
@@ -85,10 +78,14 @@ export default function Header3({ variant }) {
               <div className="cs_main_header_right">
                 <div className="header-btn d-flex align-items-center">
                   <div className="main-button">
-                    <a onClick={() => setSearchToggle(!searchToggle)} className="search-trigger search-icon">
+                    <a
+                      onClick={() => setSearchToggle(!searchToggle)}
+                      className="search-trigger search-icon"
+                      style={{ color: textColor }}
+                    >
                       <i className="bi bi-search"></i>
                     </a>
-                    <Link to="/blog" className="theme-btn">
+                    <Link to="/blog" className="theme-btn" style={{ color: textColor }}>
                       <span>
                         Newsletter <i className="bi bi-arrow-right"></i>
                       </span>
