@@ -13,14 +13,7 @@ export default function Header3({ variant }) {
   const logoSrc = isHero ? '/1global1.png' : '/one-globe.png';
   const textColor = isHero ? '#fff' : '#000';
 
-  const isHero = variant === 'header-transparent';
-  const logoSrc = isHero ? '/1global1.png' : '/one-globe.png';
-  const textColor = isHero ? '#fff' : '#000';
-
   useEffect(() => {
-    const heroHeight =
-      document.querySelector('.hero-section')?.offsetHeight || 0;
-
     const handleScroll = () => {
       const currentScrollPos = window.scrollY;
 
@@ -33,7 +26,7 @@ export default function Header3({ variant }) {
       }
 
       setPrevScrollPos(currentScrollPos);
-      setHasScrolled(currentScrollPos >= heroHeight);
+      setHasScrolled(currentScrollPos > 0);
     };
 
     window.addEventListener('scroll', handleScroll);

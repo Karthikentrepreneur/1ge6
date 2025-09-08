@@ -17,10 +17,12 @@ const Home3 = () => {
     return (
         <div>
             <Heroanner1></Heroanner1>
-            <About1></About1>
-            <Category1></Category1>
-            <Blog1></Blog1>
-            <Brand1></Brand1>
+            <div style={{ marginTop: '-140px', paddingTop: '140px' }}>
+                <About1></About1>
+                <Category1></Category1>
+                <Blog1></Blog1>
+                <Brand1></Brand1>
+            </div>
         </div>
     );
 };
