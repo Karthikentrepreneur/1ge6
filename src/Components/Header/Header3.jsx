@@ -7,7 +7,9 @@ export default function Header3({ variant }) {
   const [isSticky, setIsSticky] = useState();
   const prevScrollPos = useRef(0);
   const [searchToggle, setSearchToggle] = useState(false);
-  const [hasScrolled, setHasScrolled] = useState(variant !== 'header-transparent');
+  // Track if the user has scrolled at least once to lock the dark navbar
+  const hasScrolledRef = useRef(variant !== 'header-transparent');
+  const [hasScrolled, setHasScrolled] = useState(hasScrolledRef.current);
 
   const isHero = variant === 'header-transparent' && !hasScrolled;
   const logoSrc = isHero ? '/1global1.png' : '/one-globe.png';
@@ -26,11 +28,15 @@ export default function Header3({ variant }) {
       }
 
       prevScrollPos.current = currentScrollPos;
-      setHasScrolled((prev) => prev || currentScrollPos > 0);
+
+      if (!hasScrolledRef.current && currentScrollPos > 0) {
+        hasScrolledRef.current = true;
+        setHasScrolled(true); // Permanently switch to dark variant
+      }
     };
 
     window.addEventListener('scroll', handleScroll);
-    setHasScrolled((prev) => prev || window.scrollY > 0);
+    handleScroll(); // Set initial state based on current scroll
     return () => {
       window.removeEventListener('scroll', handleScroll);
     };
