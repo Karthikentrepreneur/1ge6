@@ -9,7 +9,7 @@ const Home3 = () => {
     return (
         <div>
             <Heroanner1></Heroanner1>
-            <div className="after-hero-offset">
+            <div id="hero-sentinel" className="after-hero-offset">
                 <About1></About1>
                 <Category1></Category1>
                 <Blog1></Blog1>

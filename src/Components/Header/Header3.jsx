@@ -28,11 +28,6 @@ export default function Header3({ variant }) {
       }
 
       prevScrollPos.current = currentScrollPos;
-
-      if (!hasScrolledRef.current && currentScrollPos > 0) {
-        hasScrolledRef.current = true;
-        setHasScrolled(true); // Permanently switch to dark variant
-      }
     };
 
     window.addEventListener('scroll', handleScroll);
@@ -41,6 +36,23 @@ export default function Header3({ variant }) {
       window.removeEventListener('scroll', handleScroll);
     };
   }, []);
+
+  useEffect(() => {
+    if (variant !== 'header-transparent' || hasScrolledRef.current) return;
+    const sentinel = document.getElementById('hero-sentinel');
+    if (!sentinel) return;
+
+    const observer = new IntersectionObserver((entries) => {
+      const entry = entries[0];
+      if (entry.isIntersecting) {
+        hasScrolledRef.current = true;
+        setHasScrolled(true); // Permanently switch to dark variant
+      }
+    });
+
+    observer.observe(sentinel);
+    return () => observer.disconnect();
+  }, [variant]);
 
   return (
     <div>
