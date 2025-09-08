@@ -1,4 +1,5 @@
 import React from 'react';
+import Header3 from '../Header/Header3';
 
 const Heroanner1 = () => {
   const videoSrc = 'singapore.mp4';
@@ -10,10 +11,30 @@ const Heroanner1 = () => {
 
   return (
     <section className="hero-section">
+      <Header3 variant="header-transparent" />
       <style>{`
-        .hero-1 { 
-          position: relative; 
-          overflow: hidden; 
+        .hero-section {
+          position: relative;
+          background: transparent;
+        }
+        .hero-section .cs_site_header_spacing_140 {
+          display: none;
+        }
+        .header-transparent {
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          background: transparent;
+          z-index: 3;
+        }
+        .header-transparent .cs_top_header,
+        .header-transparent .cs_main_header {
+          background: transparent;
+        }
+        .hero-1 {
+          position: relative;
+          overflow: hidden;
           min-height: 100vh; /* full viewport height */
           display: flex;
           align-items: center; /* vertical center */
