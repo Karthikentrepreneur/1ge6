@@ -24,9 +24,7 @@ const About1 = () => {
       className="about-section section-padding fix bg-cover"
       data-background="/about-bg.png"
     >
-      <div className="right-shape float-bob-x">
-        <img src="/shipping2.png" alt="img" />
-      </div>
+
 
       <div className="container">
         <div className="about-wrapper">
