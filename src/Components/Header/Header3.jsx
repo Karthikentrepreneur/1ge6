@@ -61,7 +61,7 @@ export default function Header3({ variant }) {
             <div className="cs_main_header_in">
               <div className="cs_main_header_left">
                 <Link className="cs_site_branding" to="/">
-                  <img src={logoSrc} alt="Logo" />
+                  <img src={logoSrc} alt="One Global logo" />
                 </Link>
               </div>
 
