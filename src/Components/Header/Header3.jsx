@@ -1,13 +1,31 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Link } from "react-router";
 import Nav from './Nav';
 
 export default function Header3({ variant }) {
   const [mobileToggle, setMobileToggle] = useState(false);
+  const [isSticky, setIsSticky] = useState();
+  const [prevScrollPos, setPrevScrollPos] = useState(0);
   const [searchToggle, setSearchToggle] = useState(false);
 
-  // Determine header style based on variant to control text color
-  const colorStyle = variant === 'header-transparent' ? 'header_style_2_1' : 'header_style_2_2';
+  useEffect(() => {
+    const handleScroll = () => {
+      const currentScrollPos = window.scrollY;
+      if (currentScrollPos > prevScrollPos) {
+        setIsSticky('cs-gescout_sticky'); // Scrolling down
+      } else if (currentScrollPos !== 0) {
+        setIsSticky('cs-gescout_show cs-gescout_sticky'); // Scrolling up
+      } else {
+        setIsSticky();
+      }
+      setPrevScrollPos(currentScrollPos);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, [prevScrollPos]);
 
   return (
     <div>
@@ -33,11 +51,11 @@ export default function Header3({ variant }) {
       `}</style>
 
       <header
-        className={`cs_site_header header_style_2 ${colorStyle} cs_style_1 header_sticky_style1 ${
+        className={`cs_site_header header_style_2 header_style_2_2 cs_style_1 header_sticky_style1 ${
           variant ? variant : ''
         } cs_sticky_header cs_site_header_full_width ${
           mobileToggle ? 'cs_mobile_toggle_active' : ''
-        } cs-gescout_sticky`}
+        } ${isSticky ? isSticky : ''}`}
       >
         <div className="cs_main_header">
           <div className="container">
