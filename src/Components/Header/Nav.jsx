@@ -1,37 +1,37 @@
 import DropDown from './DropDown';
 import { Link } from "react-router";
 
-export default function Nav({ setMobileToggle }) {
+export default function Nav({ setMobileToggle, linkColor }) {
   return (
     <ul className="cs_nav_list fw-medium">
       <li>
-        <Link to="/">Home</Link>
+        <Link to="/" style={{ color: linkColor }}>Home</Link>
       </li>
 
       <li>
-        <Link to="/about" onClick={() => setMobileToggle(false)}>
+        <Link to="/about" onClick={() => setMobileToggle(false)} style={{ color: linkColor }}>
         About Us
         </Link>
       </li>
 
 
       <li>
-        <Link to="/activities" onClick={() => setMobileToggle(false)}>
+        <Link to="/activities" onClick={() => setMobileToggle(false)} style={{ color: linkColor }}>
         Activities
         </Link>
-      </li> 
-      
-      <li>
-        <Link to="/team">Our Team</Link>
-      </li>        
+      </li>
 
       <li>
-        <Link to="/blog" onClick={() => setMobileToggle(false)}>
+        <Link to="/team" style={{ color: linkColor }}>Our Team</Link>
+      </li>
+
+      <li>
+        <Link to="/blog" onClick={() => setMobileToggle(false)} style={{ color: linkColor }}>
           Blog
         </Link>
-        
+
       </li>
-      
+
     </ul>
   );
 }
