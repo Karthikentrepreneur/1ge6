@@ -7,10 +7,19 @@ export default function Header3({ variant }) {
   const [isSticky, setIsSticky] = useState();
   const [prevScrollPos, setPrevScrollPos] = useState(0);
   const [searchToggle, setSearchToggle] = useState(false);
+  const [hasScrolled, setHasScrolled] = useState(false);
+
+  const isHero = variant === 'header-transparent' && !hasScrolled;
+  const logoSrc = isHero ? '/1global1.png' : '/one-globe.png';
+  const textColor = isHero ? '#fff' : '#000';
 
   useEffect(() => {
+    const heroHeight =
+      document.querySelector('.hero-section')?.offsetHeight || 0;
+
     const handleScroll = () => {
       const currentScrollPos = window.scrollY;
+
       if (currentScrollPos > prevScrollPos) {
         setIsSticky('cs-gescout_sticky'); // Scrolling down
       } else if (currentScrollPos !== 0) {
@@ -18,7 +27,9 @@ export default function Header3({ variant }) {
       } else {
         setIsSticky();
       }
+
       setPrevScrollPos(currentScrollPos);
+      setHasScrolled(currentScrollPos >= heroHeight);
     };
 
     window.addEventListener('scroll', handleScroll);
@@ -51,6 +62,7 @@ export default function Header3({ variant }) {
       `}</style>
 
       <header
+        style={{ color: textColor }}
         className={`cs_site_header header_style_2 header_style_2_2 cs_style_1 header_sticky_style1 ${
           variant ? variant : ''
         } cs_sticky_header cs_site_header_full_width ${
@@ -62,7 +74,7 @@ export default function Header3({ variant }) {
             <div className="cs_main_header_in">
               <div className="cs_main_header_left">
                 <Link className="cs_site_branding" to="/">
-                  <img src="/1global1.png" alt="Logo" />
+                  <img src={logoSrc} alt="Logo" />
                 </Link>
               </div>
 
@@ -78,17 +90,21 @@ export default function Header3({ variant }) {
                   >
                     <span></span>
                   </span>
-                  <Nav setMobileToggle={setMobileToggle} />
+                  <Nav setMobileToggle={setMobileToggle} linkColor={textColor} />
                 </div>
               </div>
 
               <div className="cs_main_header_right">
                 <div className="header-btn d-flex align-items-center">
                   <div className="main-button">
-                    <a onClick={() => setSearchToggle(!searchToggle)} className="search-trigger search-icon">
+                    <a
+                      onClick={() => setSearchToggle(!searchToggle)}
+                      className="search-trigger search-icon"
+                      style={{ color: textColor }}
+                    >
                       <i className="bi bi-search"></i>
                     </a>
-                    <Link to="/blog" className="theme-btn">
+                    <Link to="/blog" className="theme-btn" style={{ color: textColor }}>
                       <span>
                         Newsletter <i className="bi bi-arrow-right"></i>
                       </span>
