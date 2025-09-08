@@ -14,7 +14,7 @@ const AboutPage = () => {
                 bgimg="/aboutbg.png"
                 Title="About Us"
             ></BreadCumb>
-            <About1></About1>>
+            <About1></About1>
             <Counter4></Counter4>
         </div>
     );
