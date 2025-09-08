@@ -7,14 +7,23 @@ export default function Header3({ variant }) {
   const [isSticky, setIsSticky] = useState();
   const [prevScrollPos, setPrevScrollPos] = useState(0);
   const [searchToggle, setSearchToggle] = useState(false);
+  const [hasScrolled, setHasScrolled] = useState(false);
+
+  const isHero = variant === 'header-transparent' && !hasScrolled;
+  const logoSrc = isHero ? '/1global1.png' : '/one-globe.png';
+  const textColor = isHero ? '#fff' : '#000';
 
   const isHero = variant === 'header-transparent';
   const logoSrc = isHero ? '/1global1.png' : '/one-globe.png';
   const textColor = isHero ? '#fff' : '#000';
 
   useEffect(() => {
+    const heroHeight =
+      document.querySelector('.hero-section')?.offsetHeight || 0;
+
     const handleScroll = () => {
       const currentScrollPos = window.scrollY;
+
       if (currentScrollPos > prevScrollPos) {
         setIsSticky('cs-gescout_sticky'); // Scrolling down
       } else if (currentScrollPos !== 0) {
@@ -22,7 +31,9 @@ export default function Header3({ variant }) {
       } else {
         setIsSticky();
       }
+
       setPrevScrollPos(currentScrollPos);
+      setHasScrolled(currentScrollPos >= heroHeight);
     };
 
     window.addEventListener('scroll', handleScroll);
