@@ -57,49 +57,6 @@ export default function Header3({ variant }) {
           mobileToggle ? 'cs_mobile_toggle_active' : ''
         } ${isSticky ? isSticky : ''}`}
       >
-        <div className="cs_top_header">
-          <div className="container">
-            <div className="cs_top_header_in">
-              <div className="cs_top_header_left header-info">
-                <ul className="cs_header_contact_list cs_mp_0 cs_white_color">
-                  <li>
-                    <i className="bi bi-envelope-fill"></i>
-                    <a href="mailto:demo@example.com" aria-label="Email link">jp@1ge.sg</a>
-                  </li>
-                  <li>
-                    <i className="bi bi-telephone-fill"></i>
-                    <a href="tel:+990123456789" aria-label="Phone call link">+65 69080838</a>
-                  </li>
-                  <li>
-                    <i className="bi bi-geo-alt-fill"></i>
-                    #03-01, Keppel Distripark,511 Kampong Bahru Road,Singapore
-                  </li>
-                </ul>
-              </div>
-              <div className="cs_top_header_right">
-                <div className="cs_header_social_links_wrap">
-                  <div className="cs_header_social_links top-header-social-icon">
-                    <div className="cs_social_btns cs_style_1">
-                      <a href="#" aria-label="Social link" className="cs_center">
-                        <i className="bi bi-twitter-x"></i>
-                      </a>
-                      <a href="#" aria-label="Social link" className="cs_center">
-                        <i className="bi bi-facebook"></i>
-                      </a>
-                      <a href="#" aria-label="Social link" className="cs_center">
-                        <i className="bi bi-linkedin"></i>
-                      </a>
-                      <a href="#" aria-label="Social link" className="cs_center">
-                        <i className="bi bi-instagram"></i>
-                      </a>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
         <div className="cs_main_header">
           <div className="container">
             <div className="cs_main_header_in">
