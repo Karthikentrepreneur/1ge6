@@ -21,6 +21,7 @@ export default function Header3({ variant }) {
   useEffect(() => {
     const handleScroll = () => {
       const currentScrollPos = window.scrollY;
+      const heroHeight = document.querySelector('.hero-section')?.offsetHeight || 0;
 
       if (currentScrollPos > prevScrollPos) {
         setIsSticky('cs-gescout_sticky'); // Scrolling down
@@ -31,9 +32,10 @@ export default function Header3({ variant }) {
       }
 
       setPrevScrollPos(currentScrollPos);
-      setHasScrolled((prev) => prev || currentScrollPos > 0);
+      setHasScrolled(currentScrollPos > heroHeight);
     };
 
+    handleScroll();
     window.addEventListener('scroll', handleScroll);
     return () => {
       window.removeEventListener('scroll', handleScroll);
