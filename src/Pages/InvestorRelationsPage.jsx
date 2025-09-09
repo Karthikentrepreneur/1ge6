@@ -22,7 +22,7 @@ const InvestorRelationsPage = () => {
             </div>
             <div className="col-lg-6">
               <img
-                src="/investorrelations.png"
+                src="/investor.png"
                 alt="1 Global Enterprises – Investor overview"
                 className="img-fluid rounded-3"
               />
