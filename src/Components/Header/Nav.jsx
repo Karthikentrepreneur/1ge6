@@ -33,7 +33,7 @@ export default function Nav({ setMobileToggle, linkColor }) {
 
       <li>
         <Link to="/blog" onClick={() => setMobileToggle(false)} style={{ color: linkColor }}>
-          Blog
+          News Room
         </Link>
 
       </li>
