@@ -9,28 +9,32 @@ const Footer1 = () => {
 
   return (
     <footer
-      className="footer-section bg-cover"
-      data-background="/footer.png"
+      className="footer-section"
       aria-label="Website Footer"
     >
       <div className="container">
         {/* Main Footer Content */}
         <div className="footer-main">
-          {/* Column 1 - Logo + Newsletter */}
+          {/* Column 1 - Logo + About */}
           <div className="footer-col">
-            <img src="/one-globe.png" alt="1 Global Enterprises Logo" className="footer-logo" />
-            <h3 className="footer-heading">Subscribe Newsletter</h3>
-            <p className="footer-subtext">Get our latest deals and updates</p>
-            <form className="footer-input" onSubmit={(e) => e.preventDefault()}>
-              <input type="email" placeholder="Your email address" />
-              <button type="submit">Subscribe →</button>
-            </form>
+            <img
+              src="/1global1.png"
+              alt="1 Global Enterprises Logo"
+              className="footer-logo"
+            />
+
+            <h3 className="footer-heading">About us</h3>
+            <p className="footer-text">
+              1 Global Enterprises Pte Ltd is a Singapore head quartered business group
+              having interest in Shipping, Logistics/Supply chain, Product distribution,
+              Software development/IT, Renewal energy supplies/clean energy and trading.
+            </p>
 
             <div className="footer-social">
-              <a href="#" aria-label="Facebook"><i className="bi bi-facebook"></i></a>
-              <a href="#" aria-label="Twitter"><i className="bi bi-twitter-x"></i></a>
-              <a href="#" aria-label="LinkedIn"><i className="bi bi-linkedin"></i></a>
-              <a href="#" aria-label="Instagram"><i className="bi bi-instagram"></i></a>
+              <a href="#" aria-label="Facebook"><i className="bi bi-facebook" /></a>
+              <a href="#" aria-label="Twitter/X"><i className="bi bi-twitter-x" /></a>
+              <a href="#" aria-label="LinkedIn"><i className="bi bi-linkedin" /></a>
+              <a href="#" aria-label="Instagram"><i className="bi bi-instagram" /></a>
             </div>
           </div>
 
@@ -50,17 +54,19 @@ const Footer1 = () => {
           {/* Column 3 - Contact Info */}
           <div className="footer-col">
             <h4 className="footer-heading">Contact Us</h4>
-            <p>
+            <p className="footer-text">
               1 Global Enterprises Pte Ltd <br />
               #03-01, Keppel Distripark, <br />
               511 Kampong Bahru Road, <br />
               Singapore 099447
             </p>
-            <p><a href="mailto:jp@1ge.sg">jp@1ge.sg</a></p>
-            <p>
-              <a href="tel:+6569080838">+65 69080838</a> <br />
-              <a href="tel:+6569080849">+65 69080849</a> <br />
-              <a href="tel:+6598177292">+65 98177292</a>
+            <p className="footer-text">
+              <a className="footer-link" href="mailto:jp@1ge.sg">jp@1ge.sg</a>
+            </p>
+            <p className="footer-text">
+              <a className="footer-link" href="tel:+6569080838">+65 69080838</a> <br />
+              <a className="footer-link" href="tel:+6569080849">+65 69080849</a> <br />
+              <a className="footer-link" href="tel:+6598177292">+65 98177292</a>
             </p>
 
             <div className="footer-tags">
@@ -84,20 +90,14 @@ const Footer1 = () => {
       {/* Styles */}
       <style>{`
         .footer-section {
-          background: url('/footer.png') center/cover no-repeat;
+          background: #000;
           position: relative;
           padding: 60px 0 30px;
           color: #fff;
         }
-        .footer-section::before {
-          content: "";
-          position: absolute; inset: 0;
-          background: rgba(0,0,0,0.75);
-          backdrop-filter: blur(8px);
-        }
         .footer-section .container {
           position: relative;
-          z-index: 2;
+          z-index: 1;
         }
         .footer-main {
           display: grid;
@@ -106,96 +106,80 @@ const Footer1 = () => {
           margin-bottom: 40px;
         }
         .footer-col {
-          background: rgba(255, 255, 255, 0.05);
-          padding: 25px;
-          border-radius: 16px;
-          box-shadow: 0 6px 18px rgba(0,0,0,0.2);
+          /* boxes removed: no background, no shadow, no borders */
+          padding: 0;
         }
         .footer-logo {
           max-height: 60px;
-          margin-bottom: 20px;
+          margin-bottom: 16px;
         }
         .footer-heading {
           font-size: 20px;
           font-weight: 700;
-          margin-bottom: 12px;
+          margin: 12px 0;
           color: #fff;
-          position: relative;
         }
-        .footer-subtext {
-          font-size: 14px;
-          margin-bottom: 16px;
-          color: #ccc;
-        }
-        .footer-input {
-          display: flex;
-          margin-bottom: 16px;
-        }
-        .footer-input input {
-          flex: 1;
-          padding: 10px;
-          border: none;
-          border-radius: 8px 0 0 8px;
-          outline: none;
-        }
-        .footer-input button {
-          padding: 10px 16px;
-          background: linear-gradient(135deg, #4f8df9, #2a66f0);
-          border: none;
-          border-radius: 0 8px 8px 0;
+        .footer-text {
           color: #fff;
-          font-weight: 600;
-          cursor: pointer;
+          opacity: 0.9;
+          line-height: 1.7;
+          margin: 0 0 12px 0;
         }
         .footer-social a {
-          margin: 0 6px;
+          margin: 0 6px 0 0;
           display: inline-flex;
           align-items: center;
           justify-content: center;
           width: 38px; height: 38px;
           border-radius: 50%;
-          background: #222;
+          background: #111;
           color: #fff;
-          transition: all .3s ease;
+          transition: opacity .25s ease;
         }
-        .footer-social a:hover {
-          background: #2a66f0;
-        }
+        .footer-social a:hover { opacity: 0.8; }
+
         .footer-links {
           list-style: none;
           padding: 0;
           margin: 0;
         }
-        .footer-links li {
-          margin: 8px 0;
-        }
+        .footer-links li { margin: 8px 0; }
         .footer-links a {
-          color: #ddd;
+          color: #fff;
           text-decoration: none;
-          transition: color .3s ease;
+          opacity: 0.9;
+          transition: opacity .25s ease;
         }
-        .footer-links a:hover {
-          color: #2a66f0;
+        .footer-links a:hover { opacity: 1; }
+
+        .footer-link {
+          color: #fff;
+          text-decoration: none;
+          opacity: 0.9;
         }
+        .footer-link:hover { opacity: 1; }
+
         .footer-tags span {
           display: inline-block;
-          margin: 5px 6px 0 0;
+          margin: 6px 6px 0 0;
           padding: 5px 12px;
-          background: #2a66f0;
+          border: 1px solid rgba(255,255,255,0.25);
           color: #fff;
-          border-radius: 20px;
+          border-radius: 999px;
           font-size: 12px;
           font-weight: 600;
         }
+
         .footer-bottom {
           display: flex;
           flex-wrap: wrap;
           justify-content: space-between;
           align-items: center;
-          border-top: 1px solid rgba(255,255,255,0.1);
+          border-top: 1px solid rgba(255,255,255,0.15);
           padding-top: 20px;
           font-size: 14px;
-          color: #aaa;
+          color: #fff;
+          opacity: 0.9;
         }
         .footer-bottom ul {
           display: flex;
@@ -205,13 +189,11 @@ const Footer1 = () => {
           margin: 0;
         }
         .footer-bottom a {
-          color: #ddd;
+          color: #fff;
           text-decoration: none;
-          transition: color .3s ease;
+          opacity: 0.9;
         }
-        .footer-bottom a:hover {
-          color: #2a66f0;
-        }
+        .footer-bottom a:hover { opacity: 1; }
       `}</style>
     </footer>
   );
