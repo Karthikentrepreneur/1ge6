@@ -7,7 +7,11 @@ const ShippingPage = () => {
       <BreadCumb bgimg="/aboutbg.png" Title="Shipping" />
       <section className="py-5">
         <div className="container">
-          <img src="/shipping.png" alt="Shipping" className="mb-4 w-100" />
+          <img
+            src="/shipping.png"
+            alt="Shipping"
+            className="mb-6 w-full h-80 object-cover rounded"
+          />
           <p>
             Shipping is the backbone of global trade, moving goods across oceans and
             connecting markets on every continent. Our shipping services are built on

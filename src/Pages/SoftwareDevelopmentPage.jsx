@@ -7,7 +7,11 @@ const SoftwareDevelopmentPage = () => {
       <BreadCumb bgimg="/aboutbg.png" Title="Software Development" />
       <section className="py-5">
         <div className="container">
-          <img src="/software.png" alt="Software Development" className="mb-4 w-100" />
+          <img
+            src="/software.png"
+            alt="Software Development"
+            className="mb-6 w-full h-80 object-cover rounded"
+          />
           <p>
             Our software development team creates innovative solutions that drive
             digital transformation. From web applications to complex enterprise
