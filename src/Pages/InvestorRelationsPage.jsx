@@ -78,7 +78,7 @@ const InvestorRelationsPage = () => {
               </p>
             </div>
             <div className="col-lg-6">
-              <img src="/ir/performance-chart.png" alt="Performance snapshot chart" className="img-fluid rounded-3" />
+             
             </div>
           </div>
 
@@ -114,7 +114,7 @@ const InvestorRelationsPage = () => {
             </div>
             <div className="col-md-4">
               <div className="p-3 border rounded-3 h-100">
-                <img src="/ir/news-1.jpg" alt="Press item 1" className="img-fluid rounded-2 mb-3" />
+              
                 <h6 className="mb-1">1GE expands clean-energy trading</h6>
                 <p className="text-muted small mb-2">Date: Aug 2025</p>
                 <a href="/press/1ge-expands-clean-energy" className="link-primary">Read more</a>
@@ -122,7 +122,7 @@ const InvestorRelationsPage = () => {
             </div>
             <div className="col-md-4">
               <div className="p-3 border rounded-3 h-100">
-                <img src="/ir/news-2.jpg" alt="Press item 2" className="img-fluid rounded-2 mb-3" />
+              
                 <h6 className="mb-1">New logistics hub announcement</h6>
                 <p className="text-muted small mb-2">Date: Jul 2025</p>
                 <a href="/press/new-logistics-hub" className="link-primary">Read more</a>
@@ -130,7 +130,7 @@ const InvestorRelationsPage = () => {
             </div>
             <div className="col-md-4">
               <div className="p-3 border rounded-3 h-100">
-                <img src="/ir/news-3.jpg" alt="Press item 3" className="img-fluid rounded-2 mb-3" />
+               
                 <h6 className="mb-1">Partnership with regional distributor</h6>
                 <p className="text-muted small mb-2">Date: Jun 2025</p>
                 <a href="/press/regional-partnership" className="link-primary">Read more</a>
@@ -155,7 +155,7 @@ const InvestorRelationsPage = () => {
               </a>
             </div>
             <div className="col-lg-6">
-              <img src="/ir/governance.jpg" alt="Corporate governance" className="img-fluid rounded-3" />
+              
             </div>
           </div>
 
@@ -173,7 +173,7 @@ const InvestorRelationsPage = () => {
               <h3 className="mb-3">Contact Investor Relations</h3>
               <p className="mb-1"><strong>Email:</strong> <a href="mailto:ir@1ge.sg">ir@1ge.sg</a></p>
               <p className="mb-3"><strong>Address:</strong> #03-01, Keppel Distripark, 511 Kampong Bahru Road, Singapore 099447</p>
-              <img src="/ir/contact.jpg" alt="Investor relations contact" className="img-fluid rounded-3" />
+             
             </div>
           </div>
         </div>
