@@ -10,7 +10,7 @@ import {
   FaPhone,
 } from "react-icons/fa6";
 
-const Footer1: React.FC = () => {
+const Footer1 = () => {
   return (
     <footer className="footer">
       <div className="container">
@@ -24,11 +24,7 @@ const Footer1: React.FC = () => {
             <p className="muted">Get our latest deals and updates</p>
 
             <form className="subscribe" onSubmit={(e) => e.preventDefault()}>
-              <input
-                type="email"
-                placeholder="Your email address"
-                aria-label="Your email address"
-              />
+              <input type="email" placeholder="Your email address" aria-label="Your email address" />
               <button type="submit">Subscribe →</button>
             </form>
 
@@ -104,123 +100,36 @@ const Footer1: React.FC = () => {
 
       {/* Styles */}
       <style>{`
-        /* Base */
-        .footer {
-          background: #0b0b0b;     /* pure black base */
-          color: #ffffff;          /* all text white */
-          padding: 56px 0 28px;
-        }
-        .container {
-          width: min(1200px, 92%);
-          margin: 0 auto;
-        }
-
-        /* Grid – one unified panel (no boxes) */
-        .grid {
-          display: grid;
-          grid-template-columns: 1.1fr .7fr 1fr;
-          gap: 42px;
-          align-items: start;
-        }
-        @media (max-width: 992px) {
-          .grid { grid-template-columns: 1fr; gap: 28px; }
-        }
-
-        .col { /* columns share same base spacing, no backgrounds */
-          padding: 4px 0;
-        }
-
-        /* Headings */
-        .h3 { font-size: 22px; font-weight: 800; margin: 10px 0 6px; }
-        .h4 { font-size: 18px; font-weight: 800; margin: 6px 0 14px; }
-
-        .muted { color: rgba(255,255,255,0.7); }
-
-        /* Logo */
-        .logo { max-height: 56px; width: auto; display: block; margin-bottom: 12px; }
-
-        /* Subscribe */
-        .subscribe { display: flex; gap: 10px; margin: 12px 0 14px; }
-        .subscribe input {
-          flex: 1;
-          height: 46px;
-          background: #141414;
-          border: 1px solid #2a2a2a;
-          color: #fff;
-          border-radius: 12px;
-          padding: 0 14px;
-          outline: none;
-        }
-        .subscribe input::placeholder { color: rgba(255,255,255,0.65); }
-        .subscribe button {
-          height: 46px;
-          padding: 0 16px;
-          font-weight: 700;
-          border: 0;
-          border-radius: 12px;
-          cursor: pointer;
-          color: #fff;
-          background: linear-gradient(135deg, #4f8df9, #2a66f0);
-          transition: transform .15s ease, box-shadow .15s ease;
-        }
-        .subscribe button:hover { transform: translateY(-1px); box-shadow: 0 10px 22px rgba(42,102,240,.35); }
-
-        /* Social */
-        .social { display: flex; gap: 10px; margin-top: 6px; }
-        .social a {
-          width: 40px; height: 40px;
-          display: inline-flex; align-items: center; justify-content: center;
-          border-radius: 50%;
-          background: #151515;
-          border: 1px solid #2a2a2a;
-          color: #fff;
-          font-size: 16px;
-          transition: transform .15s ease, background .15s ease, border-color .15s ease;
-        }
-        .social a:hover { transform: translateY(-2px); background: #1f1f1f; border-color: #2f6af5; }
-
-        /* Links */
-        .links { list-style: none; padding: 0; margin: 0; display: grid; gap: 10px; }
-        .links a {
-          color: #ffffff;
-          text-decoration: none;
-          opacity: .9;
-          transition: opacity .15s ease, color .15s ease, transform .15s ease;
-        }
-        .links a:hover { color: #62a0ff; transform: translateX(2px); }
-
-        /* Contact items */
-        .item { display: grid; grid-template-columns: 24px 1fr; gap: 10px; margin: 10px 0; }
-        .ico { font-size: 18px; margin-top: 2px; }
-        .phones { display: grid; gap: 4px; }
-        .col a { color: #fff; text-decoration: none; opacity: .9; }
-        .col a:hover { color: #62a0ff; opacity: 1; }
-
-        /* Tags */
-        .tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
-        .tags span {
-          display: inline-block;
-          font-size: 12px; font-weight: 700;
-          padding: 6px 12px;
-          border-radius: 999px;
-          background: #111;
-          border: 1px solid #2a2a2a;
-          color: #fff;
-        }
-
-        /* Divider & bottom */
-        .divide {
-          height: 1px; border: 0; margin: 28px 0 14px;
-          background: linear-gradient(90deg, rgba(255,255,255,0.06), rgba(255,255,255,0.2), rgba(255,255,255,0.06));
-        }
-        .bottom {
-          display: flex; align-items: center; justify-content: space-between; gap: 16px;
-          flex-wrap: wrap;
-          color: rgba(255,255,255,0.85);
-        }
-        .bottom ul { list-style: none; display: flex; gap: 18px; padding: 0; margin: 0; }
-        .bottom a { color: #fff; opacity: .9; text-decoration: none; }
-        .bottom a:hover { color: #62a0ff; opacity: 1; }
+        .footer { background:#0b0b0b; color:#fff; padding:56px 0 28px; }
+        .container { width:min(1200px,92%); margin:0 auto; }
+        .grid { display:grid; grid-template-columns:1.1fr .7fr 1fr; gap:42px; align-items:start; }
+        @media (max-width: 992px){ .grid{ grid-template-columns:1fr; gap:28px; } }
+        .col { padding:4px 0; }
+        .h3{ font-size:22px; font-weight:800; margin:10px 0 6px; }
+        .h4{ font-size:18px; font-weight:800; margin:6px 0 14px; }
+        .muted{ color:rgba(255,255,255,.7); }
+        .logo{ max-height:56px; width:auto; display:block; margin-bottom:12px; }
+        .subscribe{ display:flex; gap:10px; margin:12px 0 14px; }
+        .subscribe input{ flex:1; height:46px; background:#141414; border:1px solid #2a2a2a; color:#fff; border-radius:12px; padding:0 14px; }
+        .subscribe input::placeholder{ color:rgba(255,255,255,.65); }
+        .subscribe button{ height:46px; padding:0 16px; font-weight:700; border:0; border-radius:12px; cursor:pointer; color:#fff; background:linear-gradient(135deg,#4f8df9,#2a66f0); }
+        .social{ display:flex; gap:10px; margin-top:6px; }
+        .social a{ width:40px;height:40px;display:inline-flex;align-items:center;justify-content:center;border-radius:50%;background:#151515;border:1px solid #2a2a2a;color:#fff; }
+        .links{ list-style:none; padding:0; margin:0; display:grid; gap:10px; }
+        .links a{ color:#fff; text-decoration:none; opacity:.9; }
+        .links a:hover{ color:#62a0ff; opacity:1; transform:translateX(2px); }
+        .item{ display:grid; grid-template-columns:24px 1fr; gap:10px; margin:10px 0; }
+        .ico{ font-size:18px; margin-top:2px; }
+        .phones{ display:grid; gap:4px; }
+        .col a{ color:#fff; text-decoration:none; opacity:.9; }
+        .col a:hover{ color:#62a0ff; opacity:1; }
+        .tags{ display:flex; flex-wrap:wrap; gap:8px; margin-top:12px; }
+        .tags span{ font-size:12px; font-weight:700; padding:6px 12px; border-radius:999px; background:#111; border:1px solid #2a2a2a; color:#fff; }
+        .divide{ height:1px; border:0; margin:28px 0 14px; background:linear-gradient(90deg,rgba(255,255,255,.06),rgba(255,255,255,.2),rgba(255,255,255,.06)); }
+        .bottom{ display:flex; align-items:center; justify-content:space-between; gap:16px; flex-wrap:wrap; color:rgba(255,255,255,.85); }
+        .bottom ul{ list-style:none; display:flex; gap:18px; padding:0; margin:0; }
+        .bottom a{ color:#fff; opacity:.9; text-decoration:none; }
+        .bottom a:hover{ color:#62a0ff; opacity:1; }
       `}</style>
     </footer>
   );
