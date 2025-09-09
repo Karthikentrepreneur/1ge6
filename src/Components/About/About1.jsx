@@ -13,26 +13,26 @@ const About1 = () => {
     >
       <div className="container">
         <div className="about-wrapper">
-          <div className="row g-0 align-items-stretch">
+          <div className="row g-0 align-items-center">
             {/* LEFT IMAGE */}
-            <div className="col-lg-6 d-flex">
-              <div className="about-image w-100 h-100">
+            <div className="col-lg-6">
+              <div className="about-image w-100">
                 <img
                   src="/about9.png"
                   alt="About 1 Global Enterprises"
                   style={{
                     width: '100%',
-                    height: '100%',         // Make image fill entire column height
+                    height: '420px',        // 👈 rectangle fixed height
                     borderRadius: '16px',
-                    objectFit: 'cover',     // Crop nicely
+                    objectFit: 'cover',    // ensures it fills nicely
                   }}
                 />
               </div>
             </div>
 
             {/* RIGHT CONTENT */}
-            <div className="col-lg-6 d-flex">
-              <div className="about-content w-100 d-flex flex-column justify-content-center p-4">
+            <div className="col-lg-6">
+              <div className="about-content w-100 p-4">
                 <div className="section-title">
                   <span className="sub-title wow fadeInUp">
                     Singapore Headquarters
