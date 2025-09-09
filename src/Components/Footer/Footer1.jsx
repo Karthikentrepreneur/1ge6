@@ -1,5 +1,4 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import {
   FaFacebookF,
   FaXTwitter,
@@ -15,9 +14,7 @@ const Footer1 = () => {
     <footer className="footer">
       <div className="container">
 
-        {/* Top / Main */}
         <div className="grid">
-          {/* Brand + Newsletter */}
           <section aria-label="Subscribe Newsletter" className="col">
             <img src="/1global1.png" alt="1 Global Enterprises" className="logo" />
             <h3 className="h3">Subscribe Newsletter</h3>
@@ -36,20 +33,18 @@ const Footer1 = () => {
             </div>
           </section>
 
-          {/* Quick Links */}
           <nav aria-label="Quick Links" className="col">
             <h4 className="h4">Quick Links</h4>
             <ul className="links">
-              <li><Link to="/">Home</Link></li>
-              <li><Link to="/about">About Us</Link></li>
-              <li><Link to="/activities">Activities</Link></li>
-              <li><Link to="/team">Our Team</Link></li>
-              <li><Link to="/blog">Blog</Link></li>
-              <li><Link to="/contact">Contact</Link></li>
+              <li><a href="/">Home</a></li>
+              <li><a href="/about">About Us</a></li>
+              <li><a href="/activities">Activities</a></li>
+              <li><a href="/team">Our Team</a></li>
+              <li><a href="/blog">Blog</a></li>
+              <li><a href="/contact">Contact</a></li>
             </ul>
           </nav>
 
-          {/* Contact */}
           <address className="col" aria-label="Contact Us">
             <h4 className="h4">Contact Us</h4>
 
@@ -85,20 +80,17 @@ const Footer1 = () => {
           </address>
         </div>
 
-        {/* Divider */}
         <hr className="divide" />
 
-        {/* Bottom bar */}
         <div className="bottom">
           <p>© 1 Global Enterprises, All Rights Reserved.</p>
           <ul>
-            <li><Link to="/terms">Terms of Use</Link></li>
-            <li><Link to="/privacy">Privacy & Environmental Policy</Link></li>
+            <li><a href="/terms">Terms of Use</a></li>
+            <li><a href="/privacy">Privacy & Environmental Policy</a></li>
           </ul>
         </div>
       </div>
 
-      {/* Styles */}
       <style>{`
         .footer { background:#0b0b0b; color:#fff; padding:56px 0 28px; }
         .container { width:min(1200px,92%); margin:0 auto; }
