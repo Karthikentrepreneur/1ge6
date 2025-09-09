@@ -1,43 +1,49 @@
-import React, { useEffect } from "react";
-import { Link } from "react-router";
-import loadBackgroudImages from "../Common/loadBackgroudImages";
+import React from "react";
+import { Link } from "react-router-dom";
+import {
+  FaFacebookF,
+  FaXTwitter,
+  FaLinkedinIn,
+  FaInstagram,
+  FaMapMarkerAlt,
+  FaEnvelope,
+  FaPhone,
+} from "react-icons/fa6";
 
-const Footer1 = () => {
-  useEffect(() => {
-    loadBackgroudImages();
-  }, []);
-
+const Footer1: React.FC = () => {
   return (
-    <footer
-      className="footer-section bg-cover"
-      data-background="/footer.png"
-      aria-label="Website Footer"
-    >
+    <footer className="footer">
       <div className="container">
-        {/* Main Footer Content */}
-        <div className="footer-main">
-          {/* Column 1 - Logo + Newsletter */}
-          <div className="footer-col">
-            <img src="/1global1.png" alt="1 Global Enterprises Logo" className="footer-logo" />
-            <h3 className="footer-heading">Subscribe Newsletter</h3>
-            <p className="footer-subtext">Get our latest deals and updates</p>
-            <form className="footer-input" onSubmit={(e) => e.preventDefault()}>
-              <input type="email" placeholder="Your email address" />
+
+        {/* Top / Main */}
+        <div className="grid">
+          {/* Brand + Newsletter */}
+          <section aria-label="Subscribe Newsletter" className="col">
+            <img src="/1global1.png" alt="1 Global Enterprises" className="logo" />
+            <h3 className="h3">Subscribe Newsletter</h3>
+            <p className="muted">Get our latest deals and updates</p>
+
+            <form className="subscribe" onSubmit={(e) => e.preventDefault()}>
+              <input
+                type="email"
+                placeholder="Your email address"
+                aria-label="Your email address"
+              />
               <button type="submit">Subscribe →</button>
             </form>
 
-            <div className="footer-social">
-              <a href="#" aria-label="Facebook"><i className="bi bi-facebook"></i></a>
-              <a href="#" aria-label="Twitter"><i className="bi bi-twitter-x"></i></a>
-              <a href="#" aria-label="LinkedIn"><i className="bi bi-linkedin"></i></a>
-              <a href="#" aria-label="Instagram"><i className="bi bi-instagram"></i></a>
+            <div className="social">
+              <a href="#" aria-label="Facebook"><FaFacebookF /></a>
+              <a href="#" aria-label="X (Twitter)"><FaXTwitter /></a>
+              <a href="#" aria-label="LinkedIn"><FaLinkedinIn /></a>
+              <a href="#" aria-label="Instagram"><FaInstagram /></a>
             </div>
-          </div>
+          </section>
 
-          {/* Column 2 - Quick Links */}
-          <div className="footer-col">
-            <h4 className="footer-heading">Quick Links</h4>
-            <ul className="footer-links">
+          {/* Quick Links */}
+          <nav aria-label="Quick Links" className="col">
+            <h4 className="h4">Quick Links</h4>
+            <ul className="links">
               <li><Link to="/">Home</Link></li>
               <li><Link to="/about">About Us</Link></li>
               <li><Link to="/activities">Activities</Link></li>
@@ -45,34 +51,49 @@ const Footer1 = () => {
               <li><Link to="/blog">Blog</Link></li>
               <li><Link to="/contact">Contact</Link></li>
             </ul>
-          </div>
+          </nav>
 
-          {/* Column 3 - Contact Info */}
-          <div className="footer-col">
-            <h4 className="footer-heading">Contact Us</h4>
-            <p>
-              1 Global Enterprises Pte Ltd <br />
-              #03-01, Keppel Distripark, <br />
-              511 Kampong Bahru Road, <br />
-              Singapore 099447
-            </p>
-            <p><a href="mailto:jp@1ge.sg">jp@1ge.sg</a></p>
-            <p>
-              <a href="tel:+6569080838">+65 69080838</a> <br />
-              <a href="tel:+6569080849">+65 69080849</a> <br />
-              <a href="tel:+6598177292">+65 98177292</a>
-            </p>
+          {/* Contact */}
+          <address className="col" aria-label="Contact Us">
+            <h4 className="h4">Contact Us</h4>
 
-            <div className="footer-tags">
+            <div className="item">
+              <FaMapMarkerAlt className="ico" aria-hidden />
+              <div>
+                1 Global Enterprises Pte Ltd<br />
+                #03-01, Keppel Distripark,<br />
+                511 Kampong Bahru Road,<br />
+                Singapore 099447
+              </div>
+            </div>
+
+            <div className="item">
+              <FaEnvelope className="ico" aria-hidden />
+              <a href="mailto:jp@1ge.sg">jp@1ge.sg</a>
+            </div>
+
+            <div className="item">
+              <FaPhone className="ico" aria-hidden />
+              <div className="phones">
+                <a href="tel:+6569080838">+65 69080838</a>
+                <a href="tel:+6569080849">+65 69080849</a>
+                <a href="tel:+6598177292">+65 98177292</a>
+              </div>
+            </div>
+
+            <div className="tags">
               <span>ISO Certified</span>
               <span>Green Logistics</span>
               <span>Global Network</span>
             </div>
-          </div>
+          </address>
         </div>
 
-        {/* Bottom Section */}
-        <div className="footer-bottom">
+        {/* Divider */}
+        <hr className="divide" />
+
+        {/* Bottom bar */}
+        <div className="bottom">
           <p>© 1 Global Enterprises, All Rights Reserved.</p>
           <ul>
             <li><Link to="/terms">Terms of Use</Link></li>
@@ -83,135 +104,123 @@ const Footer1 = () => {
 
       {/* Styles */}
       <style>{`
-        .footer-section {
-          background: url('/footer.png') center/cover no-repeat;
-          position: relative;
-          padding: 60px 0 30px;
-          color: #fff;
+        /* Base */
+        .footer {
+          background: #0b0b0b;     /* pure black base */
+          color: #ffffff;          /* all text white */
+          padding: 56px 0 28px;
         }
-        .footer-section::before {
-          content: "";
-          position: absolute; inset: 0;
-          background: rgba(0,0,0,0.75);
-          backdrop-filter: blur(8px);
+        .container {
+          width: min(1200px, 92%);
+          margin: 0 auto;
         }
-        .footer-section .container {
-          position: relative;
-          z-index: 2;
-        }
-        .footer-main {
+
+        /* Grid – one unified panel (no boxes) */
+        .grid {
           display: grid;
-          grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-          gap: 40px;
-          margin-bottom: 40px;
+          grid-template-columns: 1.1fr .7fr 1fr;
+          gap: 42px;
+          align-items: start;
         }
-        .footer-col {
-          background: rgba(255, 255, 255, 0.05);
-          padding: 25px;
-          border-radius: 16px;
-          box-shadow: 0 6px 18px rgba(0,0,0,0.2);
+        @media (max-width: 992px) {
+          .grid { grid-template-columns: 1fr; gap: 28px; }
         }
-        .footer-logo {
-          max-height: 60px;
-          margin-bottom: 20px;
+
+        .col { /* columns share same base spacing, no backgrounds */
+          padding: 4px 0;
         }
-        .footer-heading {
-          font-size: 20px;
-          font-weight: 700;
-          margin-bottom: 12px;
-          color: #fff;
-          position: relative;
-        }
-        .footer-subtext {
-          font-size: 14px;
-          margin-bottom: 16px;
-          color: #ccc;
-        }
-        .footer-input {
-          display: flex;
-          margin-bottom: 16px;
-        }
-        .footer-input input {
+
+        /* Headings */
+        .h3 { font-size: 22px; font-weight: 800; margin: 10px 0 6px; }
+        .h4 { font-size: 18px; font-weight: 800; margin: 6px 0 14px; }
+
+        .muted { color: rgba(255,255,255,0.7); }
+
+        /* Logo */
+        .logo { max-height: 56px; width: auto; display: block; margin-bottom: 12px; }
+
+        /* Subscribe */
+        .subscribe { display: flex; gap: 10px; margin: 12px 0 14px; }
+        .subscribe input {
           flex: 1;
-          padding: 10px;
-          border: none;
-          border-radius: 8px 0 0 8px;
+          height: 46px;
+          background: #141414;
+          border: 1px solid #2a2a2a;
+          color: #fff;
+          border-radius: 12px;
+          padding: 0 14px;
           outline: none;
         }
-        .footer-input button {
-          padding: 10px 16px;
-          background: linear-gradient(135deg, #4f8df9, #2a66f0);
-          border: none;
-          border-radius: 0 8px 8px 0;
-          color: #fff;
-          font-weight: 600;
+        .subscribe input::placeholder { color: rgba(255,255,255,0.65); }
+        .subscribe button {
+          height: 46px;
+          padding: 0 16px;
+          font-weight: 700;
+          border: 0;
+          border-radius: 12px;
           cursor: pointer;
+          color: #fff;
+          background: linear-gradient(135deg, #4f8df9, #2a66f0);
+          transition: transform .15s ease, box-shadow .15s ease;
         }
-        .footer-social a {
-          margin: 0 6px;
-          display: inline-flex;
-          align-items: center;
-          justify-content: center;
-          width: 38px; height: 38px;
+        .subscribe button:hover { transform: translateY(-1px); box-shadow: 0 10px 22px rgba(42,102,240,.35); }
+
+        /* Social */
+        .social { display: flex; gap: 10px; margin-top: 6px; }
+        .social a {
+          width: 40px; height: 40px;
+          display: inline-flex; align-items: center; justify-content: center;
           border-radius: 50%;
-          background: #222;
+          background: #151515;
+          border: 1px solid #2a2a2a;
           color: #fff;
-          transition: all .3s ease;
+          font-size: 16px;
+          transition: transform .15s ease, background .15s ease, border-color .15s ease;
         }
-        .footer-social a:hover {
-          background: #2a66f0;
-        }
-        .footer-links {
-          list-style: none;
-          padding: 0;
-          margin: 0;
-        }
-        .footer-links li {
-          margin: 8px 0;
-        }
-        .footer-links a {
-          color: #ddd;
+        .social a:hover { transform: translateY(-2px); background: #1f1f1f; border-color: #2f6af5; }
+
+        /* Links */
+        .links { list-style: none; padding: 0; margin: 0; display: grid; gap: 10px; }
+        .links a {
+          color: #ffffff;
           text-decoration: none;
-          transition: color .3s ease;
+          opacity: .9;
+          transition: opacity .15s ease, color .15s ease, transform .15s ease;
         }
-        .footer-links a:hover {
-          color: #2a66f0;
-        }
-        .footer-tags span {
+        .links a:hover { color: #62a0ff; transform: translateX(2px); }
+
+        /* Contact items */
+        .item { display: grid; grid-template-columns: 24px 1fr; gap: 10px; margin: 10px 0; }
+        .ico { font-size: 18px; margin-top: 2px; }
+        .phones { display: grid; gap: 4px; }
+        .col a { color: #fff; text-decoration: none; opacity: .9; }
+        .col a:hover { color: #62a0ff; opacity: 1; }
+
+        /* Tags */
+        .tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
+        .tags span {
           display: inline-block;
-          margin: 5px 6px 0 0;
-          padding: 5px 12px;
-          background: #2a66f0;
+          font-size: 12px; font-weight: 700;
+          padding: 6px 12px;
+          border-radius: 999px;
+          background: #111;
+          border: 1px solid #2a2a2a;
           color: #fff;
-          border-radius: 20px;
-          font-size: 12px;
-          font-weight: 600;
         }
-        .footer-bottom {
-          display: flex;
+
+        /* Divider & bottom */
+        .divide {
+          height: 1px; border: 0; margin: 28px 0 14px;
+          background: linear-gradient(90deg, rgba(255,255,255,0.06), rgba(255,255,255,0.2), rgba(255,255,255,0.06));
+        }
+        .bottom {
+          display: flex; align-items: center; justify-content: space-between; gap: 16px;
           flex-wrap: wrap;
-          justify-content: space-between;
-          align-items: center;
-          border-top: 1px solid rgba(255,255,255,0.1);
-          padding-top: 20px;
-          font-size: 14px;
-          color: #aaa;
+          color: rgba(255,255,255,0.85);
         }
-        .footer-bottom ul {
-          display: flex;
-          gap: 16px;
-          list-style: none;
-          padding: 0;
-          margin: 0;
-        }
-        .footer-bottom a {
-          color: #ddd;
-          text-decoration: none;
-          transition: color .3s ease;
-        }
-        .footer-bottom a:hover {
-          color: #2a66f0;
-        }
+        .bottom ul { list-style: none; display: flex; gap: 18px; padding: 0; margin: 0; }
+        .bottom a { color: #fff; opacity: .9; text-decoration: none; }
+        .bottom a:hover { color: #62a0ff; opacity: 1; }
       `}</style>
     </footer>
   );
