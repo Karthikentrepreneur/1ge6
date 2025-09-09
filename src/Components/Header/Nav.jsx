@@ -15,11 +15,17 @@ export default function Nav({ setMobileToggle, linkColor }) {
       </li>
 
 
-      <li>
-        <Link to="/activities" onClick={() => setMobileToggle(false)} style={{ color: linkColor }}>
-        Activities
-        </Link>
-      </li>
+        <li>
+          <Link to="/activities" onClick={() => setMobileToggle(false)} style={{ color: linkColor }}>
+          Activities
+          </Link>
+        </li>
+
+        <li>
+          <Link to="/corporate-sustainability" onClick={() => setMobileToggle(false)} style={{ color: linkColor }}>
+          Corporate Sustainability
+          </Link>
+        </li>
 
       <li>
         <Link to="/team" style={{ color: linkColor }}>Our Team</Link>

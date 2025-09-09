@@ -20,6 +20,7 @@ import LogisticsPage from "../Pages/LogisticsPage";
 import ProductDistributionPage from "../Pages/ProductDistributionPage";
 import SoftwareDevelopmentPage from "../Pages/SoftwareDevelopmentPage";
 import RenewableEnergyPage from "../Pages/RenewableEnergyPage";
+import CorporateSustainabilityPage from "../Pages/CorporateSustainabilityPage";
 
 export const router = createBrowserRouter([
   {
@@ -90,10 +91,14 @@ export const router = createBrowserRouter([
         path: "software-development",
         Component: SoftwareDevelopmentPage,
       },
-      {
-        path: "renewable-energy",
-        Component: RenewableEnergyPage,
-      },
+        {
+          path: "renewable-energy",
+          Component: RenewableEnergyPage,
+        },
+        {
+          path: "corporate-sustainability",
+          Component: CorporateSustainabilityPage,
+        },
       {
         path: "blog",
         Component: BlogGrid,
