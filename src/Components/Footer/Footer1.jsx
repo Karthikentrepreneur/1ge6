@@ -84,7 +84,7 @@ const Footer1 = () => {
 
         <div className="bottom">
           <p>© 1 Global Enterprises, All Rights Reserved.</p>
-          <ul>
+          <ul className="bottom-links">
             <li><a href="/terms">Terms of Use</a></li>
             <li><a href="/privacy">Privacy & Environmental Policy</a></li>
           </ul>
@@ -92,36 +92,37 @@ const Footer1 = () => {
       </div>
 
       <style>{`
-        .footer { background:#0b0b0b; color:#fff; padding:56px 0 28px; }
-        .container { width:min(1200px,92%); margin:0 auto; }
-        .grid { display:grid; grid-template-columns:1.1fr .7fr 1fr; gap:42px; align-items:start; }
-        @media (max-width: 992px){ .grid{ grid-template-columns:1fr; gap:28px; } }
+        .footer { background:#000; color:#fff; padding:60px 0 30px; }
+        .container { width:min(1200px,90%); margin:0 auto; }
+        .grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(250px,1fr)); gap:40px 32px; align-items:start; }
         .col { padding:4px 0; }
         .h3{ font-size:22px; font-weight:800; margin:10px 0 6px; }
         .h4{ font-size:18px; font-weight:800; margin:6px 0 14px; }
-        .muted{ color:rgba(255,255,255,.7); }
+        .muted{ color:#fff; opacity:.8; }
         .logo{ max-height:56px; width:auto; display:block; margin-bottom:12px; }
-        .subscribe{ display:flex; gap:10px; margin:12px 0 14px; }
-        .subscribe input{ flex:1; height:46px; background:#141414; border:1px solid #2a2a2a; color:#fff; border-radius:12px; padding:0 14px; }
-        .subscribe input::placeholder{ color:rgba(255,255,255,.65); }
-        .subscribe button{ height:46px; padding:0 16px; font-weight:700; border:0; border-radius:12px; cursor:pointer; color:#fff; background:linear-gradient(135deg,#4f8df9,#2a66f0); }
+        .subscribe{ display:flex; gap:10px; margin:12px 0; flex-wrap:wrap; }
+        .subscribe input{ flex:1; min-width:220px; height:46px; background:#111; border:1px solid #2a2a2a; color:#fff; border-radius:8px; padding:0 14px; }
+        .subscribe input::placeholder{ color:rgba(255,255,255,.8); }
+        .subscribe button{ height:46px; padding:0 16px; font-weight:700; border:0; border-radius:8px; cursor:pointer; background:#fff; color:#000; }
+        @media(max-width:600px){ .subscribe{ flex-direction:column; } .subscribe input{ min-width:unset; width:100%; } .subscribe button{ width:100%; } }
         .social{ display:flex; gap:10px; margin-top:6px; }
-        .social a{ width:40px;height:40px;display:inline-flex;align-items:center;justify-content:center;border-radius:50%;background:#151515;border:1px solid #2a2a2a;color:#fff; }
+        .social a{ width:40px;height:40px;display:inline-flex;align-items:center;justify-content:center;border-radius:50%;background:#111;border:1px solid #2a2a2a;color:#fff; }
         .links{ list-style:none; padding:0; margin:0; display:grid; gap:10px; }
-        .links a{ color:#fff; text-decoration:none; opacity:.9; }
-        .links a:hover{ color:#62a0ff; opacity:1; transform:translateX(2px); }
+        .links a{ color:#fff; text-decoration:none; }
+        .links a:hover{ color:#62a0ff; transform:translateX(2px); }
         .item{ display:grid; grid-template-columns:24px 1fr; gap:10px; margin:10px 0; }
         .ico{ font-size:18px; margin-top:2px; }
         .phones{ display:grid; gap:4px; }
-        .col a{ color:#fff; text-decoration:none; opacity:.9; }
-        .col a:hover{ color:#62a0ff; opacity:1; }
+        .col a{ color:#fff; text-decoration:none; }
+        .col a:hover{ color:#62a0ff; }
         .tags{ display:flex; flex-wrap:wrap; gap:8px; margin-top:12px; }
         .tags span{ font-size:12px; font-weight:700; padding:6px 12px; border-radius:999px; background:#111; border:1px solid #2a2a2a; color:#fff; }
-        .divide{ height:1px; border:0; margin:28px 0 14px; background:linear-gradient(90deg,rgba(255,255,255,.06),rgba(255,255,255,.2),rgba(255,255,255,.06)); }
-        .bottom{ display:flex; align-items:center; justify-content:space-between; gap:16px; flex-wrap:wrap; color:rgba(255,255,255,.85); }
-        .bottom ul{ list-style:none; display:flex; gap:18px; padding:0; margin:0; }
-        .bottom a{ color:#fff; opacity:.9; text-decoration:none; }
-        .bottom a:hover{ color:#62a0ff; opacity:1; }
+        .divide{ height:1px; border:0; margin:32px 0; background:rgba(255,255,255,.15); }
+        .bottom{ display:flex; flex-direction:column; align-items:center; gap:16px; text-align:center; }
+        .bottom-links{ list-style:none; display:flex; gap:18px; padding:0; margin:0; }
+        .bottom a{ color:#fff; text-decoration:none; }
+        .bottom a:hover{ color:#62a0ff; }
+        @media(min-width:600px){ .bottom{ flex-direction:row; justify-content:space-between; text-align:left; } }
       `}</style>
     </footer>
   );
