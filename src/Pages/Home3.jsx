@@ -14,18 +14,16 @@ import Blog1 from '../Components/Blog/Blog1';
 import Brand1 from '../Components/Brand/Brand1';
 
 const Home3 = () => {
-    return (
-        <div>
-                <Heroanner1></Heroanner1>
-            <div className="cs_site_header_spacing_140"></div>
-            <div style={{ marginTop: '-146px', paddingTop: '146px' }}>
-                <About1></About1>
-                <Category1></Category1>
-                <Blog1></Blog1>
-                <Brand1></Brand1>
-            </div>
-        </div>
-    );
+  return (
+    <div>
+      <Heroanner1 />
+      {/* Removed cs_site_header_spacing_140 and margin/padding hacks */}
+      <About1 />
+      <Category1 />
+      <Blog1 />
+      <Brand1 />
+    </div>
+  );
 };
 
 export default Home3;
