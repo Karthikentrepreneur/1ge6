@@ -40,8 +40,8 @@ const Category1 = () => {
           <h2 className="text-3xl font-bold">Our Core Industries</h2>
         </div>
 
-        {/* Grid Layout: 1 row with 4 cards */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        {/* Strict 1x4 row layout */}
+        <div className="grid grid-cols-4 gap-8">
           {categoryContent.map((item, i) => (
             <div
               key={i}
