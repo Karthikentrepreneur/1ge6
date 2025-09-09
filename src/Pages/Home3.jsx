@@ -17,6 +17,8 @@ const Home3 = () => {
     return (
         <div>
                 <Heroanner1></Heroanner1>
+            <div className="cs_site_header_spacing_140"></div>
+            <div style={{ marginTop: '-146px', paddingTop: '146px' }}>
                 <About1></About1>
                 <Category1></Category1>
                 <Blog1></Blog1>
