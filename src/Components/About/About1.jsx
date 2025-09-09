@@ -16,17 +16,16 @@ const About1 = () => {
           <div className="row g-4">
             {/* LEFT IMAGE */}
             <div className="col-lg-6 d-flex justify-content-center align-items-center">
-              <div className="about-image">
+              <div className="about-image w-100">
                 <img
                   src="/about7.png"
                   alt="About 1 Global Enterprises"
-                  width={630}
-                  height={418}
                   style={{
-                    maxWidth: '100%',
-                    height: 'auto',
-                    borderRadius: '12px',
-                    objectFit: 'cover'
+                    width: '100%',         // Fill full column width
+                    height: 'auto',        // Keep aspect ratio
+                    maxHeight: '500px',    // Control max height (adjust if needed)
+                    borderRadius: '16px',  // Rounded corners
+                    objectFit: 'cover'     // Keep image looking clean
                   }}
                 />
               </div>
@@ -46,10 +45,16 @@ const About1 = () => {
 
                 <div className="about-area mt-4 mt-md-0">
                   <div className="line-image">
-                    <img src="/assets/img/about/Line-image.png" alt="Line Decoration" />
+                    <img
+                      src="/assets/img/about/Line-image.png"
+                      alt="Line Decoration"
+                    />
                   </div>
 
-                  <div className="about-items wow fadeInUp" data-wow-delay=".3s">
+                  <div
+                    className="about-items wow fadeInUp"
+                    data-wow-delay=".3s"
+                  >
                     <div className="icon">
                       <img src="/assets/img/icon/05.svg" alt="Who We Are" />
                     </div>
@@ -62,7 +67,10 @@ const About1 = () => {
                     </div>
                   </div>
 
-                  <div className="about-items wow fadeInUp" data-wow-delay=".5s">
+                  <div
+                    className="about-items wow fadeInUp"
+                    data-wow-delay=".5s"
+                  >
                     <div className="icon">
                       <img src="/assets/img/icon/06.svg" alt="Our Reach" />
                     </div>
@@ -75,7 +83,10 @@ const About1 = () => {
                     </div>
                   </div>
 
-                  <div className="about-items wow fadeInUp" data-wow-delay=".7s">
+                  <div
+                    className="about-items wow fadeInUp"
+                    data-wow-delay=".7s"
+                  >
                     <div className="icon">
                       <img src="/assets/img/icon/07.svg" alt="Expertise" />
                     </div>
