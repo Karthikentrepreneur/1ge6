@@ -14,6 +14,7 @@ import ContactPage from "../Pages/ContactPage";
 import BlogGrid from "../Pages/BlogGrid";
 import BlogDetailsPage from "../Pages/BlogDetailsPage";
 import BlogSidebarPage from "../Pages/BlogSidebarPage";
+import InvestorRelationsPage from "../Pages/InvestorRelationsPage";
 
 export const router = createBrowserRouter([
   {
@@ -63,6 +64,10 @@ export const router = createBrowserRouter([
       {
         path: "contact",
         Component: ContactPage,
+      },
+      {
+        path: "investor-relations",
+        Component: InvestorRelationsPage,
       },
       {
         path: "blog",
