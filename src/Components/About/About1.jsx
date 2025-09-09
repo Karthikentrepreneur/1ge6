@@ -16,15 +16,26 @@ const About1 = () => {
           <div className="row g-0 align-items-center">
             {/* LEFT IMAGE */}
             <div className="col-lg-6">
-              <div className="about-image w-100">
+              <div
+                className="about-image w-100"
+                style={{
+                  position: 'relative',
+                  width: '100%',
+                  paddingTop: '56.25%', // 👈 16:9 ratio (9/16 = 0.5625)
+                  borderRadius: '16px',
+                  overflow: 'hidden',
+                }}
+              >
                 <img
                   src="/about9.png"
                   alt="About 1 Global Enterprises"
                   style={{
+                    position: 'absolute',
+                    top: 0,
+                    left: 0,
                     width: '100%',
-                    height: '420px',        // 👈 rectangle fixed height
-                    borderRadius: '16px',
-                    objectFit: 'cover',    // ensures it fills nicely
+                    height: '100%',
+                    objectFit: 'cover', // fill nicely while keeping ratio
                   }}
                 />
               </div>
