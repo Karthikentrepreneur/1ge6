@@ -9,7 +9,7 @@ const About1 = () => {
   return (
     <section
       className="about-section section-padding fix bg-cover"
-      data-background="/about7.png"
+      data-background="/about-bg.png"
     >
       <div className="container">
         <div className="about-wrapper">
