@@ -10,7 +10,7 @@ const LogisticsPage = () => {
           <img
             src="/logistics.png"
             alt="Logistics"
-            className="mb-6 w-full h-80 object-cover rounded"
+            className="mb-6 w-full h-60 object-cover rounded"
           />
           <p>
             Efficient logistics are essential for keeping supply chains running

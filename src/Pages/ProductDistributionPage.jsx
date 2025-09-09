@@ -10,7 +10,7 @@ const ProductDistributionPage = () => {
           <img
             src="/product.png"
             alt="Product Distribution"
-            className="mb-6 w-full h-80 object-cover rounded"
+            className="mb-6 w-full h-60 object-cover rounded"
           />
           <p>
             Our product distribution services bridge the gap between manufacturers and
