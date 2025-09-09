@@ -5,13 +5,7 @@ import { motion } from "framer-motion";
 import { useEffect } from "react";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
 
-const EnhancedCategoryCard = ({ image, title, description, icon, link }: {
-  image: string;
-  title: string;
-  description: string;
-  icon: JSX.Element;
-  link: string;
-}) => {
+const EnhancedCategoryCard = ({ image, title, description, icon, link }) => {
   return (
     <motion.div
       whileHover={{ y: -5 }}
@@ -21,7 +15,7 @@ const EnhancedCategoryCard = ({ image, title, description, icon, link }: {
     >
       <Link to={link} className="block h-full" onClick={() => window.scrollTo(0, 0)}>
         <div className="h-44 sm:h-48 md:h-40 overflow-hidden">
-          <AspectRatio ratio={16/9} className="h-full">
+          <AspectRatio ratio={16 / 9} className="h-full">
             <img
               src={image}
               alt={title}
@@ -37,9 +31,7 @@ const EnhancedCategoryCard = ({ image, title, description, icon, link }: {
             <h3 className="text-lg font-bold text-brand-navy">{title}</h3>
           </div>
 
-          <p className="text-sm text-gray-600 mb-4 line-clamp-2">
-            {description}
-          </p>
+          <p className="text-sm text-gray-600 mb-4 line-clamp-2">{description}</p>
 
           <div className="inline-flex items-center text-brand-gold font-medium text-sm group">
             Learn More
