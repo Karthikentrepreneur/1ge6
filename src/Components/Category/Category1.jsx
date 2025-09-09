@@ -40,8 +40,8 @@ const Category1 = () => {
           <h2 className="text-3xl font-bold">Our Core Industries</h2>
         </div>
 
-        {/* Strict 1x4 row layout */}
-        <div className="grid grid-cols-4 gap-8">
+        {/* Responsive 3-column layout with larger images */}
+        <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
           {categoryContent.map((item, i) => (
             <div
               key={i}
@@ -50,7 +50,7 @@ const Category1 = () => {
               <img
                 src={item.img}
                 alt={item.title}
-                className="w-full h-48 object-cover"
+                className="w-full h-60 object-cover"
               />
               <div className="p-4">
                 <h5 className="text-lg font-semibold mb-2">

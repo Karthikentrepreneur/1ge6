@@ -7,7 +7,11 @@ const LogisticsPage = () => {
       <BreadCumb bgimg="/aboutbg.png" Title="Logistics" />
       <section className="py-5">
         <div className="container">
-          <img src="/logistics.png" alt="Logistics" className="mb-4 w-100" />
+          <img
+            src="/logistics.png"
+            alt="Logistics"
+            className="mb-6 w-full h-80 object-cover rounded"
+          />
           <p>
             Efficient logistics are essential for keeping supply chains running
             smoothly. Our logistics team coordinates transportation, warehousing, and

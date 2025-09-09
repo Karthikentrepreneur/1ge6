@@ -7,7 +7,11 @@ const ProductDistributionPage = () => {
       <BreadCumb bgimg="/aboutbg.png" Title="Product Distribution" />
       <section className="py-5">
         <div className="container">
-          <img src="/product.png" alt="Product Distribution" className="mb-4 w-100" />
+          <img
+            src="/product.png"
+            alt="Product Distribution"
+            className="mb-6 w-full h-80 object-cover rounded"
+          />
           <p>
             Our product distribution services bridge the gap between manufacturers and
             consumers. We manage every stage of the distribution process, ensuring that
