@@ -22,7 +22,7 @@ const InvestorRelationsPage = () => {
             </div>
             <div className="col-lg-6">
               <img
-                src="/ir/ir-hero.jpg"
+                src="/investorrelations.png"
                 alt="1 Global Enterprises – Investor overview"
                 className="img-fluid rounded-3"
               />
@@ -41,7 +41,7 @@ const InvestorRelationsPage = () => {
                   Operating verticals across logistics, distribution, IT solutions, and
                   clean-energy supply reduce cyclicality and enhance resilience.
                 </p>
-                <img src="/ir/highlights-diversified.jpg" alt="Diversified portfolio" className="img-fluid rounded-2" />
+                
               </div>
             </div>
             <div className="col-md-4">
@@ -50,7 +50,7 @@ const InvestorRelationsPage = () => {
                 <p className="mb-3">
                   Focus on renewable/clean-energy trading and green logistics aligned with global goals.
                 </p>
-                <img src="/ir/highlights-sustainability.jpg" alt="Sustainable growth" className="img-fluid rounded-2" />
+               
               </div>
             </div>
             <div className="col-md-4">
@@ -59,7 +59,7 @@ const InvestorRelationsPage = () => {
                 <p className="mb-3">
                   Singapore HQ with an expanding network across Asia enables efficient execution and reach.
                 </p>
-                <img src="/ir/highlights-footprint.jpg" alt="Regional footprint" className="img-fluid rounded-2" />
+               
               </div>
             </div>
           </div>
