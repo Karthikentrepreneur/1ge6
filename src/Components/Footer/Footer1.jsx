@@ -8,10 +8,7 @@ const Footer1 = () => {
   }, []);
 
   return (
-    <footer
-      className="footer-section"
-      aria-label="Website Footer"
-    >
+    <footer className="footer-section" aria-label="Website Footer">
       <div className="container">
         {/* Main Footer Content */}
         <div className="footer-main">
@@ -23,11 +20,12 @@ const Footer1 = () => {
               className="footer-logo"
             />
 
-            <h3 className="footer-heading">About us</h3>
+            <h3 className="footer-heading">About Us</h3>
             <p className="footer-text">
-              1 Global Enterprises Pte Ltd is a Singapore head quartered business group
-              having interest in Shipping, Logistics/Supply chain, Product distribution,
-              Software development/IT, Renewal energy supplies/clean energy and trading.
+              1 Global Enterprises Pte Ltd is a Singapore head quartered
+              business group having interest in Shipping, Logistics/Supply
+              chain, Product distribution, Software development/IT, Renewal
+              energy supplies/clean energy and trading.
             </p>
 
             <div className="footer-social">
@@ -101,12 +99,21 @@ const Footer1 = () => {
         }
         .footer-main {
           display: grid;
-          grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+          grid-template-columns: 1.2fr 0.8fr 1fr; /* FIXED tighter spacing */
           gap: 40px;
           margin-bottom: 40px;
         }
+        @media (max-width: 992px) {
+          .footer-main {
+            grid-template-columns: 1fr 1fr; /* 2 columns on tablets */
+          }
+        }
+        @media (max-width: 600px) {
+          .footer-main {
+            grid-template-columns: 1fr; /* 1 column on mobile */
+          }
+        }
         .footer-col {
-          /* boxes removed: no background, no shadow, no borders */
           padding: 0;
         }
         .footer-logo {
