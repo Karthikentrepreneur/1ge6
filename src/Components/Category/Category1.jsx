@@ -5,31 +5,24 @@ const Category1 = () => {
   const categoryContent = [
     {
       img: '/shipping.png',
-      title: 'Shipping',
+      title: 'Ocean Freight',
       description:
-        'We specialize in ocean freight management for LCL and FCL loads, ensuring reliable and cost-efficient shipping solutions worldwide.',
+        "GBOL's dedicated ocean freight department specializes in comprehensive freight management services for both LCL and FCL loads.",
       link: '/shipping',
     },
     {
-      img: '/logistics.png',
-      title: 'Logistics',
+      img: '/shipping2.png',
+      title: 'Air Freight',
       description:
-        'End-to-end logistics support with streamlined operations, warehousing, and distribution tailored to your business needs.',
+        'At GBOL, we provide a complete range of air freight services designed to move your cargo swiftly and securely.',
       link: '/logistics',
     },
     {
-      img: '/product.png',
-      title: 'Product Distribution',
+      img: '/logistics.png',
+      title: 'Transportation And Distribution',
       description:
-        'A robust distribution network delivering your products efficiently and effectively to domestic and global markets.',
+        'Our transportation network delivers goods efficiently, offering end-to-end distribution with dependable service.',
       link: '/product-distribution',
-    },
-    {
-      img: '/software.png',
-      title: 'Software Development',
-      description:
-        'Custom software solutions that integrate technology into logistics and energy, driving innovation and efficiency.',
-      link: '/software-development',
     },
   ];
 

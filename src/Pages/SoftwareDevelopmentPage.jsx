@@ -10,7 +10,7 @@ const SoftwareDevelopmentPage = () => {
           <img
             src="/software.png"
             alt="Software Development"
-            className="mb-6 w-full h-80 object-cover rounded"
+            className="mb-6 w-full h-60 object-cover rounded"
           />
           <p>
             Our software development team creates innovative solutions that drive

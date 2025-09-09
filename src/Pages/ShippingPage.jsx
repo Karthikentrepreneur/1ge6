@@ -10,7 +10,7 @@ const ShippingPage = () => {
           <img
             src="/shipping.png"
             alt="Shipping"
-            className="mb-6 w-full h-80 object-cover rounded"
+            className="mb-6 w-full h-60 object-cover rounded"
           />
           <p>
             Shipping is the backbone of global trade, moving goods across oceans and
