@@ -1,4 +1,4 @@
-import { Button } from "@/components/ui/button";
+import Button  from "@/components/ui/button";
 import { ArrowRight, Truck, Package, Anchor, Droplets, Cog } from "lucide-react";
 import { Link, useLocation } from "react-router-dom";
 import { motion } from "framer-motion";
