@@ -3,47 +3,68 @@ import { Link } from 'react-router';
 
 const Category1 = () => {
   const categoryContent = [
-    { img: '/shipping.png', title: 'Shipping', link: '/shipping' },
-    { img: '/logistics.png', title: 'Logistics', link: '/logistics' },
+    {
+      img: '/shipping.png',
+      title: 'Shipping',
+      description:
+        'We specialize in ocean freight management for LCL and FCL loads, ensuring reliable and cost-efficient shipping solutions worldwide.',
+      link: '/shipping',
+    },
+    {
+      img: '/logistics.png',
+      title: 'Logistics',
+      description:
+        'End-to-end logistics support with streamlined operations, warehousing, and distribution tailored to your business needs.',
+      link: '/logistics',
+    },
     {
       img: '/product.png',
       title: 'Product Distribution',
+      description:
+        'A robust distribution network delivering your products efficiently and effectively to domestic and global markets.',
       link: '/product-distribution',
     },
     {
       img: '/software.png',
       title: 'Software Development',
+      description:
+        'Custom software solutions that integrate technology into logistics and energy, driving innovation and efficiency.',
       link: '/software-development',
-    },
-    {
-      img: '/renewable.png',
-      title: 'Renewable Energy',
-      link: '/renewable-energy',
     },
   ];
 
   return (
     <section className="destination-category-section pt-10 pb-4">
-      <div className="plane-shape float-bob-y"></div>
       <div className="container">
-        <div className="section-title text-center">
-          <span className="sub-title wow fadeInUp"></span>
-          <h2 className="wow fadeInUp wow" data-wow-delay=".2s">
-            Our Core Industries
-          </h2>
+        <div className="section-title text-center mb-10">
+          <h2 className="text-3xl font-bold">Our Core Industries</h2>
         </div>
-      </div>
-      <div className="container">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6">
+
+        {/* Grid Layout: 1 row with 4 cards */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {categoryContent.map((item, i) => (
-            <div key={i} className="destination-category-item">
-              <div className="category-image">
-                <img src={item.img} alt="img" />
-                <div className="category-content">
-                  <h5>
-                    <Link to={item.link}>{item.title}</Link>
-                  </h5>
-                </div>
+            <div
+              key={i}
+              className="bg-white rounded-xl shadow-md overflow-hidden transition hover:shadow-xl"
+            >
+              <img
+                src={item.img}
+                alt={item.title}
+                className="w-full h-48 object-cover"
+              />
+              <div className="p-4">
+                <h5 className="text-lg font-semibold mb-2">
+                  <Link to={item.link} className="hover:text-blue-600">
+                    {item.title}
+                  </Link>
+                </h5>
+                <p className="text-sm text-gray-600 mb-3">{item.description}</p>
+                <Link
+                  to={item.link}
+                  className="text-blue-600 text-sm font-medium hover:underline"
+                >
+                  Learn More →
+                </Link>
               </div>
             </div>
           ))}
