@@ -15,6 +15,11 @@ import BlogGrid from "../Pages/BlogGrid";
 import BlogDetailsPage from "../Pages/BlogDetailsPage";
 import BlogSidebarPage from "../Pages/BlogSidebarPage";
 import InvestorRelationsPage from "../Pages/InvestorRelationsPage";
+import ShippingPage from "../Pages/ShippingPage";
+import LogisticsPage from "../Pages/LogisticsPage";
+import ProductDistributionPage from "../Pages/ProductDistributionPage";
+import SoftwareDevelopmentPage from "../Pages/SoftwareDevelopmentPage";
+import RenewableEnergyPage from "../Pages/RenewableEnergyPage";
 
 export const router = createBrowserRouter([
   {
@@ -68,6 +73,26 @@ export const router = createBrowserRouter([
       {
         path: "investor-relations",
         Component: InvestorRelationsPage,
+      },
+      {
+        path: "shipping",
+        Component: ShippingPage,
+      },
+      {
+        path: "logistics",
+        Component: LogisticsPage,
+      },
+      {
+        path: "product-distribution",
+        Component: ProductDistributionPage,
+      },
+      {
+        path: "software-development",
+        Component: SoftwareDevelopmentPage,
+      },
+      {
+        path: "renewable-energy",
+        Component: RenewableEnergyPage,
       },
       {
         path: "blog",
