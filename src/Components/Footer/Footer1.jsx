@@ -18,7 +18,7 @@ const Footer1 = () => {
         <div className="footer-main">
           {/* Column 1 - Logo + Newsletter */}
           <div className="footer-col">
-            <img src="/1global1.png" alt="1 Global Enterprises Logo" className="footer-logo" />
+            <img src="/one-globe.png" alt="1 Global Enterprises Logo" className="footer-logo" />
             <h3 className="footer-heading">Subscribe Newsletter</h3>
             <p className="footer-subtext">Get our latest deals and updates</p>
             <form className="footer-input" onSubmit={(e) => e.preventDefault()}>
