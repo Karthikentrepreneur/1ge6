@@ -13,6 +13,11 @@ export default function Header3({ variant }) {
   const logoSrc = isHero ? '/1global1.png' : '/one-globe.png';
   const textColor = isHero ? '#fff' : '#000';
 
+  const headerStyle = {
+    color: textColor,
+    backgroundColor: isHero ? 'transparent' : '#fff',
+  };
+
   useEffect(() => {
     const handleScroll = () => {
       const currentScrollPos = window.scrollY;
@@ -26,9 +31,10 @@ export default function Header3({ variant }) {
       }
 
       setPrevScrollPos(currentScrollPos);
-      setHasScrolled((prev) => prev || currentScrollPos > 0);
+      setHasScrolled(currentScrollPos > 0);
     };
 
+    handleScroll();
     window.addEventListener('scroll', handleScroll);
     return () => {
       window.removeEventListener('scroll', handleScroll);
@@ -59,9 +65,9 @@ export default function Header3({ variant }) {
       `}</style>
 
       <header
-        style={{ color: textColor }}
+        style={headerStyle}
         className={`cs_site_header header_style_2 header_style_2_2 cs_style_1 header_sticky_style1 ${
-          variant ? variant : ''
+          isHero ? variant : ''
         } cs_sticky_header cs_site_header_full_width ${
           mobileToggle ? 'cs_mobile_toggle_active' : ''
         } ${isSticky ? isSticky : ''}`}
