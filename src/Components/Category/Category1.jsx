@@ -1,70 +1,86 @@
 import React from 'react';
 import { Link } from 'react-router';
+import Slider from 'react-slick';
 
 const Category1 = () => {
-  const categoryContent = [
-    {
-      img: '/shipping.png',
-      title: 'Ocean Freight',
-      description:
-        "GBOL's dedicated ocean freight department specializes in comprehensive freight management services for both LCL and FCL loads.",
-      link: '/shipping',
-    },
-    {
-      img: '/shipping2.png',
-      title: 'Air Freight',
-      description:
-        'At GBOL, we provide a complete range of air freight services designed to move your cargo swiftly and securely.',
-      link: '/logistics',
-    },
-    {
-      img: '/logistics.png',
-      title: 'Transportation And Distribution',
-      description:
-        'Our transportation network delivers goods efficiently, offering end-to-end distribution with dependable service.',
-      link: '/product-distribution',
-    },
-  ];
 
-  return (
-    <section className="destination-category-section pt-10 pb-4">
-      <div className="container">
-        <div className="section-title text-center mb-10">
-          <h2 className="text-3xl font-bold">Our Core Industries</h2>
-        </div>
+    const settings = {
+        dots: false,
+        infinite: true,
+        speed: 2000,
+        slidesToShow: 5,
+        slidesToScroll: 1,
+        arrows: false,
+        swipeToSlide: true,
+        autoplay: true,
+        autoplaySpeed: 4000,        
+        responsive: [
+          {
+            breakpoint: 1399,
+            settings: {
+              slidesToShow: 5,
+            }
+          },
+          {
+            breakpoint: 1199,
+            settings: {
+              slidesToShow: 4,
+            }
+          },{
+            breakpoint: 575,
+            settings: {
+              slidesToShow: 1,
+            }
+          }
+        ]
+      };  
 
-        {/* Responsive 3-column layout with larger images */}
-        <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
-          {categoryContent.map((item, i) => (
-            <div
-              key={i}
-              className="bg-white rounded-xl shadow-md overflow-hidden transition hover:shadow-xl"
-            >
-              <img
-                src={item.img}
-                alt={item.title}
-                className="w-full h-60 object-cover"
-              />
-              <div className="p-4">
-                <h5 className="text-lg font-semibold mb-2">
-                  <Link to={item.link} className="hover:text-blue-600">
-                    {item.title}
-                  </Link>
-                </h5>
-                <p className="text-sm text-gray-600 mb-3">{item.description}</p>
-                <Link
-                  to={item.link}
-                  className="text-blue-600 text-sm font-medium hover:underline"
-                >
-                  Learn More →
-                </Link>
-              </div>
+      const categoryContent = [
+        {img:'/shipping.png', title:'Shipping'},      
+        {img:'/logistics.png', title:'Logistics'},      
+        {img:'/product.png', title:'Product Distribution'},      
+        {img:'/software.png', title:'Software Development'},      
+        {img:'/renewable.png', title:'Renewable Energy'},      
+      ]; 
+
+    return (
+        <section className="destination-category-section pt-10 pb-4">
+            <div className="plane-shape float-bob-y"></div>
+            <div className="container">
+                <div className="section-title text-center">
+                    <span className="sub-title wow fadeInUp"></span>
+                    <h2 className="wow fadeInUp wow" data-wow-delay=".2s">
+                        Our Core Industries
+                    </h2>
+                </div>
             </div>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
+            <div className="container-fluid">
+                <div className="swiper category-slider">
+                    <div className="swiper-wrapper cs_slider_gap_301">
+                        <Slider {...settings}>
+                            {categoryContent.map((item, i) => (
+                                <div key={i} className="swiper-slide">
+                                    <div className="destination-category-item">
+                                        <div className="category-image">
+                                            <img src={item.img} alt="img" />
+                                            <div className="category-content">
+                                                <h5>
+                                                    <Link to="/">{item.title}</Link>
+                                                </h5>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            ))}
+                        </Slider>
+                    </div>
+                </div>
+                <div className="swiper-dot4 mt-5">
+                    <div className="dot"></div>
+                </div>
+            </div>
+        </section> 
+    );
 };
 
 export default Category1;
