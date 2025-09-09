@@ -101,9 +101,9 @@ export default function Header3({ variant }) {
                     >
                       <i className="bi bi-search"></i>
                     </a>
-                    <Link to="/blog" className="theme-btn" style={{ color: textColor }}>
+                    <Link to="/investor-relations" className="theme-btn" style={{ color: textColor }}>
                       <span>
-                        Newsletter <i className="bi bi-arrow-right"></i>
+                        Investor Relations <i className="bi bi-arrow-right"></i>
                       </span>
                     </Link>
                   </div>
