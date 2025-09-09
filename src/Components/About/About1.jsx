@@ -13,27 +13,26 @@ const About1 = () => {
     >
       <div className="container">
         <div className="about-wrapper">
-          <div className="row g-4">
+          <div className="row g-0 align-items-stretch">
             {/* LEFT IMAGE */}
-            <div className="col-lg-6 d-flex justify-content-center align-items-center">
-              <div className="about-image w-100">
+            <div className="col-lg-6 d-flex">
+              <div className="about-image w-100 h-100">
                 <img
                   src="/about9.png"
                   alt="About 1 Global Enterprises"
                   style={{
-                    width: '100%',         // Fill full column width
-                    height: 'auto',        // Keep aspect ratio
-                    maxHeight: '500px',    // Control max height (adjust if needed)
-                    borderRadius: '16px',  // Rounded corners
-                    objectFit: 'cover'     // Keep image looking clean
+                    width: '100%',
+                    height: '100%',         // Make image fill entire column height
+                    borderRadius: '16px',
+                    objectFit: 'cover',     // Crop nicely
                   }}
                 />
               </div>
             </div>
 
             {/* RIGHT CONTENT */}
-            <div className="col-lg-6">
-              <div className="about-content">
+            <div className="col-lg-6 d-flex">
+              <div className="about-content w-100 d-flex flex-column justify-content-center p-4">
                 <div className="section-title">
                   <span className="sub-title wow fadeInUp">
                     Singapore Headquarters
@@ -44,13 +43,6 @@ const About1 = () => {
                 </div>
 
                 <div className="about-area mt-4 mt-md-0">
-                  <div className="line-image">
-                    <img
-                      src="/assets/img/about/Line-image.png"
-                      alt="Line Decoration"
-                    />
-                  </div>
-
                   <div
                     className="about-items wow fadeInUp"
                     data-wow-delay=".3s"
