@@ -18,7 +18,7 @@ const About1 = () => {
             <div className="col-lg-6 d-flex justify-content-center align-items-center">
               <div className="about-image">
                 <img
-                  src="/about3.png"
+                  src="/about7.png"
                   alt="About 1 Global Enterprises"
                   width={630}
                   height={418}
