@@ -18,7 +18,7 @@ const About1 = () => {
             <div className="col-lg-6 d-flex justify-content-center align-items-center">
               <div className="about-image w-100">
                 <img
-                  src="/about8.png"
+                  src="/about9.png"
                   alt="About 1 Global Enterprises"
                   style={{
                     width: '100%',         // Fill full column width
