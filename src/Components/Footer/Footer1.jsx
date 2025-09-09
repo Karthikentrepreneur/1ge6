@@ -1,128 +1,217 @@
-import React from "react";
-import {
-  FaFacebookF,
-  FaXTwitter,
-  FaLinkedinIn,
-  FaInstagram,
-  FaMapMarkerAlt,
-  FaEnvelope,
-  FaPhone,
-} from "react-icons/fa6";
+import React, { useEffect } from "react";
+import { Link } from "react-router";
+import loadBackgroudImages from "../Common/loadBackgroudImages";
 
 const Footer1 = () => {
+  useEffect(() => {
+    loadBackgroudImages();
+  }, []);
+
   return (
-    <footer className="footer">
+    <footer
+      className="footer-section bg-cover"
+      data-background="/footer.png"
+      aria-label="Website Footer"
+    >
       <div className="container">
-
-        <div className="grid">
-          <section aria-label="Subscribe Newsletter" className="col">
-            <img src="/1global1.png" alt="1 Global Enterprises" className="logo" />
-            <h3 className="h3">Subscribe Newsletter</h3>
-            <p className="muted">Get our latest deals and updates</p>
-
-            <form className="subscribe" onSubmit={(e) => e.preventDefault()}>
-              <input type="email" placeholder="Your email address" aria-label="Your email address" />
+        {/* Main Footer Content */}
+        <div className="footer-main">
+          {/* Column 1 - Logo + Newsletter */}
+          <div className="footer-col">
+            <img src="/1global1.png" alt="1 Global Enterprises Logo" className="footer-logo" />
+            <h3 className="footer-heading">Subscribe Newsletter</h3>
+            <p className="footer-subtext">Get our latest deals and updates</p>
+            <form className="footer-input" onSubmit={(e) => e.preventDefault()}>
+              <input type="email" placeholder="Your email address" />
               <button type="submit">Subscribe →</button>
             </form>
 
-            <div className="social">
-              <a href="#" aria-label="Facebook"><FaFacebookF /></a>
-              <a href="#" aria-label="X (Twitter)"><FaXTwitter /></a>
-              <a href="#" aria-label="LinkedIn"><FaLinkedinIn /></a>
-              <a href="#" aria-label="Instagram"><FaInstagram /></a>
+            <div className="footer-social">
+              <a href="#" aria-label="Facebook"><i className="bi bi-facebook"></i></a>
+              <a href="#" aria-label="Twitter"><i className="bi bi-twitter-x"></i></a>
+              <a href="#" aria-label="LinkedIn"><i className="bi bi-linkedin"></i></a>
+              <a href="#" aria-label="Instagram"><i className="bi bi-instagram"></i></a>
             </div>
-          </section>
+          </div>
 
-          <nav aria-label="Quick Links" className="col">
-            <h4 className="h4">Quick Links</h4>
-            <ul className="links">
-              <li><a href="/">Home</a></li>
-              <li><a href="/about">About Us</a></li>
-              <li><a href="/activities">Activities</a></li>
-              <li><a href="/team">Our Team</a></li>
-              <li><a href="/blog">Blog</a></li>
-              <li><a href="/contact">Contact</a></li>
+          {/* Column 2 - Quick Links */}
+          <div className="footer-col">
+            <h4 className="footer-heading">Quick Links</h4>
+            <ul className="footer-links">
+              <li><Link to="/">Home</Link></li>
+              <li><Link to="/about">About Us</Link></li>
+              <li><Link to="/activities">Activities</Link></li>
+              <li><Link to="/team">Our Team</Link></li>
+              <li><Link to="/blog">Blog</Link></li>
+              <li><Link to="/contact">Contact</Link></li>
             </ul>
-          </nav>
+          </div>
 
-          <address className="col" aria-label="Contact Us">
-            <h4 className="h4">Contact Us</h4>
+          {/* Column 3 - Contact Info */}
+          <div className="footer-col">
+            <h4 className="footer-heading">Contact Us</h4>
+            <p>
+              1 Global Enterprises Pte Ltd <br />
+              #03-01, Keppel Distripark, <br />
+              511 Kampong Bahru Road, <br />
+              Singapore 099447
+            </p>
+            <p><a href="mailto:jp@1ge.sg">jp@1ge.sg</a></p>
+            <p>
+              <a href="tel:+6569080838">+65 69080838</a> <br />
+              <a href="tel:+6569080849">+65 69080849</a> <br />
+              <a href="tel:+6598177292">+65 98177292</a>
+            </p>
 
-            <div className="item">
-              <FaMapMarkerAlt className="ico" aria-hidden />
-              <div>
-                1 Global Enterprises Pte Ltd<br />
-                #03-01, Keppel Distripark,<br />
-                511 Kampong Bahru Road,<br />
-                Singapore 099447
-              </div>
-            </div>
-
-            <div className="item">
-              <FaEnvelope className="ico" aria-hidden />
-              <a href="mailto:jp@1ge.sg">jp@1ge.sg</a>
-            </div>
-
-            <div className="item">
-              <FaPhone className="ico" aria-hidden />
-              <div className="phones">
-                <a href="tel:+6569080838">+65 69080838</a>
-                <a href="tel:+6569080849">+65 69080849</a>
-                <a href="tel:+6598177292">+65 98177292</a>
-              </div>
-            </div>
-
-            <div className="tags">
+            <div className="footer-tags">
               <span>ISO Certified</span>
               <span>Green Logistics</span>
               <span>Global Network</span>
             </div>
-          </address>
+          </div>
         </div>
 
-        <hr className="divide" />
-
-        <div className="bottom">
+        {/* Bottom Section */}
+        <div className="footer-bottom">
           <p>© 1 Global Enterprises, All Rights Reserved.</p>
-          <ul className="bottom-links">
-            <li><a href="/terms">Terms of Use</a></li>
-            <li><a href="/privacy">Privacy & Environmental Policy</a></li>
+          <ul>
+            <li><Link to="/terms">Terms of Use</Link></li>
+            <li><Link to="/privacy">Privacy & Environmental Policy</Link></li>
           </ul>
         </div>
       </div>
 
+      {/* Styles */}
       <style>{`
-        .footer { background:#000; color:#fff; padding:60px 0 30px; }
-        .container { width:min(1200px,90%); margin:0 auto; }
-        .grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(250px,1fr)); gap:40px 32px; align-items:start; }
-        .col { padding:4px 0; }
-        .h3{ font-size:22px; font-weight:800; margin:10px 0 6px; }
-        .h4{ font-size:18px; font-weight:800; margin:6px 0 14px; }
-        .muted{ color:#fff; opacity:.8; }
-        .logo{ max-height:56px; width:auto; display:block; margin-bottom:12px; }
-        .subscribe{ display:flex; gap:10px; margin:12px 0; flex-wrap:wrap; }
-        .subscribe input{ flex:1; min-width:220px; height:46px; background:#111; border:1px solid #2a2a2a; color:#fff; border-radius:8px; padding:0 14px; }
-        .subscribe input::placeholder{ color:rgba(255,255,255,.8); }
-        .subscribe button{ height:46px; padding:0 16px; font-weight:700; border:0; border-radius:8px; cursor:pointer; background:#fff; color:#000; }
-        @media(max-width:600px){ .subscribe{ flex-direction:column; } .subscribe input{ min-width:unset; width:100%; } .subscribe button{ width:100%; } }
-        .social{ display:flex; gap:10px; margin-top:6px; }
-        .social a{ width:40px;height:40px;display:inline-flex;align-items:center;justify-content:center;border-radius:50%;background:#111;border:1px solid #2a2a2a;color:#fff; }
-        .links{ list-style:none; padding:0; margin:0; display:grid; gap:10px; }
-        .links a{ color:#fff; text-decoration:none; }
-        .links a:hover{ color:#62a0ff; transform:translateX(2px); }
-        .item{ display:grid; grid-template-columns:24px 1fr; gap:10px; margin:10px 0; }
-        .ico{ font-size:18px; margin-top:2px; }
-        .phones{ display:grid; gap:4px; }
-        .col a{ color:#fff; text-decoration:none; }
-        .col a:hover{ color:#62a0ff; }
-        .tags{ display:flex; flex-wrap:wrap; gap:8px; margin-top:12px; }
-        .tags span{ font-size:12px; font-weight:700; padding:6px 12px; border-radius:999px; background:#111; border:1px solid #2a2a2a; color:#fff; }
-        .divide{ height:1px; border:0; margin:32px 0; background:rgba(255,255,255,.15); }
-        .bottom{ display:flex; flex-direction:column; align-items:center; gap:16px; text-align:center; }
-        .bottom-links{ list-style:none; display:flex; gap:18px; padding:0; margin:0; }
-        .bottom a{ color:#fff; text-decoration:none; }
-        .bottom a:hover{ color:#62a0ff; }
-        @media(min-width:600px){ .bottom{ flex-direction:row; justify-content:space-between; text-align:left; } }
+        .footer-section {
+          background: url('/footer.png') center/cover no-repeat;
+          position: relative;
+          padding: 60px 0 30px;
+          color: #fff;
+        }
+        .footer-section::before {
+          content: "";
+          position: absolute; inset: 0;
+          background: rgba(0,0,0,0.75);
+          backdrop-filter: blur(8px);
+        }
+        .footer-section .container {
+          position: relative;
+          z-index: 2;
+        }
+        .footer-main {
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+          gap: 40px;
+          margin-bottom: 40px;
+        }
+        .footer-col {
+          background: rgba(255, 255, 255, 0.05);
+          padding: 25px;
+          border-radius: 16px;
+          box-shadow: 0 6px 18px rgba(0,0,0,0.2);
+        }
+        .footer-logo {
+          max-height: 60px;
+          margin-bottom: 20px;
+        }
+        .footer-heading {
+          font-size: 20px;
+          font-weight: 700;
+          margin-bottom: 12px;
+          color: #fff;
+          position: relative;
+        }
+        .footer-subtext {
+          font-size: 14px;
+          margin-bottom: 16px;
+          color: #ccc;
+        }
+        .footer-input {
+          display: flex;
+          margin-bottom: 16px;
+        }
+        .footer-input input {
+          flex: 1;
+          padding: 10px;
+          border: none;
+          border-radius: 8px 0 0 8px;
+          outline: none;
+        }
+        .footer-input button {
+          padding: 10px 16px;
+          background: linear-gradient(135deg, #4f8df9, #2a66f0);
+          border: none;
+          border-radius: 0 8px 8px 0;
+          color: #fff;
+          font-weight: 600;
+          cursor: pointer;
+        }
+        .footer-social a {
+          margin: 0 6px;
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          width: 38px; height: 38px;
+          border-radius: 50%;
+          background: #222;
+          color: #fff;
+          transition: all .3s ease;
+        }
+        .footer-social a:hover {
+          background: #2a66f0;
+        }
+        .footer-links {
+          list-style: none;
+          padding: 0;
+          margin: 0;
+        }
+        .footer-links li {
+          margin: 8px 0;
+        }
+        .footer-links a {
+          color: #ddd;
+          text-decoration: none;
+          transition: color .3s ease;
+        }
+        .footer-links a:hover {
+          color: #2a66f0;
+        }
+        .footer-tags span {
+          display: inline-block;
+          margin: 5px 6px 0 0;
+          padding: 5px 12px;
+          background: #2a66f0;
+          color: #fff;
+          border-radius: 20px;
+          font-size: 12px;
+          font-weight: 600;
+        }
+        .footer-bottom {
+          display: flex;
+          flex-wrap: wrap;
+          justify-content: space-between;
+          align-items: center;
+          border-top: 1px solid rgba(255,255,255,0.1);
+          padding-top: 20px;
+          font-size: 14px;
+          color: #aaa;
+        }
+        .footer-bottom ul {
+          display: flex;
+          gap: 16px;
+          list-style: none;
+          padding: 0;
+          margin: 0;
+        }
+        .footer-bottom a {
+          color: #ddd;
+          text-decoration: none;
+          transition: color .3s ease;
+        }
+        .footer-bottom a:hover {
+          color: #2a66f0;
+        }
       `}</style>
     </footer>
   );
