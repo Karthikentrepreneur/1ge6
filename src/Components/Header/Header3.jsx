@@ -1,19 +1,22 @@
-import { useEffect, useState } from 'react';
-import { Link } from "react-router";
+import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import Nav from './Nav';
 
-export default function Header3({ variant }) {
+type Header3Props = {
+  variant?: 'header-transparent' | string;
+};
+
+export default function Header3({ variant }: Header3Props) {
   const [mobileToggle, setMobileToggle] = useState(false);
-  const [isSticky, setIsSticky] = useState();
+  const [isSticky, setIsSticky] = useState<string | undefined>(undefined);
   const [prevScrollPos, setPrevScrollPos] = useState(0);
-  const [searchToggle, setSearchToggle] = useState(false);
   const [hasScrolled, setHasScrolled] = useState(false);
 
   const isHero = variant === 'header-transparent' && !hasScrolled;
   const logoSrc = isHero ? '/1global1.png' : '/one-globe.png';
   const textColor = isHero ? '#fff' : '#000';
 
-  const headerStyle = {
+  const headerStyle: React.CSSProperties = {
     color: textColor,
     backgroundColor: isHero ? 'transparent' : '#fff',
   };
@@ -21,25 +24,26 @@ export default function Header3({ variant }) {
   useEffect(() => {
     const handleScroll = () => {
       const currentScrollPos = window.scrollY;
-      const heroHeight = document.querySelector('.hero-section')?.offsetHeight || 0;
+      const heroHeight = document.querySelector<HTMLElement>('.hero-section')?.offsetHeight || 0;
 
       if (currentScrollPos > prevScrollPos) {
-        setIsSticky('cs-gescout_sticky'); // Scrolling down
+        // Scrolling down: hide header but keep sticky
+        setIsSticky('cs-gescout_sticky');
       } else if (currentScrollPos !== 0) {
-        setIsSticky('cs-gescout_show cs-gescout_sticky'); // Scrolling up
+        // Scrolling up: show header & sticky
+        setIsSticky('cs-gescout_show cs-gescout_sticky');
       } else {
-        setIsSticky();
+        // At top: normal
+        setIsSticky(undefined);
       }
 
       setPrevScrollPos(currentScrollPos);
       setHasScrolled(currentScrollPos > heroHeight);
     };
 
-    handleScroll();
-    window.addEventListener('scroll', handleScroll);
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-    };
+    handleScroll(); // initialize on mount
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
   }, [prevScrollPos]);
 
   return (
@@ -47,17 +51,15 @@ export default function Header3({ variant }) {
       {/* Inline CSS to control logo size — no imports */}
       <style>{`
         .cs_site_branding img {
-          height: clamp(40px, 5vw, 64px); /* normal size */
+          height: clamp(40px, 5vw, 64px);
           width: auto;
           display: block;
           object-fit: contain;
         }
-        /* When header becomes sticky, gently reduce the logo size */
         .cs_sticky_header .cs_site_branding img,
         .cs-gescout_sticky .cs_site_branding img {
           height: clamp(34px, 4.2vw, 56px);
         }
-        /* Ensure the img never overflows its container */
         .cs_main_header_left .cs_site_branding {
           display: inline-flex;
           align-items: center;
@@ -85,12 +87,10 @@ export default function Header3({ variant }) {
               <div className="cs_main_header_center">
                 <div className="cs_nav cs_primary_font fw-medium">
                   <span
-                    className={
-                      mobileToggle
-                        ? 'cs-munu_toggle cs_teggle_active'
-                        : 'cs-munu_toggle'
-                    }
+                    className={mobileToggle ? 'cs-munu_toggle cs_teggle_active' : 'cs-munu_toggle'}
                     onClick={() => setMobileToggle(!mobileToggle)}
+                    role="button"
+                    aria-label="Toggle navigation"
                   >
                     <span></span>
                   </span>
@@ -101,12 +101,13 @@ export default function Header3({ variant }) {
               <div className="cs_main_header_right">
                 <div className="header-btn d-flex align-items-center">
                   <div className="main-button">
-                   
-                      <i className="bi bi-search"></i>
-                    </a>
-                    <Link to="/corporate-sustainability" className="theme-btn" style={{ color: textColor }}>
+                    <Link
+                      to="/corporate-sustainability"
+                      className="theme-btn"
+                      style={{ color: textColor }}
+                    >
                       <span>
-                        Vision & Strategy <i className="bi bi-arrow-right"></i>
+                        Vision &amp; Strategy <i className="bi bi-arrow-right"></i>
                       </span>
                     </Link>
                   </div>
@@ -118,21 +119,8 @@ export default function Header3({ variant }) {
         </div>
       </header>
 
+      {/* spacer so content doesn't jump under fixed header */}
       <div className="cs_site_header_spacing_140"></div>
-
-      <div className={`search-wrap ${searchToggle ? 'active' : ''}`}>
-        <div className="search-inner">
-         
-          <div className="search-cell">
-            <form method="get">
-              <div className="search-field-holder">
-                <input type="search" className="main-search-input" placeholder="Search..." />
-              </div>
-            </form>
-          </div>
-        </div>
-      </div>
-
     </div>
   );
 }
