@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
 import Nav from './Nav';
 
 export default function Header3({ variant }) {
@@ -76,9 +75,10 @@ export default function Header3({ variant }) {
           <div className="container">
             <div className="cs_main_header_in">
               <div className="cs_main_header_left">
-                <Link className="cs_site_branding" to="/">
+                {/* Use anchor instead of Link */}
+                <a className="cs_site_branding" href="/">
                   <img src={logoSrc} alt="Logo" />
-                </Link>
+                </a>
               </div>
 
               <div className="cs_main_header_center">
@@ -91,6 +91,7 @@ export default function Header3({ variant }) {
                   >
                     <span></span>
                   </span>
+                  {/* Nav can still handle anchors or internal links as needed */}
                   <Nav setMobileToggle={setMobileToggle} linkColor={textColor} />
                 </div>
               </div>
@@ -98,15 +99,16 @@ export default function Header3({ variant }) {
               <div className="cs_main_header_right">
                 <div className="header-btn d-flex align-items-center">
                   <div className="main-button">
-                    <Link
-                      to="/corporate-sustainability"
+                    {/* Use anchor instead of Link */}
+                    <a
+                      href="/corporate-sustainability"
                       className="theme-btn"
                       style={{ color: textColor }}
                     >
                       <span>
                         Vision &amp; Strategy <i className="bi bi-arrow-right"></i>
                       </span>
-                    </Link>
+                    </a>
                   </div>
                 </div>
               </div>
