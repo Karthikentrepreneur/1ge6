@@ -23,7 +23,7 @@ export default function Nav({ setMobileToggle, linkColor }) {
 
 
 
-      </li>
+
 
     </ul>
   );
