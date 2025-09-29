@@ -2,13 +2,9 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import Nav from './Nav';
 
-type Header3Props = {
-  variant?: 'header-transparent' | string;
-};
-
-export default function Header3({ variant }: Header3Props) {
+export default function Header3({ variant }) {
   const [mobileToggle, setMobileToggle] = useState(false);
-  const [isSticky, setIsSticky] = useState<string | undefined>(undefined);
+  const [isSticky, setIsSticky] = useState(undefined);
   const [prevScrollPos, setPrevScrollPos] = useState(0);
   const [hasScrolled, setHasScrolled] = useState(false);
 
@@ -16,7 +12,7 @@ export default function Header3({ variant }: Header3Props) {
   const logoSrc = isHero ? '/1global1.png' : '/one-globe.png';
   const textColor = isHero ? '#fff' : '#000';
 
-  const headerStyle: React.CSSProperties = {
+  const headerStyle = {
     color: textColor,
     backgroundColor: isHero ? 'transparent' : '#fff',
   };
@@ -24,16 +20,17 @@ export default function Header3({ variant }: Header3Props) {
   useEffect(() => {
     const handleScroll = () => {
       const currentScrollPos = window.scrollY;
-      const heroHeight = document.querySelector<HTMLElement>('.hero-section')?.offsetHeight || 0;
+      const hero = document.querySelector('.hero-section');
+      const heroHeight = (hero && hero.offsetHeight) || 0;
 
       if (currentScrollPos > prevScrollPos) {
-        // Scrolling down: hide header but keep sticky
+        // Scrolling down
         setIsSticky('cs-gescout_sticky');
       } else if (currentScrollPos !== 0) {
-        // Scrolling up: show header & sticky
+        // Scrolling up
         setIsSticky('cs-gescout_show cs-gescout_sticky');
       } else {
-        // At top: normal
+        // Top
         setIsSticky(undefined);
       }
 
@@ -41,14 +38,14 @@ export default function Header3({ variant }: Header3Props) {
       setHasScrolled(currentScrollPos > heroHeight);
     };
 
-    handleScroll(); // initialize on mount
+    handleScroll(); // initialize
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, [prevScrollPos]);
 
   return (
     <div>
-      {/* Inline CSS to control logo size — no imports */}
+      {/* Inline CSS to control logo size */}
       <style>{`
         .cs_site_branding img {
           height: clamp(40px, 5vw, 64px);
@@ -119,7 +116,6 @@ export default function Header3({ variant }: Header3Props) {
         </div>
       </header>
 
-      {/* spacer so content doesn't jump under fixed header */}
       <div className="cs_site_header_spacing_140"></div>
     </div>
   );
