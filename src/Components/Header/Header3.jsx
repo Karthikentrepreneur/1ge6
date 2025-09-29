@@ -101,16 +101,12 @@ export default function Header3({ variant }) {
               <div className="cs_main_header_right">
                 <div className="header-btn d-flex align-items-center">
                   <div className="main-button">
-                    <a
-                      onClick={() => setSearchToggle(!searchToggle)}
-                      className="search-trigger search-icon"
-                      style={{ color: textColor }}
-                    >
+                   
                       <i className="bi bi-search"></i>
                     </a>
-                    <Link to="/investor-relations" className="theme-btn" style={{ color: textColor }}>
+                    <Link to="/corporate-sustainability" className="theme-btn" style={{ color: textColor }}>
                       <span>
-                        Investor Relations <i className="bi bi-arrow-right"></i>
+                        Vision & Strategy <i className="bi bi-arrow-right"></i>
                       </span>
                     </Link>
                   </div>
@@ -126,11 +122,7 @@ export default function Header3({ variant }) {
 
       <div className={`search-wrap ${searchToggle ? 'active' : ''}`}>
         <div className="search-inner">
-          <i
-            onClick={() => setSearchToggle(!searchToggle)}
-            id="search-close"
-            className="bi bi-x-lg search-close"
-          ></i>
+         
           <div className="search-cell">
             <form method="get">
               <div className="search-field-holder">
