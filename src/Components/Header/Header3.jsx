@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
+import { Link } from "react-router";
 import Nav from './Nav';
 
 export default function Header3({ variant }) {
   const [mobileToggle, setMobileToggle] = useState(false);
-  const [isSticky, setIsSticky] = useState(undefined);
+  const [isSticky, setIsSticky] = useState();
   const [prevScrollPos, setPrevScrollPos] = useState(0);
   const [hasScrolled, setHasScrolled] = useState(false);
 
@@ -19,26 +20,22 @@ export default function Header3({ variant }) {
   useEffect(() => {
     const handleScroll = () => {
       const currentScrollPos = window.scrollY;
-      const hero = document.querySelector('.hero-section');
-      const heroHeight = (hero && hero.offsetHeight) || 0;
+      const heroHeight = document.querySelector('.hero-section')?.offsetHeight || 0;
 
       if (currentScrollPos > prevScrollPos) {
-        // Scrolling down
-        setIsSticky('cs-gescout_sticky');
+        setIsSticky('cs-gescout_sticky'); // scrolling down
       } else if (currentScrollPos !== 0) {
-        // Scrolling up
-        setIsSticky('cs-gescout_show cs-gescout_sticky');
+        setIsSticky('cs-gescout_show cs-gescout_sticky'); // scrolling up
       } else {
-        // Top
-        setIsSticky(undefined);
+        setIsSticky();
       }
 
       setPrevScrollPos(currentScrollPos);
       setHasScrolled(currentScrollPos > heroHeight);
     };
 
-    handleScroll(); // initialize
-    window.addEventListener('scroll', handleScroll, { passive: true });
+    handleScroll();
+    window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, [prevScrollPos]);
 
@@ -69,46 +66,44 @@ export default function Header3({ variant }) {
           isHero ? variant : ''
         } cs_sticky_header cs_site_header_full_width ${
           mobileToggle ? 'cs_mobile_toggle_active' : ''
-        } ${isSticky ? isSticky : ''}`}
+        } ${isSticky || ''}`}
       >
         <div className="cs_main_header">
           <div className="container">
             <div className="cs_main_header_in">
+              {/* Left: Logo */}
               <div className="cs_main_header_left">
-                {/* Use anchor instead of Link */}
-                <a className="cs_site_branding" href="/">
+                <Link className="cs_site_branding" to="/">
                   <img src={logoSrc} alt="Logo" />
-                </a>
+                </Link>
               </div>
 
+              {/* Center: Nav */}
               <div className="cs_main_header_center">
                 <div className="cs_nav cs_primary_font fw-medium">
                   <span
-                    className={mobileToggle ? 'cs-munu_toggle cs_teggle_active' : 'cs-munu_toggle'}
+                    className={
+                      mobileToggle
+                        ? 'cs-munu_toggle cs_teggle_active'
+                        : 'cs-munu_toggle'
+                    }
                     onClick={() => setMobileToggle(!mobileToggle)}
-                    role="button"
-                    aria-label="Toggle navigation"
                   >
                     <span></span>
                   </span>
-                  {/* Nav can still handle anchors or internal links as needed */}
                   <Nav setMobileToggle={setMobileToggle} linkColor={textColor} />
                 </div>
               </div>
 
+              {/* Right: Button only */}
               <div className="cs_main_header_right">
                 <div className="header-btn d-flex align-items-center">
                   <div className="main-button">
-                    {/* Use anchor instead of Link */}
-                    <a
-                      href="/corporate-sustainability"
-                      className="theme-btn"
-                      style={{ color: textColor }}
-                    >
+                    <Link to="/investor-relations" className="theme-btn" style={{ color: textColor }}>
                       <span>
-                        Vision &amp; Strategy <i className="bi bi-arrow-right"></i>
+                        Investor Relations <i className="bi bi-arrow-right"></i>
                       </span>
-                    </a>
+                    </Link>
                   </div>
                 </div>
               </div>
