@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import loadBackgroudImages from '../Common/loadBackgroudImages';
 
-const About1 = () => {
+const About1: React.FC = () => {
   useEffect(() => {
     loadBackgroudImages();
   }, []);
@@ -13,28 +13,32 @@ const About1 = () => {
     >
       <div className="container">
         <div className="about-wrapper">
-          <div className="row g-4">
+          <div className="row g-4 align-items-center">
+            
             {/* LEFT IMAGE */}
-            <div className="col-lg-6 d-flex justify-content-center align-items-center">
-              <div className="about-image">
+            <div className="col-lg-7 d-flex justify-content-center">
+              <div className="about-image" style={{ width: '100%' }}>
                 <img
-                  src="/team.jpeg‎"
+                  src="/team.jpeg"
                   alt="1 Global Enterprises Group"
-                  width={630}
-                  height={418}
                   style={{
-                    maxWidth: '100%',
+                    width: '100%',
+                    maxWidth: '720px',   // increased size
                     height: 'auto',
-                    borderRadius: '12px',
+                    borderRadius: '16px',
                     objectFit: 'cover',
-                    boxShadow: '0 8px 24px rgba(0,0,0,0.15)'
+                    boxShadow: '0 10px 30px rgba(0,0,0,0.25)',
+                    transform: 'scale(1.05)',
+                    transition: 'transform 0.3s ease-in-out',
                   }}
+                  onMouseEnter={(e) => (e.currentTarget.style.transform = 'scale(1.1)')}
+                  onMouseLeave={(e) => (e.currentTarget.style.transform = 'scale(1.05)')}
                 />
               </div>
             </div>
 
             {/* RIGHT CONTENT */}
-            <div className="col-lg-6">
+            <div className="col-lg-5">
               <div className="about-content">
                 <div className="section-title">
                   <span className="sub-title wow fadeInUp">
@@ -91,7 +95,8 @@ const About1 = () => {
                 </div>
               </div>
             </div>
-            {/* END RIGHT */}
+            {/* END RIGHT CONTENT */}
+
           </div>
         </div>
       </div>
