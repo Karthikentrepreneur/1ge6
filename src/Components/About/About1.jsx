@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import loadBackgroudImages from '../Common/loadBackgroudImages';
 
-const About1: React.FC = () => {
+const About1 = () => {
   useEffect(() => {
     loadBackgroudImages();
   }, []);
@@ -14,7 +14,7 @@ const About1: React.FC = () => {
       <div className="container">
         <div className="about-wrapper">
           <div className="row g-4 align-items-center">
-            
+
             {/* LEFT IMAGE */}
             <div className="col-lg-7 d-flex justify-content-center">
               <div className="about-image" style={{ width: '100%' }}>
@@ -23,7 +23,7 @@ const About1: React.FC = () => {
                   alt="1 Global Enterprises Group"
                   style={{
                     width: '100%',
-                    maxWidth: '720px',   // increased size
+                    maxWidth: '720px',
                     height: 'auto',
                     borderRadius: '16px',
                     objectFit: 'cover',
