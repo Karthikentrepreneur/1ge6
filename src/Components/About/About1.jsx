@@ -18,15 +18,16 @@ const About1 = () => {
             <div className="col-lg-6 d-flex justify-content-center align-items-center">
               <div className="about-image">
                 <img
-                  src="/about3.png"
-                  alt="About 1 Global Enterprises"
+                  src="/team.jpeg‎"
+                  alt="1 Global Enterprises Group"
                   width={630}
                   height={418}
                   style={{
                     maxWidth: '100%',
                     height: 'auto',
                     borderRadius: '12px',
-                    objectFit: 'cover'
+                    objectFit: 'cover',
+                    boxShadow: '0 8px 24px rgba(0,0,0,0.15)'
                   }}
                 />
               </div>
