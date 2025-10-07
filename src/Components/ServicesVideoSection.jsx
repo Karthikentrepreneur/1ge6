@@ -11,7 +11,7 @@ const SERVICES = [
 ];
 
 const ServicesVideoSection = ({
-  videoSrc = "/Video2.mp4",
+  videoSrc = "/videos/Video2.mp4",
   heading = "Our Services",
   subheading = "Integrated solutions powered by people, technology, and purpose",
 }) => {
@@ -37,7 +37,7 @@ const ServicesVideoSection = ({
           </div>
         </div>
 
-        {/* RIGHT: Portrait video in a white card */}
+        {/* RIGHT: Video */}
         <div className="svs-right">
           <div className="svs-video-card">
             <div className="svs-video-frame">
@@ -55,19 +55,18 @@ const ServicesVideoSection = ({
         </div>
       </div>
 
-      {/* Styles */}
       <style>{`
         .svs-split {
-          background: #fff;          /* white background as requested */
+          background: #fff;
           padding: 56px 0;
         }
         .svs-container {
           width: min(1200px, 92%);
           margin: 0 auto;
           display: grid;
-          grid-template-columns: 1fr 520px; /* left content / right video width */
+          grid-template-columns: 1fr 520px; /* left / right */
           gap: 32px;
-          align-items: start;
+          align-items: stretch;            /* ⬅ make both columns equal height */
         }
 
         /* LEFT */
@@ -84,7 +83,6 @@ const ServicesVideoSection = ({
           font-weight: 800;
           color: #0E0F2C;
         }
-
         .svs-list {
           display: grid;
           gap: 12px;
@@ -106,8 +104,7 @@ const ServicesVideoSection = ({
           border-color: #dbe7f1;
         }
         .svs-icon {
-          flex: 0 0 44px;
-          width: 44px; height: 44px;
+          flex: 0 0 44px; width: 44px; height: 44px;
           border-radius: 12px;
           display: grid; place-items: center;
           background: rgba(38,182,224,.12);
@@ -115,14 +112,10 @@ const ServicesVideoSection = ({
           color: #1c99bf;
         }
         .svs-icon svg { width: 22px; height: 22px; }
-        .svs-item-title {
-          font-weight: 700;
-          color: #0E0F2C;
-          letter-spacing: .2px;
-        }
+        .svs-item-title { font-weight: 700; color: #0E0F2C; letter-spacing: .2px; }
 
-        /* RIGHT */
-        .svs-right { display: flex; justify-content: center; }
+        /* RIGHT: Match text height */
+        .svs-right { display: flex; }
         .svs-video-card {
           background: #ffffff;
           border: 1px solid #eef2f6;
@@ -130,33 +123,32 @@ const ServicesVideoSection = ({
           box-shadow: 0 12px 30px rgba(10, 40, 80, 0.08);
           padding: 16px;
           width: 100%;
-          max-width: 520px; /* matches grid column */
+          max-width: 520px;
+          display: flex;           /* ⬅ stretch inner frame */
+          height: 100%;            /* ⬅ column height = left column height */
         }
-        /* Keep video as a perfect 9:16 portrait frame */
         .svs-video-frame {
-          width: 100%;
-          aspect-ratio: 9 / 16;      /* keeps 2160x3840 ratio */
+          flex: 1;                 /* ⬅ fill the card */
+          min-height: 0;
           overflow: hidden;
           border-radius: 14px;
-          background: #000;          /* fallback while loading */
+          background: #000;
         }
         .svs-video-frame video {
-          width: 100%; height: 100%;
-          object-fit: cover;         /* fill frame while preserving portrait */
+          width: 100%;
+          height: 100%;            /* ⬅ fill the frame height */
+          object-fit: cover;       /* crop to fit if needed */
           object-position: center;
           display: block;
         }
 
-        /* Responsive */
+        /* Responsive: stack & go portrait frame again */
         @media (max-width: 1024px) {
-          .svs-container {
-            grid-template-columns: 1fr; /* stack */
-          }
-          .svs-right {
-            order: -1;               /* show video first on mobile, optional */
-            margin-bottom: 10px;
-          }
-          .svs-video-card { max-width: 440px; margin: 0 auto; }
+          .svs-container { grid-template-columns: 1fr; }
+          .svs-right { justify-content: center; }
+          .svs-video-card { max-width: 440px; height: auto; }
+          .svs-video-frame { aspect-ratio: 9 / 16; }  /* restore portrait on mobile */
+          .svs-video-frame video { height: 100%; }
         }
         @media (max-width: 480px) {
           .svs-video-card { max-width: 360px; }
