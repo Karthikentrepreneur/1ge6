@@ -18,7 +18,7 @@ const ServicesVideoSection = ({
   return (
     <section className="svs-split">
       <div className="svs-container">
-        {/* LEFT: Services list */}
+        {/* LEFT: Services */}
         <div className="svs-left">
           <header className="svs-header">
             <p className="svs-sub">{subheading}</p>
@@ -37,7 +37,7 @@ const ServicesVideoSection = ({
           </div>
         </div>
 
-        {/* RIGHT: Video */}
+        {/* RIGHT: Compact video card */}
         <div className="svs-right">
           <div className="svs-video-card">
             <div className="svs-video-frame">
@@ -58,100 +58,72 @@ const ServicesVideoSection = ({
       <style>{`
         .svs-split {
           background: #fff;
-          padding: 56px 0;
+          padding: 40px 0;        /* slightly tighter */
         }
         .svs-container {
           width: min(1200px, 92%);
           margin: 0 auto;
           display: grid;
-          grid-template-columns: 1fr 520px; /* left / right */
-          gap: 32px;
-          align-items: stretch;            /* ⬅ make both columns equal height */
+          grid-template-columns: 1fr 460px;  /* smaller video column */
+          gap: 28px;
+          align-items: start;                 /* keep both aligned at the top */
         }
 
         /* LEFT */
-        .svs-header { margin-bottom: 16px; }
-        .svs-sub {
-          margin: 0 0 6px;
-          font-size: .95rem;
-          letter-spacing: .2px;
-          color: #5f6b7a;
-        }
-        .svs-title {
-          margin: 0;
-          font-size: clamp(1.8rem, 1.2rem + 2vw, 2.4rem);
-          font-weight: 800;
-          color: #0E0F2C;
-        }
-        .svs-list {
-          display: grid;
-          gap: 12px;
-          margin-top: 14px;
-        }
+        .svs-header { margin-bottom: 12px; }
+        .svs-sub { margin: 0 0 6px; font-size: .95rem; color: #5f6b7a; }
+        .svs-title { margin: 0; font-size: clamp(1.8rem, 1.2rem + 2vw, 2.4rem); font-weight: 800; color: #0E0F2C; }
+
+        .svs-list { display: grid; gap: 12px; margin-top: 12px; }
         .svs-item {
-          display: flex;
-          align-items: center;
-          gap: 12px;
+          display: flex; align-items: center; gap: 12px;
           padding: 14px 16px;
-          border: 1px solid #e9eef3;
-          border-radius: 14px;
-          background: #fafcff;
+          border: 1px solid #e9eef3; border-radius: 14px; background: #fafcff;
           transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease;
         }
-        .svs-item:hover {
-          transform: translateY(-1px);
-          box-shadow: 0 6px 18px rgba(10, 40, 80, 0.08);
-          border-color: #dbe7f1;
-        }
+        .svs-item:hover { transform: translateY(-1px); box-shadow: 0 6px 18px rgba(10,40,80,.08); border-color: #dbe7f1; }
         .svs-icon {
-          flex: 0 0 44px; width: 44px; height: 44px;
-          border-radius: 12px;
-          display: grid; place-items: center;
-          background: rgba(38,182,224,.12);
-          border: 1px solid rgba(38,182,224,.35);
-          color: #1c99bf;
+          flex: 0 0 44px; width: 44px; height: 44px; border-radius: 12px;
+          display: grid; place-items: center; background: rgba(38,182,224,.12); border: 1px solid rgba(38,182,224,.35); color: #1c99bf;
         }
         .svs-icon svg { width: 22px; height: 22px; }
-        .svs-item-title { font-weight: 700; color: #0E0F2C; letter-spacing: .2px; }
+        .svs-item-title { font-weight: 700; color: #0E0F2C; }
 
-        /* RIGHT: Match text height */
-        .svs-right { display: flex; }
+        /* RIGHT: compact video equal to text block visually */
+        .svs-right { display: flex; justify-content: center; }
         .svs-video-card {
-          background: #ffffff;
+          background: #fff;
           border: 1px solid #eef2f6;
-          border-radius: 20px;
-          box-shadow: 0 12px 30px rgba(10, 40, 80, 0.08);
-          padding: 16px;
+          border-radius: 16px;
+          box-shadow: 0 10px 24px rgba(10,40,80,.08);
+          padding: 12px;
           width: 100%;
-          max-width: 520px;
-          display: flex;           /* ⬅ stretch inner frame */
-          height: 100%;            /* ⬅ column height = left column height */
+          max-width: 460px;
+          /* keep the video card compact */
+          max-height: 420px;                /* << cap the card so no scrolling is needed */
         }
         .svs-video-frame {
-          flex: 1;                 /* ⬅ fill the card */
-          min-height: 0;
+          width: 100%;
+          aspect-ratio: 16 / 9;             /* << desktop: compact landscape */
           overflow: hidden;
-          border-radius: 14px;
+          border-radius: 12px;
           background: #000;
         }
         .svs-video-frame video {
-          width: 100%;
-          height: 100%;            /* ⬅ fill the frame height */
-          object-fit: cover;       /* crop to fit if needed */
-          object-position: center;
+          width: 100%; height: 100%;
+          object-fit: cover; object-position: center;
           display: block;
         }
 
-        /* Responsive: stack & go portrait frame again */
+        /* Mobile: stack and show portrait */
         @media (max-width: 1024px) {
           .svs-container { grid-template-columns: 1fr; }
-          .svs-right { justify-content: center; }
-          .svs-video-card { max-width: 440px; height: auto; }
-          .svs-video-frame { aspect-ratio: 9 / 16; }  /* restore portrait on mobile */
-          .svs-video-frame video { height: 100%; }
+          .svs-right { order: -1; margin-bottom: 14px; }
+          .svs-video-card { max-width: 420px; max-height: none; margin: 0 auto; }
+          .svs-video-frame { aspect-ratio: 9 / 16; }  /* portrait when stacked */
         }
         @media (max-width: 480px) {
-          .svs-video-card { max-width: 360px; }
+          .svs-video-card { max-width: 340px; }
         }
       `}</style>
     </section>
