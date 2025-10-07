@@ -12,6 +12,13 @@ const Heroanner1 = () => {
   return (
     <section className="hero-section">
       <Header3 variant="header-transparent" />
+
+      {/* Import Montserrat font */}
+      <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap"
+        rel="stylesheet"
+      />
+
       <style>{`
         .hero-section {
           position: relative;
@@ -35,11 +42,11 @@ const Heroanner1 = () => {
         .hero-1 {
           position: relative;
           overflow: hidden;
-          min-height: 100vh; /* full viewport height */
+          min-height: 100vh;
           display: flex;
-          align-items: center; /* vertical center */
-          justify-content: flex-start; /* push content left */
-          padding-left: 8%; /* add spacing from left edge */
+          align-items: center;
+          justify-content: flex-start;
+          padding-left: 8%;
         }
         .video-bg {
           position: absolute; inset: 0;
@@ -59,7 +66,7 @@ const Heroanner1 = () => {
           position: relative; 
           z-index: 2;
           color: #fff;
-          text-align: left; /* align text left */
+          text-align: left;
           max-width: 650px;
         }
         .hero-content h1 {
@@ -72,6 +79,8 @@ const Heroanner1 = () => {
           font-size: 1.3rem;
           font-weight: 500;
           opacity: 0.9;
+          font-family: 'Montserrat', sans-serif;
+          letter-spacing: 0.5px;
         }
         @media (max-width: 768px) {
           .hero-1 { padding-left: 5%; }
