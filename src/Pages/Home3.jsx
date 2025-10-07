@@ -21,7 +21,7 @@ const Home3 = () => {
       {/* Removed cs_site_header_spacing_140 and margin/padding hacks */}
       <About1 />
       <ServicesVideoSection />
-      <Category1 /> 
+       
      
     </div>
   );
