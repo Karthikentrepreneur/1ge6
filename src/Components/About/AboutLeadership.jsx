@@ -121,9 +121,7 @@ const AboutLeadership = () => {
             {/* LEFT CONTENT */}
             <div className="col-lg-7">
               <div className="about-content about-content-wrap">
-                <div className="section-title">
-                  <h2>People-Powered Leadership</h2>
-                </div>
+                
 
                 {/* Block 1 */}
                 <div className="about-items">
