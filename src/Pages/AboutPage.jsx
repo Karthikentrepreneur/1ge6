@@ -1,6 +1,6 @@
 import React from 'react';
 import BreadCumb from '../Components/Common/BreadCumb';
-import About1 from '../Components/About/About1';
+import AboutSimple from '../Components/About/AAboutSimple';
 import Choose1 from '../Components/Choose/Choose1';
 import Counter4 from '../Components/Counter/Counter4';
 import Team1 from '../Components/Team/Team1';
@@ -14,7 +14,7 @@ const AboutPage = () => {
                 bgimg="/aboutbg.png"
                 Title="About Us"
             ></BreadCumb>
-            <About1></About1>
+            <AboutSimple></AboutSimple
             <Counter4></Counter4>
         </div>
     );
