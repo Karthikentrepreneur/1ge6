@@ -11,90 +11,156 @@ const SERVICES = [
 ];
 
 const ServicesVideoSection = ({
-  videoSrc = "/videos/services.mp4",
-  heading = "What We Do",
+  videoSrc = "/videos/Video2.mp4",
+  heading = "Our Services",
   subheading = "Integrated solutions powered by people, technology, and purpose",
 }) => {
   return (
-    <section className="services-video-section" style={{ position: "relative" }}>
-      <div className="svs__video">
-        <video
-          src={videoSrc}
-          autoPlay
-          muted
-          loop
-          playsInline
-          preload="auto"
-          aria-hidden="true"
-        />
-      </div>
+    <section className="svs-split">
+      <div className="svs-container">
+        {/* LEFT: Services list */}
+        <div className="svs-left">
+          <header className="svs-header">
+            <p className="svs-sub">{subheading}</p>
+            <h2 className="svs-title">{heading}</h2>
+          </header>
 
-      <div className="svs__overlay" />
-
-      <div className="svs__container">
-        <header className="svs__header">
-          <p className="svs__sub">{subheading}</p>
-          <h2 className="svs__title">{heading}</h2>
-        </header>
-
-        <div className="svs__grid">
-          {SERVICES.map(({ title, Icon }) => (
-            <div key={title} className="svs__card">
-              <div className="svs__icon">
-                <Icon strokeWidth={1.75} />
+          <div className="svs-list">
+            {SERVICES.map(({ title, Icon }) => (
+              <div className="svs-item" key={title}>
+                <div className="svs-icon">
+                  <Icon strokeWidth={1.75} />
+                </div>
+                <div className="svs-item-title">{title}</div>
               </div>
-              <h3 className="svs__cardTitle">{title}</h3>
+            ))}
+          </div>
+        </div>
+
+        {/* RIGHT: Portrait video in a white card */}
+        <div className="svs-right">
+          <div className="svs-video-card">
+            <div className="svs-video-frame">
+              <video
+                src={videoSrc}
+                autoPlay
+                muted
+                loop
+                playsInline
+                preload="auto"
+                aria-label="Services video"
+              />
             </div>
-          ))}
+          </div>
         </div>
       </div>
 
+      {/* Styles */}
       <style>{`
-        .services-video-section {
-          overflow: hidden;
-          min-height: 75vh;
+        .svs-split {
+          background: #fff;          /* white background as requested */
+          padding: 56px 0;
+        }
+        .svs-container {
+          width: min(1200px, 92%);
+          margin: 0 auto;
           display: grid;
-          place-items: center;
+          grid-template-columns: 1fr 520px; /* left content / right video width */
+          gap: 32px;
+          align-items: start;
         }
-        .svs__video { position: absolute; inset: 0; z-index: 0; }
-        .svs__video video {
-          width: 100%; height: 100%;
-          object-fit: cover; object-position: center;
-          filter: saturate(1.05) contrast(1.02);
-        }
-        .svs__overlay {
-          position: absolute; inset: 0; z-index: 1;
-          background: linear-gradient(180deg, rgba(0,0,0,.55), rgba(0,0,0,.35) 40%, rgba(0,0,0,.55));
-        }
-        .svs__container {
-          position: relative; z-index: 2; color: #fff;
-          width: min(1200px, 92%); margin: 0 auto; padding: 56px 0;
-        }
-        .svs__header { text-align: center; margin-bottom: 28px; }
-        .svs__sub { margin: 0 0 6px; font-size: .95rem; letter-spacing: .3px; opacity: .9; }
-        .svs__title { margin: 0; font-size: clamp(1.8rem, 1.2rem + 2vw, 2.6rem); font-weight: 800; }
-        .svs__grid { display: grid; gap: 16px; grid-template-columns: repeat(6, minmax(0, 1fr)); }
-        .svs__card {
-          background: rgba(255,255,255,.06);
-          border: 1px solid rgba(255,255,255,.12);
-          border-radius: 16px;
-          padding: 18px 16px;
-          backdrop-filter: blur(4px);
-          display: flex; align-items: center; gap: 12px;
-          transition: transform .2s ease, background .2s ease, border-color .2s ease;
-        }
-        .svs__card:hover { transform: translateY(-2px); background: rgba(255,255,255,.10); border-color: rgba(255,255,255,.18); }
-        .svs__icon {
-          flex: 0 0 44px; width: 44px; height: 44px; border-radius: 12px;
-          display: grid; place-items: center;
-          background: rgba(38,182,224,.18);
-          border: 1px solid rgba(38,182,224,.35);
-        }
-        .svs__icon svg { width: 22px; height: 22px; color: #EAFBFF; }
-        .svs__cardTitle { margin: 0; font-size: 1rem; font-weight: 700; letter-spacing: .2px; line-height: 1.2; }
 
-        @media (max-width: 1199px) { .svs__grid { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
-        @media (max-width: 639px)  { .svs__grid { grid-template-columns: 1fr; } .svs__card { padding: 16px 14px; } }
+        /* LEFT */
+        .svs-header { margin-bottom: 16px; }
+        .svs-sub {
+          margin: 0 0 6px;
+          font-size: .95rem;
+          letter-spacing: .2px;
+          color: #5f6b7a;
+        }
+        .svs-title {
+          margin: 0;
+          font-size: clamp(1.8rem, 1.2rem + 2vw, 2.4rem);
+          font-weight: 800;
+          color: #0E0F2C;
+        }
+
+        .svs-list {
+          display: grid;
+          gap: 12px;
+          margin-top: 14px;
+        }
+        .svs-item {
+          display: flex;
+          align-items: center;
+          gap: 12px;
+          padding: 14px 16px;
+          border: 1px solid #e9eef3;
+          border-radius: 14px;
+          background: #fafcff;
+          transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease;
+        }
+        .svs-item:hover {
+          transform: translateY(-1px);
+          box-shadow: 0 6px 18px rgba(10, 40, 80, 0.08);
+          border-color: #dbe7f1;
+        }
+        .svs-icon {
+          flex: 0 0 44px;
+          width: 44px; height: 44px;
+          border-radius: 12px;
+          display: grid; place-items: center;
+          background: rgba(38,182,224,.12);
+          border: 1px solid rgba(38,182,224,.35);
+          color: #1c99bf;
+        }
+        .svs-icon svg { width: 22px; height: 22px; }
+        .svs-item-title {
+          font-weight: 700;
+          color: #0E0F2C;
+          letter-spacing: .2px;
+        }
+
+        /* RIGHT */
+        .svs-right { display: flex; justify-content: center; }
+        .svs-video-card {
+          background: #ffffff;
+          border: 1px solid #eef2f6;
+          border-radius: 20px;
+          box-shadow: 0 12px 30px rgba(10, 40, 80, 0.08);
+          padding: 16px;
+          width: 100%;
+          max-width: 520px; /* matches grid column */
+        }
+        /* Keep video as a perfect 9:16 portrait frame */
+        .svs-video-frame {
+          width: 100%;
+          aspect-ratio: 9 / 16;      /* keeps 2160x3840 ratio */
+          overflow: hidden;
+          border-radius: 14px;
+          background: #000;          /* fallback while loading */
+        }
+        .svs-video-frame video {
+          width: 100%; height: 100%;
+          object-fit: cover;         /* fill frame while preserving portrait */
+          object-position: center;
+          display: block;
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+          .svs-container {
+            grid-template-columns: 1fr; /* stack */
+          }
+          .svs-right {
+            order: -1;               /* show video first on mobile, optional */
+            margin-bottom: 10px;
+          }
+          .svs-video-card { max-width: 440px; margin: 0 auto; }
+        }
+        @media (max-width: 480px) {
+          .svs-video-card { max-width: 360px; }
+        }
       `}</style>
     </section>
   );
