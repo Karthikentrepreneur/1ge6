@@ -16,6 +16,7 @@ const AboutPage = () => {
                 Title="About Us"
             ></BreadCumb>
             <AboutSimple></AboutSimple>
+        <AboutLeadership></AboutLeadership>
             <Counter4></Counter4>
         </div>
     );
