@@ -48,7 +48,12 @@ const About1 = () => {
       <style>{`
         .about-wrapper { width: 100%; }
 
-        /* Image sizing (smaller so it doesn't overlap text) */
+        /* Slight spacing between image & content */
+        @media (min-width: 992px) {
+          .about-photo-wrap { margin-right: 40px; } /* 👈 extra gap between image & text */
+        }
+
+        /* Image sizing */
         .about-photo-wrap { width: 100%; text-align: center; }
         .about-photo {
           width: min(100%, 940px);
@@ -64,7 +69,7 @@ const About1 = () => {
           box-shadow: 0 22px 66px rgba(0,0,0,.26);
         }
 
-        /* Right content spacing */
+        /* Text content styling */
         .about-content .section-title .sub-title {
           color: #26B6E0;
           margin-bottom: 6px;
@@ -75,11 +80,10 @@ const About1 = () => {
         .about-items { margin-bottom: 18px; }
         .about-items .icon img { width: 44px; height: 44px; }
 
-        /* Group Companies section */
+        /* Group Companies (no divider line now) */
         .brand-block {
-          margin-top: 60px;              /* space before logos */
-          padding-top: 25px;
-          border-top: 2px solid #26B6E0; /* teal divider line */
+          margin-top: 60px; /* spacing before logos */
+          padding-top: 0;   /* removed top padding + border */
         }
         .brand-title {
           text-align: center;
@@ -96,7 +100,7 @@ const About1 = () => {
           align-items:center;
           justify-content:center;
           height:110px;
-          padding-left: 10px; /* 👈 adds small space before logos */
+          padding-left: 10px; /* small space before logos */
         }
         .brand-logo {
           max-height: 90px;
@@ -117,7 +121,7 @@ const About1 = () => {
           .about-photo { width: 100%; transform: scale(1.0); border-radius: 18px; }
           .brand-slide { height: 96px; }
           .brand-logo { max-height: 80px; }
-          .brand-block { margin-top: 40px; padding-top: 15px; }
+          .brand-block { margin-top: 40px; }
         }
         @media (max-width: 575px) {
           .brand-slide { height: 86px; }
@@ -183,7 +187,7 @@ const About1 = () => {
                     <div className="content">
                       <h5>Expertise</h5>
                       <p className="mb-0">
-                        Each business unit is led by experts ensuring sustainability
+                        Each business unit is led by experts ensuring sustainability,
                         execution & growth.
                       </p>
                     </div>
