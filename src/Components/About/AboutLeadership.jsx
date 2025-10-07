@@ -22,50 +22,39 @@ const AboutLeadership = () => {
           .about-content-wrap { margin-right: 40px; }
         }
 
-        /* Main right-side image */
-        .about-photo-wrap { width: 100%; text-align: center; }
-        .about-photo {
-          width: min(100%, 940px);
-          height: auto;
-          border-radius: 22px;
-          object-fit: cover;
-          box-shadow: 0 16px 50px rgba(0,0,0,.24);
-          transform: scale(1.03);
-          transition: transform .3s ease, box-shadow .3s ease;
-        }
-        .about-photo:hover {
-          transform: scale(1.07);
-          box-shadow: 0 22px 66px rgba(0,0,0,.26);
-        }
-
-        /* Founder portrait below main image */
-        .founder-wrap {
+        /* JP Image — full height, square, occupies right column */
+        .founder-photo-wrap {
+          width: 100%;
           text-align: center;
-          margin-top: 24px;
         }
-        .founder-wrap img {
-          width: 150px;
-          height: 150px;
-          border-radius: 50%;
+        .founder-photo {
+          width: 100%;
+          max-width: 600px;
+          aspect-ratio: 1 / 1; /* makes it a perfect square */
           object-fit: cover;
-          box-shadow: 0 8px 25px rgba(0,0,0,0.2);
-          transition: transform .3s ease;
+          border-radius: 16px;
+          box-shadow: 0 16px 50px rgba(0,0,0,.25);
+          transition: transform .35s ease, box-shadow .35s ease;
         }
-        .founder-wrap img:hover { transform: scale(1.05); }
+        .founder-photo:hover {
+          transform: scale(1.03);
+          box-shadow: 0 20px 60px rgba(0,0,0,.3);
+        }
         .founder-caption {
-          margin-top: 10px;
+          margin-top: 16px;
+          text-align: center;
           font-weight: 600;
-          font-size: 16px;
+          font-size: 18px;
           color: #0E0F2C;
         }
         .founder-caption span {
           display: block;
-          font-size: 14px;
+          font-size: 15px;
           color: #26B6E0;
           font-weight: 500;
         }
 
-        /* Lucide teal circle icon bullets */
+        /* Content icons and layout */
         .about-items {
           position: relative;
           display: flex;
@@ -117,13 +106,12 @@ const AboutLeadership = () => {
 
         /* Responsive tweaks */
         @media (max-width: 1199px) {
-          .about-photo { width: min(100%, 860px); transform: scale(1.02); }
+          .founder-photo { max-width: 500px; }
         }
         @media (max-width: 991px) {
           .about-section { padding: 40px 0 16px !important; }
-          .about-photo { width: 100%; transform: scale(1.0); border-radius: 18px; }
+          .founder-photo { width: 100%; max-width: 400px; border-radius: 12px; }
           .about-content-wrap { margin-right: 0; }
-          .founder-wrap img { width: 120px; height: 120px; }
         }
       `}</style>
 
@@ -137,6 +125,7 @@ const AboutLeadership = () => {
                   <h2>People-Powered Leadership</h2>
                 </div>
 
+                {/* Block 1 */}
                 <div className="about-items">
                   <div className="icon"><Users2 /></div>
                   <div className="content">
@@ -150,6 +139,7 @@ const AboutLeadership = () => {
                   </div>
                 </div>
 
+                {/* Block 2 */}
                 <div className="about-items">
                   <div className="icon"><HeartHandshake /></div>
                   <div className="content">
@@ -163,6 +153,7 @@ const AboutLeadership = () => {
                   </div>
                 </div>
 
+                {/* Block 3 */}
                 <div className="about-items">
                   <div className="icon"><Globe2 /></div>
                   <div className="content">
@@ -179,23 +170,18 @@ const AboutLeadership = () => {
               </div>
             </div>
 
-            {/* RIGHT IMAGE + FOUNDER SECTION */}
+            {/* RIGHT IMAGE — MR. JAY PRAKASH */}
             <div className="col-lg-5 d-flex flex-column align-items-center">
-              <div className="about-photo-wrap">
+              <div className="founder-photo-wrap">
                 <img
-                  src="/leadership.jpg"
-                  alt="Leadership at 1 Global Enterprises"
-                  className="about-photo"
+                  src="/founder.jpg"
+                  alt="Mr. Jay Prakash – Managing Director & Founder"
+                  className="founder-photo"
                 />
               </div>
-
-              {/* Founder portrait and caption */}
-              <div className="founder-wrap">
-                <img src="/founder.jpg" alt="Jay Prakash" />
-                <div className="founder-caption">
-                  Managing Director and Founder
-                  <span>Jay Prakash</span>
-                </div>
+              <div className="founder-caption">
+                Mr. Jay Prakash
+                <span>Managing Director & Founder</span>
               </div>
             </div>
           </div>
