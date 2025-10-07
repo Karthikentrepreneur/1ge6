@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Ship, Workflow, Truck, Droplets, Code2, Sun } from "lucide-react";
 
 const SERVICES = [
@@ -11,15 +11,43 @@ const SERVICES = [
 ];
 
 const ServicesVideoSection = ({
-  videoSrc = "/Video2.mp4",
+  videoSrc = "/videos/Video2.mp4",
   heading = "Our Services",
   subheading = "Integrated solutions powered by people, technology, and purpose",
 }) => {
+  const leftRef = useRef(null);
+  const videoCardRef = useRef(null);
+  const [matchHeight, setMatchHeight] = useState(null);
+
+  useEffect(() => {
+    // Match the video card height to the left column height
+    const el = leftRef.current;
+    if (!el) return;
+
+    const ro = new ResizeObserver(() => {
+      const h = el.getBoundingClientRect().height;
+      setMatchHeight(Math.max(280, Math.round(h))); // guard against tiny heights
+    });
+    ro.observe(el);
+
+    // also update on window resize (Safari quirks)
+    const onResize = () => {
+      const h = el.getBoundingClientRect().height;
+      setMatchHeight(Math.max(280, Math.round(h)));
+    };
+    window.addEventListener("resize", onResize);
+
+    return () => {
+      ro.disconnect();
+      window.removeEventListener("resize", onResize);
+    };
+  }, []);
+
   return (
     <section className="svs-split">
       <div className="svs-container">
         {/* LEFT: Services */}
-        <div className="svs-left">
+        <div className="svs-left" ref={leftRef}>
           <header className="svs-header">
             <p className="svs-sub">{subheading}</p>
             <h2 className="svs-title">{heading}</h2>
@@ -37,9 +65,14 @@ const ServicesVideoSection = ({
           </div>
         </div>
 
-        {/* RIGHT: Compact video card */}
+        {/* RIGHT: Video equal to content height */}
         <div className="svs-right">
-          <div className="svs-video-card">
+          <div
+            className="svs-video-card"
+            ref={videoCardRef}
+            // Only apply forced height on desktop via CSS var
+            style={{ "--svsCardH": matchHeight ? `${matchHeight}px` : undefined }}
+          >
             <div className="svs-video-frame">
               <video
                 src={videoSrc}
@@ -58,22 +91,21 @@ const ServicesVideoSection = ({
       <style>{`
         .svs-split {
           background: #fff;
-          padding: 40px 0;        /* slightly tighter */
+          padding: 48px 0;
         }
         .svs-container {
           width: min(1200px, 92%);
           margin: 0 auto;
           display: grid;
-          grid-template-columns: 1fr 460px;  /* smaller video column */
-          gap: 28px;
-          align-items: start;                 /* keep both aligned at the top */
+          grid-template-columns: 1fr 1fr; /* equal columns so it feels balanced */
+          gap: 32px;
+          align-items: start;
         }
 
         /* LEFT */
-        .svs-header { margin-bottom: 12px; }
+        .svs-header { margin-bottom: 14px; }
         .svs-sub { margin: 0 0 6px; font-size: .95rem; color: #5f6b7a; }
-        .svs-title { margin: 0; font-size: clamp(1.8rem, 1.2rem + 2vw, 2.4rem); font-weight: 800; color: #0E0F2C; }
-
+        .svs-title { margin: 0; font-size: clamp(1.8rem, 1.2rem + 2vw, 2.6rem); font-weight: 800; color: #0E0F2C; }
         .svs-list { display: grid; gap: 12px; margin-top: 12px; }
         .svs-item {
           display: flex; align-items: center; gap: 12px;
@@ -84,12 +116,13 @@ const ServicesVideoSection = ({
         .svs-item:hover { transform: translateY(-1px); box-shadow: 0 6px 18px rgba(10,40,80,.08); border-color: #dbe7f1; }
         .svs-icon {
           flex: 0 0 44px; width: 44px; height: 44px; border-radius: 12px;
-          display: grid; place-items: center; background: rgba(38,182,224,.12); border: 1px solid rgba(38,182,224,.35); color: #1c99bf;
+          display: grid; place-items: center; background: rgba(38,182,224,.12);
+          border: 1px solid rgba(38,182,224,.35); color: #1c99bf;
         }
         .svs-icon svg { width: 22px; height: 22px; }
         .svs-item-title { font-weight: 700; color: #0E0F2C; }
 
-        /* RIGHT: compact video equal to text block visually */
+        /* RIGHT: video card equals left content height on desktop */
         .svs-right { display: flex; justify-content: center; }
         .svs-video-card {
           background: #fff;
@@ -98,29 +131,35 @@ const ServicesVideoSection = ({
           box-shadow: 0 10px 24px rgba(10,40,80,.08);
           padding: 12px;
           width: 100%;
-          max-width: 460px;
-          /* keep the video card compact */
-          max-height: 420px;                /* << cap the card so no scrolling is needed */
+          height: var(--svsCardH, auto);     /* <-- match left height */
+          display: flex;                      /* let inner frame stretch */
         }
         .svs-video-frame {
-          width: 100%;
-          aspect-ratio: 16 / 9;             /* << desktop: compact landscape */
+          flex: 1;
+          min-height: 0;
           overflow: hidden;
           border-radius: 12px;
           background: #000;
         }
         .svs-video-frame video {
-          width: 100%; height: 100%;
-          object-fit: cover; object-position: center;
+          width: 100%;
+          height: 100%;
+          object-fit: cover;                  /* neatly fills whatever height we give */
+          object-position: center;
           display: block;
         }
 
-        /* Mobile: stack and show portrait */
+        /* Mobile / tablet: stack and go portrait */
         @media (max-width: 1024px) {
           .svs-container { grid-template-columns: 1fr; }
           .svs-right { order: -1; margin-bottom: 14px; }
-          .svs-video-card { max-width: 420px; max-height: none; margin: 0 auto; }
-          .svs-video-frame { aspect-ratio: 9 / 16; }  /* portrait when stacked */
+          .svs-video-card {
+            height: auto;                     /* stop forcing equal height when stacked */
+            max-width: 420px;
+            margin: 0 auto;
+          }
+          .svs-video-frame { aspect-ratio: 9 / 16; } /* portrait on mobile */
+          .svs-video-frame video { height: 100%; }
         }
         @media (max-width: 480px) {
           .svs-video-card { max-width: 340px; }
