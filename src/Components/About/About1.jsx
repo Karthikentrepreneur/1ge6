@@ -1,4 +1,4 @@
-// src/Components/About/About1.jsx (or .tsx)
+// src/Components/About/About1.jsx
 import React, { useEffect } from 'react';
 import Slider from 'react-slick';
 import loadBackgroudImages from '../Common/loadBackgroudImages';
@@ -8,7 +8,7 @@ const About1 = () => {
     loadBackgroudImages();
   }, []);
 
-  // ---- logos (auto-filters out any "shipsoft" asset) ----
+  // --- Logos (filter out Shipsoft) ---
   const rawLogos = [
     { img: '/logosss01.png', alt: 'Brand 1' },
     { img: '/logosss02.png', alt: 'Brand 2' },
@@ -18,7 +18,7 @@ const About1 = () => {
     { img: '/logosss06.png', alt: 'Brand 6' },
   ];
   const logos = rawLogos.filter(
-    l => !/shipsoft/i.test(l.img) && !/shipsoft/i.test(l.alt)
+    (l) => !/shipsoft/i.test(l.img) && !/shipsoft/i.test(l.alt)
   );
 
   const sliderSettings = {
@@ -42,92 +42,154 @@ const About1 = () => {
 
   return (
     <section
-      className="about-section section-padding fix bg-cover"
+      className="about-section bg-cover"
       data-background="/about-bg.png"
-      style={{ overflow: 'hidden' }}
+      // Trim big white bands top/bottom right here
+      style={{ padding: '56px 0 24px', overflow: 'hidden' }}
     >
+      {/* local styles for this section */}
+      <style>{`
+        /* Reduce section spacing on smaller screens */
+        @media (max-width: 991px) {
+          .about-section { padding: 40px 0 12px !important; }
+        }
+
+        /* Make the layout feel fuller */
+        .about-wrapper { width: 100%; }
+
+        /* Bigger image that scales responsively */
+        .about-photo-wrap {
+          width: 100%;
+          text-align: center;
+        }
+        .about-photo {
+          width: min(100%, 1100px);    /* hard cap, but LARGE */
+          height: auto;
+          border-radius: 24px;
+          object-fit: cover;
+          box-shadow: 0 18px 55px rgba(0,0,0,0.25);
+          transform: scale(1.12);      /* bump visual presence */
+          transition: transform .35s ease-in-out, box-shadow .35s ease-in-out;
+        }
+        .about-photo:hover {
+          transform: scale(1.16);
+          box-shadow: 0 24px 70px rgba(0,0,0,0.28);
+        }
+
+        /* Tighten right content spacing */
+        .about-content .section-title .sub-title {
+          color: #26B6E0;
+          display: inline-block;
+          margin-bottom: 6px;
+          font-weight: 600;
+        }
+        .about-content .section-title h2 {
+          margin-bottom: 12px;
+        }
+        .about-items { margin-bottom: 18px; }
+        .about-items .icon img { width: 44px; height: 44px; }
+
+        /* Group Companies: centered + elegant */
+        .brand-block {
+          margin-top: 28px;
+        }
+        .brand-title {
+          text-align: center;
+          margin: 0 0 10px 0;
+          font-weight: 700;
+        }
+        .brand-slider-wrap {
+          max-width: 1100px;
+          margin: 0 auto;                 /* center the carousel */
+          padding: 0 8px;
+        }
+        .brand-slide {
+          display: flex; align-items: center; justify-content: center;
+          height: 110px;
+        }
+        .brand-logo {
+          max-height: 90px; width: auto; object-fit: contain;
+          filter: grayscale(100%); opacity: .7; transition: all .25s ease;
+        }
+        .brand-logo:hover {
+          filter: grayscale(0%); opacity: 1; transform: translateY(-2px);
+        }
+
+        /* Stack nicely on tablet/mobile & adjust image scale */
+        @media (max-width: 1199px) {
+          .about-photo { transform: scale(1.08); }
+        }
+        @media (max-width: 991px) {
+          .about-photo { transform: scale(1.04); border-radius: 18px; }
+          .brand-slide { height: 96px; }
+          .brand-logo { max-height: 80px; }
+        }
+        @media (max-width: 575px) {
+          .about-photo { transform: scale(1.0); border-radius: 16px; }
+          .brand-slide { height: 86px; }
+          .brand-logo { max-height: 72px; }
+        }
+      `}</style>
+
       <div className="container">
         <div className="about-wrapper">
           <div className="row g-4 align-items-center">
-
-            {/* LEFT IMAGE (Bigger) */}
-            <div className="col-lg-7 d-flex justify-content-center">
-              <div
-                className="about-image"
-                style={{ width: '100%', textAlign: 'center' }}
-              >
+            {/* Give more room to the image for desktop */}
+            <div className="col-lg-8 d-flex justify-content-center">
+              <div className="about-photo-wrap">
                 <img
                   src="/team.jpeg"
                   alt="1 Global Enterprises Group"
-                  style={{
-                    width: '100%',
-                    maxWidth: '980px',     // ⬅ bigger cap
-                    height: 'auto',
-                    borderRadius: '24px',
-                    objectFit: 'cover',
-                    boxShadow: '0 18px 55px rgba(0,0,0,0.28)',
-                    transform: 'scale(1.16)',         // ⬅ bigger visual presence
-                    transition: 'transform 0.35s ease-in-out',
-                  }}
-                  onMouseEnter={(e) => (e.currentTarget.style.transform = 'scale(1.2)')}
-                  onMouseLeave={(e) => (e.currentTarget.style.transform = 'scale(1.16)')}
+                  className="about-photo"
                 />
               </div>
             </div>
 
-            {/* RIGHT CONTENT */}
-            <div className="col-lg-5">
+            <div className="col-lg-4">
               <div className="about-content">
                 <div className="section-title">
-                  <span className="sub-title wow fadeInUp">
-                    Singapore Headquarters
-                  </span>
-                  <h2 className="wow fadeInUp" data-wow-delay=".2s">
-                    1 Global Enterprises
-                  </h2>
+                  <span className="sub-title">Singapore Headquarters</span>
+                  <h2>1 Global Enterprises</h2>
                 </div>
 
-                <div className="about-area mt-4 mt-md-0">
-                  <div className="line-image">
-                    <img
-                      src="/assets/img/about/Line-image.png"
-                      alt="Line Decoration"
-                    />
+                <div className="about-area mt-3">
+                  <div className="line-image mb-2">
+                    <img src="/assets/img/about/Line-image.png" alt="Line Decoration" />
                   </div>
 
-                  <div className="about-items wow fadeInUp" data-wow-delay=".3s">
+                  <div className="about-items d-flex gap-3">
                     <div className="icon">
                       <img src="/assets/img/icon/05.svg" alt="Who We Are" />
                     </div>
                     <div className="content">
                       <h5>Who We Are</h5>
-                      <p>
-                        A diversified group with interests in Shipping,
-                        Logistics, Distribution, IT, Clean Energy & Trading.
+                      <p className="mb-0">
+                        A diversified group with interests in Shipping, Logistics,
+                        Distribution, IT, Clean Energy & Trading.
                       </p>
                     </div>
                   </div>
 
-                  <div className="about-items wow fadeInUp" data-wow-delay=".5s">
+                  <div className="about-items d-flex gap-3">
                     <div className="icon">
                       <img src="/assets/img/icon/06.svg" alt="Our Reach" />
                     </div>
                     <div className="content">
                       <h5>Our Reach</h5>
-                      <p>
+                      <p className="mb-0">
                         700+ professionals operating across South-East Asia,
                         Middle East, USA & UK.
                       </p>
                     </div>
                   </div>
 
-                  <div className="about-items wow fadeInUp" data-wow-delay=".7s">
+                  <div className="about-items d-flex gap-3">
                     <div className="icon">
                       <img src="/assets/img/icon/07.svg" alt="Expertise" />
                     </div>
                     <div className="content">
                       <h5>Expertise</h5>
-                      <p>
+                      <p className="mb-0">
                         Each business unit is led by experts ensuring strong
                         execution & growth.
                       </p>
@@ -136,46 +198,22 @@ const About1 = () => {
                 </div>
               </div>
             </div>
-            {/* END RIGHT CONTENT */}
+            {/* /Right content */}
           </div>
 
-          {/* --- Logos carousel INSIDE the same About section --- */}
-          <div className="row mt-5">
-            <div className="col-12">
-              <h4 className="brand-title wow fadeInUp mb-3" data-wow-delay=".2s">
-                Group Companies
-              </h4>
+          {/* Group Companies – centered and compact, inside About section */}
+          <div className="brand-block">
+            <h4 className="brand-title">Group Companies</h4>
+            <div className="brand-slider-wrap">
               <Slider {...sliderSettings}>
                 {logos.map((item, i) => (
-                  <div key={i}>
-                    <div
-                      style={{
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                        height: 120,
-                        padding: '0 8px',
-                      }}
-                    >
-                      <img
-                        src={item.img}
-                        alt={item.alt}
-                        style={{
-                          maxHeight: 100,
-                          width: 'auto',
-                          objectFit: 'contain',
-                          opacity: 1,
-                          filter: 'none',
-                          mixBlendMode: 'normal',
-                        }}
-                      />
-                    </div>
+                  <div key={i} className="brand-slide">
+                    <img src={item.img} alt={item.alt} className="brand-logo" />
                   </div>
                 ))}
               </Slider>
             </div>
           </div>
-          {/* --- /logos --- */}
         </div>
       </div>
     </section>
