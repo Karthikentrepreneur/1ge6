@@ -48,12 +48,12 @@ const About1 = () => {
       <style>{`
         .about-wrapper { width: 100%; }
 
-        /* Slight spacing between image & content */
+        /* Add gap between image & content */
         @media (min-width: 992px) {
-          .about-photo-wrap { margin-right: 40px; } /* 👈 extra gap between image & text */
+          .about-photo-wrap { margin-right: 40px; }
         }
 
-        /* Image sizing */
+        /* Team Image */
         .about-photo-wrap { width: 100%; text-align: center; }
         .about-photo {
           width: min(100%, 940px);
@@ -69,21 +69,73 @@ const About1 = () => {
           box-shadow: 0 22px 66px rgba(0,0,0,.26);
         }
 
-        /* Text content styling */
-        .about-content .section-title .sub-title {
-          color: #26B6E0;
-          margin-bottom: 6px;
-          font-weight: 600;
-          display: inline-block;
+        /* Section content */
+        .about-content .section-title h2 {
+          margin-bottom: 18px;
         }
-        .about-content .section-title h2 { margin-bottom: 12px; }
-        .about-items { margin-bottom: 18px; }
-        .about-items .icon img { width: 44px; height: 44px; }
 
-        /* Group Companies (no divider line now) */
+        /* Full teal circle icons */
+        .about-items {
+          position: relative;
+          display: flex;
+          align-items: flex-start;
+          gap: 16px;
+          margin-bottom: 28px;
+        }
+
+        .about-items .icon {
+          position: relative;
+          width: 60px;
+          height: 60px;
+          min-width: 60px;
+          border-radius: 50%;
+          background-color: #26B6E0;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          z-index: 1;
+          box-shadow: 0 4px 10px rgba(38,182,224,0.35);
+        }
+
+        .about-items .icon img {
+          width: 28px;
+          height: 28px;
+          filter: brightness(0) invert(1);
+        }
+
+        .about-items:not(:last-child)::after {
+          content: "";
+          position: absolute;
+          left: 29px;
+          top: 60px;
+          width: 2px;
+          height: calc(100% - 30px);
+          background: repeating-linear-gradient(
+            to bottom,
+            #26B6E0,
+            #26B6E0 4px,
+            transparent 4px,
+            transparent 8px
+          );
+          z-index: 0;
+        }
+
+        .about-items .content h5 {
+          font-weight: 700;
+          margin-bottom: 4px;
+          color: #0E0F2C;
+        }
+        .about-items .content p {
+          margin: 0;
+          line-height: 1.5;
+          color: #444;
+          font-size: 15px;
+        }
+
+        /* Group Companies */
         .brand-block {
-          margin-top: 60px; /* spacing before logos */
-          padding-top: 0;   /* removed top padding + border */
+          margin-top: 60px;
+          padding-top: 0; /* no border line */
         }
         .brand-title {
           text-align: center;
@@ -100,7 +152,7 @@ const About1 = () => {
           align-items:center;
           justify-content:center;
           height:110px;
-          padding-left: 10px; /* small space before logos */
+          padding-left: 10px;
         }
         .brand-logo {
           max-height: 90px;
@@ -112,7 +164,7 @@ const About1 = () => {
         }
         .brand-logo:hover { transform: translateY(-2px); }
 
-        /* Responsive adjustments */
+        /* Responsive */
         @media (max-width: 1199px) {
           .about-photo { width: min(100%, 860px); transform: scale(1.02); }
         }
@@ -132,7 +184,7 @@ const About1 = () => {
       <div className="container">
         <div className="about-wrapper">
           <div className="row g-4 align-items-center">
-            {/* Image Section */}
+            {/* Left Image */}
             <div className="col-lg-7 d-flex justify-content-center">
               <div className="about-photo-wrap">
                 <img
@@ -143,7 +195,7 @@ const About1 = () => {
               </div>
             </div>
 
-            {/* Text Section */}
+            {/* Right Text */}
             <div className="col-lg-5">
               <div className="about-content">
                 <div className="section-title">
@@ -151,42 +203,36 @@ const About1 = () => {
                 </div>
 
                 <div className="about-area mt-3">
-                  <div className="line-image mb-2">
-                    <img src="/assets/img/about/Line-image.png" alt="Line Decoration" />
-                  </div>
-
-                  <div className="about-items d-flex gap-3">
+                  <div className="about-items">
                     <div className="icon">
                       <img src="/assets/img/icon/05.svg" alt="Who We Are" />
                     </div>
                     <div className="content">
                       <h5>Who We Are</h5>
-                      <p className="mb-0">
+                      <p>
                         A diversified group with interests in Shipping, Logistics,
                         Distribution, IT, Clean Energy & Trading.
                       </p>
                     </div>
                   </div>
 
-                  <div className="about-items d-flex gap-3">
+                  <div className="about-items">
                     <div className="icon">
                       <img src="/assets/img/icon/06.svg" alt="Our Reach" />
                     </div>
                     <div className="content">
                       <h5>Our Reach</h5>
-                      <p className="mb-0">
-                        A global workforce of 700+ professionals.
-                      </p>
+                      <p>A global workforce of 700+ professionals.</p>
                     </div>
                   </div>
 
-                  <div className="about-items d-flex gap-3">
+                  <div className="about-items">
                     <div className="icon">
                       <img src="/assets/img/icon/07.svg" alt="Expertise" />
                     </div>
                     <div className="content">
                       <h5>Expertise</h5>
-                      <p className="mb-0">
+                      <p>
                         Each business unit is led by experts ensuring sustainability,
                         execution & growth.
                       </p>
