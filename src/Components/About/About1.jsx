@@ -8,7 +8,7 @@ const About1 = () => {
     loadBackgroudImages();
   }, []);
 
-  // --- Logos (filter out Shipsoft) ---
+  // Logos (Shipsoft filtered out if present)
   const rawLogos = [
     { img: '/logosss01.png', alt: 'Brand 1' },
     { img: '/logosss02.png', alt: 'Brand 2' },
@@ -17,9 +17,7 @@ const About1 = () => {
     { img: '/logosss05.png', alt: 'Brand 5' },
     { img: '/logosss06.png', alt: 'Brand 6' },
   ];
-  const logos = rawLogos.filter(
-    (l) => !/shipsoft/i.test(l.img) && !/shipsoft/i.test(l.alt)
-  );
+  const logos = rawLogos.filter(l => !/shipsoft/i.test(l.img) && !/shipsoft/i.test(l.alt));
 
   const sliderSettings = {
     dots: false,
@@ -44,88 +42,62 @@ const About1 = () => {
     <section
       className="about-section bg-cover"
       data-background="/about-bg.png"
-      // Trim big white bands top/bottom right here
       style={{ padding: '56px 0 24px', overflow: 'hidden' }}
     >
-      {/* local styles for this section */}
       <style>{`
-        /* Reduce section spacing on smaller screens */
-        @media (max-width: 991px) {
-          .about-section { padding: 40px 0 12px !important; }
-        }
-
-        /* Make the layout feel fuller */
         .about-wrapper { width: 100%; }
 
-        /* Bigger image that scales responsively */
-        .about-photo-wrap {
-          width: 100%;
-          text-align: center;
-        }
+        /* Slightly smaller image so it doesn't crowd the text */
+        .about-photo-wrap { width: 100%; text-align: center; }
         .about-photo {
-          width: min(100%, 1100px);    /* hard cap, but LARGE */
+          width: min(100%, 960px);   /* was 1100px */
           height: auto;
-          border-radius: 24px;
+          border-radius: 22px;
           object-fit: cover;
-          box-shadow: 0 18px 55px rgba(0,0,0,0.25);
-          transform: scale(1.12);      /* bump visual presence */
-          transition: transform .35s ease-in-out, box-shadow .35s ease-in-out;
+          box-shadow: 0 16px 50px rgba(0,0,0,.24);
+          transform: scale(1.04);    /* was 1.12 */
+          transition: transform .3s ease, box-shadow .3s ease;
         }
         .about-photo:hover {
-          transform: scale(1.16);
-          box-shadow: 0 24px 70px rgba(0,0,0,0.28);
+          transform: scale(1.08);    /* was 1.16 */
+          box-shadow: 0 22px 66px rgba(0,0,0,.26);
         }
 
-        /* Tighten right content spacing */
         .about-content .section-title .sub-title {
-          color: #26B6E0;
-          display: inline-block;
-          margin-bottom: 6px;
-          font-weight: 600;
+          color: #26B6E0; margin-bottom: 6px; font-weight: 600; display: inline-block;
         }
-        .about-content .section-title h2 {
-          margin-bottom: 12px;
-        }
+        .about-content .section-title h2 { margin-bottom: 12px; }
         .about-items { margin-bottom: 18px; }
         .about-items .icon img { width: 44px; height: 44px; }
 
-        /* Group Companies: centered + elegant */
-        .brand-block {
-          margin-top: 28px;
-        }
-        .brand-title {
-          text-align: center;
-          margin: 0 0 10px 0;
-          font-weight: 700;
-        }
-        .brand-slider-wrap {
-          max-width: 1100px;
-          margin: 0 auto;                 /* center the carousel */
-          padding: 0 8px;
-        }
-        .brand-slide {
-          display: flex; align-items: center; justify-content: center;
-          height: 110px;
-        }
+        /* Group Companies centered + full color logos (no grayscale) */
+        .brand-block { margin-top: 26px; }
+        .brand-title { text-align: center; margin: 0 0 10px 0; font-weight: 700; }
+        .brand-slider-wrap { max-width: 1100px; margin: 0 auto; padding: 0 8px; }
+        .brand-slide { display:flex; align-items:center; justify-content:center; height:110px; }
         .brand-logo {
-          max-height: 90px; width: auto; object-fit: contain;
-          filter: grayscale(100%); opacity: .7; transition: all .25s ease;
+          max-height: 90px; width:auto; object-fit:contain;
+          opacity: 1; filter: none; transition: transform .2s ease;
         }
-        .brand-logo:hover {
-          filter: grayscale(0%); opacity: 1; transform: translateY(-2px);
+        .brand-logo:hover { transform: translateY(-2px); }
+
+        /* Layout tweaks so text never overlaps image */
+        @media (min-width: 1200px) {
+          .about-left-col { padding-right: 16px; } /* small gutter */
+          .about-right-col { padding-left: 24px; } /* breathing room for text */
         }
 
-        /* Stack nicely on tablet/mobile & adjust image scale */
+        /* Responsive adjustments */
         @media (max-width: 1199px) {
-          .about-photo { transform: scale(1.08); }
+          .about-photo { width: min(100%, 880px); transform: scale(1.02); }
         }
         @media (max-width: 991px) {
-          .about-photo { transform: scale(1.04); border-radius: 18px; }
+          .about-section { padding: 40px 0 16px !important; }
+          .about-photo { width: 100%; transform: scale(1.0); border-radius: 18px; }
           .brand-slide { height: 96px; }
           .brand-logo { max-height: 80px; }
         }
         @media (max-width: 575px) {
-          .about-photo { transform: scale(1.0); border-radius: 16px; }
           .brand-slide { height: 86px; }
           .brand-logo { max-height: 72px; }
         }
@@ -134,18 +106,14 @@ const About1 = () => {
       <div className="container">
         <div className="about-wrapper">
           <div className="row g-4 align-items-center">
-            {/* Give more room to the image for desktop */}
-            <div className="col-lg-8 d-flex justify-content-center">
+            {/* Slightly smaller than before: 7 / 5 split */}
+            <div className="col-lg-7 about-left-col d-flex justify-content-center">
               <div className="about-photo-wrap">
-                <img
-                  src="/team.jpeg"
-                  alt="1 Global Enterprises Group"
-                  className="about-photo"
-                />
+                <img src="/team.jpeg" alt="1 Global Enterprises Group" className="about-photo" />
               </div>
             </div>
 
-            <div className="col-lg-4">
+            <div className="col-lg-5 about-right-col">
               <div className="about-content">
                 <div className="section-title">
                   <span className="sub-title">Singapore Headquarters</span>
@@ -198,10 +166,9 @@ const About1 = () => {
                 </div>
               </div>
             </div>
-            {/* /Right content */}
           </div>
 
-          {/* Group Companies – centered and compact, inside About section */}
+          {/* Group Companies (inside) */}
           <div className="brand-block">
             <h4 className="brand-title">Group Companies</h4>
             <div className="brand-slider-wrap">
