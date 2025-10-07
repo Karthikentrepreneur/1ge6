@@ -11,7 +11,7 @@ const SERVICES = [
 ];
 
 const ServicesVideoSection = ({
-  videoSrc = "/videos/Video2.mp4",
+  videoSrc = "/Video2.mp4",
   heading = "Our Services",
   subheading = "Integrated solutions powered by people, technology, and purpose",
 }) => {
