@@ -21,6 +21,7 @@ import ProductDistributionPage from "../Pages/ProductDistributionPage";
 import SoftwareDevelopmentPage from "../Pages/SoftwareDevelopmentPage";
 import RenewableEnergyPage from "../Pages/RenewableEnergyPage";
 import CorporateSustainabilityPage from "../Pages/CorporateSustainabilityPage";
+import GlobalPresencePage from "../Pages/GlobalPresencePage";
 
 export const router = createBrowserRouter([
   {
@@ -54,6 +55,10 @@ export const router = createBrowserRouter([
       {
         path: "activities",
         Component: ActivitiesPage,
+      },
+      {
+        path: "global-presence",
+        Component: GlobalPresencePage,
       },
       {
         path: "activities/activities-details",
