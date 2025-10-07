@@ -19,9 +19,7 @@ const Home3 = () => {
       <Heroanner1 />
       {/* Removed cs_site_header_spacing_140 and margin/padding hacks */}
       <About1 />
-      <Category1 />
-      <Blog1 />
-      <Brand1 />
+      <Category1 /> 
     </div>
   );
 };
