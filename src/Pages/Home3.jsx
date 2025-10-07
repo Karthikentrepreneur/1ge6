@@ -10,7 +10,7 @@ import Testimonial1 from '../Components/Testimonial/Testimonial1';
 import Choose1 from '../Components/Choose/Choose1';
 import Team1 from '../Components/Team/Team1';
 import Cta2 from '../Components/Cta/Cta2';
-
+import ServicesVideoSection from '../Components/ServicesVideoSection';
 import Blog1 from '../Components/Blog/Blog1';
 import Brand1 from '../Components/Brand/Brand1';
 
@@ -20,7 +20,7 @@ const Home3 = () => {
       <Heroanner1 />
       {/* Removed cs_site_header_spacing_140 and margin/padding hacks */}
       <About1 />
-    
+      <ServicesVideoSection />
       <Category1 /> 
      
     </div>
