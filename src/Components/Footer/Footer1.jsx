@@ -29,10 +29,7 @@ const Footer1 = () => {
             </p>
 
             <div className="footer-social">
-              <a href="#" aria-label="Facebook"><i className="bi bi-facebook" /></a>
-              <a href="#" aria-label="Twitter/X"><i className="bi bi-twitter-x" /></a>
-              <a href="#" aria-label="LinkedIn"><i className="bi bi-linkedin" /></a>
-              <a href="#" aria-label="Instagram"><i className="bi bi-instagram" /></a>
+              <a href="https://www.linkedin.com/company/1-global-enterprises/" aria-label="LinkedIn"><i className="bi bi-linkedin" /></a>
             </div>
           </div>
 
