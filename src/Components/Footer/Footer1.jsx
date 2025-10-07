@@ -57,7 +57,7 @@ const Footer1 = () => {
               Singapore 099447
             </p>
             <p className="footer-text">
-              <a className="footer-link" href="mailto:jp@1ge.sg">jp@1ge.sg</a>
+              <a className="footer-link" href="mailto:jp@1ge.sg">info@1ge.sg</a>
             </p>
             <p className="footer-text">
               <a className="footer-link" href="tel:+6569080838">+65 69080838</a> <br />
@@ -66,9 +66,7 @@ const Footer1 = () => {
             </p>
 
             <div className="footer-tags">
-              <span>ISO Certified</span>
-              <span>Green Logistics</span>
-              <span>Global Network</span>
+             
             </div>
           </div>
         </div>
