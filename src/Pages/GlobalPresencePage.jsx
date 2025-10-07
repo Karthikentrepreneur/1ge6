@@ -84,11 +84,7 @@ const GlobalPresencePage = () => {
           <div className="global-presence-intro">
             <h1>Our Global Network</h1>
             <p>
-              Explore OECL's expansive international footprint, spanning key
-              logistics hubs across Asia, the Middle East, Europe, Australia,
-              and North America. Select a location to see detailed contact
-              information and discover how our teams can support your supply
-              chain requirements.
+            
             </p>
           </div>
         </div>
