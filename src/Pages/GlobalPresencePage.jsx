@@ -76,7 +76,7 @@ const GlobalPresencePage = () => {
   return (
     <div className="global-presence-page">
       <BreadCumb
-        bgimg="/assets/img/breadcrumb/breadcrumb.jpg"
+        bgimg="/gp.png"
         Title="Global Presence"
       />
       <section className="global-presence-hero">
