@@ -1,15 +1,18 @@
 import { useEffect, useState } from "react";
 import { RefreshCw, Maximize2, Minimize2 } from "lucide-react";
 
-const MAP_BASE_URL =
-  "https://www.google.com/maps/d/u/0/embed?mid=1rF5337I7j7xk98at6ZPdMul4aglzrLg&hl=en&ehbc=2E312F";
+const buildSimpleEmbedUrl = ({ lat, lng, zoom }) =>
+  `https://www.google.com/maps?q=${lat},${lng}&z=${zoom}&output=embed`;
+
+// Optional: if you use the Embed API (clean, no header), swap mapUrl builder:
+// const buildEmbedApiUrl = ({ lat, lng, zoom, key }) =>
+//   `https://www.google.com/maps/embed/v1/view?key=${key}&center=${lat},${lng}&zoom=${zoom}`;
 
 const ContactMapContainer = ({
   coordinates,
   selectedCity,
-  cropHeight = 80,     // height of black bar to hide (adjust if needed)
-  maskColor = "#fff",  // color of the white overlay
   hideChrome = false,
+  cropTop = 64, // 👈 pixels to crop off the top (hides My Maps black header)
 }) => {
   const [isLoaded, setIsLoaded] = useState(false);
   const [isFullScreen, setIsFullScreen] = useState(false);
@@ -19,22 +22,32 @@ const ContactMapContainer = ({
 
   useEffect(() => {
     setIsLoaded(false);
-    setMapVersion(v => v + 1);
+    setMapVersion((v) => v + 1);
   }, [lat, lng, zoom]);
 
+  const mapUrl = buildSimpleEmbedUrl({ lat, lng, zoom });
+
   return (
-    <div className={`global-map-card${isFullScreen ? " fullscreen" : ""}`}>
+    <div
+      className={`global-map-card${isFullScreen ? " fullscreen" : ""}`}
+      style={{ "--crop-top": `${cropTop}px` }}
+    >
       {!hideChrome && (
         <div className="global-map-header">
           <div>
             <h3>Interactive Global Presence Map</h3>
-            {selectedCity && <p>Viewing: <span>{selectedCity.name}</span></p>}
+            {selectedCity && (
+              <p>
+                Viewing: <span>{selectedCity.name}</span>
+              </p>
+            )}
           </div>
           <div className="global-map-actions">
-            <button onClick={() => setMapVersion(v => v + 1)}>
-              <RefreshCw size={16} /><span>Refresh</span>
+            <button onClick={() => setMapVersion((v) => v + 1)}>
+              <RefreshCw size={16} />
+              <span>Refresh</span>
             </button>
-            <button onClick={() => setIsFullScreen(f => !f)}>
+            <button onClick={() => setIsFullScreen((f) => !f)}>
               {isFullScreen ? <Minimize2 size={16} /> : <Maximize2 size={16} />}
               <span>{isFullScreen ? "Compact" : "Expand"}</span>
             </button>
@@ -45,28 +58,24 @@ const ContactMapContainer = ({
       <div className="global-map-frame">
         {!isLoaded && (
           <div className="global-map-loading">
-            <div className="spinner" /><p>Loading map...</p>
+            <div className="spinner" />
+            <p>Loading map...</p>
           </div>
         )}
 
-        <div className="iframe-wrapper">
+        {/* The cropping trick: shift iframe up by --crop-top and extend height */}
+        <div className="iframe-cropper">
           <iframe
             key={mapVersion}
-            src={MAP_BASE_URL}
-            title="Global Map"
+            src={mapUrl}
+            title="Interactive Map"
             allowFullScreen
             loading="lazy"
             onLoad={() => setIsLoaded(true)}
             referrerPolicy="no-referrer-when-downgrade"
           />
-          {/* 🔥 WHITE BOX MASK TO HIDE BLACK HEADER */}
-          <div
-            className="iframe-mask"
-            style={{
-              height: `${cropHeight}px`,
-              background: maskColor,
-            }}
-          />
+          {/* Optional visual mask to hide any remaining sliver; click-through */}
+          <div className="crop-mask" aria-hidden />
         </div>
       </div>
 
@@ -83,34 +92,30 @@ const ContactMapContainer = ({
         .global-map-card.fullscreen { position:fixed; inset:16px; z-index:1000; background:#fff; }
         .global-map-card.fullscreen .global-map-frame { height: calc(100% - 96px); }
 
-        .iframe-wrapper {
+        /* --- CROPPING STYLES --- */
+        .iframe-cropper {
           position: relative;
           width: 100%;
           height: 100%;
-          overflow: hidden;
+          overflow: hidden; /* hide the black header area */
         }
-        .iframe-wrapper iframe {
+        .iframe-cropper iframe {
           position: absolute;
-          inset: 0;
+          top: calc(-1 * var(--crop-top, 0px)); /* shift up */
+          left: 0;
           width: 100%;
-          height: 100%;
+          height: calc(100% + var(--crop-top, 0px)); /* grow to compensate */
           border: 0;
           display: block;
         }
-
-        /* 👇 Overlay that hides the black header */
-        .iframe-mask {
+        .iframe-cropper .crop-mask {
           position: absolute;
-          top: 0;
-          left: 0;
-          right: 0;
-          pointer-events: none; /* keeps map interactive */
-          z-index: 9999;
+          top: 0; left: 0; right: 0; height: var(--crop-top, 0px);
+          background: #fff; /* match card bg to hide seam */
+          pointer-events: none; /* don't block map interactions */
         }
 
-        @media (max-width: 991px) {
-          .global-map-frame { height:420px; }
-        }
+        @media (max-width: 991px) { .global-map-frame { height:420px; } }
       `}</style>
     </div>
   );
