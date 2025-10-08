@@ -1,120 +1,96 @@
-import { useEffect, useState } from "react";
+import React, { useRef, useState } from "react";
 import { RefreshCw, Maximize2, Minimize2 } from "lucide-react";
+import { Button } from "@/components/ui/button";
 
-const buildSimpleEmbedUrl = ({ lat, lng, zoom }) =>
-  `https://www.google.com/maps?q=${lat},${lng}&z=${zoom}&output=embed`;
+const MAP_URL =
+  "https://www.google.com/maps/d/u/0/embed?mid=1rF5337I7j7xk98at6ZPdMul4aglzrLg&hl=en&ehbc=2E312F&output=embed";
 
-const ContactMapContainer = ({ coordinates, selectedCity, hideChrome = false }) => {
+const ContactMapContainer: React.FC = () => {
+  const iframeRef = useRef<HTMLIFrameElement>(null);
   const [isLoaded, setIsLoaded] = useState(false);
   const [isFullScreen, setIsFullScreen] = useState(false);
-  const [mapVersion, setMapVersion] = useState(0);
 
-  const { lat, lng, zoom } = coordinates;
-
-  useEffect(() => {
+  const handleReload = () => {
+    if (!iframeRef.current) return;
+    const currentSrc = iframeRef.current.src;
+    iframeRef.current.src = "";
+    setTimeout(() => {
+      if (iframeRef.current) iframeRef.current.src = currentSrc;
+    }, 100);
     setIsLoaded(false);
-    setMapVersion((v) => v + 1);
-  }, [lat, lng, zoom]);
-
-  const mapUrl = buildSimpleEmbedUrl({ lat, lng, zoom });
+  };
 
   return (
-    <div className={`global-map-card${isFullScreen ? " fullscreen" : ""}`}>
-      {!hideChrome && (
-        <div className="global-map-header">
-          <div>
-            <h3>Interactive Global Presence Map</h3>
-            {selectedCity && (
-              <p>
-                Viewing: <span>{selectedCity.name}</span>
-              </p>
-            )}
-          </div>
-          <div className="global-map-actions">
-            <button onClick={() => setMapVersion((v) => v + 1)}>
-              <RefreshCw size={16} />
-              <span>Refresh</span>
-            </button>
-            <button onClick={() => setIsFullScreen((f) => !f)}>
-              {isFullScreen ? <Minimize2 size={16} /> : <Maximize2 size={16} />}
-              <span>{isFullScreen ? "Compact" : "Expand"}</span>
-            </button>
+    <div className="w-full h-full flex justify-center">
+      <div
+        className={`bg-white rounded-2xl shadow-lg overflow-hidden relative w-full transition-all duration-300 ease-in-out ${
+          isFullScreen ? "max-w-full" : "max-w-6xl"
+        } my-3`}
+      >
+        {/* Header */}
+        <div className="flex justify-between items-center p-3 border-b border-red-100 bg-gradient-to-r from-red-50 to-white">
+          <h3 className="font-medium text-red-700 flex items-center">
+            <span className="hidden sm:inline">Interactive Global Presence Map</span>
+            <span className="sm:hidden">Global Map</span>
+          </h3>
+          <div className="flex items-center gap-2">
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={handleReload}
+              className="text-red-600 border-red-200 hover:bg-red-50"
+            >
+              <RefreshCw className="h-3.5 w-3.5 mr-1" />
+              <span className="hidden sm:inline">Refresh</span>
+            </Button>
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={() => setIsFullScreen((v) => !v)}
+              className="text-red-600 border-red-200 hover:bg-red-50"
+            >
+              {isFullScreen ? (
+                <>
+                  <Minimize2 className="h-3.5 w-3.5 mr-1" />
+                  <span className="hidden sm:inline">Compact</span>
+                </>
+              ) : (
+                <>
+                  <Maximize2 className="h-3.5 w-3.5 mr-1" />
+                  <span className="hidden sm:inline">Expand</span>
+                </>
+              )}
+            </Button>
           </div>
         </div>
-      )}
 
-      <div className="global-map-frame">
-        {!isLoaded && (
-          <div className="global-map-loading">
-            <div className="spinner" />
-            <p>Loading map...</p>
-          </div>
-        )}
+        {/* Map */}
+        <div className={`relative transition-all duration-300 ${isFullScreen ? "aspect-[16/9]" : "aspect-[4/3]"}`}>
+          {/* hard white overlay to hide My Maps black header */}
+          <div className="absolute top-0 left-0 w-full h-[80px] bg-white z-[2147483647] pointer-events-none" />
+          <iframe
+            ref={iframeRef}
+            src={MAP_URL}
+            title="Interactive Map"
+            className="w-full h-full border-0"
+            loading="eager"
+            onLoad={() => setIsLoaded(true)}
+          />
+          {!isLoaded && (
+            <div className="absolute inset-0 flex items-center justify-center bg-white/80 z-10">
+              <div className="flex flex-col items-center">
+                <div className="animate-spin rounded-full h-10 w-10 border-b-2 border-red-500" />
+                <p className="mt-3 text-sm text-gray-600">Loading map...</p>
+              </div>
+            </div>
+          )}
+        </div>
 
-        {/* 👇 Pure Google Maps embed — no black header */}
-        <iframe
-          key={mapVersion}
-          src={mapUrl}
-          title="Interactive Map"
-          allowFullScreen
-          loading="lazy"
-          onLoad={() => setIsLoaded(true)}
-          referrerPolicy="no-referrer-when-downgrade"
-        />
+        {/* Footer */}
+        <div className="py-2 px-4 border-t border-red-100 bg-gradient-to-r from-white to-red-50 text-xs text-gray-500 text-center">
+          <p>© 2025 OECL Global Presence Map | Data updated quarterly</p>
+        </div>
       </div>
-
-      <div className="global-map-footer">
-        <p>© 2025 Global Presence Map — Data updated quarterly</p>
-      </div>
-
-      <style>{`
-        .global-map-card { 
-          border-radius: 16px; 
-          overflow: hidden; 
-          background: #fff; 
-          box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-        }
-        .global-map-header { 
-          display:flex; 
-          align-items:center; 
-          justify-content:space-between; 
-          padding:14px 16px; 
-          color:#c44b0a;
-        }
-        .global-map-header h3 { margin:0; font-size:1rem; font-weight:600; }
-        .global-map-header span { font-weight:600; color:#c44b0a; }
-        .global-map-actions button { 
-          display:inline-flex; 
-          align-items:center; 
-          gap:8px; 
-          margin-left:8px; 
-          border:1px solid #c44b0a; 
-          border-radius:8px; 
-          padding:6px 10px; 
-          background:none; 
-          color:#c44b0a; 
-          cursor:pointer; 
-          font-size:0.85rem;
-        }
-        .global-map-actions button:hover { background:#fff1ea; }
-        .global-map-frame { position:relative; height:520px; }
-        .global-map-frame iframe { width:100%; height:100%; border:0; display:block; }
-        .global-map-loading { 
-          position:absolute; 
-          inset:0; 
-          display:grid; 
-          place-items:center; 
-          background:#fff; 
-        }
-        .global-map-card.fullscreen { 
-          position:fixed; 
-          inset:16px; 
-          z-index:1000; 
-          background:#fff; 
-        }
-        .global-map-card.fullscreen .global-map-frame { height: calc(100% - 96px); }
-        @media (max-width: 991px) { .global-map-frame { height:420px; } }
-      `}</style>
     </div>
   );
 };
