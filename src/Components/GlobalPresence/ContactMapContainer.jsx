@@ -4,16 +4,7 @@ import { RefreshCw, Maximize2, Minimize2 } from "lucide-react";
 const buildSimpleEmbedUrl = ({ lat, lng, zoom }) =>
   `https://www.google.com/maps?q=${lat},${lng}&z=${zoom}&output=embed`;
 
-// Optional: if you use the Embed API (clean, no header), swap mapUrl builder:
-// const buildEmbedApiUrl = ({ lat, lng, zoom, key }) =>
-//   `https://www.google.com/maps/embed/v1/view?key=${key}&center=${lat},${lng}&zoom=${zoom}`;
-
-const ContactMapContainer = ({
-  coordinates,
-  selectedCity,
-  hideChrome = false,
-  cropTop = 64, // 👈 pixels to crop off the top (hides My Maps black header)
-}) => {
+const ContactMapContainer = ({ coordinates, selectedCity, hideChrome = false }) => {
   const [isLoaded, setIsLoaded] = useState(false);
   const [isFullScreen, setIsFullScreen] = useState(false);
   const [mapVersion, setMapVersion] = useState(0);
@@ -28,10 +19,7 @@ const ContactMapContainer = ({
   const mapUrl = buildSimpleEmbedUrl({ lat, lng, zoom });
 
   return (
-    <div
-      className={`global-map-card${isFullScreen ? " fullscreen" : ""}`}
-      style={{ "--crop-top": `${cropTop}px` }}
-    >
+    <div className={`global-map-card${isFullScreen ? " fullscreen" : ""}`}>
       {!hideChrome && (
         <div className="global-map-header">
           <div>
@@ -63,58 +51,68 @@ const ContactMapContainer = ({
           </div>
         )}
 
-        {/* The cropping trick: shift iframe up by --crop-top and extend height */}
-        <div className="iframe-cropper">
-          <iframe
-            key={mapVersion}
-            src={mapUrl}
-            title="Interactive Map"
-            allowFullScreen
-            loading="lazy"
-            onLoad={() => setIsLoaded(true)}
-            referrerPolicy="no-referrer-when-downgrade"
-          />
-          {/* Optional visual mask to hide any remaining sliver; click-through */}
-          <div className="crop-mask" aria-hidden />
-        </div>
+        {/* 👇 Pure Google Maps embed — no black header */}
+        <iframe
+          key={mapVersion}
+          src={mapUrl}
+          title="Interactive Map"
+          allowFullScreen
+          loading="lazy"
+          onLoad={() => setIsLoaded(true)}
+          referrerPolicy="no-referrer-when-downgrade"
+        />
       </div>
 
       <div className="global-map-footer">
-        <p>© 2025 OECL Global Presence Map — Data updated quarterly</p>
+        <p>© 2025 Global Presence Map — Data updated quarterly</p>
       </div>
 
       <style>{`
-        .global-map-card { border-radius: 16px; overflow: hidden; background: #fff; }
-        .global-map-header { display:flex; align-items:center; justify-content:space-between; padding:14px 16px; }
-        .global-map-actions button { display:inline-flex; align-items:center; gap:8px; margin-left:8px; }
+        .global-map-card { 
+          border-radius: 16px; 
+          overflow: hidden; 
+          background: #fff; 
+          box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+        }
+        .global-map-header { 
+          display:flex; 
+          align-items:center; 
+          justify-content:space-between; 
+          padding:14px 16px; 
+          color:#c44b0a;
+        }
+        .global-map-header h3 { margin:0; font-size:1rem; font-weight:600; }
+        .global-map-header span { font-weight:600; color:#c44b0a; }
+        .global-map-actions button { 
+          display:inline-flex; 
+          align-items:center; 
+          gap:8px; 
+          margin-left:8px; 
+          border:1px solid #c44b0a; 
+          border-radius:8px; 
+          padding:6px 10px; 
+          background:none; 
+          color:#c44b0a; 
+          cursor:pointer; 
+          font-size:0.85rem;
+        }
+        .global-map-actions button:hover { background:#fff1ea; }
         .global-map-frame { position:relative; height:520px; }
-        .global-map-loading { position:absolute; inset:0; display:grid; place-items:center; background:#fff; }
-        .global-map-card.fullscreen { position:fixed; inset:16px; z-index:1000; background:#fff; }
+        .global-map-frame iframe { width:100%; height:100%; border:0; display:block; }
+        .global-map-loading { 
+          position:absolute; 
+          inset:0; 
+          display:grid; 
+          place-items:center; 
+          background:#fff; 
+        }
+        .global-map-card.fullscreen { 
+          position:fixed; 
+          inset:16px; 
+          z-index:1000; 
+          background:#fff; 
+        }
         .global-map-card.fullscreen .global-map-frame { height: calc(100% - 96px); }
-
-        /* --- CROPPING STYLES --- */
-        .iframe-cropper {
-          position: relative;
-          width: 100%;
-          height: 100%;
-          overflow: hidden; /* hide the black header area */
-        }
-        .iframe-cropper iframe {
-          position: absolute;
-          top: calc(-1 * var(--crop-top, 0px)); /* shift up */
-          left: 0;
-          width: 100%;
-          height: calc(100% + var(--crop-top, 0px)); /* grow to compensate */
-          border: 0;
-          display: block;
-        }
-        .iframe-cropper .crop-mask {
-          position: absolute;
-          top: 0; left: 0; right: 0; height: var(--crop-top, 0px);
-          background: #fff; /* match card bg to hide seam */
-          pointer-events: none; /* don't block map interactions */
-        }
-
         @media (max-width: 991px) { .global-map-frame { height:420px; } }
       `}</style>
     </div>
