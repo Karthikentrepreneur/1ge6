@@ -8,6 +8,7 @@ const About1 = () => {
     loadBackgroudImages();
   }, []);
 
+  // Logos (Shipsoft filtered out)
   const rawLogos = [
     { img: '/logosss01.png', alt: 'Brand 1' },
     { img: '/logosss02.png', alt: 'Brand 2' },
@@ -15,7 +16,6 @@ const About1 = () => {
     { img: '/logosss04.png', alt: 'Brand 4' },
     { img: '/logosss05.png', alt: 'Brand 5' },
   ];
-
   const logos = rawLogos.filter(
     (l) => !/shipsoft/i.test(l.img) && !/shipsoft/i.test(l.alt)
   );
@@ -33,9 +33,9 @@ const About1 = () => {
     responsive: [
       { breakpoint: 1399, settings: { slidesToShow: 5 } },
       { breakpoint: 1199, settings: { slidesToShow: 4 } },
-      { breakpoint: 991, settings: { slidesToShow: 3 } },
-      { breakpoint: 767, settings: { slidesToShow: 2 } },
-      { breakpoint: 575, settings: { slidesToShow: 1 } },
+      { breakpoint: 991,  settings: { slidesToShow: 3 } },
+      { breakpoint: 767,  settings: { slidesToShow: 2 } },
+      { breakpoint: 575,  settings: { slidesToShow: 1 } },
     ],
   };
 
@@ -48,37 +48,25 @@ const About1 = () => {
       <style>{`
         .about-wrapper { width: 100%; }
 
+        /* Add gap between image & content */
         @media (min-width: 992px) {
           .about-photo-wrap { margin-right: 40px; }
         }
 
-        /* Team Image - Bigger, more visible */
+        /* Team Image */
         .about-photo-wrap { width: 100%; text-align: center; }
         .about-photo {
-          width: 100%;
-          max-width: 1100px;
+          width: min(100%, 940px);
           height: auto;
-          border-radius: 24px;
+          border-radius: 22px;
           object-fit: cover;
-          box-shadow: 0 20px 60px rgba(0,0,0,.25);
-          transform: scale(1.08);
-          transition: transform .4s ease, box-shadow .4s ease;
+          box-shadow: 0 16px 50px rgba(0,0,0,.24);
+          transform: scale(1.03);
+          transition: transform .3s ease, box-shadow .3s ease;
         }
         .about-photo:hover {
-          transform: scale(1.12);
-          box-shadow: 0 28px 80px rgba(0,0,0,.3);
-        }
-
-        /* Layout adjustment for large screens */
-        @media (min-width: 1200px) {
-          .col-lg-7 {
-            flex: 0 0 65%;
-            max-width: 65%;
-          }
-          .col-lg-5 {
-            flex: 0 0 35%;
-            max-width: 35%;
-          }
+          transform: scale(1.07);
+          box-shadow: 0 22px 66px rgba(0,0,0,.26);
         }
 
         /* Section content */
@@ -86,7 +74,7 @@ const About1 = () => {
           margin-bottom: 18px;
         }
 
-        /* Icons and text */
+        /* Full teal circle icons */
         .about-items {
           position: relative;
           display: flex;
@@ -137,7 +125,6 @@ const About1 = () => {
           margin-bottom: 4px;
           color: #0E0F2C;
         }
-
         .about-items .content p {
           margin: 0;
           line-height: 1.5;
@@ -148,21 +135,18 @@ const About1 = () => {
         /* Group Companies */
         .brand-block {
           margin-top: 60px;
-          padding-top: 0;
+          padding-top: 0; /* no border line */
         }
-
         .brand-title {
           text-align: center;
           margin: 0 0 15px 0;
           font-weight: 700;
         }
-
         .brand-slider-wrap {
           max-width: 1100px;
           margin: 0 auto;
           padding: 0 8px;
         }
-
         .brand-slide {
           display:flex;
           align-items:center;
@@ -170,7 +154,6 @@ const About1 = () => {
           height:110px;
           padding-left: 10px;
         }
-
         .brand-logo {
           max-height: 90px;
           width:auto;
@@ -179,12 +162,11 @@ const About1 = () => {
           filter: none;
           transition: transform .2s ease;
         }
-
         .brand-logo:hover { transform: translateY(-2px); }
 
         /* Responsive */
         @media (max-width: 1199px) {
-          .about-photo { max-width: 900px; transform: scale(1.04); }
+          .about-photo { width: min(100%, 860px); transform: scale(1.02); }
         }
         @media (max-width: 991px) {
           .about-section { padding: 40px 0 16px !important; }
