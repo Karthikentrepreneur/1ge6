@@ -188,7 +188,7 @@ const About1 = () => {
             <div className="col-lg-7 d-flex justify-content-center">
               <div className="about-photo-wrap">
                 <img
-                  src="/team.jpeg"
+                  src="/team.jpg"
                   alt="1 Global Enterprises Group"
                   className="about-photo"
                 />
