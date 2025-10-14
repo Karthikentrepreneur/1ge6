@@ -74,29 +74,29 @@ const ContactMapContainer = ({ coordinates, selectedCity, hideChrome = false }) 
           background: #fff; 
           box-shadow: 0 4px 12px rgba(0,0,0,0.05);
         }
-        .global-map-header { 
-          display:flex; 
-          align-items:center; 
-          justify-content:space-between; 
-          padding:14px 16px; 
-          color:#c44b0a;
+        .global-map-header {
+          display:flex;
+          align-items:center;
+          justify-content:space-between;
+          padding:14px 16px;
+          color:var(--theme-2);
         }
-        .global-map-header h3 { margin:0; font-size:1rem; font-weight:600; }
-        .global-map-header span { font-weight:600; color:#c44b0a; }
-        .global-map-actions button { 
-          display:inline-flex; 
-          align-items:center; 
-          gap:8px; 
-          margin-left:8px; 
-          border:1px solid #c44b0a; 
-          border-radius:8px; 
-          padding:6px 10px; 
-          background:none; 
-          color:#c44b0a; 
-          cursor:pointer; 
+        .global-map-header h3 { margin:0; font-size:1rem; font-weight:600; color:var(--theme-2); }
+        .global-map-header span { font-weight:600; color:var(--theme); }
+        .global-map-actions button {
+          display:inline-flex;
+          align-items:center;
+          gap:8px;
+          margin-left:8px;
+          border:1px solid var(--theme);
+          border-radius:8px;
+          padding:6px 10px;
+          background:rgba(28, 168, 203, 0.08);
+          color:var(--theme-2);
+          cursor:pointer;
           font-size:0.85rem;
         }
-        .global-map-actions button:hover { background:#fff1ea; }
+        .global-map-actions button:hover { background:var(--theme); color:#fff; }
         .global-map-frame { position:relative; height:520px; }
         .global-map-frame iframe { width:100%; height:100%; border:0; display:block; }
         .global-map-loading { 
