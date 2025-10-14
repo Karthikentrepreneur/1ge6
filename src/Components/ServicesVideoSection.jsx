@@ -2,9 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { Ship, Workflow, Truck, Droplets, Code2, Sun } from "lucide-react";
 
 const SERVICES = [
-  { title: "Shipping", Icon: Ship },
   { title: "Supply Chain Solutions", Icon: Workflow },
-  { title: "Logistics", Icon: Truck },
   { title: "Lubricant Distribution", Icon: Droplets },
   { title: "Software Development", Icon: Code2 },
   { title: "Renewable Energy", Icon: Sun },
