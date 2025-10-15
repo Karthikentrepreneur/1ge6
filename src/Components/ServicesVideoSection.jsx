@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import { Ship, Workflow, Truck, Droplets, Code2, Sun } from "lucide-react";
+import { Workflow, Droplets, Code2, Sun } from "lucide-react";
 
 const SERVICES = [
   { title: "Supply Chain Solutions", Icon: Workflow },
@@ -18,17 +18,15 @@ const ServicesVideoSection = ({
   const [matchHeight, setMatchHeight] = useState(null);
 
   useEffect(() => {
-    // Match the video card height to the left column height
     const el = leftRef.current;
     if (!el) return;
 
     const ro = new ResizeObserver(() => {
       const h = el.getBoundingClientRect().height;
-      setMatchHeight(Math.max(280, Math.round(h))); // guard against tiny heights
+      setMatchHeight(Math.max(280, Math.round(h)));
     });
     ro.observe(el);
 
-    // also update on window resize (Safari quirks)
     const onResize = () => {
       const h = el.getBoundingClientRect().height;
       setMatchHeight(Math.max(280, Math.round(h)));
@@ -68,8 +66,9 @@ const ServicesVideoSection = ({
           <div
             className="svs-video-card"
             ref={videoCardRef}
-            // Only apply forced height on desktop via CSS var
-            style={{ "--svsCardH": matchHeight ? `${matchHeight}px` : undefined }}
+            style={{
+              "--svsCardH": matchHeight ? `${matchHeight}px` : undefined,
+            }}
           >
             <div className="svs-video-frame">
               <video
@@ -95,12 +94,12 @@ const ServicesVideoSection = ({
           width: min(1200px, 92%);
           margin: 0 auto;
           display: grid;
-          grid-template-columns: 1fr 1fr; /* equal columns so it feels balanced */
+          grid-template-columns: 1fr 1fr;
           gap: 32px;
           align-items: start;
         }
 
-        /* LEFT */
+        /* LEFT SIDE */
         .svs-header { margin-bottom: 14px; }
         .svs-sub { margin: 0 0 6px; font-size: .95rem; color: #5f6b7a; }
         .svs-title { margin: 0; font-size: clamp(1.8rem, 1.2rem + 2vw, 2.6rem); font-weight: 800; color: #0E0F2C; }
@@ -120,7 +119,7 @@ const ServicesVideoSection = ({
         .svs-icon svg { width: 22px; height: 22px; }
         .svs-item-title { font-weight: 700; color: #0E0F2C; }
 
-        /* RIGHT: video card equals left content height on desktop */
+        /* RIGHT SIDE */
         .svs-right { display: flex; justify-content: center; }
         .svs-video-card {
           background: #fff;
@@ -129,36 +128,44 @@ const ServicesVideoSection = ({
           box-shadow: 0 10px 24px rgba(10,40,80,.08);
           padding: 12px;
           width: 100%;
-          height: var(--svsCardH, auto);     /* <-- match left height */
-          display: flex;                      /* let inner frame stretch */
+          height: var(--svsCardH, auto);
+          display: flex;
         }
+
         .svs-video-frame {
           flex: 1;
           min-height: 0;
           overflow: hidden;
           border-radius: 12px;
           background: #000;
+          display: flex;
+          align-items: center;
+          justify-content: center;
         }
+
+        /* ✅ UPDATED for portrait video full view */
         .svs-video-frame video {
           width: 100%;
           height: 100%;
-          object-fit: cover;                  /* neatly fills whatever height we give */
+          object-fit: contain;   /* ensures full video visible */
           object-position: center;
           display: block;
+          background: #000;      /* adds black padding */
         }
 
-        /* Mobile / tablet: stack and go portrait */
+        /* RESPONSIVE */
         @media (max-width: 1024px) {
           .svs-container { grid-template-columns: 1fr; }
           .svs-right { order: -1; margin-bottom: 14px; }
           .svs-video-card {
-            height: auto;                     /* stop forcing equal height when stacked */
+            height: auto;
             max-width: 420px;
             margin: 0 auto;
           }
           .svs-video-frame { aspect-ratio: 9 / 16; } /* portrait on mobile */
-          .svs-video-frame video { height: 100%; }
+          .svs-video-frame video { height: 100%; object-fit: contain; }
         }
+
         @media (max-width: 480px) {
           .svs-video-card { max-width: 340px; }
         }
