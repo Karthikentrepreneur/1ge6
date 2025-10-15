@@ -1,6 +1,27 @@
 import { useMemo } from "react";
 import { MapPin, Phone, Mail, Home, ChevronRight, Globe } from "lucide-react";
 
+const FALLBACK_FLAG =
+  "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='18' viewBox='0 0 24 18'%3E%3Crect width='24' height='18' rx='3' fill='%23E2E8F0'/%3E%3Cpath d='M12 5.25c1.794 0 3.25 1.456 3.25 3.25S13.794 11.75 12 11.75 8.75 10.294 8.75 8.5 10.206 5.25 12 5.25Z' fill='%2328A8CB'/%3E%3C/svg%3E";
+
+const buildCountryFlagAsset = (code = "") => {
+  if (typeof code !== "string" || code.length !== 2) {
+    return { src: FALLBACK_FLAG, srcSet: undefined };
+  }
+
+  const normalized = code.toLowerCase();
+  return {
+    src: `https://flagcdn.com/w24/${normalized}.png`,
+    srcSet: `https://flagcdn.com/w48/${normalized}.png 2x`,
+  };
+};
+
+const handleFlagError = (event) => {
+  event.currentTarget.onerror = null;
+  event.currentTarget.src = FALLBACK_FLAG;
+  event.currentTarget.removeAttribute("srcset");
+};
+
 const formatContacts = (contacts = []) => contacts.filter(Boolean).join(" \u2022 ");
 
 // Compute center & bounds for a country's city list
@@ -102,6 +123,7 @@ const ContactSidebar = ({
         {countries.map((country) => {
           const isExpanded = expandedCountry === country.code;
           const isSelectedCountry = selectedCountryCode === country.code;
+          const flagAsset = buildCountryFlagAsset(country.code);
 
           return (
             <div className="global-country" key={country.code}>
@@ -111,7 +133,18 @@ const ContactSidebar = ({
                 onClick={() => handleCountryClick(country)}
                 aria-expanded={isExpanded}
               >
-                <span className="global-country-name">{country.name}</span>
+                <span className="global-country-identity">
+                  <img
+                    className="global-country-flag"
+                    src={flagAsset.src}
+                    srcSet={flagAsset.srcSet}
+                    loading="lazy"
+                    decoding="async"
+                    alt={`${country.name} flag`}
+                    onError={handleFlagError}
+                  />
+                  <span className="global-country-name">{country.name}</span>
+                </span>
                 <ChevronRight className="global-country-icon" size={18} />
               </button>
 
