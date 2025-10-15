@@ -1,6 +1,20 @@
 import { useMemo } from "react";
 import { MapPin, Phone, Mail, Home, ChevronRight, Globe } from "lucide-react";
 
+const countryCodeToFlagEmoji = (code = "") => {
+  if (typeof code !== "string" || code.length !== 2) {
+    return "🌍";
+  }
+
+  const uppercaseCode = code.toUpperCase();
+  const base = 127397;
+
+  return String.fromCodePoint(
+    uppercaseCode.charCodeAt(0) + base,
+    uppercaseCode.charCodeAt(1) + base
+  );
+};
+
 const formatContacts = (contacts = []) => contacts.filter(Boolean).join(" \u2022 ");
 
 // Compute center & bounds for a country's city list
@@ -111,7 +125,16 @@ const ContactSidebar = ({
                 onClick={() => handleCountryClick(country)}
                 aria-expanded={isExpanded}
               >
-                <span className="global-country-name">{country.name}</span>
+                <span className="global-country-identity">
+                  <span
+                    className="global-country-flag"
+                    role="img"
+                    aria-label={`${country.name} flag`}
+                  >
+                    {countryCodeToFlagEmoji(country.code)}
+                  </span>
+                  <span className="global-country-name">{country.name}</span>
+                </span>
                 <ChevronRight className="global-country-icon" size={18} />
               </button>
 

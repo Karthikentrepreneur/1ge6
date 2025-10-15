@@ -21,22 +21,19 @@ const About1 = () => {
   );
 
   const sliderSettings = {
-    dots: false,
+    dots: true,
     infinite: true,
-    speed: 500,
-    slidesToShow: 5,
+    speed: 600,
+    slidesToShow: 1,
     slidesToScroll: 1,
     arrows: false,
-    swipeToSlide: true,
     autoplay: true,
-    autoplaySpeed: 2200,
-    responsive: [
-      { breakpoint: 1399, settings: { slidesToShow: 5 } },
-      { breakpoint: 1199, settings: { slidesToShow: 4 } },
-      { breakpoint: 991,  settings: { slidesToShow: 3 } },
-      { breakpoint: 767,  settings: { slidesToShow: 2 } },
-      { breakpoint: 575,  settings: { slidesToShow: 1 } },
-    ],
+    autoplaySpeed: 3200,
+    pauseOnHover: true,
+    fade: true,
+    adaptiveHeight: true,
+    appendDots: (dots) => <ul className="brand-dots">{dots}</ul>,
+    customPaging: () => <button type="button" aria-label="Show brand" />,
   };
 
   return (
@@ -134,35 +131,121 @@ const About1 = () => {
 
         /* Group Companies */
         .brand-block {
+          position: relative;
           margin-top: 60px;
-          padding-top: 0; /* no border line */
+          padding: 36px 20px 46px;
+          border-radius: 34px;
+          background: rgba(255, 255, 255, 0.9);
+          box-shadow: 0 24px 60px rgba(8, 23, 49, 0.16);
+          overflow: hidden;
         }
+
+        .brand-block::before,
+        .brand-block::after {
+          content: "";
+          position: absolute;
+          width: 260px;
+          height: 260px;
+          border-radius: 50%;
+          filter: blur(60px);
+          opacity: 0.4;
+          z-index: 0;
+        }
+
+        .brand-block::before {
+          top: -120px;
+          left: -80px;
+          background: rgba(38, 182, 224, 0.6);
+        }
+
+        .brand-block::after {
+          bottom: -120px;
+          right: -100px;
+          background: rgba(16, 65, 115, 0.5);
+        }
+
         .brand-title {
+          position: relative;
+          z-index: 1;
           text-align: center;
-          margin: 0 0 15px 0;
+          margin: 0 0 18px 0;
           font-weight: 700;
+          color: #0b1a33;
         }
         .brand-slider-wrap {
-          max-width: 1100px;
+          position: relative;
+          z-index: 1;
+          max-width: 520px;
           margin: 0 auto;
-          padding: 0 8px;
+          padding: 0 12px;
         }
+
         .brand-slide {
-          display:flex;
-          align-items:center;
-          justify-content:center;
-          height:110px;
-          padding-left: 10px;
+          display: flex !important;
+          align-items: center;
+          justify-content: center;
+          padding: 8px 0;
         }
+
+        .brand-card {
+          width: min(420px, 100%);
+          margin: 0 auto;
+          padding: 34px 20px;
+          border-radius: 26px;
+          background: linear-gradient(135deg, rgba(14, 31, 59, 0.9), rgba(38, 182, 224, 0.84));
+          box-shadow: 0 16px 44px rgba(10, 28, 60, 0.28);
+          border: 1px solid rgba(255, 255, 255, 0.22);
+          backdrop-filter: blur(4px);
+          position: relative;
+        }
+
+        .brand-card::after {
+          content: "";
+          position: absolute;
+          inset: 10px;
+          border-radius: 22px;
+          border: 1px dashed rgba(255, 255, 255, 0.3);
+          pointer-events: none;
+        }
+
         .brand-logo {
-          max-height: 90px;
-          width:auto;
-          object-fit:contain;
-          opacity: 1;
-          filter: none;
-          transition: transform .2s ease;
+          max-width: 240px;
+          width: 100%;
+          height: auto;
+          object-fit: contain;
+          filter: drop-shadow(0 10px 24px rgba(11, 30, 58, 0.45));
+          transition: transform .25s ease;
         }
-        .brand-logo:hover { transform: translateY(-2px); }
+
+        .brand-card:hover .brand-logo {
+          transform: translateY(-4px) scale(1.02);
+        }
+
+        .brand-dots {
+          margin: 24px 0 0;
+          padding: 0;
+          display: flex !important;
+          align-items: center;
+          justify-content: center;
+          gap: 12px;
+          list-style: none;
+        }
+
+        .brand-dots li button {
+          width: 12px;
+          height: 12px;
+          border-radius: 999px;
+          border: none;
+          background: rgba(10, 24, 48, 0.3);
+          padding: 0;
+          cursor: pointer;
+          transition: all .3s ease;
+        }
+
+        .brand-dots li.slick-active button {
+          width: 28px;
+          background: linear-gradient(135deg, #26b6e0, #1173b7);
+        }
 
         /* Responsive */
         @media (max-width: 1199px) {
@@ -171,13 +254,48 @@ const About1 = () => {
         @media (max-width: 991px) {
           .about-section { padding: 40px 0 16px !important; }
           .about-photo { width: 100%; transform: scale(1.0); border-radius: 18px; }
-          .brand-slide { height: 96px; }
-          .brand-logo { max-height: 80px; }
+          .brand-block {
+            margin-top: 48px;
+            padding: 32px 18px 40px;
+            border-radius: 28px;
+          }
+
+          .brand-card {
+            padding: 28px 16px;
+            border-radius: 22px;
+          }
+
+          .brand-card::after {
+            inset: 8px;
+            border-radius: 18px;
+          }
+
+          .brand-logo {
+            max-width: 210px;
+          }
           .brand-block { margin-top: 40px; }
         }
         @media (max-width: 575px) {
-          .brand-slide { height: 86px; }
-          .brand-logo { max-height: 72px; }
+          .brand-block {
+            margin-top: 36px;
+            padding: 26px 14px 34px;
+            border-radius: 24px;
+          }
+
+          .brand-slider-wrap { padding: 0 8px; }
+          .brand-card {
+            padding: 26px 14px;
+            border-radius: 20px;
+          }
+
+          .brand-card::after {
+            inset: 6px;
+            border-radius: 16px;
+          }
+
+          .brand-logo {
+            max-width: 190px;
+          }
         }
       `}</style>
 
@@ -250,7 +368,9 @@ const About1 = () => {
               <Slider {...sliderSettings}>
                 {logos.map((item, i) => (
                   <div key={i} className="brand-slide">
-                    <img src={item.img} alt={item.alt} className="brand-logo" />
+                    <div className="brand-card">
+                      <img src={item.img} alt={item.alt} className="brand-logo" />
+                    </div>
                   </div>
                 ))}
               </Slider>
