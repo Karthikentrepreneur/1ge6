@@ -63,22 +63,20 @@ const ServicesVideoSection = ({
         {/* RIGHT SIDE (Video Section) */}
         <div className="svs-right">
           <div
-            className="svs-video-card"
+            className="svs-video-frame"
             style={{
-              "--svsCardH": matchHeight ? `${matchHeight}px` : undefined,
+              height: matchHeight ? `${matchHeight}px` : "auto",
             }}
           >
-            <div className="svs-video-frame">
-              <video
-                src={videoSrc}
-                autoPlay
-                muted
-                loop
-                playsInline
-                preload="auto"
-                aria-label="Services video"
-              />
-            </div>
+            <video
+              src={videoSrc}
+              autoPlay
+              muted
+              loop
+              playsInline
+              preload="auto"
+              aria-label="Services video"
+            />
           </div>
         </div>
       </div>
@@ -87,7 +85,7 @@ const ServicesVideoSection = ({
       <style>{`
         .svs-split {
           background: #fff;
-          padding: 48px 0;
+          padding: 80px 0; /* ⬆️ more breathing space top & bottom */
         }
 
         .svs-container {
@@ -120,51 +118,45 @@ const ServicesVideoSection = ({
         .svs-item-title { font-weight: 700; color: #0E0F2C; }
 
         /* RIGHT SIDE */
-        .svs-right { display: flex; justify-content: center; }
-        .svs-video-card {
-          background: #fff;
-          border: 1px solid #eef2f6;
-          border-radius: 16px;
-          box-shadow: 0 10px 24px rgba(10,40,80,.08);
-          padding: 12px;
-          width: 100%;
-          height: var(--svsCardH, auto);
+        .svs-right {
           display: flex;
           justify-content: center;
           align-items: center;
         }
 
-        /* Frame: fixed 9:16 aspect ratio and full visibility */
+        /* ✅ Clean, frameless video with vertical space */
         .svs-video-frame {
           aspect-ratio: 9 / 16;
           width: 100%;
           max-width: 360px;
           border-radius: 14px;
-          background: #000;
           overflow: hidden;
+          background: #000;
           display: flex;
           justify-content: center;
           align-items: center;
+          margin-top: 40px;   /* ⬆️ add space above */
+          margin-bottom: 40px;/* ⬇️ add space below */
+          box-shadow: 0 12px 28px rgba(0,0,0,0.15); /* subtle lift */
         }
 
         .svs-video-frame video {
           width: 100%;
           height: 100%;
-          object-fit: contain; /* ✅ FULLY VISIBLE */
+          object-fit: cover;
           object-position: center;
           display: block;
-          background: #000;
         }
 
         /* RESPONSIVE */
         @media (max-width: 1024px) {
           .svs-container { grid-template-columns: 1fr; }
-          .svs-right { order: -1; margin-bottom: 18px; }
-          .svs-video-card { max-width: 420px; margin: 0 auto; height: auto; }
+          .svs-right { order: -1; }
+          .svs-video-frame { max-width: 420px; margin: 40px auto; }
         }
 
         @media (max-width: 480px) {
-          .svs-video-frame { max-width: 320px; }
+          .svs-video-frame { max-width: 320px; margin: 32px auto; }
         }
       `}</style>
     </section>
