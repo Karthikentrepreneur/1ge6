@@ -1,6 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
 import { useLocation } from "react-router";
-import BreadCumb from "../Components/Common/BreadCumb";
 import ContactMapContainer from "../Components/GlobalPresence/ContactMapContainer";
 import ContactSidebar from "../Components/GlobalPresence/ContactSidebar";
 import { COUNTRIES } from "../Components/GlobalPresence/countriesData";
@@ -50,10 +49,24 @@ const GlobalPresencePage = () => {
   }, [isMobile, mobileView]);
 
   const handleToggleCountry = (code) => {
-    setExpandedCountry((prev) => (prev === code ? null : code));
+    if (expandedCountry === code) {
+      setExpandedCountry(null);
+      return;
+    }
+
+    setExpandedCountry(code);
+    setSelectedCountryCode(code);
+
+    const country = countries.find((item) => item.code === code);
+    if (country?.cities?.length) {
+      setSelectedCity(country.cities[0]);
+    } else {
+      setSelectedCity(null);
+    }
   };
 
   const handleSelectCity = (countryCode, city) => {
+    setExpandedCountry(countryCode);
     setSelectedCountryCode(countryCode);
     setSelectedCity(city);
   };
@@ -75,21 +88,6 @@ const GlobalPresencePage = () => {
 
   return (
     <div className="global-presence-page">
-      <BreadCumb
-        bgimg="/gp.png"
-        Title="Global Presence"
-      />
-      <section className="global-presence-hero">
-        <div className="container">
-          <div className="global-presence-intro">
-            <h1>Our Global Network</h1>
-            <p>
-            
-            </p>
-          </div>
-        </div>
-      </section>
-
       {isMobile && (
         <div className="global-mobile-toggle">
           <button
