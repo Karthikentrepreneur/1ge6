@@ -14,7 +14,6 @@ const ServicesVideoSection = ({
   subheading = "Integrated solutions powered by people, technology, and purpose",
 }) => {
   const leftRef = useRef(null);
-  const videoCardRef = useRef(null);
   const [matchHeight, setMatchHeight] = useState(null);
 
   useEffect(() => {
@@ -61,11 +60,10 @@ const ServicesVideoSection = ({
           </div>
         </div>
 
-        {/* RIGHT: Video equal to content height */}
+        {/* RIGHT: Video equal to left height */}
         <div className="svs-right">
           <div
             className="svs-video-card"
-            ref={videoCardRef}
             style={{
               "--svsCardH": matchHeight ? `${matchHeight}px` : undefined,
             }}
@@ -90,6 +88,7 @@ const ServicesVideoSection = ({
           background: #fff;
           padding: 48px 0;
         }
+
         .svs-container {
           width: min(1200px, 92%);
           margin: 0 auto;
@@ -99,7 +98,7 @@ const ServicesVideoSection = ({
           align-items: start;
         }
 
-        /* LEFT SIDE */
+        /* LEFT */
         .svs-header { margin-bottom: 14px; }
         .svs-sub { margin: 0 0 6px; font-size: .95rem; color: #5f6b7a; }
         .svs-title { margin: 0; font-size: clamp(1.8rem, 1.2rem + 2vw, 2.6rem); font-weight: 800; color: #0E0F2C; }
@@ -119,7 +118,7 @@ const ServicesVideoSection = ({
         .svs-icon svg { width: 22px; height: 22px; }
         .svs-item-title { font-weight: 700; color: #0E0F2C; }
 
-        /* RIGHT SIDE */
+        /* RIGHT */
         .svs-right { display: flex; justify-content: center; }
         .svs-video-card {
           background: #fff;
@@ -131,26 +130,21 @@ const ServicesVideoSection = ({
           height: var(--svsCardH, auto);
           display: flex;
         }
-
         .svs-video-frame {
           flex: 1;
           min-height: 0;
           overflow: hidden;
           border-radius: 12px;
           background: #000;
-          display: flex;
-          align-items: center;
-          justify-content: center;
         }
 
-        /* ✅ UPDATED for portrait video full view */
+        /* ✅ Fill video fully (no black bars) */
         .svs-video-frame video {
           width: 100%;
           height: 100%;
-          object-fit: contain;   /* ensures full video visible */
+          object-fit: cover;     /* fills entire container */
           object-position: center;
           display: block;
-          background: #000;      /* adds black padding */
         }
 
         /* RESPONSIVE */
@@ -162,8 +156,7 @@ const ServicesVideoSection = ({
             max-width: 420px;
             margin: 0 auto;
           }
-          .svs-video-frame { aspect-ratio: 9 / 16; } /* portrait on mobile */
-          .svs-video-frame video { height: 100%; object-fit: contain; }
+          .svs-video-frame { aspect-ratio: 9 / 16; }
         }
 
         @media (max-width: 480px) {
