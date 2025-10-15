@@ -4,7 +4,7 @@ import BreadCumb from '../Components/Common/BreadCumb';
 const CorporateSustainabilityPage = () => {
   return (
     <div>
-      <BreadCumb bgimg="/aboutbg.png" Title="Corporate Sustainability" />
+      <BreadCumb bgimg="/1.png" Title="Corporate Sustainability" />
       <section className="py-5">
         <div className="container">
           <div className="row align-items-center mb-5">
