@@ -1,170 +1,67 @@
-import React, { useEffect, useRef, useState } from "react";
-import { Workflow, Droplets, Code2, Sun } from "lucide-react";
+import React from "react";
+import { Package, Droplet, Code, Sun } from "lucide-react";
 
-const SERVICES = [
-  { title: "Supply Chain Solutions", Icon: Workflow },
-  { title: "Lubricant Distribution", Icon: Droplets },
-  { title: "Software Development", Icon: Code2 },
-  { title: "Renewable Energy", Icon: Sun },
+const services = [
+  {
+    icon: <Package className="w-6 h-6 text-sky-500" />,
+    title: "Supply Chain Solutions",
+  },
+  {
+    icon: <Droplet className="w-6 h-6 text-sky-500" />,
+    title: "Lubricant Distribution",
+  },
+  {
+    icon: <Code className="w-6 h-6 text-sky-500" />,
+    title: "Software Development",
+  },
+  {
+    icon: <Sun className="w-6 h-6 text-sky-500" />,
+    title: "Renewable Energy",
+  },
 ];
 
-const ServicesVideoSection = ({
-  videoSrc = "/Video2.mp4",
-  heading = "Our Services",
-  subheading = "Integrated solutions powered by people, technology, and purpose",
-}) => {
-  const leftRef = useRef(null);
-  const [matchHeight, setMatchHeight] = useState(null);
-
-  useEffect(() => {
-    const el = leftRef.current;
-    if (!el) return;
-
-    const ro = new ResizeObserver(() => {
-      const h = el.getBoundingClientRect().height;
-      setMatchHeight(Math.max(280, Math.round(h)));
-    });
-    ro.observe(el);
-
-    const onResize = () => {
-      const h = el.getBoundingClientRect().height;
-      setMatchHeight(Math.max(280, Math.round(h)));
-    };
-    window.addEventListener("resize", onResize);
-
-    return () => {
-      ro.disconnect();
-      window.removeEventListener("resize", onResize);
-    };
-  }, []);
-
+export default function ServicesSection() {
   return (
-    <section className="svs-split">
-      <div className="svs-container">
-        {/* LEFT: Services */}
-        <div className="svs-left" ref={leftRef}>
-          <header className="svs-header">
-            <p className="svs-sub">{subheading}</p>
-            <h2 className="svs-title">{heading}</h2>
-          </header>
+    <section className="px-8 py-20 bg-white">
+      <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-[40%_60%] items-center gap-12">
+        {/* Left Content */}
+        <div>
+          <p className="text-sky-600 font-medium tracking-wide mb-3">
+            Integrated solutions powered by people, technology, and purpose
+          </p>
+          <h2 className="text-4xl font-bold text-gray-900 mb-10">
+            Our Services
+          </h2>
 
-          <div className="svs-list">
-            {SERVICES.map(({ title, Icon }) => (
-              <div className="svs-item" key={title}>
-                <div className="svs-icon">
-                  <Icon strokeWidth={1.75} />
-                </div>
-                <div className="svs-item-title">{title}</div>
+          <div className="space-y-5">
+            {services.map((service, index) => (
+              <div
+                key={index}
+                className="flex items-center space-x-4 p-5 rounded-2xl border border-gray-200 shadow-sm hover:shadow-md transition-all duration-300 cursor-pointer hover:scale-[1.02]"
+              >
+                <div className="p-3 bg-sky-50 rounded-xl">{service.icon}</div>
+                <h3 className="text-lg font-semibold text-gray-800">
+                  {service.title}
+                </h3>
               </div>
             ))}
           </div>
         </div>
 
-        {/* RIGHT: Video equal to left height */}
-        <div className="svs-right">
-          <div
-            className="svs-video-card"
-            style={{
-              "--svsCardH": matchHeight ? `${matchHeight}px` : undefined,
-            }}
-          >
-            <div className="svs-video-frame">
-              <video
-                src={videoSrc}
-                autoPlay
-                muted
-                loop
-                playsInline
-                preload="auto"
-                aria-label="Services video"
-              />
-            </div>
+        {/* Right Video Section (9:16 Frame) */}
+        <div className="relative flex justify-center">
+          <div className="rounded-3xl overflow-hidden shadow-2xl aspect-[9/16] w-[320px] md:w-[360px] lg:w-[400px]">
+            <video
+              src="/videos/port.mp4"
+              autoPlay
+              muted
+              loop
+              playsInline
+              className="w-full h-full object-contain bg-black"
+            ></video>
           </div>
         </div>
       </div>
-
-      <style>{`
-        .svs-split {
-          background: #fff;
-          padding: 48px 0;
-        }
-
-        .svs-container {
-          width: min(1200px, 92%);
-          margin: 0 auto;
-          display: grid;
-          grid-template-columns: 1fr 1fr;
-          gap: 32px;
-          align-items: start;
-        }
-
-        /* LEFT */
-        .svs-header { margin-bottom: 14px; }
-        .svs-sub { margin: 0 0 6px; font-size: .95rem; color: #5f6b7a; }
-        .svs-title { margin: 0; font-size: clamp(1.8rem, 1.2rem + 2vw, 2.6rem); font-weight: 800; color: #0E0F2C; }
-        .svs-list { display: grid; gap: 12px; margin-top: 12px; }
-        .svs-item {
-          display: flex; align-items: center; gap: 12px;
-          padding: 14px 16px;
-          border: 1px solid #e9eef3; border-radius: 14px; background: #fafcff;
-          transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease;
-        }
-        .svs-item:hover { transform: translateY(-1px); box-shadow: 0 6px 18px rgba(10,40,80,.08); border-color: #dbe7f1; }
-        .svs-icon {
-          flex: 0 0 44px; width: 44px; height: 44px; border-radius: 12px;
-          display: grid; place-items: center; background: rgba(38,182,224,.12);
-          border: 1px solid rgba(38,182,224,.35); color: #1c99bf;
-        }
-        .svs-icon svg { width: 22px; height: 22px; }
-        .svs-item-title { font-weight: 700; color: #0E0F2C; }
-
-        /* RIGHT */
-        .svs-right { display: flex; justify-content: center; }
-        .svs-video-card {
-          background: #fff;
-          border: 1px solid #eef2f6;
-          border-radius: 16px;
-          box-shadow: 0 10px 24px rgba(10,40,80,.08);
-          padding: 12px;
-          width: 100%;
-          height: var(--svsCardH, auto);
-          display: flex;
-        }
-        .svs-video-frame {
-          flex: 1;
-          min-height: 0;
-          overflow: hidden;
-          border-radius: 12px;
-          background: #000;
-        }
-
-        /* ✅ Fill video fully (no black bars) */
-        .svs-video-frame video {
-          width: 100%;
-          height: 100%;
-          object-fit: cover;     /* fills entire container */
-          object-position: center;
-          display: block;
-        }
-
-        /* RESPONSIVE */
-        @media (max-width: 1024px) {
-          .svs-container { grid-template-columns: 1fr; }
-          .svs-right { order: -1; margin-bottom: 14px; }
-          .svs-video-card {
-            height: auto;
-            max-width: 420px;
-            margin: 0 auto;
-          }
-          .svs-video-frame { aspect-ratio: 9 / 16; }
-        }
-
-        @media (max-width: 480px) {
-          .svs-video-card { max-width: 340px; }
-        }
-      `}</style>
     </section>
   );
-};
-
-export default ServicesVideoSection;
+}
