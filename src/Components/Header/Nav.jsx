@@ -17,7 +17,7 @@ export default function Nav({ setMobileToggle, linkColor }) {
 
         <li>
           <Link to="/activities" onClick={() => setMobileToggle(false)} style={{ color: linkColor }}>
-          Activities
+          Our Business Verticals
           </Link>
         </li>
 

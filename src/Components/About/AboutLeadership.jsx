@@ -145,8 +145,8 @@ const AboutLeadership = () => {
                     <p>
                       JP, the Managing Director and Founder of 1 Global Enterprises, believes that true leadership begins
                       with empowering others. He attributes the company’s growth and success to the collective effort of
-                      a talented and diverse team that shares a common purpose — creating meaningful progress for people
-                      and the planet.
+                      a talented and diverse team that shares a common purpose — creating meaningful progress for our
+                      people and our customers.
                     </p>
                   </div>
                 </div>
@@ -160,8 +160,8 @@ const AboutLeadership = () => {
                       Under JP’s guidance, 1 Global Enterprises has evolved into a group of businesses spanning renewable energy,
                       sustainable supply chain solutions, software innovation, and responsible product distribution.
                       His vision proves that commercial excellence and social responsibility can coexist — empowering communities,
-                      advancing cleaner technologies, and creating lasting value for generations to come through collaboration,
-                      humility, and long-term thinking.
+                      advancing cleaner technologies, and creating lasting value for generations to come through collaboration and
+                      having a long term vision.
                     </p>
                   </div>
                 </div>

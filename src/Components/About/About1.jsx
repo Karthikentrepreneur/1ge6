@@ -8,17 +8,15 @@ const About1 = () => {
     loadBackgroudImages();
   }, []);
 
-  // Logos (Shipsoft filtered out)
-  const rawLogos = [
-    { img: '/logosss01.png', alt: 'Brand 1' },
-    { img: '/logosss02.png', alt: 'Brand 2' },
-    { img: '/logosss03.png', alt: 'Brand 3' },
-    { img: '/logosss04.png', alt: 'Brand 4' },
-    { img: '/logosss05.png', alt: 'Brand 5' },
+  const logos = [
+    { img: '/brand-logos/ggl.svg', alt: 'Global Gateway Logistics' },
+    { img: '/brand-logos/oecl.svg', alt: 'OECL Supply Chain' },
+    { img: '/brand-logos/global-consol.svg', alt: 'Global Consol' },
+    { img: '/brand-logos/hai-xun.svg', alt: 'Hai Xun Logistics' },
+    { img: '/brand-logos/one-global-logistics.svg', alt: 'ONE Global Logistics' },
+    { img: '/brand-logos/moltech.svg', alt: 'Moltech Energy' },
+    { img: '/brand-logos/citygn.svg', alt: 'CityGn Distribution' },
   ];
-  const logos = rawLogos.filter(
-    (l) => !/shipsoft/i.test(l.img) && !/shipsoft/i.test(l.alt)
-  );
 
   const sliderSettings = {
     dots: false,
