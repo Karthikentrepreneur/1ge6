@@ -1,5 +1,5 @@
 import React from "react";
-import { Truck, Leaf, Package } from "lucide-react"; // ✅ Modern clean icons
+import { Truck, Leaf, Package } from "lucide-react"; // still used for small icons near titles
 
 const VERTICALS = [
   {
@@ -13,8 +13,8 @@ const VERTICALS = [
       { img: "Haixun_logo.svg", alt: "HAI XUN logo" },
       { img: "ogl-logo.png", alt: "ONE GLOBAL LOGISTICS logo" },
     ],
-    image: "/image-gen.png", // ✅ Replace with your real image path
-    icon: <Truck size={28} strokeWidth={2.3} color="#fff" />,
+    image: "/images/supplychain.jpg",
+    icon: <Truck size={20} strokeWidth={2.3} color="#fff" />,
   },
   {
     title: "Renewable Energy",
@@ -25,16 +25,16 @@ const VERTICALS = [
       { img: "/brand-logos/moltechgen.svg", alt: "MoltechGen logo" },
       { img: "superenergy.png", alt: "Superenergy logo" },
     ],
-    image: "/wind.jpg", // ✅ Replace with your real image
-    icon: <Leaf size={28} strokeWidth={2.3} color="#fff" />,
+    image: "/images/renewable.jpg",
+    icon: <Leaf size={20} strokeWidth={2.3} color="#fff" />,
   },
   {
     title: "Product Distribution",
     description:
       "1 Global Enterprises invests in high-performing distribution platforms that bring world-class products to regional markets. Through strategic partnerships and on-ground execution, our group company Citygn manages the distribution of ENOC lubricants and other industrial products across key territories. Our focus is on building efficient, customer-centric networks supported by strong logistics capabilities and reliable after-sales service. By combining local market expertise with the strength of global brands, we ensure consistent quality, reach, and value delivery across every channel.",
     logos: [{ img: "/logosss05.png", alt: "CityGn logo" }],
-    image: "/Productdistribution.jpg", // ✅ Replace with your real image
-    icon: <Package size={28} strokeWidth={2.3} color="#fff" />,
+    image: "/images/distribution.jpg",
+    icon: <Package size={20} strokeWidth={2.3} color="#fff" />,
   },
 ];
 
@@ -75,30 +75,6 @@ const Activities = () => {
           height: 180px;
           background-size: cover;
           background-position: center;
-          position: relative;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-        }
-
-        .vertical-card__image::after {
-          content: "";
-          position: absolute;
-          inset: 0;
-          background: rgba(0, 0, 0, 0.45);
-        }
-
-        .vertical-card__icon {
-          position: relative;
-          z-index: 2;
-          width: 60px;
-          height: 60px;
-          background: rgba(255, 255, 255, 0.2);
-          border-radius: 50%;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          backdrop-filter: blur(6px);
         }
 
         .vertical-card__content {
@@ -186,13 +162,11 @@ const Activities = () => {
               className="vertical-card wow fadeInUp"
               data-wow-delay={`${0.2 + index * 0.1}s`}
             >
-              {/* Top Image with Overlay & Icon */}
+              {/* ✅ Top Image Only (no icon overlay) */}
               <div
                 className="vertical-card__image"
                 style={{ backgroundImage: `url(${vertical.image})` }}
-              >
-                <div className="vertical-card__icon">{vertical.icon}</div>
-              </div>
+              ></div>
 
               {/* Text Content */}
               <div className="vertical-card__content">
