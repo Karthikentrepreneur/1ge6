@@ -10,7 +10,7 @@ const VERTICALS = [
     logos: [
       { img: "/logosss01.png", alt: "GGL logo" },
       { img: "logosss03.png", alt: "OECL logo" },
-      { img: "logosss01.png", alt: "GC logo" },
+      { img: "logosss02.png", alt: "GC logo" },
       { img: "Haixun_logo.svg", alt: "HAI XUN logo" },
       { img: "ogl-logo.png", alt: "ONE GLOBAL LOGISTICS logo" },
     ],
