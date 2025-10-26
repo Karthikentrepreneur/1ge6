@@ -13,7 +13,7 @@ const VERTICALS = [
       { img: "Haixun_logo.svg", alt: "HAI XUN logo" },
       { img: "ogl-logo.png", alt: "ONE GLOBAL LOGISTICS logo" },
     ],
-    image: "/images/supplychain.jpg", // ✅ Replace with your real image path
+    image: "/image-gen.png", // ✅ Replace with your real image path
     icon: <Truck size={28} strokeWidth={2.3} color="#fff" />,
   },
   {
@@ -25,7 +25,7 @@ const VERTICALS = [
       { img: "/brand-logos/moltechgen.svg", alt: "MoltechGen logo" },
       { img: "superenergy.png", alt: "Superenergy logo" },
     ],
-    image: "/images/renewable.jpg", // ✅ Replace with your real image
+    image: "/wind.jpg", // ✅ Replace with your real image
     icon: <Leaf size={28} strokeWidth={2.3} color="#fff" />,
   },
   {
@@ -33,7 +33,7 @@ const VERTICALS = [
     description:
       "1 Global Enterprises invests in high-performing distribution platforms that bring world-class products to regional markets. Through strategic partnerships and on-ground execution, our group company Citygn manages the distribution of ENOC lubricants and other industrial products across key territories. Our focus is on building efficient, customer-centric networks supported by strong logistics capabilities and reliable after-sales service. By combining local market expertise with the strength of global brands, we ensure consistent quality, reach, and value delivery across every channel.",
     logos: [{ img: "/logosss05.png", alt: "CityGn logo" }],
-    image: "/images/distribution.jpg", // ✅ Replace with your real image
+    image: "/Productdistribution", // ✅ Replace with your real image
     icon: <Package size={28} strokeWidth={2.3} color="#fff" />,
   },
 ];
