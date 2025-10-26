@@ -1,35 +1,41 @@
-import React from 'react';
+import React from "react";
+import {
+  Truck,
+  Leaf,
+  Package,
+} from "lucide-react"; // ✅ Import proper icons
 
 const VERTICALS = [
   {
-    title: 'Supply Chain Solutions',
+    title: "Supply Chain Solutions",
     description:
-      '1 Global Enterprises invests in and builds high-performing logistics and technology businesses that power global trade. Our portfolio spans 16 countries, covering every major segment of the supply chain — including freight forwarding, warehousing, distribution, and digital logistics infrastructure. Through strategic ownership and operational expertise, we support our group companies in driving innovation, operational excellence, and sustainable growth. Our focus is on strengthening global connectivity and creating long-term value across the supply chain landscape.',
+      "1 Global Enterprises invests in and builds high-performing logistics and technology businesses that power global trade. Our portfolio spans 16 countries, covering every major segment of the supply chain — including freight forwarding, warehousing, distribution, and digital logistics infrastructure. Through strategic ownership and operational expertise, we support our group companies in driving innovation, operational excellence, and sustainable growth. Our focus is on strengthening global connectivity and creating long-term value across the supply chain landscape.",
     logos: [
-      { img: '/logosss01.png', alt: 'GGL logo' },
-      { img: 'logosss03.png', alt: 'OECL logo' },
-      { img: 'logosss01.png', alt: 'GC logo' },
-      { img: 'Haixun_logo.svg', alt: 'HAI XUN logo' },
-      { img: 'ogl-logo.png', alt: 'ONE GLOBAL LOGISTICS logo' },
+      { img: "/logosss01.png", alt: "GGL logo" },
+      { img: "logosss03.png", alt: "OECL logo" },
+      { img: "logosss01.png", alt: "GC logo" },
+      { img: "Haixun_logo.svg", alt: "HAI XUN logo" },
+      { img: "ogl-logo.png", alt: "ONE GLOBAL LOGISTICS logo" },
     ],
+    icon: <Truck size={32} strokeWidth={2.5} color="#fff" />, // ✅ logistics/truck
   },
   {
-    title: 'Renewable Energy',
+    title: "Renewable Energy",
     description:
-      'As part of its commitment to sustainable growth, 1 Global Enterprises strategically invests in the renewable energy value chain, focusing on feedstock origination, processing, and technology enablement. Our portfolio supports the global shift toward renewable diesel and sustainable aviation fuel (SAF) by securing and optimising the supply of advanced feedstocks. We work across multiple regions to build ethical and traceable sourcing networks, ensuring transparency from collection to conversion. Through investments in IoT-driven monitoring systems, digital traceability, and pre-treatment infrastructure, we strengthen both environmental integrity and operational efficiency. By combining responsible sourcing practices with long-term investment vision, 1 Global Enterprises is helping accelerate the world\'s transition to cleaner energy.',
+      "As part of its commitment to sustainable growth, 1 Global Enterprises strategically invests in the renewable energy value chain, focusing on feedstock origination, processing, and technology enablement. Our portfolio supports the global shift toward renewable diesel and sustainable aviation fuel (SAF) by securing and optimising the supply of advanced feedstocks. We work across multiple regions to build ethical and traceable sourcing networks, ensuring transparency from collection to conversion. Through investments in IoT-driven monitoring systems, digital traceability, and pre-treatment infrastructure, we strengthen both environmental integrity and operational efficiency. By combining responsible sourcing practices with long-term investment vision, 1 Global Enterprises is helping accelerate the world’s transition to cleaner energy.",
     logos: [
-      { img: '/logosss04.png', alt: 'Moltech logo' },
-      { img: '/brand-logos/moltechgen.svg', alt: 'MoltechGen logo' },
-      { img: 'superenergy.png', alt: 'Superenergy logo' },
+      { img: "/logosss04.png", alt: "Moltech logo" },
+      { img: "/brand-logos/moltechgen.svg", alt: "MoltechGen logo" },
+      { img: "superenergy.png", alt: "Superenergy logo" },
     ],
+    icon: <Leaf size={32} strokeWidth={2.5} color="#fff" />, // ✅ clean energy
   },
   {
-    title: 'Product Distribution',
+    title: "Product Distribution",
     description:
-      '1 Global Enterprises invests in high-performing distribution platforms that bring world-class products to regional markets. Through strategic partnerships and on-ground execution, our group company Citygn manages the distribution of ENOC lubricants and other industrial products across key territories. Our focus is on building efficient, customer-centric networks supported by strong logistics capabilities and reliable after-sales service. By combining local market expertise with the strength of global brands, we ensure consistent quality, reach, and value delivery across every channel.',
-    logos: [
-      { img: '/logosss05.png', alt: 'CityGn logo' },
-    ],
+      "1 Global Enterprises invests in high-performing distribution platforms that bring world-class products to regional markets. Through strategic partnerships and on-ground execution, our group company Citygn manages the distribution of ENOC lubricants and other industrial products across key territories. Our focus is on building efficient, customer-centric networks supported by strong logistics capabilities and reliable after-sales service. By combining local market expertise with the strength of global brands, we ensure consistent quality, reach, and value delivery across every channel.",
+    logos: [{ img: "/logosss05.png", alt: "CityGn logo" }],
+    icon: <Package size={32} strokeWidth={2.5} color="#fff" />, // ✅ product packaging/distribution
   },
 ];
 
@@ -74,15 +80,13 @@ const Activities = () => {
         }
 
         .vertical-card__icon {
-          width: 60px;
-          height: 60px;
-          background: #ffffff;
+          width: 70px;
+          height: 70px;
+          background: #ffffff20;
           border-radius: 50%;
           display: flex;
           align-items: center;
           justify-content: center;
-          font-size: 28px;
-          color: #2563eb;
         }
 
         .vertical-card__content {
@@ -185,7 +189,6 @@ const Activities = () => {
 
       <div className="container">
         <div className="section-title text-center">
-          <span className="sub-title wow fadeInUp"></span>
           <h2 className="wow fadeInUp" data-wow-delay=".2s">
             Our Business Verticals
           </h2>
@@ -193,31 +196,35 @@ const Activities = () => {
 
         <div className="verticals-wrapper">
           {VERTICALS.map((vertical, index) => (
-            <article key={vertical.title} className="vertical-card wow fadeInUp" data-wow-delay={`${0.2 + index * 0.1}s`}>
+            <article
+              key={vertical.title}
+              className="vertical-card wow fadeInUp"
+              data-wow-delay={`${0.2 + index * 0.1}s`}
+            >
               <div className="vertical-card__image">
-                <div className="vertical-card__icon">
-                  {index === 0 && '🚢'}
-                  {index === 1 && '⚡'}
-                  {index === 2 && '📦'}
-                </div>
+                <div className="vertical-card__icon">{vertical.icon}</div>
               </div>
-              
+
               <div className="vertical-card__content">
                 <div className="vertical-card__title">
                   <div className="vertical-card__title-icon">
-                    <svg viewBox="0 0 24 24">
-                      <circle cx="12" cy="12" r="10" />
-                      <path d="M12 6v6l4 2" />
-                    </svg>
+                    {vertical.icon}
                   </div>
                   <h3>{vertical.title}</h3>
                 </div>
-                
-                <p className="vertical-card__description">{vertical.description}</p>
+
+                <p className="vertical-card__description">
+                  {vertical.description}
+                </p>
 
                 <div className="vertical-card__logos">
                   {vertical.logos.map((logo) => (
-                    <img key={logo.alt} src={logo.img} alt={logo.alt} loading="lazy" />
+                    <img
+                      key={logo.alt}
+                      src={logo.img}
+                      alt={logo.alt}
+                      loading="lazy"
+                    />
                   ))}
                 </div>
               </div>
