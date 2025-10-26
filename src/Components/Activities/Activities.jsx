@@ -134,17 +134,6 @@ const Activities = () => {
           flex: 1;
         }
 
-        .vertical-card__solutions {
-          margin-bottom: 24px;
-        }
-
-        .vertical-card__solutions h4 {
-          font-size: 1rem;
-          color: #2563eb;
-          font-weight: 600;
-          margin: 0 0 12px 0;
-        }
-
         .vertical-card__logos {
           display: grid;
           grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
@@ -225,10 +214,6 @@ const Activities = () => {
                 </div>
                 
                 <p className="vertical-card__description">{vertical.description}</p>
-                
-                <div className="vertical-card__solutions">
-                  <h4>Solutions Offered</h4>
-                </div>
 
                 <div className="vertical-card__logos">
                   {vertical.logos.map((logo) => (
