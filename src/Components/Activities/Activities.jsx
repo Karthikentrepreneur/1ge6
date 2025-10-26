@@ -23,10 +23,10 @@ const VERTICALS = [
       "As part of its commitment to sustainable growth, 1 Global Enterprises strategically invests in the renewable energy value chain, focusing on feedstock origination, processing, and technology enablement. Our portfolio supports the global shift toward renewable diesel and sustainable aviation fuel (SAF) by securing and optimising the supply of advanced feedstocks. We work across multiple regions to build ethical and traceable sourcing networks, ensuring transparency from collection to conversion. Through investments in IoT-driven monitoring systems, digital traceability, and pre-treatment infrastructure, we strengthen both environmental integrity and operational efficiency. By combining responsible sourcing practices with long-term investment vision, 1 Global Enterprises is helping accelerate the world’s transition to cleaner energy.",
     logos: [
       { img: "/logosss04.png", alt: "Moltech logo" },
-      { img: "/logo.png", alt: "MoltechGen logo" },
+      { img: "/molgen.png", alt: "MoltechGen logo" },
       { img: "animalfeed.jpg", alt: "Superenergy logo" },
     ],
-    image: "/wind.jpg",
+    image: "/logo.png",
     icon: <Leaf size={28} strokeWidth={2.3} color="#fff" />,
   },
   {
