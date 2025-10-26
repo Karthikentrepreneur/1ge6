@@ -1,5 +1,6 @@
+// src/Components/Activities.jsx
 import React from "react";
-import { Truck, Leaf, Package } from "lucide-react"; // icons kept for titles only
+import { Truck, Leaf, Package } from "lucide-react"; // icons for titles only
 
 const VERTICALS = [
   {
@@ -51,12 +52,12 @@ const Activities = () => {
           display: grid;
           grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
           gap: 30px;
-          margin-top: 40px;
+          margin-top: 10px; /* header removed, tighten spacing */
         }
 
         .vertical-card {
           background: #ffffff;
-          border-radius: 10px;
+          border-radius: 12px;
           overflow: hidden;
           box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
           transition: all 0.3s ease;
@@ -70,10 +71,10 @@ const Activities = () => {
           box-shadow: 0 10px 24px rgba(0, 0, 0, 0.15);
         }
 
-        /* ✅ Top image only (no icon overlay) */
+        /* Bigger top image */
         .vertical-card__image {
           width: 100%;
-          height: 180px;
+          height: 220px; /* was 180px */
           background-size: cover;
           background-position: center;
           position: relative;
@@ -144,18 +145,13 @@ const Activities = () => {
         }
 
         @media (max-width: 768px) {
-          .vertical-card__content {
-            padding: 24px;
-          }
+          .vertical-card__content { padding: 24px; }
+          .vertical-card__image { height: 200px; }
         }
       `}</style>
 
       <div className="container">
-        <div className="section-title text-center">
-          <h2 className="wow fadeInUp" data-wow-delay=".2s">
-            Our Business Verticals
-          </h2>
-        </div>
+        {/* Removed the section header/title here */}
 
         <div className="verticals-wrapper">
           {VERTICALS.map((vertical, index) => (
@@ -164,33 +160,24 @@ const Activities = () => {
               className="vertical-card wow fadeInUp"
               data-wow-delay={`${0.2 + index * 0.1}s`}
             >
-              {/* ✅ Top Image Only */}
+              {/* Top image (no overlay icon) */}
               <div
                 className="vertical-card__image"
                 style={{ backgroundImage: `url(${vertical.image})` }}
-              ></div>
+              />
 
-              {/* Content Section */}
+              {/* Content */}
               <div className="vertical-card__content">
                 <div className="vertical-card__title">
-                  <div className="vertical-card__title-icon">
-                    {vertical.icon}
-                  </div>
+                  <div className="vertical-card__title-icon">{vertical.icon}</div>
                   <h3>{vertical.title}</h3>
                 </div>
 
-                <p className="vertical-card__description">
-                  {vertical.description}
-                </p>
+                <p className="vertical-card__description">{vertical.description}</p>
 
                 <div className="vertical-card__logos">
                   {vertical.logos.map((logo) => (
-                    <img
-                      key={logo.alt}
-                      src={logo.img}
-                      alt={logo.alt}
-                      loading="lazy"
-                    />
+                    <img key={logo.alt} src={logo.img} alt={logo.alt} loading="lazy" />
                   ))}
                 </div>
               </div>
