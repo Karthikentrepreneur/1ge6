@@ -16,13 +16,14 @@ import my from "../../assets/flags/my.svg";
 import qa from "../../assets/flags/qa.svg";
 import sa from "../../assets/flags/sa.svg";
 import sg from "../../assets/flags/sg.svg";
+import pk from "../../assets/flags/pk.svg";
 // If you had "th (1).svg", delete/rename it and keep only "th.svg".
 import th from "../../assets/flags/th.svg";
 import us from "../../assets/flags/us.svg";
 
 /* Local-first flag map; keys must be lowercase ISO-2 country codes */
 const FLAG_SRC_MAP = {
-  ae, au, cn, gb, id, in: _in, lk, mm, my, qa, sa, sg, th, us,
+  ae, au, cn, gb, id, in: _in, lk, mm, my, qa, sa, sg, th, us, pk,
 };
 
 /* Ultra-small inline fallback */
