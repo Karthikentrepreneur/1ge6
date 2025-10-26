@@ -9,13 +9,13 @@ const About1 = () => {
   }, []);
 
   const logos = [
-    { img: '/brand-logos/ggl.svg', alt: 'Global Gateway Logistics' },
-    { img: '/brand-logos/oecl.svg', alt: 'OECL Supply Chain' },
-    { img: '/brand-logos/global-consol.svg', alt: 'Global Consol' },
-    { img: '/brand-logos/hai-xun.svg', alt: 'Hai Xun Logistics' },
-    { img: '/brand-logos/one-global-logistics.svg', alt: 'ONE Global Logistics' },
-    { img: '/brand-logos/moltech.svg', alt: 'Moltech Energy' },
-    { img: '/brand-logos/citygn.svg', alt: 'CityGn Distribution' },
+    { img: '/logosss01.png', alt: 'Global Gateway Logistics' },
+    { img: '/logosss03.png', alt: 'OECL Supply Chain' },
+    { img: '/logosss02.png', alt: 'Global Consol' },
+    { img: '/Haixun_logo.svg', alt: 'Hai Xun Logistics' },
+    { img: '/ogl-logo.png', alt: 'ONE Global Logistics' },
+    { img: '/logosss04.png', alt: 'Moltech Energy' },
+    { img: '/logosss05.png', alt: 'CityGn Distribution' },
   ];
 
   const sliderSettings = {
