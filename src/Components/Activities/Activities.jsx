@@ -1,6 +1,6 @@
 // src/Components/Activities.jsx
 import React from "react";
-import { Truck, Leaf, Package } from "lucide-react"; // icons for titles only
+import { Truck, Leaf, Package } from "lucide-react";
 
 const VERTICALS = [
   {
@@ -52,7 +52,7 @@ const Activities = () => {
           display: grid;
           grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
           gap: 30px;
-          margin-top: 10px; /* header removed, tighten spacing */
+          margin-top: 10px;
         }
 
         .vertical-card {
@@ -71,13 +71,11 @@ const Activities = () => {
           box-shadow: 0 10px 24px rgba(0, 0, 0, 0.15);
         }
 
-        /* Bigger top image */
         .vertical-card__image {
           width: 100%;
-          height: 220px; /* was 180px */
+          height: 220px;
           background-size: cover;
           background-position: center;
-          position: relative;
         }
 
         .vertical-card__content {
@@ -119,40 +117,40 @@ const Activities = () => {
           flex: 1;
         }
 
+        /* Larger logos */
         .vertical-card__logos {
           display: grid;
-          grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
-          gap: 12px;
-          padding: 16px 0 0 0;
+          grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+          gap: 14px;
+          padding: 18px 0 0 0;
           border-top: 1px solid #e2e8f0;
         }
 
         .vertical-card__logos img {
           width: 100%;
-          height: 45px;
+          height: 65px; /* increased from 45px */
           object-fit: contain;
           background: #f8fafc;
-          border-radius: 6px;
+          border-radius: 8px;
           border: 1px solid #e2e8f0;
           transition: all 0.25s ease;
-          padding: 6px;
+          padding: 8px;
         }
 
         .vertical-card__logos img:hover {
           background: #fff;
           border-color: #2563eb;
-          transform: scale(1.05);
+          transform: scale(1.08);
         }
 
         @media (max-width: 768px) {
           .vertical-card__content { padding: 24px; }
           .vertical-card__image { height: 200px; }
+          .vertical-card__logos img { height: 55px; }
         }
       `}</style>
 
       <div className="container">
-        {/* Removed the section header/title here */}
-
         <div className="verticals-wrapper">
           {VERTICALS.map((vertical, index) => (
             <article
@@ -160,21 +158,16 @@ const Activities = () => {
               className="vertical-card wow fadeInUp"
               data-wow-delay={`${0.2 + index * 0.1}s`}
             >
-              {/* Top image (no overlay icon) */}
               <div
                 className="vertical-card__image"
                 style={{ backgroundImage: `url(${vertical.image})` }}
               />
-
-              {/* Content */}
               <div className="vertical-card__content">
                 <div className="vertical-card__title">
                   <div className="vertical-card__title-icon">{vertical.icon}</div>
                   <h3>{vertical.title}</h3>
                 </div>
-
                 <p className="vertical-card__description">{vertical.description}</p>
-
                 <div className="vertical-card__logos">
                   {vertical.logos.map((logo) => (
                     <img key={logo.alt} src={logo.img} alt={logo.alt} loading="lazy" />
