@@ -3,14 +3,14 @@ import { Workflow, Droplets, Code2, Sun } from "lucide-react";
 
 const SERVICES = [
   { title: "Supply Chain Solutions", Icon: Workflow },
-  { title: "Lubricant Distribution", Icon: Droplets },
-  { title: "Software Development", Icon: Code2 },
   { title: "Renewable Energy", Icon: Sun },
+  { title: "Product Distribution", Icon: Droplets },
+  { title: "Technology", Icon: Code2 },
 ];
 
 const ServicesVideoSection = ({
   videoSrc = "/Video2.mp4",
-  heading = "Our Services",
+  heading = "Business Verticals",
   subheading = "Integrated solutions powered by people, technology, and purpose",
 }) => {
   const leftRef = useRef(null);

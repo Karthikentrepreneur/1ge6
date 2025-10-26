@@ -18,7 +18,14 @@ const GlobalPresencePage = () => {
     const filtered = COUNTRIES.filter(
       (country) => !(isIndiaPage && country.code === "pk")
     );
-    return [...filtered].sort((a, b) => a.name.localeCompare(b.name));
+    return [...filtered].sort((a, b) => {
+      const priorityA = a.priority ?? 1;
+      const priorityB = b.priority ?? 1;
+      if (priorityA !== priorityB) {
+        return priorityA - priorityB;
+      }
+      return a.name.localeCompare(b.name);
+    });
   }, [isIndiaPage]);
 
   const [expandedCountry, setExpandedCountry] = useState(

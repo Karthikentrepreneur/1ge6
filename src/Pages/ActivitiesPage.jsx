@@ -7,8 +7,8 @@ const ActivitiesPage = () => {
         <div>
               <BreadCumb
                 bgimg="/activities.png"
-                Title="Activities"
-            ></BreadCumb>    
+                Title="Our Business Verticals"
+            ></BreadCumb>
             <Activities></Activities>         
         </div>
     );
