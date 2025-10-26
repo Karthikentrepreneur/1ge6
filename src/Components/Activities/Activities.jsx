@@ -1,5 +1,5 @@
 import React from "react";
-import { Truck, Leaf, Package } from "lucide-react"; // still used for small icons near titles
+import { Truck, Leaf, Package } from "lucide-react"; // icons kept for titles only
 
 const VERTICALS = [
   {
@@ -13,8 +13,8 @@ const VERTICALS = [
       { img: "Haixun_logo.svg", alt: "HAI XUN logo" },
       { img: "ogl-logo.png", alt: "ONE GLOBAL LOGISTICS logo" },
     ],
-    image: "/images/supplychain.jpg",
-    icon: <Truck size={20} strokeWidth={2.3} color="#fff" />,
+    image: "/image-gen.png",
+    icon: <Truck size={28} strokeWidth={2.3} color="#fff" />,
   },
   {
     title: "Renewable Energy",
@@ -25,16 +25,16 @@ const VERTICALS = [
       { img: "/brand-logos/moltechgen.svg", alt: "MoltechGen logo" },
       { img: "superenergy.png", alt: "Superenergy logo" },
     ],
-    image: "/images/renewable.jpg",
-    icon: <Leaf size={20} strokeWidth={2.3} color="#fff" />,
+    image: "/wind.jpg",
+    icon: <Leaf size={28} strokeWidth={2.3} color="#fff" />,
   },
   {
     title: "Product Distribution",
     description:
       "1 Global Enterprises invests in high-performing distribution platforms that bring world-class products to regional markets. Through strategic partnerships and on-ground execution, our group company Citygn manages the distribution of ENOC lubricants and other industrial products across key territories. Our focus is on building efficient, customer-centric networks supported by strong logistics capabilities and reliable after-sales service. By combining local market expertise with the strength of global brands, we ensure consistent quality, reach, and value delivery across every channel.",
     logos: [{ img: "/logosss05.png", alt: "CityGn logo" }],
-    image: "/images/distribution.jpg",
-    icon: <Package size={20} strokeWidth={2.3} color="#fff" />,
+    image: "/Productdistribution.jpg",
+    icon: <Package size={28} strokeWidth={2.3} color="#fff" />,
   },
 ];
 
@@ -70,11 +70,13 @@ const Activities = () => {
           box-shadow: 0 10px 24px rgba(0, 0, 0, 0.15);
         }
 
+        /* ✅ Top image only (no icon overlay) */
         .vertical-card__image {
           width: 100%;
           height: 180px;
           background-size: cover;
           background-position: center;
+          position: relative;
         }
 
         .vertical-card__content {
@@ -162,13 +164,13 @@ const Activities = () => {
               className="vertical-card wow fadeInUp"
               data-wow-delay={`${0.2 + index * 0.1}s`}
             >
-              {/* ✅ Top Image Only (no icon overlay) */}
+              {/* ✅ Top Image Only */}
               <div
                 className="vertical-card__image"
                 style={{ backgroundImage: `url(${vertical.image})` }}
               ></div>
 
-              {/* Text Content */}
+              {/* Content Section */}
               <div className="vertical-card__content">
                 <div className="vertical-card__title">
                   <div className="vertical-card__title-icon">
