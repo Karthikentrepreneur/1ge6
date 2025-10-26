@@ -12,8 +12,8 @@ const About1 = () => {
     { img: '/logosss01.png', alt: 'Global Gateway Logistics' },
     { img: '/logosss03.png', alt: 'OECL Supply Chain' },
     { img: '/logosss02.png', alt: 'Global Consol' },
-    { img: '/Haixun_logo.svg', alt: 'Hai Xun Logistics' },
-    { img: '/ogl-logo.png', alt: 'ONE Global Logistics' },
+    { img: '/Haixun_logo.png', alt: 'Hai Xun Logistics' },
+    { img: '/one.png', alt: 'ONE Global Logistics' },
     { img: '/logosss04.png', alt: 'Moltech Energy' },
     { img: '/logosss05.png', alt: 'CityGn Distribution' },
   ];
