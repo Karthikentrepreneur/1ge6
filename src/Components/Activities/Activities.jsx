@@ -6,11 +6,11 @@ const VERTICALS = [
     description:
       '1 Global Enterprises invests in and builds high-performing logistics and technology businesses that power global trade. Our portfolio spans 16 countries, covering every major segment of the supply chain — including freight forwarding, warehousing, distribution, and digital logistics infrastructure. Through strategic ownership and operational expertise, we support our group companies in driving innovation, operational excellence, and sustainable growth. Our focus is on strengthening global connectivity and creating long-term value across the supply chain landscape.',
     logos: [
-      { img: '/brand-logos/ggl.svg', alt: 'Global Gateway Logistics logo' },
-      { img: '/brand-logos/oecl.svg', alt: 'OECL Supply Chain logo' },
-      { img: '/brand-logos/global-consol.svg', alt: 'Global Consol logo' },
-      { img: '/brand-logos/hai-xun.svg', alt: 'Hai Xun Logistics logo' },
-      { img: '/brand-logos/one-global-logistics.svg', alt: 'ONE Global Logistics logo' },
+      { img: '/logosss01.png', alt: 'Global Gateway Logistics logo' },
+      { img: 'logosss03.png', alt: 'OECL Supply Chain logo' },
+      { img: 'logosss01.png', alt: 'Global Consol logo' },
+      { img: 'Haixun_logo.svg', alt: 'Hai Xun Logistics logo' },
+      { img: 'ogl-logo.png', alt: 'ONE Global Logistics logo' },
     ],
   },
   {
@@ -18,9 +18,9 @@ const VERTICALS = [
     description:
       'As part of its commitment to sustainable growth, 1 Global Enterprises strategically invests in the renewable energy value chain, focusing on feedstock origination, processing, and technology enablement. Our portfolio supports the global shift toward renewable diesel and sustainable aviation fuel (SAF) by securing and optimising the supply of advanced feedstocks. We work across multiple regions to build ethical and traceable sourcing networks, ensuring transparency from collection to conversion. Through investments in IoT-driven monitoring systems, digital traceability, and pre-treatment infrastructure, we strengthen both environmental integrity and operational efficiency. By combining responsible sourcing practices with long-term investment vision, 1 Global Enterprises is helping accelerate the world’s transition to cleaner energy.',
     logos: [
-      { img: '/brand-logos/moltech.svg', alt: 'Moltech logo' },
+      { img: '/logosss04.png', alt: 'Moltech logo' },
       { img: '/brand-logos/moltechgen.svg', alt: 'MoltechGen logo' },
-      { img: '/brand-logos/superenergy.svg', alt: 'Superenergy logo' },
+      { img: 'superenergy.png', alt: 'Superenergy logo' },
     ],
   },
   {
@@ -28,7 +28,7 @@ const VERTICALS = [
     description:
       '1 Global Enterprises invests in high-performing distribution platforms that bring world-class products to regional markets. Through strategic partnerships and on-ground execution, our group company Citygn manages the distribution of ENOC lubricants and other industrial products across key territories. Our focus is on building efficient, customer-centric networks supported by strong logistics capabilities and reliable after-sales service. By combining local market expertise with the strength of global brands, we ensure consistent quality, reach, and value delivery across every channel.',
     logos: [
-      { img: '/brand-logos/citygn.svg', alt: 'CityGn logo' },
+      { img: '/logosss05.png', alt: 'CityGn logo' },
     ],
   },
 ];
