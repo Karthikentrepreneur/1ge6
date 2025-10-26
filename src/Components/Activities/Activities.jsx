@@ -16,7 +16,7 @@ const VERTICALS = [
   {
     title: 'Renewable Energy',
     description:
-      'As part of its commitment to sustainable growth, 1 Global Enterprises strategically invests in the renewable energy value chain, focusing on feedstock origination, processing, and technology enablement. Our portfolio supports the global shift toward renewable diesel and sustainable aviation fuel (SAF) by securing and optimising the supply of advanced feedstocks. We work across multiple regions to build ethical and traceable sourcing networks, ensuring transparency from collection to conversion. Through investments in IoT-driven monitoring systems, digital traceability, and pre-treatment infrastructure, we strengthen both environmental integrity and operational efficiency. By combining responsible sourcing practices with long-term investment vision, 1 Global Enterprises is helping accelerate the world’s transition to cleaner energy.',
+      'As part of its commitment to sustainable growth, 1 Global Enterprises strategically invests in the renewable energy value chain, focusing on feedstock origination, processing, and technology enablement. Our portfolio supports the global shift toward renewable diesel and sustainable aviation fuel (SAF) by securing and optimising the supply of advanced feedstocks. We work across multiple regions to build ethical and traceable sourcing networks, ensuring transparency from collection to conversion. Through investments in IoT-driven monitoring systems, digital traceability, and pre-treatment infrastructure, we strengthen both environmental integrity and operational efficiency. By combining responsible sourcing practices with long-term investment vision, 1 Global Enterprises is helping accelerate the world's transition to cleaner energy.',
     logos: [
       { img: '/logosss04.png', alt: 'Moltech logo' },
       { img: '/brand-logos/moltechgen.svg', alt: 'MoltechGen logo' },
@@ -39,55 +39,88 @@ const Activities = () => {
       <style>{`
         .verticals-wrapper {
           display: grid;
-          gap: 40px;
+          gap: 48px;
         }
 
         .vertical-card {
-          border-radius: 24px;
-          padding: 32px;
-          background: #ffffff;
-          box-shadow: 0 24px 48px rgba(15, 33, 55, 0.08);
-          border: 1px solid rgba(38, 182, 224, 0.18);
+          border-radius: 16px;
+          padding: 40px;
+          background: linear-gradient(135deg, #f8fafc 0%, #ffffff 100%);
+          box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+          border: 2px solid #e2e8f0;
+          transition: all 0.3s ease;
+        }
+
+        .vertical-card:hover {
+          transform: translateY(-4px);
+          box-shadow: 0 12px 40px rgba(0, 0, 0, 0.12);
+          border-color: #26b6e0;
         }
 
         .vertical-card__title {
           display: flex;
           align-items: center;
           gap: 16px;
-          margin-bottom: 20px;
+          margin-bottom: 24px;
         }
 
         .vertical-card__title h3 {
           margin: 0;
-          font-size: clamp(1.5rem, 1.2rem + 1vw, 1.9rem);
-          color: #0b1a33;
-          font-weight: 700;
+          font-size: clamp(1.5rem, 1.2rem + 1vw, 2rem);
+          color: #1e293b;
+          font-weight: 800;
+          letter-spacing: -0.02em;
         }
 
         .vertical-card__logos {
           display: flex;
           flex-wrap: wrap;
-          gap: 16px;
-          margin-bottom: 20px;
+          gap: 24px;
+          margin-bottom: 28px;
+          align-items: center;
         }
 
         .vertical-card__logos img {
-          width: clamp(140px, 22vw, 200px);
-          height: auto;
-          border-radius: 18px;
-          background: #f4fbfe;
-          padding: 8px 12px;
-          border: 1px solid rgba(15, 33, 55, 0.08);
+          width: 180px;
+          height: 80px;
+          object-fit: contain;
+          border-radius: 12px;
+          background: #ffffff;
+          padding: 16px;
+          border: 1px solid #e2e8f0;
+          transition: all 0.3s ease;
+        }
+
+        .vertical-card__logos img:hover {
+          transform: scale(1.05);
+          border-color: #26b6e0;
+          box-shadow: 0 4px 12px rgba(38, 182, 224, 0.15);
         }
 
         .vertical-card__description {
           margin: 0;
-          color: #2d3b50;
-          font-size: 1rem;
-          line-height: 1.7;
+          color: #475569;
+          font-size: 1.05rem;
+          line-height: 1.8;
         }
 
         @media (max-width: 768px) {
+          .vertical-card {
+            padding: 28px;
+          }
+
+          .vertical-card__logos {
+            gap: 16px;
+            justify-content: center;
+          }
+
+          .vertical-card__logos img {
+            width: 160px;
+            height: 70px;
+          }
+        }
+
+        @media (max-width: 576px) {
           .vertical-card {
             padding: 24px;
           }
@@ -97,13 +130,8 @@ const Activities = () => {
           }
 
           .vertical-card__logos img {
-            width: 48%;
-          }
-        }
-
-        @media (max-width: 576px) {
-          .vertical-card__logos img {
-            width: 100%;
+            width: 140px;
+            height: 60px;
           }
         }
       `}</style>
