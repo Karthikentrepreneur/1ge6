@@ -24,9 +24,9 @@ const VERTICALS = [
     logos: [
       { img: "/logosss04.png", alt: "Moltech logo" },
       { img: "/molgen.png", alt: "MoltechGen logo" },
-      { img: "animalfeed.jpg", alt: "Superenergy logo" },
+      { img: "superenergy.png", alt: "Superenergy logo" },
     ],
-    image: "/logo.png",
+    image: "/animalfeed.jpg",
     icon: <Leaf size={28} strokeWidth={2.3} color="#fff" />,
   },
   {
