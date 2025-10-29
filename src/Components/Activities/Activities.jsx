@@ -40,157 +40,206 @@ const Activities = () => {
   return (
     <section className="activities-section">
       <style>{`
-        .activities-section {
-          background: #edf2f7;
-          padding: 56px 0;
-        }
-        .verticals-wrapper {
-          display: grid;
-          grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
-          gap: 28px;
-          align-items: stretch;
-        }
-        .vertical-card {
-          display: grid;
-          grid-template-rows: auto 1fr;
-          background: #fff;
-          border: 1px solid #e5e7eb;
-          border-radius: 14px;
-          overflow: hidden;
-          box-shadow: 0 2px 8px rgba(2, 8, 23, 0.06);
-          transition: transform 0.25s ease, box-shadow 0.25s ease;
-        }
-        .vertical-card:hover {
-          transform: translateY(-4px);
-          box-shadow: 0 10px 26px rgba(2, 8, 23, 0.12);
+        .activities-section { background:#edf2f7; padding:56px 0; }
+
+        .verticals-wrapper{
+          display:grid;
+          grid-template-columns:repeat(auto-fit, minmax(340px, 1fr));
+          gap:28px;
+          align-items:stretch;
         }
 
-        /* ✅ Logo grids */
-        .logos-top {
-          display: grid;
-          gap: 12px;
-          padding: 16px;
-          background: #f8fafc;
-          border-bottom: 1px solid #e6eaf0;
-          justify-items: center;
-        }
-        /* ✅ Special layout for Supply Chain (3 top, 2 bottom) */
-        .logos-top.supply-chain {
-          grid-template-columns: repeat(3, 1fr);
-          grid-auto-rows: 64px;
-        }
-        .logos-top.supply-chain::after {
-          content: "";
-          grid-column: 1 / span 3;
-          height: 0;
-        }
-        .logos-top.supply-chain .row-break {
-          grid-column: 1 / -1;
+        .vertical-card{
+          display:grid;
+          grid-template-rows:auto 1fr;
+          background:#fff;
+          border:1px solid #e5e7eb;
+          border-radius:14px;
+          overflow:hidden;
+          box-shadow:0 2px 8px rgba(2,8,23,.06);
+          transition:transform .25s ease, box-shadow .25s ease;
         }
 
-        /* Default 2x2 for others */
-        .logos-top.default {
-          grid-template-columns: repeat(2, 1fr);
-          grid-auto-rows: 64px;
+        .vertical-card:hover{
+          transform:translateY(-4px);
+          box-shadow:0 10px 26px rgba(2,8,23,.12);
         }
 
-        .logo-cell {
-          background: #fff;
-          border: 1px solid #e5e7eb;
-          border-radius: 10px;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          padding: 8px;
-          height: 64px;
-          transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
-        }
-        .logo-cell:hover {
-          transform: scale(1.05);
-          border-color: #2563eb;
-          box-shadow: 0 6px 14px rgba(37, 99, 235, 0.12);
-          cursor: pointer;
-        }
-        .logo-cell img {
-          max-width: 80%;
-          max-height: 70%;
-          object-fit: contain;
+        /* 🔹 default logo grid for others */
+        .logos-top{
+          display:grid;
+          grid-template-columns:repeat(auto-fit,minmax(100px,1fr));
+          gap:12px;
+          padding:14px;
+          background:#f8fafc;
+          border-bottom:1px solid #e6eaf0;
+          min-height:108px;
+          justify-items:center;
         }
 
-        .card-body {
-          padding: 22px 26px 26px;
-          display: flex;
-          flex-direction: column;
+        /* ✅ Supply Chain — 2 rows only (3 + 2 layout, centered second row, no 3rd space) */
+        .logos-top-sc{
+          display:flex;
+          flex-direction:column;
+          background:#f8fafc;
+          border-bottom:1px solid #e6eaf0;
+          padding:14px 16px;
+          gap:12px;
         }
-        .title-row {
-          display: flex;
-          align-items: center;
-          gap: 12px;
-          margin-bottom: 10px;
-          min-height: 46px;
+        .logos-top-sc .row{
+          display:flex;
+          justify-content:center;
+          gap:12px;
         }
-        .title-icon {
-          width: 36px;
-          height: 36px;
-          border-radius: 999px;
-          background: #2563eb;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          flex: 0 0 auto;
+        .logos-top-sc .row.first{
+          justify-content:space-between;
         }
-        .title-row h3 {
-          margin: 0;
-          font-size: 1.15rem;
-          color: #111827;
-          font-weight: 700;
-          letter-spacing: 0.2px;
-          white-space: nowrap;
-          overflow: hidden;
-          text-overflow: ellipsis;
+        .logos-top-sc .row.second{
+          justify-content:center;
         }
-        .desc {
-          margin: 0;
-          color: #475569;
-          font-size: 0.98rem;
-          line-height: 1.65;
-          flex-grow: 1;
+
+        .logo-cell{
+          width:100%;
+          height:56px;
+          background:#fff;
+          border:1px solid #e5e7eb;
+          border-radius:10px;
+          display:flex;
+          align-items:center;
+          justify-content:center;
+          padding:8px;
+          transition:transform .2s ease, border-color .2s ease, box-shadow .2s ease;
+          cursor:pointer;
         }
-        @media (max-width: 768px) {
-          .logos-top.supply-chain { grid-template-columns: repeat(3, 1fr); }
-          .logos-top.default { grid-template-columns: repeat(2, 1fr); }
+
+        .logo-cell:hover{
+          transform:scale(1.05);
+          border-color:#2563eb;
+          box-shadow:0 6px 14px rgba(37,99,235,.12);
+        }
+
+        .logo-cell img{
+          width:100%;
+          height:100%;
+          object-fit:contain;
+        }
+
+        .card-body{
+          padding:22px 26px 26px;
+          display:flex;
+          flex-direction:column;
+        }
+
+        .title-row{
+          display:flex;
+          align-items:center;
+          gap:12px;
+          margin-bottom:10px;
+          min-height:46px;
+        }
+
+        .title-icon{
+          width:36px;
+          height:36px;
+          border-radius:999px;
+          background:#2563eb;
+          display:flex;
+          align-items:center;
+          justify-content:center;
+          flex:0 0 auto;
+        }
+
+        .title-row h3{
+          margin:0;
+          font-size:1.15rem;
+          color:#111827;
+          font-weight:700;
+          letter-spacing:0.2px;
+          white-space:nowrap;
+          overflow:hidden;
+          text-overflow:ellipsis;
+        }
+
+        .desc{
+          margin:0;
+          color:#475569;
+          font-size:.98rem;
+          line-height:1.65;
+          flex-grow:1;
+        }
+
+        @media(max-width:768px){
+          .logos-top-sc .row.second{ gap:10px; }
+          .card-body{ padding:20px; }
+          .title-row h3{ font-size:1.05rem; }
+          .desc{ font-size:.95rem; }
         }
       `}</style>
 
       <div className="container">
         <div className="verticals-wrapper">
-          {VERTICALS.map((v) => (
-            <article key={v.title} className="vertical-card">
-              <div
-                className={`logos-top ${
-                  v.title === "Supply Chain Solutions" ? "supply-chain" : "default"
-                }`}
-              >
-                {v.logos.map((L, idx) => (
-                  <div
-                    key={idx}
-                    className="logo-cell"
-                    onClick={() => window.open(L.link, "_blank")}
-                  >
-                    <img src={L.img} alt={L.alt} loading="lazy" />
+          {VERTICALS.map((v) => {
+            const isSupply = v.title === "Supply Chain Solutions";
+            return (
+              <article key={v.title} className="vertical-card">
+                {isSupply ? (
+                  <div className="logos-top-sc">
+                    <div className="row first">
+                      {v.logos.slice(0, 3).map((L, i) => (
+                        <div
+                          key={`${L.alt}-top-${i}`}
+                          className="logo-cell"
+                          onClick={() =>
+                            window.open(L.link, "_blank", "noopener,noreferrer")
+                          }
+                          title={L.alt}
+                        >
+                          <img src={L.img} alt={L.alt} loading="lazy" />
+                        </div>
+                      ))}
+                    </div>
+                    <div className="row second">
+                      {v.logos.slice(3, 5).map((L, i) => (
+                        <div
+                          key={`${L.alt}-bottom-${i}`}
+                          className="logo-cell"
+                          onClick={() =>
+                            window.open(L.link, "_blank", "noopener,noreferrer")
+                          }
+                          title={L.alt}
+                        >
+                          <img src={L.img} alt={L.alt} loading="lazy" />
+                        </div>
+                      ))}
+                    </div>
                   </div>
-                ))}
-              </div>
+                ) : (
+                  <div className="logos-top">
+                    {v.logos.map((L, i) => (
+                      <div
+                        key={`${L.alt}-${i}`}
+                        className="logo-cell"
+                        onClick={() =>
+                          window.open(L.link, "_blank", "noopener,noreferrer")
+                        }
+                        title={L.alt}
+                      >
+                        <img src={L.img} alt={L.alt} loading="lazy" />
+                      </div>
+                    ))}
+                  </div>
+                )}
 
-              <div className="card-body">
-                <div className="title-row">
-                  <div className="title-icon">{v.icon}</div>
-                  <h3>{v.title}</h3>
+                <div className="card-body">
+                  <div className="title-row">
+                    <div className="title-icon">{v.icon}</div>
+                    <h3>{v.title}</h3>
+                  </div>
+                  <p className="desc">{v.description}</p>
                 </div>
-                <p className="desc">{v.description}</p>
-              </div>
-            </article>
-          ))}
+              </article>
+            );
+          })}
         </div>
       </div>
     </section>
