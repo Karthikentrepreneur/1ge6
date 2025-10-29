@@ -1,115 +1,144 @@
-import React from 'react';
-import Header3 from '../Header/Header3';
+// src/Components/HeroBanner1.jsx
+import React from "react";
+import Header3 from "../Header/Header3";
 
-const Heroanner1 = () => {
-  const videoSrc = 'video.mp4‎';
-
-  const heroContent = {
-    subtitle: 'Sustainability Through Innovation',
-    title: '“Where logistics, technology, and energy meet excellence.”',
-  };
-
+const HeroBanner1 = ({
+  videoSrc = "/video.mp4",
+}) => {
   return (
     <section className="hero-section">
       <Header3 variant="header-transparent" />
 
-      {/* Import Montserrat font */}
       <link
-        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&display=swap"
         rel="stylesheet"
       />
 
       <style>{`
-        .hero-section {
-          position: relative;
-          background: transparent;
+        .hero-section{
+          position:relative;
+          background:transparent;
         }
-        .hero-section .cs_site_header_spacing_140 {
-          display: none;
+        .hero-section .cs_site_header_spacing_140{ display:none; }
+
+        .header-transparent{
+          position:absolute; top:0; left:0; width:100%;
+          background:transparent; z-index:5;
         }
-        .header-transparent {
-          position: absolute;
-          top: 0;
-          left: 0;
-          width: 100%;
-          background: transparent;
-          z-index: 3;
+
+        .hero-wrap{
+          position:relative; min-height:100vh;
+          display:flex; align-items:center; justify-content:center;
+          overflow:hidden;
         }
-        .header-transparent .cs_top_header,
-        .header-transparent .cs_main_header {
-          background: transparent;
+
+        .bg-layer{ position:absolute; inset:0; z-index:0; }
+        .bg-layer video{
+          width:100%; height:100%;
+          object-fit:cover; object-position:center;
+          display:block;
         }
-        .hero-1 {
-          position: relative;
-          overflow: hidden;
-          min-height: 100vh;
-          display: flex;
-          align-items: center;
-          justify-content: flex-start;
-          padding-left: 8%;
+
+        .bg-overlay{
+          position:absolute; inset:0; z-index:1;
+          background: linear-gradient(0deg, rgba(0,0,0,0.45), rgba(0,0,0,0.45));
         }
-        .video-bg {
-          position: absolute; inset: 0;
-          width: 100%; height: 100%;
-          z-index: 0;
+
+        .hero-grid{
+          position:relative; z-index:2;
+          width:100%; max-width:1500px;
+          padding: clamp(16px, 3vw, 32px);
+          display:grid;
+          grid-template-columns: 1fr minmax(320px, 560px);
+          align-items:center; gap: clamp(16px, 4vw, 40px);
         }
-        .video-bg video {
-          width: 100%; height: 100%;
-          object-fit: cover; object-position: center;
+
+        .info-card{
+          justify-self:end;
+          background:#3FA9F5;
+          color:#fff;
+          border-radius:20px;
+          box-shadow:0 12px 30px rgba(0,0,0,0.25);
+          padding: clamp(20px, 3vw, 36px);
+          width:min(92vw, 520px);
+          font-family:'Montserrat', sans-serif;
         }
-        .video-overlay {
-          position: absolute; inset: 0;
-          background: linear-gradient(0deg, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0.25) 50%, rgba(0,0,0,0.55) 100%);
-          z-index: 1;
+
+        .school-badge{
+          display:flex; align-items:center; gap:10px;
+          margin-bottom:10px;
         }
-        .hero-content {
-          position: relative; 
-          z-index: 2;
-          color: #fff;
-          text-align: left;
-          max-width: 650px;
+        .school-badge img{
+          height:40px; width:auto; object-fit:contain;
+          background:rgba(255,255,255,0.9);
+          border-radius:8px;
+          padding:6px;
         }
-        .hero-content h1 {
-          font-size: 2.8rem;
-          font-weight: 700;
-          line-height: 1.2;
-          margin-top: 15px;
+
+        .h-title{
+          font-size:clamp(30px, 4vw, 44px);
+          font-weight:800;
+          line-height:1.2;
+          margin:10px 0 12px;
+          letter-spacing:0.2px;
         }
-        .hero-content .sub-title {
-          font-size: 1.3rem;
-          font-weight: 500;
-          opacity: 0.9;
-          font-family: 'Montserrat', sans-serif;
-          letter-spacing: 0.5px;
+
+        .h-support{
+          font-size:clamp(15px,1.4vw,18px);
+          font-weight:500;
+          opacity:.95;
+          margin-bottom:20px;
         }
-        @media (max-width: 768px) {
-          .hero-1 { padding-left: 5%; }
-          .hero-content h1 { font-size: 2rem; }
-          .hero-content .sub-title { font-size: 1.1rem; }
+
+        .cta{
+          display:inline-block;
+          background:#FFD12A;
+          color:#0b1320;
+          font-weight:700;
+          border:none;
+          border-radius:10px;
+          padding:12px 24px;
+          text-decoration:none;
+          box-shadow:0 6px 20px rgba(0,0,0,0.18);
+          transition: all .2s ease;
+        }
+        .cta:hover{
+          transform:translateY(-2px);
+          box-shadow:0 10px 28px rgba(0,0,0,0.25);
+        }
+
+        .hero-left{ min-height:40vh; }
+
+        @media(max-width:992px){
+          .hero-grid{ grid-template-columns:1fr; gap:18px; }
+          .info-card{ justify-self:stretch; width:100%; }
         }
       `}</style>
 
-      <div className="hero-1">
-        {/* Background video */}
-        <div className="video-bg" aria-hidden="true">
-          <video
-            src="/video.mp4"
-            autoPlay
-            muted
-            loop
-            playsInline
-            preload="auto"
-          />
+      <div className="hero-wrap">
+        {/* ✅ Keep your video background exactly as before */}
+        <div className="bg-layer" aria-hidden="true">
+          <video src={videoSrc} autoPlay muted loop playsInline preload="auto" />
         </div>
-        <div className="video-overlay" />
+        <div className="bg-overlay" />
 
-        <div className="hero-content">
-          <div className="sub-title">{heroContent.subtitle}</div>
-          <h1>{heroContent.title}</h1>
+        <div className="hero-grid">
+          <div className="hero-left" />
+          <div className="info-card">
+            <div className="school-badge">
+              <img src="/ai-campus-logo.png" alt="Next Gen AI Enabled Campus" />
+            </div>
+            <h1 className="h-title">Shaping Tomorrow's Leaders Today</h1>
+            <div className="h-support">
+              Experience innovative education that combines tradition with
+              technology for a brighter future.
+            </div>
+            <a href="/admissions" className="cta">Admissions</a>
+          </div>
         </div>
       </div>
     </section>
   );
 };
 
-export default Heroanner1;
+export default HeroBanner1;
