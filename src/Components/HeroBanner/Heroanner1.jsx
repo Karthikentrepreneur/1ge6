@@ -71,7 +71,7 @@ const HeroBanner1 = ({
         .info-card {
           position: absolute;
           bottom: clamp(40px, 6vh, 80px);
-          left: clamp(30px, 4vw, 90px);
+          right: clamp(30px, 4vw, 90px);
           background: linear-gradient(to right, #2563eb, #60a5fa);
           color: #fff;
           border-radius: 12px;
