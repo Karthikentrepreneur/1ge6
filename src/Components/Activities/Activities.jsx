@@ -8,11 +8,11 @@ const VERTICALS = [
     description:
       "1 Global Enterprises invests in and builds high-performing logistics and technology businesses that power global trade. Our portfolio spans 16 countries, covering every major segment of the supply chain — including freight forwarding, warehousing, distribution, and digital logistics infrastructure. Through strategic ownership and operational expertise, we support our group companies in driving innovation, operational excellence, and sustainable growth. Our focus is on strengthening global connectivity and creating long-term value across the supply chain landscape.",
     logos: [
-      { img: "/logosss01.png", alt: "GGL" },
-      { img: "logosss03.png", alt: "OECL" },
-      { img: "logosss02.png", alt: "GC" },
-      { img: "Haixun_logo.svg", alt: "HAI XUN" },
-      { img: "ogl-logo.png", alt: "ONE GLOBAL LOGISTICS" },
+      { img: "/logosss01.png", alt: "GGL", link: "https://ggl.sg/" },
+      { img: "logosss03.png", alt: "OECL", link: "https://www.oecl.sg/" },
+      { img: "logosss02.png", alt: "GC", link: "https://www.globalconsol.com/" },
+      { img: "Haixun_logo.svg", alt: "HAI XUN", link: "https://haixun.co/" },
+      { img: "ogl-logo.png", alt: "ONE GLOBAL LOGISTICS", link: "https://oneglobalqatar.com/" },
     ],
     icon: <Truck size={22} strokeWidth={2.2} color="#fff" />,
   },
@@ -21,9 +21,9 @@ const VERTICALS = [
     description:
       "We drive sustainable growth through strategic investments across the renewable energy value chain — from feedstock origination to processing and technology enablement. Our portfolio supports the global shift toward renewable fuels and SAF by securing and optimising advanced feedstock supply. Operating across multiple regions, we build ethical, traceable sourcing networks and pre-treatment infrastructure, strengthening transparency, efficiency, and environmental integrity while accelerating the transition to cleaner energy.",
     logos: [
-      { img: "/logosss04.png", alt: "Moltech" },
-      { img: "/molgen.png", alt: "MoltechGen" },
-      { img: "superenergy.png", alt: "Super Energy" },
+      { img: "/logosss04.png", alt: "Moltech", link: "https://moltechglobal.com/" },
+      { img: "/molgen.png", alt: "MoltechGen", link: "https://moltechgen.com/" },
+      { img: "superenergy.png", alt: "Super Energy", link: "https://www.superenergy.sg/" },
     ],
     icon: <Leaf size={22} strokeWidth={2.2} color="#fff" />,
   },
@@ -31,7 +31,9 @@ const VERTICALS = [
     title: "Product Distribution",
     description:
       "Through strategic partnerships, our group company Citygn manages the distribution of ENOC lubricants and other industrial products across key territories. Our focus is on building efficient, customer-centric networks supported by strong logistics capabilities and reliable after-sales service. By combining local market expertise with the strength of global brands, we ensure consistent quality, reach, and value delivery across every channel.",
-    logos: [{ img: "/logosss05.png", alt: "CityGn" }],
+    logos: [
+      { img: "/logosss05.png", alt: "CityGn", link: "https://citygn.com/" },
+    ],
     icon: <Package size={22} strokeWidth={2.2} color="#fff" />,
   },
 ];
@@ -87,6 +89,7 @@ const Activities = () => {
           border: 1px solid #e5e7eb;
           border-radius: 10px;
           padding: 8px;
+          cursor: pointer;
           transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
         }
 
@@ -107,7 +110,7 @@ const Activities = () => {
           align-items: center;
           gap: 12px;
           margin-bottom: 10px;
-          min-height: 46px; /* ✅ equal alignment for all titles */
+          min-height: 46px;
         }
 
         .title-icon {
@@ -127,7 +130,7 @@ const Activities = () => {
           color: #111827;
           font-weight: 700;
           letter-spacing: 0.2px;
-          white-space: nowrap;       /* ✅ keeps it on one line */
+          white-space: nowrap;
           overflow: hidden;
           text-overflow: ellipsis;
         }
@@ -159,11 +162,17 @@ const Activities = () => {
 
       <div className="container">
         <div className="verticals-wrapper">
-          {VERTICALS.map((v, i) => (
+          {VERTICALS.map((v) => (
             <article key={v.title} className="vertical-card">
               <div className="logos-top">
                 {v.logos.map((L) => (
-                  <img key={L.alt} src={L.img} alt={L.alt} loading="lazy" />
+                  <img
+                    key={L.alt}
+                    src={L.img}
+                    alt={L.alt}
+                    loading="lazy"
+                    onClick={() => window.open(L.link, "_blank")}
+                  />
                 ))}
               </div>
 
