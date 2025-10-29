@@ -5,7 +5,6 @@ import Header3 from "../Header/Header3";
 const HeroBanner1 = ({
   videoSrc = "/video.mp4",
   heroContent = {
-    // ✅ your existing copy
     subtitle: "Sustainability Through Innovation",
     title: "“Where logistics, technology, and energy meet excellence.”",
   },
@@ -34,33 +33,32 @@ const HeroBanner1 = ({
           overflow:hidden;
         }
 
-        /* Background video (UNCHANGED) */
+        /* Background video */
         .bg-layer{ position:absolute; inset:0; z-index:0; }
         .bg-layer video{
-          width:100%; height:100%; object-fit:cover; object-position:center;
+          width:100%; height:100%;
+          object-fit:cover; object-position:center;
           display:block;
         }
 
-        /* subtle dark layer for readability */
         .bg-overlay{
           position:absolute; inset:0; z-index:1;
-          background: linear-gradient(0deg, rgba(0,0,0,0.38), rgba(0,0,0,0.38));
+          background: linear-gradient(0deg, rgba(0,0,0,0.4), rgba(0,0,0,0.4));
         }
 
-        /* grid keeps card on right side */
+        /* grid layout - card left bottom */
         .hero-grid{
           position:relative; z-index:2;
           width:100%; max-width:1500px;
           padding: clamp(16px, 3vw, 32px);
           display:grid;
-          grid-template-columns: 1fr minmax(320px, 560px);
-          align-items:end; /* ✅ helps place card lower */
-          gap: clamp(16px, 4vw, 40px);
+          grid-template-columns: minmax(320px, 560px) 1fr;
+          align-items:end;
         }
 
-        /* Blue card */
+        /* Blue box */
         .info-card{
-          justify-self:end;
+          justify-self:start;
           background: linear-gradient(180deg, #43A5E6 0%, #2D8DD8 100%);
           color:#fff;
           border-radius:22px;
@@ -69,47 +67,50 @@ const HeroBanner1 = ({
           width:min(92vw, 560px);
           font-family:'Montserrat', sans-serif;
 
-          /* ✅ move box further DOWN */
-          margin-top: clamp(120px, 22vh, 260px);
+          /* ✅ Move box to bottom left */
+          margin-bottom: clamp(60px, 14vh, 120px);
+          margin-left: clamp(40px, 5vw, 90px);
         }
 
-        /* Title & subtitle (original content only) */
+        /* ✅ Subtitle green gradient */
         .h-sub{
-          font-weight:600; letter-spacing:.2px; opacity:.95;
-          font-size: clamp(14px, 1.4vw, 18px);
-          margin: 2px 0 8px;
+          font-weight:700;
+          letter-spacing:.4px;
+          font-size:clamp(16px,1.6vw,20px);
+          background:linear-gradient(90deg,#00C853,#B2FF59);
+          -webkit-background-clip:text;
+          -webkit-text-fill-color:transparent;
+          text-transform:uppercase;
+          margin:0 0 8px;
         }
+
+        /* ✅ Title white smaller */
         .h-title{
-          font-weight:800; line-height:1.15; letter-spacing:.2px;
-          font-size: clamp(28px, 4.2vw, 44px);
-          margin: 6px 0 0 0;
-          text-wrap: balance;
+          font-weight:700;
+          line-height:1.25;
+          color:#fff;
+          font-size:clamp(20px,2.5vw,30px);
+          margin:6px 0 0 0;
         }
 
-        /* left slot just for layout balance */
-        .hero-left{ min-height:35vh; }
-
-        @media (max-width: 992px){
+        @media (max-width:992px){
           .hero-grid{ grid-template-columns:1fr; }
           .info-card{
-            justify-self:stretch; width:100%;
-            margin-top: clamp(60px, 14vh, 140px); /* a bit less drop on mobile */
+            justify-self:start;
+            width:90%;
+            margin-left:5%;
+            margin-bottom: clamp(40px, 10vh, 100px);
           }
         }
       `}</style>
 
       <div className="hero-wrap">
-        {/* ✅ Keep your video background exactly as-is */}
         <div className="bg-layer" aria-hidden="true">
           <video src={videoSrc} autoPlay muted loop playsInline preload="auto" />
         </div>
         <div className="bg-overlay" />
 
         <div className="hero-grid">
-          {/* Left side empty (like sample) */}
-          <div className="hero-left" />
-
-          {/* Right blue info card — logo & button removed */}
           <div className="info-card">
             <div className="h-sub">{heroContent.subtitle}</div>
             <h1 className="h-title">{heroContent.title}</h1>
