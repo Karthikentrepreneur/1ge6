@@ -8,7 +8,7 @@ const VERTICALS = [
     description:
       "1 Global Enterprises invests in and builds high-performing logistics and technology businesses that power global trade. Our portfolio spans 16 countries, covering every major segment of the supply chain — including freight forwarding, warehousing, distribution, and digital logistics infrastructure. Through strategic ownership and operational expertise, we support our group companies in driving innovation, operational excellence, and sustainable growth. Our focus is on strengthening global connectivity and creating long-term value across the supply chain landscape.",
     logos: [
-      { img: "/logosss01.png", alt: "GGL", link: "https://ggl.sg/" },
+      { img: "/logosss01.png", alt: "GGL", link: "https://www.ggl.sg/" },
       { img: "logosss03.png", alt: "OECL", link: "https://www.oecl.sg/" },
       { img: "logosss02.png", alt: "GC", link: "https://www.globalconsol.com/" },
       { img: "Haixun_logo.svg", alt: "HAI XUN", link: "https://haixun.co/" },
@@ -32,7 +32,7 @@ const VERTICALS = [
     description:
       "Through strategic partnerships, our group company Citygn manages the distribution of ENOC lubricants and other industrial products across key territories. Our focus is on building efficient, customer-centric networks supported by strong logistics capabilities and reliable after-sales service. By combining local market expertise with the strength of global brands, we ensure consistent quality, reach, and value delivery across every channel.",
     logos: [
-      { img: "/logosss05.png", alt: "CityGn", link: "https://citygn.com/" },
+      { img: "/logosss05.png", alt: "CityGn", link: "https://citygnenergy.com/" },
     ],
     icon: <Package size={22} strokeWidth={2.2} color="#fff" />,
   },
