@@ -12,7 +12,7 @@ const VERTICALS = [
       { img: "logosss03.png", alt: "OECL", link: "https://www.oecl.sg/" },
       { img: "logosss02.png", alt: "GC", link: "https://www.globalconsol.com/" },
       { img: "Haixun_logo.svg", alt: "HAI XUN", link: "https://haixun.co/" },
-      // { img: "ogl-logo.png", alt: "ONE GLOBAL LOGISTICS", link: "https://oneglobalqatar.com/" }, // 5th will be ignored to keep 2x2
+      { img: "ogl-logo.png", alt: "ONE GLOBAL LOGISTICS", link: "https://oneglobalqatar.com/" },
     ],
     icon: <Truck size={22} strokeWidth={2.2} color="#fff" />,
   },
@@ -24,7 +24,6 @@ const VERTICALS = [
       { img: "/logosss04.png", alt: "Moltech", link: "https://moltechglobal.com/" },
       { img: "/molgen.png", alt: "MoltechGen", link: "https://moltechgen.com/" },
       { img: "superenergy.png", alt: "Super Energy", link: "https://www.superenergy.sg/" },
-      // fourth slot will render blank if not provided
     ],
     icon: <Leaf size={22} strokeWidth={2.2} color="#fff" />,
   },
@@ -32,10 +31,7 @@ const VERTICALS = [
     title: "Product Distribution",
     description:
       "Through strategic partnerships, our group company Citygn manages the distribution of ENOC lubricants and other industrial products across key territories. Our focus is on building efficient, customer-centric networks supported by strong logistics capabilities and reliable after-sales service. By combining local market expertise with the strength of global brands, we ensure consistent quality, reach, and value delivery across every channel.",
-    logos: [
-      { img: "/logosss05.png", alt: "CityGn", link: "https://citygnenergy.com/" },
-      // 3 empty placeholders will show
-    ],
+    logos: [{ img: "/logosss05.png", alt: "CityGn", link: "https://citygnenergy.com/" }],
     icon: <Package size={22} strokeWidth={2.2} color="#fff" />,
   },
 ];
@@ -48,14 +44,12 @@ const Activities = () => {
           background: #edf2f7;
           padding: 56px 0;
         }
-
         .verticals-wrapper {
           display: grid;
           grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
           gap: 28px;
           align-items: stretch;
         }
-
         .vertical-card {
           display: grid;
           grid-template-rows: auto 1fr;
@@ -66,20 +60,41 @@ const Activities = () => {
           box-shadow: 0 2px 8px rgba(2, 8, 23, 0.06);
           transition: transform 0.25s ease, box-shadow 0.25s ease;
         }
-        .vertical-card:hover { transform: translateY(-4px); box-shadow: 0 10px 26px rgba(2, 8, 23, 0.12); }
+        .vertical-card:hover {
+          transform: translateY(-4px);
+          box-shadow: 0 10px 26px rgba(2, 8, 23, 0.12);
+        }
 
-        /* === Fixed 2x2 grid (4 slots) === */
+        /* ✅ Logo grids */
         .logos-top {
           display: grid;
-          grid-template-columns: repeat(2, 1fr); /* always 2 columns */
           gap: 12px;
           padding: 16px;
           background: #f8fafc;
           border-bottom: 1px solid #e6eaf0;
+          justify-items: center;
+        }
+        /* ✅ Special layout for Supply Chain (3 top, 2 bottom) */
+        .logos-top.supply-chain {
+          grid-template-columns: repeat(3, 1fr);
+          grid-auto-rows: 64px;
+        }
+        .logos-top.supply-chain::after {
+          content: "";
+          grid-column: 1 / span 3;
+          height: 0;
+        }
+        .logos-top.supply-chain .row-break {
+          grid-column: 1 / -1;
+        }
+
+        /* Default 2x2 for others */
+        .logos-top.default {
+          grid-template-columns: repeat(2, 1fr);
+          grid-auto-rows: 64px;
         }
 
         .logo-cell {
-          height: 64px;
           background: #fff;
           border: 1px solid #e5e7eb;
           border-radius: 10px;
@@ -87,85 +102,95 @@ const Activities = () => {
           align-items: center;
           justify-content: center;
           padding: 8px;
-          transition: transform .2s ease, border-color .2s ease, box-shadow .2s ease, opacity .2s ease;
+          height: 64px;
+          transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
         }
-        .logo-cell:not(.empty) { cursor: pointer; }
-        .logo-cell:not(.empty):hover {
-          transform: scale(1.04);
+        .logo-cell:hover {
+          transform: scale(1.05);
           border-color: #2563eb;
           box-shadow: 0 6px 14px rgba(37, 99, 235, 0.12);
+          cursor: pointer;
         }
-        .logo-cell.empty { opacity: 0.85; } /* subtle blank tile */
-
         .logo-cell img {
           max-width: 80%;
           max-height: 70%;
           object-fit: contain;
-          display: block;
         }
 
-        .card-body { padding: 22px 26px 26px; display: flex; flex-direction: column; }
-
+        .card-body {
+          padding: 22px 26px 26px;
+          display: flex;
+          flex-direction: column;
+        }
         .title-row {
-          display: flex; align-items: center; gap: 12px;
-          margin-bottom: 10px; min-height: 46px;
+          display: flex;
+          align-items: center;
+          gap: 12px;
+          margin-bottom: 10px;
+          min-height: 46px;
         }
         .title-icon {
-          width: 36px; height: 36px; border-radius: 999px; background: #2563eb;
-          display: flex; align-items: center; justify-content: center; flex: 0 0 auto;
+          width: 36px;
+          height: 36px;
+          border-radius: 999px;
+          background: #2563eb;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          flex: 0 0 auto;
         }
         .title-row h3 {
-          margin: 0; font-size: 1.15rem; color: #111827; font-weight: 700; letter-spacing: 0.2px;
-          white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+          margin: 0;
+          font-size: 1.15rem;
+          color: #111827;
+          font-weight: 700;
+          letter-spacing: 0.2px;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
         }
-
-        .desc { margin: 0; color: #475569; font-size: 0.98rem; line-height: 1.65; flex-grow: 1; }
-
+        .desc {
+          margin: 0;
+          color: #475569;
+          font-size: 0.98rem;
+          line-height: 1.65;
+          flex-grow: 1;
+        }
         @media (max-width: 768px) {
-          .card-body { padding: 20px; }
-          .title-row h3 { font-size: 1.05rem; }
-          .desc { font-size: 0.95rem; }
-          /* still 2 columns on mobile to keep 2x2 */
-          .logos-top { gap: 10px; padding: 14px; }
-          .logo-cell { height: 58px; }
+          .logos-top.supply-chain { grid-template-columns: repeat(3, 1fr); }
+          .logos-top.default { grid-template-columns: repeat(2, 1fr); }
         }
       `}</style>
 
       <div className="container">
         <div className="verticals-wrapper">
-          {VERTICALS.map((v) => {
-            // build fixed 4-slot array
-            const slots = Array.from({ length: 4 }, (_, i) => v.logos[i] || null);
-            return (
-              <article key={v.title} className="vertical-card">
-                <div className="logos-top">
-                  {slots.map((slot, idx) =>
-                    slot ? (
-                      <div
-                        key={slot.alt + idx}
-                        className="logo-cell"
-                        onClick={() => window.open(slot.link, "_blank", "noopener,noreferrer")}
-                        role="button"
-                        title={slot.alt}
-                      >
-                        <img src={slot.img} alt={slot.alt} loading="lazy" />
-                      </div>
-                    ) : (
-                      <div key={`empty-${idx}`} className="logo-cell empty" aria-hidden="true" />
-                    )
-                  )}
-                </div>
-
-                <div className="card-body">
-                  <div className="title-row">
-                    <div className="title-icon">{v.icon}</div>
-                    <h3>{v.title}</h3>
+          {VERTICALS.map((v) => (
+            <article key={v.title} className="vertical-card">
+              <div
+                className={`logos-top ${
+                  v.title === "Supply Chain Solutions" ? "supply-chain" : "default"
+                }`}
+              >
+                {v.logos.map((L, idx) => (
+                  <div
+                    key={idx}
+                    className="logo-cell"
+                    onClick={() => window.open(L.link, "_blank")}
+                  >
+                    <img src={L.img} alt={L.alt} loading="lazy" />
                   </div>
-                  <p className="desc">{v.description}</p>
+                ))}
+              </div>
+
+              <div className="card-body">
+                <div className="title-row">
+                  <div className="title-icon">{v.icon}</div>
+                  <h3>{v.title}</h3>
                 </div>
-              </article>
-            );
-          })}
+                <p className="desc">{v.description}</p>
+              </div>
+            </article>
+          ))}
         </div>
       </div>
     </section>
