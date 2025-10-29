@@ -19,87 +19,100 @@ const HeroBanner1 = ({
       />
 
       <style>{`
-        .hero-section{ position:relative; background:transparent; }
-        .hero-section .cs_site_header_spacing_140{ display:none; }
-
-        .header-transparent{
-          position:absolute; top:0; left:0; width:100%;
-          background:transparent; z-index:5;
+        .hero-section {
+          position: relative;
+          background: transparent;
         }
 
-        .hero-wrap{
-          position:relative; min-height:100vh; width:100%;
-          display:flex; align-items:center; justify-content:center;
-          overflow:hidden;
+        .hero-section .cs_site_header_spacing_140 {
+          display: none;
         }
 
-        /* Background video */
-        .bg-layer{ position:absolute; inset:0; z-index:0; }
-        .bg-layer video{
-          width:100%; height:100%;
-          object-fit:cover; object-position:center;
-          display:block;
+        .header-transparent {
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          background: transparent;
+          z-index: 5;
         }
 
-        .bg-overlay{
-          position:absolute; inset:0; z-index:1;
-          background: linear-gradient(0deg, rgba(0,0,0,0.4), rgba(0,0,0,0.4));
+        .hero-wrap {
+          position: relative;
+          min-height: 100vh;
+          width: 100%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          overflow: hidden;
         }
 
-        /* grid layout - card left bottom */
-        .hero-grid{
-          position:relative; z-index:2;
-          width:100%; max-width:1500px;
-          padding: clamp(16px, 3vw, 32px);
-          display:grid;
-          grid-template-columns: minmax(320px, 560px) 1fr;
-          align-items:end;
+        .bg-layer {
+          position: absolute;
+          inset: 0;
+          z-index: 0;
         }
 
-        /* Blue box */
-        .info-card{
-          justify-self:start;
-          background: linear-gradient(180deg, #43A5E6 0%, #2D8DD8 100%);
-          color:#fff;
-          border-radius:22px;
-          box-shadow:0 18px 40px rgba(0,0,0,0.25);
-          padding: clamp(18px, 3.2vw, 28px) clamp(20px, 3.6vw, 36px);
-          width:min(92vw, 560px);
-          font-family:'Montserrat', sans-serif;
-
-          /* ✅ Move box to bottom left */
-          margin-bottom: clamp(60px, 14vh, 120px);
-          margin-left: clamp(40px, 5vw, 90px);
+        .bg-layer video {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          object-position: center;
         }
 
-        /* ✅ Subtitle green gradient */
-        .h-sub{
-          font-weight:700;
-          letter-spacing:.4px;
-          font-size:clamp(16px,1.6vw,20px);
-          background:linear-gradient(90deg,#00C853,#B2FF59);
-          -webkit-background-clip:text;
-          -webkit-text-fill-color:transparent;
-          text-transform:uppercase;
-          margin:0 0 8px;
+        .bg-overlay {
+          position: absolute;
+          inset: 0;
+          z-index: 1;
+          background: linear-gradient(0deg, rgba(0, 0, 0, 0.45), rgba(0, 0, 0, 0.45));
         }
 
-        /* ✅ Title white smaller */
-        .h-title{
-          font-weight:700;
-          line-height:1.25;
-          color:#fff;
-          font-size:clamp(20px,2.5vw,30px);
-          margin:6px 0 0 0;
+        /* ✅ Bottom-left card with blue gradient background */
+        .info-card {
+          position: absolute;
+          bottom: clamp(40px, 6vh, 80px);
+          left: clamp(30px, 4vw, 90px);
+          background: linear-gradient(to right, #2563eb, #60a5fa);
+          color: #fff;
+          border-radius: 12px;
+          box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+          padding: clamp(18px, 3vw, 32px) clamp(22px, 3.6vw, 40px);
+          width: min(92vw, 520px);
+          font-family: 'Montserrat', sans-serif;
+          z-index: 3;
+          transition: all 0.3s ease;
         }
 
-        @media (max-width:992px){
-          .hero-grid{ grid-template-columns:1fr; }
-          .info-card{
-            justify-self:start;
-            width:90%;
-            margin-left:5%;
-            margin-bottom: clamp(40px, 10vh, 100px);
+        .info-card:hover {
+          background: linear-gradient(to right, #1e40af, #3b82f6);
+          box-shadow: 0 14px 36px rgba(0, 0, 0, 0.35);
+        }
+
+        /* ✅ Clean green subtitle (no gradient) */
+        .h-sub {
+          color: #22C55E; /* solid bright emerald green */
+          font-weight: 700;
+          letter-spacing: 0.4px;
+          font-size: clamp(16px, 1.5vw, 20px);
+          text-transform: uppercase;
+          margin: 0 0 8px;
+        }
+
+        /* ✅ White smaller title */
+        .h-title {
+          font-weight: 700;
+          line-height: 1.25;
+          color: #ffffff;
+          font-size: clamp(20px, 2.3vw, 28px);
+          margin: 6px 0 0 0;
+        }
+
+        @media (max-width: 992px) {
+          .info-card {
+            left: 5%;
+            bottom: 8%;
+            width: 90%;
+            padding: 20px 26px;
           }
         }
       `}</style>
@@ -110,11 +123,10 @@ const HeroBanner1 = ({
         </div>
         <div className="bg-overlay" />
 
-        <div className="hero-grid">
-          <div className="info-card">
-            <div className="h-sub">{heroContent.subtitle}</div>
-            <h1 className="h-title">{heroContent.title}</h1>
-          </div>
+        {/* ✅ Refined card with solid green subtitle */}
+        <div className="info-card">
+          <div className="h-sub">{heroContent.subtitle}</div>
+          <h1 className="h-title">{heroContent.title}</h1>
         </div>
       </div>
     </section>
