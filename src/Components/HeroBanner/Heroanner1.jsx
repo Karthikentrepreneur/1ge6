@@ -19,113 +19,98 @@ const HeroBanner1 = ({
       />
 
       <style>{`
-        .hero-section {
-          position: relative;
-          background: transparent;
+        .hero-section{ position:relative; background:transparent; }
+        .hero-section .cs_site_header_spacing_140{ display:none; }
+
+        .header-transparent{
+          position:absolute; top:0; left:0; width:100%;
+          background:transparent; z-index:5;
         }
 
-        .hero-section .cs_site_header_spacing_140 {
-          display: none;
+        .hero-wrap{
+          position:relative; min-height:100vh; width:100%;
+          display:flex; align-items:center; justify-content:center;
+          overflow:hidden;
         }
 
-        .header-transparent {
-          position: absolute;
-          top: 0;
-          left: 0;
-          width: 100%;
-          background: transparent;
-          z-index: 5;
+        /* Background video (unchanged) */
+        .bg-layer{ position:absolute; inset:0; z-index:0; }
+        .bg-layer video{
+          width:100%; height:100%; object-fit:cover; object-position:center;
+          display:block;
         }
 
-        .hero-wrap {
-          position: relative;
-          min-height: 100vh;
-          width: 100%;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          overflow: hidden;
+        /* Contrast overlay */
+        .bg-overlay{
+          position:absolute; inset:0; z-index:1;
+          background: linear-gradient(0deg, rgba(0,0,0,0.45), rgba(0,0,0,0.45));
         }
 
-        .bg-layer {
-          position: absolute;
-          inset: 0;
-          z-index: 0;
-        }
-
-        .bg-layer video {
-          width: 100%;
-          height: 100%;
-          object-fit: cover;
-          object-position: center;
-        }
-
-        .bg-overlay {
-          position: absolute;
-          inset: 0;
-          z-index: 1;
-          background: linear-gradient(0deg, rgba(0, 0, 0, 0.45), rgba(0, 0, 0, 0.45));
-        }
-
-        /* ✅ Bottom-left card with blue gradient background */
-        .info-card {
-          position: absolute;
+        /* ✅ Info card anchored to BOTTOM–RIGHT, aligned with header corner line */
+        .info-card{
+          position:absolute;
           bottom: clamp(40px, 6vh, 80px);
-          right: clamp(30px, 4vw, 90px);
-          background: linear-gradient(to right, #2563eb, #60a5fa);
-          color: #fff;
-          border-radius: 12px;
-          box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+          right: clamp(30px, 4vw, 90px); /* mirrors header button's corner spacing */
+          background: linear-gradient(to right, #2563eb, #60a5fa); /* from-blue-600 -> to-blue-400 */
+          color:#fff;
+          border-radius: 14px;
+          box-shadow: 0 10px 30px rgba(0,0,0,0.28);
           padding: clamp(18px, 3vw, 32px) clamp(22px, 3.6vw, 40px);
-          width: min(92vw, 520px);
-          font-family: 'Montserrat', sans-serif;
-          z-index: 3;
-          transition: all 0.3s ease;
+          width: min(92vw, 560px);
+          font-family:'Montserrat', sans-serif;
+          z-index:3;
+          transition: background .25s ease, box-shadow .25s ease;
+        }
+        .info-card:hover{
+          background: linear-gradient(to right, #1e40af, #3b82f6); /* hover: from-blue-700 to-blue-500 */
+          box-shadow: 0 14px 36px rgba(0,0,0,0.35);
         }
 
-        .info-card:hover {
-          background: linear-gradient(to right, #1e40af, #3b82f6);
-          box-shadow: 0 14px 36px rgba(0, 0, 0, 0.35);
-        }
-
-        /* ✅ Clean green subtitle (no gradient) */
-        .h-sub {
-          color: #22C55E; /* solid bright emerald green */
-          font-weight: 700;
-          letter-spacing: 0.4px;
-          font-size: clamp(16px, 1.5vw, 20px);
+        /* ✅ Subtitle: solid green via <span>, no gradient */
+        .h-sub{
+          margin: 0 0 10px 0;
+          font-weight: 800;
+          letter-spacing: .3px;
+          font-size: clamp(14px, 1.3vw, 16px);
           text-transform: uppercase;
-          margin: 0 0 8px;
+        }
+        .h-sub span{
+          color: #22C55E; /* emerald green */
         }
 
-        /* ✅ White smaller title */
-        .h-title {
-          font-weight: 700;
-          line-height: 1.25;
-          color: #ffffff;
-          font-size: clamp(20px, 2.3vw, 28px);
-          margin: 6px 0 0 0;
+        /* ✅ Main line: white, smaller, single line */
+        .h-title{
+          margin: 0;
+          color:#ffffff;
+          font-weight: 800;
+          line-height: 1.2;
+          font-size: clamp(18px, 2vw, 24px); /* smaller */
+          white-space: nowrap;           /* keep to one line */
+          overflow: hidden;              /* crop overflow */
+          text-overflow: ellipsis;       /* add … if needed */
         }
 
-        @media (max-width: 992px) {
-          .info-card {
-            left: 5%;
+        @media (max-width: 992px){
+          .info-card{
+            right: 5%;
             bottom: 8%;
             width: 90%;
-            padding: 20px 26px;
+            padding: 18px 24px;
           }
+          .h-title{ font-size: clamp(18px, 4.8vw, 22px); }
         }
       `}</style>
 
       <div className="hero-wrap">
+        {/* ✅ Keep your video exactly as is */}
         <div className="bg-layer" aria-hidden="true">
           <video src={videoSrc} autoPlay muted loop playsInline preload="auto" />
         </div>
         <div className="bg-overlay" />
 
-        {/* ✅ Refined card with solid green subtitle */}
+        {/* ✅ Bottom-right card aligned with header button edge */}
         <div className="info-card">
-          <div className="h-sub">{heroContent.subtitle}</div>
+          <div className="h-sub"><span>{heroContent.subtitle}</span></div>
           <h1 className="h-title">{heroContent.title}</h1>
         </div>
       </div>
