@@ -4,6 +4,11 @@ import Header3 from "../Header/Header3";
 
 const HeroBanner1 = ({
   videoSrc = "/video.mp4",
+  heroContent = {
+    // ✅ your existing copy
+    subtitle: "Sustainability Through Innovation",
+    title: "“Where logistics, technology, and energy meet excellence.”",
+  },
 }) => {
   return (
     <section className="hero-section">
@@ -15,10 +20,7 @@ const HeroBanner1 = ({
       />
 
       <style>{`
-        .hero-section{
-          position:relative;
-          background:transparent;
-        }
+        .hero-section{ position:relative; background:transparent; }
         .hero-section .cs_site_header_spacing_140{ display:none; }
 
         .header-transparent{
@@ -27,113 +29,90 @@ const HeroBanner1 = ({
         }
 
         .hero-wrap{
-          position:relative; min-height:100vh;
+          position:relative; min-height:100vh; width:100%;
           display:flex; align-items:center; justify-content:center;
           overflow:hidden;
         }
 
+        /* Background video (UNCHANGED) */
         .bg-layer{ position:absolute; inset:0; z-index:0; }
         .bg-layer video{
-          width:100%; height:100%;
-          object-fit:cover; object-position:center;
+          width:100%; height:100%; object-fit:cover; object-position:center;
           display:block;
         }
 
+        /* subtle dark layer for readability */
         .bg-overlay{
           position:absolute; inset:0; z-index:1;
-          background: linear-gradient(0deg, rgba(0,0,0,0.45), rgba(0,0,0,0.45));
+          background: linear-gradient(0deg, rgba(0,0,0,0.38), rgba(0,0,0,0.38));
         }
 
+        /* grid keeps card on right side */
         .hero-grid{
           position:relative; z-index:2;
           width:100%; max-width:1500px;
           padding: clamp(16px, 3vw, 32px);
           display:grid;
           grid-template-columns: 1fr minmax(320px, 560px);
-          align-items:center; gap: clamp(16px, 4vw, 40px);
+          align-items:end; /* ✅ helps place card lower */
+          gap: clamp(16px, 4vw, 40px);
         }
 
+        /* Blue card */
         .info-card{
           justify-self:end;
-          background:#3FA9F5;
+          background: linear-gradient(180deg, #43A5E6 0%, #2D8DD8 100%);
           color:#fff;
-          border-radius:20px;
-          box-shadow:0 12px 30px rgba(0,0,0,0.25);
-          padding: clamp(20px, 3vw, 36px);
-          width:min(92vw, 520px);
+          border-radius:22px;
+          box-shadow:0 18px 40px rgba(0,0,0,0.25);
+          padding: clamp(18px, 3.2vw, 28px) clamp(20px, 3.6vw, 36px);
+          width:min(92vw, 560px);
           font-family:'Montserrat', sans-serif;
+
+          /* ✅ move box further DOWN */
+          margin-top: clamp(120px, 22vh, 260px);
         }
 
-        .school-badge{
-          display:flex; align-items:center; gap:10px;
-          margin-bottom:10px;
+        /* Title & subtitle (original content only) */
+        .h-sub{
+          font-weight:600; letter-spacing:.2px; opacity:.95;
+          font-size: clamp(14px, 1.4vw, 18px);
+          margin: 2px 0 8px;
         }
-        .school-badge img{
-          height:40px; width:auto; object-fit:contain;
-          background:rgba(255,255,255,0.9);
-          border-radius:8px;
-          padding:6px;
-        }
-
         .h-title{
-          font-size:clamp(30px, 4vw, 44px);
-          font-weight:800;
-          line-height:1.2;
-          margin:10px 0 12px;
-          letter-spacing:0.2px;
+          font-weight:800; line-height:1.15; letter-spacing:.2px;
+          font-size: clamp(28px, 4.2vw, 44px);
+          margin: 6px 0 0 0;
+          text-wrap: balance;
         }
 
-        .h-support{
-          font-size:clamp(15px,1.4vw,18px);
-          font-weight:500;
-          opacity:.95;
-          margin-bottom:20px;
-        }
+        /* left slot just for layout balance */
+        .hero-left{ min-height:35vh; }
 
-        .cta{
-          display:inline-block;
-          background:#FFD12A;
-          color:#0b1320;
-          font-weight:700;
-          border:none;
-          border-radius:10px;
-          padding:12px 24px;
-          text-decoration:none;
-          box-shadow:0 6px 20px rgba(0,0,0,0.18);
-          transition: all .2s ease;
-        }
-        .cta:hover{
-          transform:translateY(-2px);
-          box-shadow:0 10px 28px rgba(0,0,0,0.25);
-        }
-
-        .hero-left{ min-height:40vh; }
-
-        @media(max-width:992px){
-          .hero-grid{ grid-template-columns:1fr; gap:18px; }
-          .info-card{ justify-self:stretch; width:100%; }
+        @media (max-width: 992px){
+          .hero-grid{ grid-template-columns:1fr; }
+          .info-card{
+            justify-self:stretch; width:100%;
+            margin-top: clamp(60px, 14vh, 140px); /* a bit less drop on mobile */
+          }
         }
       `}</style>
 
       <div className="hero-wrap">
-        {/* ✅ Keep your video background exactly as before */}
+        {/* ✅ Keep your video background exactly as-is */}
         <div className="bg-layer" aria-hidden="true">
           <video src={videoSrc} autoPlay muted loop playsInline preload="auto" />
         </div>
         <div className="bg-overlay" />
 
         <div className="hero-grid">
+          {/* Left side empty (like sample) */}
           <div className="hero-left" />
+
+          {/* Right blue info card — logo & button removed */}
           <div className="info-card">
-            <div className="school-badge">
-              <img src="/ai-campus-logo.png" alt="Next Gen AI Enabled Campus" />
-            </div>
-            <h1 className="h-title">Shaping Tomorrow's Leaders Today</h1>
-            <div className="h-support">
-              Experience innovative education that combines tradition with
-              technology for a brighter future.
-            </div>
-            <a href="/admissions" className="cta">Admissions</a>
+            <div className="h-sub">{heroContent.subtitle}</div>
+            <h1 className="h-title">{heroContent.title}</h1>
           </div>
         </div>
       </div>
