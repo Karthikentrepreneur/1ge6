@@ -9,7 +9,7 @@ const SERVICES = [
 ];
 
 const ServicesVideoSection = ({
-  videoSrc = "/Video2.mp4",
+  videoSrc = "/Video.mp4",
   heading = "Business Verticals",
   subheading = "Integrated solutions powered by people, technology, and purpose",
 }) => {
@@ -101,42 +101,44 @@ const ServicesVideoSection = ({
         .svs-header { margin-bottom: 14px; }
         .svs-sub { margin: 0 0 6px; font-size: .95rem; color: #5f6b7a; }
         .svs-title { margin: 0; font-size: clamp(1.8rem, 1.2rem + 2vw, 2.6rem); font-weight: 800; color: #0E0F2C; }
-        .svs-list { display: grid; gap: 12px; margin-top: 12px; }
+
+        /* tighter list */
+        .svs-list { display: grid; gap: 8px; margin-top: 12px; }
         .svs-item {
-          display: flex; align-items: center; gap: 12px;
-          padding: 14px 16px;
-          border: 1px solid #e9eef3; border-radius: 14px; background: #fafcff;
+          display: flex; align-items: center; gap: 10px;
+          padding: 10px 12px;               /* was 14px 16px */
+          min-height: 52px;                  /* keeps rows consistent but compact */
+          border: 1px solid #e5eaf0;
+          border-radius: 12px;
+          background: #fafdff;
           transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease;
         }
-        .svs-item:hover { transform: translateY(-1px); box-shadow: 0 6px 18px rgba(10,40,80,.08); border-color: #dbe7f1; }
+        .svs-item:hover { transform: translateY(-1px); box-shadow: 0 6px 16px rgba(10,40,80,.08); border-color: #d4e4ef; }
+
         .svs-icon {
-          flex: 0 0 44px; width: 44px; height: 44px; border-radius: 12px;
-          display: grid; place-items: center; background: rgba(38,182,224,.12);
-          border: 1px solid rgba(38,182,224,.35); color: #1c99bf;
+          flex: 0 0 38px; width: 38px; height: 38px;   /* was 44px */
+          border-radius: 10px;
+          display: grid; place-items: center;
+          background: rgba(38,182,224,.12);
+          border: 1px solid rgba(38,182,224,.35);
+          color: #1c99bf;
         }
-        .svs-icon svg { width: 22px; height: 22px; }
-        .svs-item-title { font-weight: 700; color: #0E0F2C; }
+        .svs-icon svg { width: 20px; height: 20px; }   /* was 22px */
+        .svs-item-title { font-weight: 600; color: #0E0F2C; font-size: .95rem; }
 
         /* RIGHT SIDE */
-        .svs-right {
-          display: flex;
-          justify-content: center;
-          align-items: center;
-        }
+        .svs-right { display: flex; justify-content: center; align-items: center; }
 
         /* ✅ Landscape 16:9 video frame */
         .svs-video-frame {
           aspect-ratio: 16 / 9;
           width: 100%;
-          max-width: 640px; /* landscape width */
+          max-width: 640px;
           border-radius: 18px;
           overflow: hidden;
           background: #000;
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          margin-top: 40px;
-          margin-bottom: 40px;
+          display: flex; justify-content: center; align-items: center;
+          margin-top: 40px; margin-bottom: 40px;
           box-shadow: 0 12px 28px rgba(0,0,0,0.15);
         }
 
@@ -154,7 +156,6 @@ const ServicesVideoSection = ({
           .svs-right { order: -1; }
           .svs-video-frame { max-width: 720px; margin: 40px auto; }
         }
-
         @media (max-width: 600px) {
           .svs-video-frame { max-width: 100%; margin: 32px auto; }
         }
