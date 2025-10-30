@@ -1,11 +1,39 @@
-import React, { useEffect, useRef, useState } from "react";
-import { Workflow, Droplets, Code2, Sun } from "lucide-react";
+// No imports used
+
+// Inline SVG icons (lightweight)
+const IconWorkflow = (props) => (
+  <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round" {...props}>
+    <rect x="3" y="3" width="7" height="7" rx="2"></rect>
+    <rect x="14" y="3" width="7" height="7" rx="2"></rect>
+    <rect x="14" y="14" width="7" height="7" rx="2"></rect>
+    <path d="M7 10v4a2 2 0 0 0 2 2h5"></path>
+  </svg>
+);
+const IconSun = (props) => (
+  <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round" {...props}>
+    <circle cx="12" cy="12" r="4"></circle>
+    <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"></path>
+  </svg>
+);
+const IconDroplets = (props) => (
+  <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round" {...props}>
+    <path d="M12 2s5 6 5 9a5 5 0 0 1-10 0c0-3 5-9 5-9z"></path>
+    <path d="M19 16.5a3.5 3.5 0 0 1-7 0c0-2.1 3.5-6.5 3.5-6.5S19 14.4 19 16.5z"></path>
+  </svg>
+);
+const IconCode = (props) => (
+  <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round" {...props}>
+    <path d="M8 9l-4 3 4 3"></path>
+    <path d="M16 9l4 3-4 3"></path>
+    <path d="M12 20l2-16"></path>
+  </svg>
+);
 
 const SERVICES = [
-  { title: "Supply Chain Solutions", Icon: Workflow },
-  { title: "Renewable Energy", Icon: Sun },
-  { title: "Product Distribution", Icon: Droplets },
-  { title: "Technology", Icon: Code2 },
+  { title: "Supply Chain Solutions", Icon: IconWorkflow },
+  { title: "Renewable Energy", Icon: IconSun },
+  { title: "Product Distribution", Icon: IconDroplets },
+  { title: "Technology", Icon: IconCode },
 ];
 
 const ServicesVideoSection = ({
@@ -13,11 +41,11 @@ const ServicesVideoSection = ({
   heading = "Business Verticals",
   subheading = "Integrated solutions powered by people, technology, and purpose",
 }) => {
-  const leftRef = useRef(null);
-  const [matchHeight, setMatchHeight] = useState<number | null>(null);
+  const leftRef = React.useRef(null);
+  const [matchHeight, setMatchHeight] = React.useState(null);
 
-  useEffect(() => {
-    const el = leftRef.current as HTMLDivElement | null;
+  React.useEffect(() => {
+    const el = leftRef.current;
     if (!el) return;
 
     const calc = () => {
@@ -25,13 +53,21 @@ const ServicesVideoSection = ({
       setMatchHeight(Math.max(280, Math.round(h)));
     };
 
-    const ro = new ResizeObserver(calc);
-    ro.observe(el);
-    window.addEventListener("resize", calc);
+    let ro;
+    if (typeof ResizeObserver !== "undefined") {
+      ro = new ResizeObserver(calc);
+      ro.observe(el);
+    } else {
+      const t = setInterval(calc, 500);
+      calc();
+      return () => clearInterval(t);
+    }
 
+    window.addEventListener("resize", calc);
     calc();
+
     return () => {
-      ro.disconnect();
+      if (ro) ro.disconnect();
       window.removeEventListener("resize", calc);
     };
   }, []);
@@ -50,7 +86,7 @@ const ServicesVideoSection = ({
             {SERVICES.map(({ title, Icon }) => (
               <div className="svs-item" key={title}>
                 <div className="svs-icon">
-                  <Icon strokeWidth={1.75} />
+                  <Icon />
                 </div>
                 <div className="svs-item-title">{title}</div>
               </div>
@@ -98,12 +134,13 @@ const ServicesVideoSection = ({
         .svs-sub { margin: 0 0 6px; font-size: .95rem; color: #5f6b7a; }
         .svs-title { margin: 0; font-size: clamp(1.8rem, 1.2rem + 2vw, 2.6rem); font-weight: 800; color: #0E0F2C; }
 
-        /* compact list */
+        /* Compact list (no empty box space) */
         .svs-list { display: grid; gap: 8px; margin-top: 12px; }
         .svs-item {
           display: flex; align-items: center;
-          gap: 8px;                 /* tighter icon-to-text gap */
-          padding: 10px 12px;       /* compact padding */
+          gap: 8px;                     /* tight icon-to-text gap */
+          padding: 10px 12px;           /* compact padding */
+          min-height: 52px;             /* even rows but compact */
           border: 1px solid #e5eaf0;
           border-radius: 10px;
           background: #fafdff;
@@ -119,8 +156,6 @@ const ServicesVideoSection = ({
           border: 1px solid rgba(38,182,224,.35);
           color: #1c99bf;
         }
-        .svs-icon svg { width: 18px; height: 18px; }
-
         .svs-item-title {
           font-weight: 600; color: #0E0F2C;
           font-size: .95rem; line-height: 1.35;
@@ -142,7 +177,6 @@ const ServicesVideoSection = ({
           margin-top: 40px; margin-bottom: 40px;
           box-shadow: 0 12px 28px rgba(0,0,0,0.15);
         }
-
         .svs-video-frame video {
           width: 100%; height: 100%;
           object-fit: cover; object-position: center; display: block;
@@ -157,29 +191,21 @@ const ServicesVideoSection = ({
           .svs-video-frame { max-width: 100%; margin: 24px auto 28px; }
         }
 
-        /* Mobile: remove empty box space + make buttons 50% width (2 per row) */
+        /* Mobile: 2-per-row (≈50% width) and tighter layout */
         @media (max-width: 768px) {
-          /* keep headings readable but tighter */
           .svs-title { font-size: clamp(1.6rem, 2.8vw + 1rem, 2.1rem); }
           .svs-sub { font-size: .9rem; }
 
-          /* 2-column grid for the cards = ~50% width each */
           .svs-list {
             grid-template-columns: repeat(2, minmax(0, 1fr));
             gap: 10px;
           }
-
-          /* ensure there is no leftover internal space in each card */
-          .svs-item {
-            padding: 10px 10px;
-            min-height: 48px;
-          }
+          .svs-item { padding: 10px 10px; min-height: 48px; }
           .svs-icon { width: 32px; height: 32px; }
-          .svs-icon svg { width: 18px; height: 18px; }
           .svs-item-title { font-size: .92rem; }
         }
 
-        /* Very small screens: fall back to 1 column if needed */
+        /* Very small screens: fall back to 1 column */
         @media (max-width: 380px) {
           .svs-list { grid-template-columns: 1fr; }
           .svs-item-title { white-space: normal; }
