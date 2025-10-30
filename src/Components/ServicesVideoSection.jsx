@@ -9,7 +9,7 @@ const SERVICES = [
 ];
 
 const ServicesVideoSection = ({
-  videoSrc = "/Video.mp4",
+  videoSrc = "/video.mp4",
   heading = "Business Verticals",
   subheading = "Integrated solutions powered by people, technology, and purpose",
 }) => {
