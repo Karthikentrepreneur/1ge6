@@ -85,7 +85,7 @@ const ServicesVideoSection = ({
       <style>{`
         .svs-split {
           background: #fff;
-          padding: 80px 0; /* ⬆️ more breathing space top & bottom */
+          padding: 80px 0;
         }
 
         .svs-container {
@@ -124,20 +124,20 @@ const ServicesVideoSection = ({
           align-items: center;
         }
 
-        /* ✅ Clean, frameless video with vertical space */
+        /* ✅ Landscape 16:9 video frame */
         .svs-video-frame {
-          aspect-ratio: 9 / 16;
+          aspect-ratio: 16 / 9;
           width: 100%;
-          max-width: 360px;
-          border-radius: 14px;
+          max-width: 640px; /* landscape width */
+          border-radius: 18px;
           overflow: hidden;
           background: #000;
           display: flex;
           justify-content: center;
           align-items: center;
-          margin-top: 40px;   /* ⬆️ add space above */
-          margin-bottom: 40px;/* ⬇️ add space below */
-          box-shadow: 0 12px 28px rgba(0,0,0,0.15); /* subtle lift */
+          margin-top: 40px;
+          margin-bottom: 40px;
+          box-shadow: 0 12px 28px rgba(0,0,0,0.15);
         }
 
         .svs-video-frame video {
@@ -152,11 +152,11 @@ const ServicesVideoSection = ({
         @media (max-width: 1024px) {
           .svs-container { grid-template-columns: 1fr; }
           .svs-right { order: -1; }
-          .svs-video-frame { max-width: 420px; margin: 40px auto; }
+          .svs-video-frame { max-width: 720px; margin: 40px auto; }
         }
 
-        @media (max-width: 480px) {
-          .svs-video-frame { max-width: 320px; margin: 32px auto; }
+        @media (max-width: 600px) {
+          .svs-video-frame { max-width: 100%; margin: 32px auto; }
         }
       `}</style>
     </section>
