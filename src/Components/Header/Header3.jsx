@@ -96,7 +96,17 @@ export default function Header3({ variant }) {
               </div>
 
               {/* Right: Button only */}
-
+              <div className="cs_main_header_right">
+                <div className="header-btn d-flex align-items-center">
+                  <div className="main-button">
+                    <Link to="/global-presence" className="theme-btn" style={{ color: textColor }}>
+                      <span>
+                        Global Presence <i className="bi bi-arrow-right"></i>
+                      </span>
+                    </Link>
+                  </div>
+                </div>
+              </div>
 
             </div>
           </div>
