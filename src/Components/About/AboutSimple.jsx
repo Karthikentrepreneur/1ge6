@@ -25,6 +25,7 @@ const AboutSimple = () => {
           .about-photo-wrap { margin-right: 40px; }
         }
 
+        /* ===== Team Image ===== */
         .about-photo-wrap { width: 100%; text-align: center; }
         .about-photo {
           width: min(100%, 940px);
@@ -37,6 +38,7 @@ const AboutSimple = () => {
         }
         .about-photo:hover { transform: scale(1.07); box-shadow: 0 22px 66px rgba(0,0,0,.26); }
 
+        /* ===== Section Title ===== */
         .about-content .section-title h2 {
           margin-bottom: 18px;
           color: var(--ink);
@@ -44,12 +46,13 @@ const AboutSimple = () => {
           letter-spacing: -0.2px;
         }
 
+        /* ===== Items (desktop/tablet baseline) ===== */
         .about-items {
           position: relative;
           display: flex;
           align-items: flex-start;
           gap: 16px;
-          margin-bottom: 28px;
+          margin-bottom: 32px;
         }
 
         .about-items .icon {
@@ -61,8 +64,8 @@ const AboutSimple = () => {
           display: flex;
           align-items: center;
           justify-content: center;
-          box-shadow: 0 4px 10px rgba(38,182,224,0.35);
           z-index: 1;
+          box-shadow: 0 4px 10px rgba(38,182,224,0.35);
         }
 
         .about-items .icon svg {
@@ -71,6 +74,7 @@ const AboutSimple = () => {
           color: #fff;
         }
 
+        /* ===== Dotted connector (desktop/tablet only) ===== */
         .about-items:not(:last-child)::after {
           content: "";
           position: absolute;
@@ -111,7 +115,7 @@ const AboutSimple = () => {
           .about-photo { width: 100%; transform: scale(1.0); border-radius: 18px; }
         }
 
-        /* ===== MOBILE FIX (≤768px) ===== */
+        /* ===== MOBILE (≤768px) ===== */
         @media (max-width: 768px) {
           .container { padding-left: 18px; padding-right: 18px; }
           .about-wrapper .row { flex-direction: column; gap: 22px; }
@@ -144,11 +148,11 @@ const AboutSimple = () => {
             height: 22px;
           }
 
+          /* Hide dotted connector on mobile */
           .about-items:not(:last-child)::after {
-            content: none !important; /* remove dotted line */
+            content: none !important;
           }
 
-          /* Keep text neatly aligned */
           .about-items .content {
             flex: 1;
           }
