@@ -14,7 +14,6 @@ const VERTICALS = [
       { img: "logosss02.png", alt: "GC", link: "https://www.globalconsol.com/" },
       { img: "Haixun_logo.svg", alt: "HAI XUN", link: "https://haixun.co/" },
       { img: "ogl-logo.png", alt: "ONE GLOBAL LOGISTICS", link: "https://oneglobalqatar.com/" },
-      // 6th slot will show placeholder
     ],
     icon: <Truck size={22} strokeWidth={2.2} color="#fff" />,
   },
@@ -26,7 +25,6 @@ const VERTICALS = [
       { img: "/logosss04.png", alt: "Moltech", link: "https://moltechglobal.com/" },
       { img: "/molgen.png", alt: "MoltechGen", link: "https://moltechgen.com/" },
       { img: "superenergy.png", alt: "Super Energy", link: "https://www.superenergy.sg/" },
-      // 3 placeholders
     ],
     icon: <Leaf size={22} strokeWidth={2.2} color="#fff" />,
   },
@@ -36,7 +34,6 @@ const VERTICALS = [
       "Through strategic partnerships, our group company Citygn manages the distribution of ENOC lubricants and other industrial products across key territories. Our focus is on building efficient, customer-centric networks supported by strong logistics capabilities and reliable after-sales service. By combining local market expertise with the strength of global brands, we ensure consistent quality, reach, and value delivery across every channel.",
     logos: [
       { img: "/logosss05.png", alt: "CityGn", link: "https://citygnenergy.com/" },
-      // 5 placeholders
     ],
     icon: <Package size={22} strokeWidth={2.2} color="#fff" />,
   },
@@ -78,40 +75,40 @@ const Activities = () => {
           box-shadow:0 10px 26px rgba(2,8,23,.12);
         }
 
-        /* ✅ Fixed 3×2 grid (6 slots) for ALL cards */
+        /* ✅ Bigger logos, removed white box */
         .logos-grid{
           display:grid;
-          grid-template-columns:repeat(3, 1fr); /* 3 columns */
-          gap:12px;
-          padding:16px;
+          grid-template-columns:repeat(3, 1fr);
+          gap:18px;
+          padding:20px;
           background:#f8fafc;
           border-bottom:1px solid #e6eaf0;
         }
 
         .logo-cell{
-          height:64px;
-          background:#fff;
-          border:1px solid #e5e7eb;
-          border-radius:10px;
+          height:90px;
+          border:none;
+          background:none;
           display:flex;
           align-items:center;
           justify-content:center;
-          padding:8px;
-          transition:transform .2s ease, border-color .2s ease, box-shadow .2s ease, opacity .2s ease;
+          transition:transform .2s ease, opacity .2s ease;
         }
         .logo-cell.clickable{ cursor:pointer; }
         .logo-cell.clickable:hover{
-          transform:scale(1.04);
-          border-color:#2563eb;
-          box-shadow:0 6px 14px rgba(37,99,235,.12);
+          transform:scale(1.06);
         }
-        .logo-cell.placeholder{ opacity:.88; }
+        .logo-cell.placeholder{ opacity:.6; }
 
         .logo-cell img{
-          max-width:80%;
-          max-height:70%;
+          max-width:90%;
+          max-height:80%;
           object-fit:contain;
           display:block;
+          transition:transform .2s ease;
+        }
+        .logo-cell:hover img{
+          transform:scale(1.05);
         }
 
         .card-body{
@@ -139,7 +136,8 @@ const Activities = () => {
         .desc{ margin:0; color:#475569; font-size:.98rem; line-height:1.65; flex-grow:1; }
 
         @media(max-width:768px){
-          .logo-cell{ height:58px; }
+          .logo-cell{ height:72px; }
+          .logo-cell img{ max-width:95%; max-height:85%; }
           .card-body{ padding:20px; }
           .title-row h3{ font-size:1.05rem; }
           .desc{ font-size:.95rem; }
@@ -150,7 +148,7 @@ const Activities = () => {
         <div className="verticals-wrapper">
           {VERTICALS.map((v) => (
             <article key={v.title} className="vertical-card">
-              {/* ✅ Always 3×2 = 6 slots */}
+              {/* ✅ Always 3×2 grid (6 slots) */}
               <div className="logos-grid">
                 {padTo(v.logos, 6).map((L, i) =>
                   L ? (
@@ -163,11 +161,7 @@ const Activities = () => {
                       <img src={L.img} alt={L.alt} loading="lazy" />
                     </div>
                   ) : (
-                    <div
-                      key={`${v.title}-ph-${i}`}
-                      className="logo-cell placeholder"
-                      aria-hidden
-                    />
+                    <div key={`${v.title}-ph-${i}`} className="logo-cell placeholder" />
                   )
                 )}
               </div>
