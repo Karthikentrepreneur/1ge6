@@ -1,19 +1,16 @@
 // src/Components/About/About1.jsx
 import React, { useEffect } from "react";
 import Slider from "react-slick";
-import { useNavigate } from "react-router-dom";
 import loadBackgroudImages from "../Common/loadBackgroudImages";
 
 const About1 = () => {
-  const navigate = useNavigate();
-
   useEffect(() => {
     loadBackgroudImages();
   }, []);
 
   const logos = [
     { img: "/logosss01.png", alt: "Global Gateway Logistics", link: "https://www.ggl.sg/" },
-    { img: "/logosss03.png", alt: "OECL Supply Chain",       link: "https://www.oecl.sg/" }, // <- fixed
+    { img: "/logosss03.png", alt: "OECL Supply Chain",       link: "https://www.oecl.sg/" }, // fixed
     { img: "/logosss02.png", alt: "Global Consol",           link: "https://www.globalconsol.com/" },
     { img: "/Haixun_logo.png", alt: "Hai Xun Logistics",     link: "https://www.haixun.co/" },
     { img: "/one.png", alt: "ONE Global Logistics",          link: "https://www.onegloballogistics.co/" },
@@ -21,25 +18,6 @@ const About1 = () => {
     { img: "/logosss05.png", alt: "CityGn Distribution",     link: "https://www.citygnenergy.com/" },
     { img: "/logo-2.png", alt: "Future Net Logistics",       link: "https://futurenetlogistics.com/" },
   ];
-
-  const isExternal = (url) => /^https?:\/\//i.test(url);
-
-  const handleLogoActivate = (link) => {
-    if (!link) return;
-    if (isExternal(link)) {
-      window.open(link, "_blank", "noopener,noreferrer");
-    } else {
-      navigate(link);
-    }
-  };
-
-  const onKeyDown = (e, link) => {
-    // Activate on Enter or Space
-    if (e.key === "Enter" || e.key === " ") {
-      e.preventDefault();
-      handleLogoActivate(link);
-    }
-  };
 
   const sliderSettings = {
     dots: false,
@@ -89,7 +67,6 @@ const About1 = () => {
           align-items:center;
           justify-content:center;
           height:110px;
-          cursor: pointer;
           transition: transform .2s ease;
           outline: none;
         }
@@ -104,6 +81,11 @@ const About1 = () => {
           -webkit-user-drag: none;
         }
         .brand-logo:hover { transform: scale(1.05); }
+        .brand-link {
+          display:flex; align-items:center; justify-content:center;
+          height:100%; width:100%;
+          cursor:pointer;
+        }
       `}</style>
 
       <div className="container">
@@ -172,17 +154,17 @@ const About1 = () => {
             <div className="brand-slider-wrap">
               <Slider {...sliderSettings}>
                 {logos.map((item, i) => (
-                  <div
-                    key={i}
-                    className="brand-slide"
-                    role="button"
-                    tabIndex={0}
-                    title={`Open ${item.alt}`}
-                    onClick={() => handleLogoActivate(item.link)}
-                    onKeyDown={(e) => onKeyDown(e, item.link)}
-                    onDragStart={(e) => e.preventDefault()}
-                  >
-                    <img src={item.img} alt={item.alt} className="brand-logo" />
+                  <div key={i} className="brand-slide">
+                    <a
+                      className="brand-link"
+                      href={item.link}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      title={`Open ${item.alt}`}
+                      onDragStart={(e) => e.preventDefault()}
+                    >
+                      <img src={item.img} alt={item.alt} className="brand-logo" />
+                    </a>
                   </div>
                 ))}
               </Slider>
