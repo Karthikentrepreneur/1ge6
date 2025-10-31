@@ -10,7 +10,7 @@ const About1 = () => {
 
   const logos = [
     { img: "/logosss01.png", alt: "Global Gateway Logistics", link: "https://www.ggl.sg/" },
-    { img: "/logosss03.png", alt: "OECL Supply Chain",       link: "https://www.oecl.sg/" }, // fixed
+    { img: "/logosss03.png", alt: "OECL Supply Chain",       link: "https://www.oecl.sg/" },
     { img: "/logosss02.png", alt: "Global Consol",           link: "https://www.globalconsol.com/" },
     { img: "/Haixun_logo.png", alt: "Hai Xun Logistics",     link: "https://www.haixun.co/" },
     { img: "/one.png", alt: "ONE Global Logistics",          link: "https://www.onegloballogistics.co/" },
@@ -42,72 +42,159 @@ const About1 = () => {
     <section
       className="about-section bg-cover"
       data-background="/about-bg.png"
-      style={{ padding: "56px 0 24px", overflow: "hidden" }}
+      style={{ padding: "56px 0 24px", overflow: "hidden", position: "relative" }}
     >
       <style>{`
+        :root { --accent:#26B6E0; --ink:#0E0F2C; --muted:#444; }
+
         .about-wrapper { width: 100%; }
         .about-section { overflow-x: hidden; }
-        .about-photo-wrap { width: 100%; text-align: center; }
-        .about-photo {
-          width: min(100%, 940px);
-          height: auto;
-          border-radius: 22px;
-          object-fit: cover;
-          box-shadow: 0 16px 50px rgba(0,0,0,.24);
-          transform: scale(1.03);
-          transition: transform .3s ease, box-shadow .3s ease;
-        }
-        .about-photo:hover { transform: scale(1.07); box-shadow: 0 22px 66px rgba(0,0,0,.26); }
 
-        .brand-block { margin-top: 60px; }
-        .brand-title { text-align: center; margin: 0 0 15px; font-weight: 700; }
-        .brand-slider-wrap { max-width: 1100px; margin: 0 auto; padding: 0 8px; }
-        .brand-slide {
-          display:flex;
-          align-items:center;
-          justify-content:center;
-          height:110px;
-          transition: transform .2s ease;
-          outline: none;
+        /* subtle bottom-right glow to match second UI */
+        .about-section::after{
+          content:"";
+          position:absolute; inset:auto 0 0 auto;
+          width: 46%; height: 46%;
+          background: radial-gradient(60% 60% at 80% 80%, rgba(200,30,48,.10), transparent 60%);
+          pointer-events:none;
         }
-        .brand-slide:focus-visible { box-shadow: 0 0 0 3px rgba(155,17,30,0.35); border-radius: 12px; }
-        .brand-slide:hover { transform: translateY(-4px); }
-        .brand-logo {
-          max-height: 90px;
-          width:auto;
-          object-fit:contain;
-          transition: transform .2s ease;
-          user-drag: none;
-          -webkit-user-drag: none;
+
+        /* layout */
+        .about-photo-wrap { width: 100%; display:flex; justify-content:center; }
+        /* framed card look */
+        .about-photo-card{
+          background:#fff;
+          padding:18px;
+          border-radius:24px;
+          box-shadow: 0 22px 60px rgba(0,0,0,.18);
+          display:inline-block;
         }
-        .brand-logo:hover { transform: scale(1.05); }
-        .brand-link {
+        .about-photo {
+          width: min(100%, 980px);
+          height: auto;
+          display:block;
+          border-radius:16px;
+        }
+
+        /* Title like the 2nd image (bigger, right column head) */
+        .section-title h2{
+          color: var(--ink);
+          font-weight: 800;
+          letter-spacing: -0.4px;
+          line-height: 1.1;
+          margin: 0 0 18px;
+          font-size: clamp(28px, 3.5vw, 56px); /* grow big on desktop */
+        }
+
+        /* items stack with dotted connector */
+        .about-items{
+          position: relative;
+          display:flex; gap: 16px;
+          align-items:flex-start;
+          padding-left: 0;
+          margin-bottom: 26px;
+        }
+        .about-items .icon{
+          width: 64px; height: 64px; min-width:64px;
+          border-radius: 50%;
+          background: var(--accent);
           display:flex; align-items:center; justify-content:center;
-          height:100%; width:100%;
-          cursor:pointer;
+          box-shadow: 0 6px 14px rgba(38,182,224,.32);
+          position: relative;
+          z-index: 2;
+        }
+        .about-items .icon img{ width: 28px; height: 28px; filter: brightness(0) invert(1); }
+
+        /* dotted connector aligned to icon centers */
+        .about-items:not(:last-child)::after{
+          content:"";
+          position:absolute;
+          left: 32px; /* half of icon width */
+          top: 64px;
+          width:2px;
+          height: calc(100% - 18px);
+          background:
+            linear-gradient(var(--accent), var(--accent)) left top / 2px 0 no-repeat,
+            repeating-linear-gradient(to bottom, var(--accent), var(--accent) 4px, transparent 4px, transparent 10px);
+          z-index:1;
+          opacity:.9;
+        }
+
+        .about-items .content h5{
+          margin: 4px 0 6px;
+          font-weight: 800;
+          color: var(--ink);
+          font-size: 18px;
+        }
+        .about-items .content p{
+          margin:0; color: var(--muted);
+          line-height: 1.55; font-size: 15.5px;
+        }
+
+        /* group companies */
+        .brand-block { margin-top: 44px; }
+        .brand-title {
+          text-align:center; margin: 0 0 14px;
+          font-weight: 800; color: var(--ink);
+          letter-spacing: -.2px;
+        }
+        .brand-slider-wrap { max-width: 1100px; margin: 0 auto; padding: 0 8px; }
+        .brand-slide { display:flex; align-items:center; justify-content:center; height:110px; }
+        .brand-logo { max-height: 90px; width:auto; object-fit:contain; transition: transform .2s ease; }
+        .brand-logo:hover { transform: translateY(-2px); }
+
+        /* spacing balance at lg+ to mimic screenshot */
+        @media (min-width: 992px){
+          .about-photo-wrap{ margin-right: 28px; }
+        }
+
+        /* Tablet */
+        @media (max-width: 991.98px){
+          .about-section{ padding: 44px 0 18px !important; }
+          .about-photo-card{ padding:14px; border-radius:20px; }
+          .about-photo{ border-radius:14px; }
+          .brand-block{ margin-top: 36px; }
+        }
+
+        /* Mobile */
+        @media (max-width: 768px){
+          .container{ padding-left:16px; padding-right:16px; }
+          .row.g-4{ gap:18px !important; }
+          .section-title h2{ font-size: clamp(24px, 6vw, 32px); }
+          .about-items{ gap:12px; margin-bottom:20px; }
+          .about-items .icon{ width:52px; height:52px; min-width:52px; }
+          .about-items:not(:last-child)::after{ left:26px; top:52px; }
+          .about-items .content h5{ font-size:16px; }
+          .about-items .content p{ font-size:14px; }
+          .brand-slide{ height:84px; }
+          .brand-logo{ max-height:68px; }
         }
       `}</style>
 
       <div className="container">
         <div className="about-wrapper">
           <div className="row g-4 align-items-center">
+            {/* Left: Photo card */}
             <div className="col-lg-7 d-flex justify-content-center">
               <div className="about-photo-wrap">
-                <img
-                  src="/team.jpg"
-                  alt="1 Global Enterprises Group"
-                  className="about-photo"
-                />
+                <div className="about-photo-card">
+                  <img
+                    src="/team.jpg"
+                    alt="1 Global Enterprises Group"
+                    className="about-photo"
+                  />
+                </div>
               </div>
             </div>
 
+            {/* Right: Title + bullets (bigger like reference) */}
             <div className="col-lg-5">
               <div className="about-content">
                 <div className="section-title">
                   <h2>1 Global Enterprises</h2>
                 </div>
 
-                <div className="about-area mt-3">
+                <div className="about-area mt-2">
                   <div className="about-items">
                     <div className="icon">
                       <img src="/assets/img/icon/05.svg" alt="Who We Are" />
@@ -116,7 +203,7 @@ const About1 = () => {
                       <h5>Who We Are</h5>
                       <p>
                         A diversified group with interests in Shipping, Logistics,
-                        Distribution, IT, Clean Energy & Trading.
+                        Distribution, IT, Clean Energy &amp; Trading.
                       </p>
                     </div>
                   </div>
@@ -139,7 +226,7 @@ const About1 = () => {
                       <h5>Expertise</h5>
                       <p>
                         Each business unit is led by experts ensuring sustainability,
-                        execution & growth.
+                        execution &amp; growth.
                       </p>
                     </div>
                   </div>
