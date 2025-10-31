@@ -39,15 +39,16 @@ const About1 = () => {
   };
 
   return (
-   <section
+    <section
       className="about-section bg-cover"
       data-background="/about-bg.png"
-      style={{ padding: '56px 0 24px', overflow: 'hidden' }}
+      style={{ padding: "56px 0 24px", overflow: "hidden" }}
     >
       <style>{`
         .about-wrapper { width: 100%; }
+        .about-section { overflow-x: hidden; }
 
-        /* Add gap between image & content */
+        /* Add gap between image & content (lg+) */
         @media (min-width: 992px) {
           .about-photo-wrap { margin-right: 40px; }
         }
@@ -69,11 +70,9 @@ const About1 = () => {
         }
 
         /* Section content */
-        .about-content .section-title h2 {
-          margin-bottom: 18px;
-        }
+        .about-content .section-title h2 { margin-bottom: 18px; }
 
-        /* Full teal circle icons */
+        /* Items with teal icon + dotted connector */
         .about-items {
           position: relative;
           display: flex;
@@ -81,57 +80,40 @@ const About1 = () => {
           gap: 16px;
           margin-bottom: 28px;
         }
-
         .about-items .icon {
           position: relative;
-          width: 60px;
-          height: 60px;
-          min-width: 60px;
+          width: 60px; height: 60px; min-width: 60px;
           border-radius: 50%;
           background-color: #26B6E0;
-          display: flex;
-          align-items: center;
-          justify-content: center;
+          display: flex; align-items: center; justify-content: center;
           z-index: 1;
           box-shadow: 0 4px 10px rgba(38,182,224,0.35);
         }
-
-        .about-items .icon img {
-          width: 28px;
-          height: 28px;
-          filter: brightness(0) invert(1);
-        }
-
+        .about-items .icon img { width: 28px; height: 28px; filter: brightness(0) invert(1); }
         .about-items:not(:last-child)::after {
           content: "";
           position: absolute;
-          left: 29px;
-          top: 60px;
+          left: 29px; top: 60px;
           width: 2px;
           height: calc(100% - 30px);
           background: repeating-linear-gradient(
-            to bottom,
-            #26B6E0,
-            #26B6E0 4px,
-            transparent 4px,
-            transparent 8px
+            to bottom, #26B6E0, #26B6E0 4px, transparent 4px, transparent 8px
           );
           z-index: 0;
         }
+        .about-items .content h5 { font-weight: 700; margin-bottom: 4px; color: #0E0F2C; }
+        .about-items .content p { margin: 0; line-height: 1.5; color: #444; font-size: 15px; }
 
-        .about-items .content h5 {
-          font-weight: 700;
-          margin-bottom: 4px;
-          color: #0E0F2C;
-        }
-        .about-items .content p {
-          margin: 0;
-          line-height: 1.5;
-          color: #444;
-          font-size: 15px;
-        }
+        /* Brand slider block */
+        .brand-block { margin-top: 44px; }
+        .brand-title { text-align: center; margin: 0 0 14px; font-weight: 700; }
+        .brand-slider-wrap { max-width: 1100px; margin: 0 auto; padding: 0 8px; }
+        .brand-slide { display: flex; align-items: center; justify-content: center; height: 110px; }
+        .brand-logo { max-height: 90px; width: auto; object-fit: contain; transition: transform .2s ease; }
+        .brand-logo:hover { transform: translateY(-2px); }
+        .brand-link { display:flex; align-items:center; justify-content:center; width:100%; height:100%; }
 
-        /* Responsive */
+        /* Responsive tweaks */
         @media (max-width: 1199px) {
           .about-photo { width: min(100%, 860px); transform: scale(1.02); }
         }
@@ -171,7 +153,7 @@ const About1 = () => {
                       <h5>Who We Are</h5>
                       <p>
                         A diversified group with interests in Shipping, Logistics,
-                        Distribution, IT, Clean Energy & Trading.
+                        Distribution, IT, Clean Energy &amp; Trading.
                       </p>
                     </div>
                   </div>
@@ -194,7 +176,7 @@ const About1 = () => {
                       <h5>Expertise</h5>
                       <p>
                         Each business unit is led by experts ensuring sustainability,
-                        execution & growth.
+                        execution &amp; growth.
                       </p>
                     </div>
                   </div>
@@ -202,11 +184,6 @@ const About1 = () => {
               </div>
             </div>
           </div>
-        </div>
-      </div>
-    </section>
-  );
-};
 
           {/* Group Companies Slider */}
           <div className="brand-block">
