@@ -13,14 +13,33 @@ const About1 = () => {
 
   const logos = [
     { img: "/logosss01.png", alt: "Global Gateway Logistics", link: "https://www.ggl.sg/" },
-    { img: "/logosss03.png", alt: "OECL Supply Chain", link: "/https://www.oecl.sg/" },
-    { img: "/logosss02.png", alt: "Global Consol", link: "https://www.globalconsol.com/" },
-    { img: "/Haixun_logo.png", alt: "Hai Xun Logistics", link: "https://www.haixun.co/" },
-    { img: "/one.png", alt: "ONE Global Logistics", link: "https://www.onegloballogistics.co/" },
-    { img: "/logosss04.png", alt: "Moltech Energy", link: "https://www.moltechglobal.com/" },
-    { img: "/logosss05.png", alt: "CityGn Distribution", link: "https://www.citygnenergy.com/" },
-    { img: "/logo-2.png", alt: "Future Net Logistics", link: "https://futurenetlogistics.com/" },
+    { img: "/logosss03.png", alt: "OECL Supply Chain",       link: "https://www.oecl.sg/" }, // <- fixed
+    { img: "/logosss02.png", alt: "Global Consol",           link: "https://www.globalconsol.com/" },
+    { img: "/Haixun_logo.png", alt: "Hai Xun Logistics",     link: "https://www.haixun.co/" },
+    { img: "/one.png", alt: "ONE Global Logistics",          link: "https://www.onegloballogistics.co/" },
+    { img: "/logosss04.png", alt: "Moltech Energy",          link: "https://www.moltechglobal.com/" },
+    { img: "/logosss05.png", alt: "CityGn Distribution",     link: "https://www.citygnenergy.com/" },
+    { img: "/logo-2.png", alt: "Future Net Logistics",       link: "https://futurenetlogistics.com/" },
   ];
+
+  const isExternal = (url) => /^https?:\/\//i.test(url);
+
+  const handleLogoActivate = (link) => {
+    if (!link) return;
+    if (isExternal(link)) {
+      window.open(link, "_blank", "noopener,noreferrer");
+    } else {
+      navigate(link);
+    }
+  };
+
+  const onKeyDown = (e, link) => {
+    // Activate on Enter or Space
+    if (e.key === "Enter" || e.key === " ") {
+      e.preventDefault();
+      handleLogoActivate(link);
+    }
+  };
 
   const sliderSettings = {
     dots: false,
@@ -35,9 +54,9 @@ const About1 = () => {
     responsive: [
       { breakpoint: 1399, settings: { slidesToShow: 5 } },
       { breakpoint: 1199, settings: { slidesToShow: 4 } },
-      { breakpoint: 991, settings: { slidesToShow: 3 } },
-      { breakpoint: 767, settings: { slidesToShow: 2, centerMode: true, centerPadding: "10px" } },
-      { breakpoint: 575, settings: { slidesToShow: 1, centerMode: true, centerPadding: "30px" } },
+      { breakpoint: 991,  settings: { slidesToShow: 3 } },
+      { breakpoint: 767,  settings: { slidesToShow: 2, centerMode: true, centerPadding: "10px" } },
+      { breakpoint: 575,  settings: { slidesToShow: 1, centerMode: true, centerPadding: "30px" } },
     ],
   };
 
@@ -72,13 +91,17 @@ const About1 = () => {
           height:110px;
           cursor: pointer;
           transition: transform .2s ease;
+          outline: none;
         }
+        .brand-slide:focus-visible { box-shadow: 0 0 0 3px rgba(155,17,30,0.35); border-radius: 12px; }
         .brand-slide:hover { transform: translateY(-4px); }
         .brand-logo {
           max-height: 90px;
           width:auto;
           object-fit:contain;
           transition: transform .2s ease;
+          user-drag: none;
+          -webkit-user-drag: none;
         }
         .brand-logo:hover { transform: scale(1.05); }
       `}</style>
@@ -152,8 +175,12 @@ const About1 = () => {
                   <div
                     key={i}
                     className="brand-slide"
-                    onClick={() => navigate(item.link)}
-                    title={`Go to ${item.alt}`}
+                    role="button"
+                    tabIndex={0}
+                    title={`Open ${item.alt}`}
+                    onClick={() => handleLogoActivate(item.link)}
+                    onKeyDown={(e) => onKeyDown(e, item.link)}
+                    onDragStart={(e) => e.preventDefault()}
                   >
                     <img src={item.img} alt={item.alt} className="brand-logo" />
                   </div>
