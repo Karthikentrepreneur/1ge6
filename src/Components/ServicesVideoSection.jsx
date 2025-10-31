@@ -86,6 +86,7 @@ const ServicesVideoSection = ({
         .svs-split {
           background: #fff;
           padding: 70px 0;
+          overflow-x: hidden; /* ✅ Prevent horizontal scroll globally */
         }
 
         .svs-container {
@@ -112,7 +113,7 @@ const ServicesVideoSection = ({
           border: 1px solid #e2e8f0;
           border-radius: 10px;
           background: #f8fcff;
-          width: 85%; /* ✅ Reduced width */
+          width: 85%;
           transition: all 0.2s ease;
         }
         .svs-item:hover {
@@ -123,7 +124,7 @@ const ServicesVideoSection = ({
         }
 
         .svs-icon {
-          flex: 0 0 40px; /* ✅ Larger icon box */
+          flex: 0 0 40px;
           width: 40px;
           height: 40px;
           border-radius: 8px;
@@ -138,7 +139,7 @@ const ServicesVideoSection = ({
         .svs-item-title {
           font-weight: 700;
           color: #0E0F2C;
-          font-size: 1rem; /* ✅ Bigger text */
+          font-size: 1rem;
           line-height: 1.4;
         }
 
@@ -172,14 +173,42 @@ const ServicesVideoSection = ({
           display: block;
         }
 
-        @media (max-width: 1024px) {
-          .svs-container { grid-template-columns: 1fr; }
-          .svs-right { order: -1; }
-          .svs-item { width: 100%; } /* Full width on mobile */
-        }
+        /* ✅ MOBILE FIX ONLY (no desktop changes) */
+        @media (max-width: 768px) {
+          .svs-container {
+            grid-template-columns: 1fr;
+            gap: 20px;
+          }
 
-        @media (max-width: 600px) {
-          .svs-video-frame { max-width: 100%; margin: 28px auto; }
+          .svs-right {
+            order: -1; /* video above content */
+            width: 100%;
+            overflow: hidden;
+          }
+
+          .svs-video-frame {
+            max-width: 100%;
+            width: 100%;
+            border-radius: 14px;
+            margin: 20px auto;
+            box-shadow: 0 8px 18px rgba(0,0,0,0.1);
+          }
+
+          .svs-video-frame video {
+            width: 100%;
+            height: auto;
+            object-fit: cover;
+          }
+
+          .svs-left {
+            width: 100%;
+            text-align: left;
+            padding-inline: 8px;
+          }
+
+          .svs-item {
+            width: 100%; /* full width cards */
+          }
         }
       `}</style>
     </section>
