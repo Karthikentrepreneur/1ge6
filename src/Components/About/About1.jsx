@@ -49,7 +49,7 @@ const About1 = () => {
         .about-wrapper { width: 100%; }
         .about-section { overflow-x: hidden; }
 
-        /* Image */
+        /* IMAGE (desktop) */
         .about-photo-wrap { width: 100%; text-align: center; }
         .about-photo {
           width: min(100%, 940px);
@@ -61,11 +61,9 @@ const About1 = () => {
           transition: transform .3s ease, box-shadow .3s ease;
         }
         .about-photo:hover { transform: scale(1.07); box-shadow: 0 22px 66px rgba(0,0,0,.26); }
-
-        /* Gap between image & text on desktop */
         @media (min-width: 992px) { .about-photo-wrap { margin-right: 40px; } }
 
-        /* Title */
+        /* TITLE */
         .about-content .section-title h2 {
           margin-bottom: 18px;
           color: var(--ink);
@@ -73,7 +71,7 @@ const About1 = () => {
           letter-spacing: -.2px;
         }
 
-        /* Items with teal icon + dotted connector */
+        /* TIMELINE ITEMS */
         .about-items {
           position: relative;
           display: flex;
@@ -101,10 +99,19 @@ const About1 = () => {
           );
           z-index: 0;
         }
-        .about-items .content h5 { font-weight: 800; margin: 2px 0 6px; color: var(--ink); }
-        .about-items .content p { margin: 0; line-height: 1.5; color: var(--muted); font-size: 15px; }
+        .about-items .content h5 {
+          font-weight: 800;
+          margin: 2px 0 6px;
+          color: var(--ink);
+        }
+        .about-items .content p {
+          margin: 0;
+          line-height: 1.55;
+          color: var(--muted);
+          font-size: 15px;
+        }
 
-        /* Brand slider block */
+        /* BRAND SLIDER */
         .brand-block { margin-top: 44px; }
         .brand-title { text-align: center; margin: 0 0 14px; font-weight: 800; color: var(--ink); }
         .brand-slider-wrap { max-width: 1100px; margin: 0 auto; padding: 0 8px; }
@@ -113,45 +120,57 @@ const About1 = () => {
         .brand-logo:hover { transform: translateY(-2px); }
         .brand-link { display:flex; align-items:center; justify-content:center; width:100%; height:100%; }
 
-        /* ===== MOBILE OPTIMIZATION ===== */
+        /* ======= MOBILE: match your screenshot layout ======= */
         @media (max-width: 768px) {
-          .about-section { padding: 32px 0 12px !important; }
+          .about-section { padding: 28px 0 8px !important; }
           .container { padding-left: 18px; padding-right: 18px; }
 
-          /* Stack columns */
-          .about-wrapper .row { flex-direction: column; gap: 24px; }
-          .col-lg-7, .col-lg-5 { width: 100%; max-width: 100%; }
+          /* Hide big image column on mobile; focus on text timeline */
+          .about-photo-col { display: none !important; }
+          .about-text-col { width: 100%; max-width: 100%; }
 
-          /* Image tweaks */
-          .about-photo { transform: none; border-radius: 16px; box-shadow: 0 10px 26px rgba(0,0,0,.15); }
-
-          /* Title size */
+          /* Section title a touch smaller, strong weight */
           .about-content .section-title h2 {
-            font-size: clamp(22px, 5.4vw, 26px);
-            text-align: left;
-            margin-bottom: 16px;
+            font-size: clamp(20px, 5.2vw, 24px);
+            margin-bottom: 14px;
           }
 
-          /* Item compact layout */
-          .about-items { gap: 12px; margin-bottom: 20px; }
+          /* Compact timeline like the screenshot */
+          .about-items { gap: 12px; margin-bottom: 22px; }
           .about-items .icon {
             width: 46px; height: 46px; min-width: 46px;
-            box-shadow: 0 3px 8px rgba(38,182,224,0.3);
+            box-shadow: 0 3px 8px rgba(38,182,224,.30);
           }
           .about-items .icon img { width: 22px; height: 22px; }
-          .about-items:not(:last-child)::after {
-            left: 23px; top: 46px; height: calc(100% - 22px);
-          }
-          .about-items .content h5 { font-size: 15px; margin-bottom: 2px; }
-          .about-items .content p { font-size: 13.5px; line-height: 1.4; }
 
-          /* Brand row height smaller on mobile */
+          /* Dotted connector aligned to icon center */
+          .about-items:not(:last-child)::after {
+            left: 23px;  /* half of 46px */
+            top: 46px;
+            height: calc(100% - 20px);
+          }
+
+          /* Typography to match the screenshot */
+          .about-items .content h5 {
+            font-size: 16px;
+            margin-bottom: 6px;
+            line-height: 1.25;
+          }
+          .about-items .content p {
+            font-size: 13.5px;
+            line-height: 1.55;
+          }
+
+          /* Slight tighter list area spacing on mobile */
+          .about-area { margin-top: 6px; }
+
+          /* Brand row smaller on mobile */
           .brand-slide { height: 84px; }
           .brand-logo { max-height: 68px; }
         }
 
-        /* Small phones */
-        @media (max-width: 480px) {
+        /* Very small phones */
+        @media (max-width: 420px) {
           .about-items .icon { width: 42px; height: 42px; min-width: 42px; }
           .about-items .icon img { width: 20px; height: 20px; }
           .about-items:not(:last-child)::after { left: 21px; top: 42px; }
@@ -162,15 +181,15 @@ const About1 = () => {
       <div className="container">
         <div className="about-wrapper">
           <div className="row g-4 align-items-center">
-            {/* Left Image */}
-            <div className="col-lg-7 d-flex justify-content-center">
+            {/* Left Image (hidden on mobile) */}
+            <div className="col-lg-7 d-flex justify-content-center about-photo-col">
               <div className="about-photo-wrap">
                 <img src="/team.jpg" alt="1 Global Enterprises Group" className="about-photo" />
               </div>
             </div>
 
-            {/* Right Text */}
-            <div className="col-lg-5">
+            {/* Right Text (full width on mobile) */}
+            <div className="col-lg-5 about-text-col">
               <div className="about-content">
                 <div className="section-title">
                   <h2>1 Global Enterprises</h2>
@@ -182,28 +201,43 @@ const About1 = () => {
                       <img src="/assets/img/icon/05.svg" alt="Who We Are" />
                     </div>
                     <div className="content">
-                      <h5>Who We Are</h5>
-                      <p>A diversified group with interests in Shipping, Logistics, Distribution, IT, Clean Energy & Trading.</p>
+                      <h5>Our People, Our Strength</h5>
+                      <p>
+                        At 1 Global Enterprises, our greatest strength is our people. Across every division and region,
+                        it is the passion, creativity, and commitment of our employees that turn ideas into real impact.
+                        Their dedication drives innovation, builds trust with our partners, and fuels the progress that
+                        defines who we are as a company.
+                      </p>
                     </div>
                   </div>
 
                   <div className="about-items">
                     <div className="icon">
-                      <img src="/assets/img/icon/06.svg" alt="Our Reach" />
+                      <img src="/assets/img/icon/06.svg" alt="Leadership" />
                     </div>
                     <div className="content">
-                      <h5>Our Reach</h5>
-                      <p>A global workforce of 700+ professionals.</p>
+                      <h5>Leadership That Empowers</h5>
+                      <p>
+                        JP, the Managing Director and Founder of 1 Global Enterprises, believes that true leadership
+                        begins with empowering others. He attributes the company’s growth and success to the collective
+                        effort of a talented and diverse team that shares a common purpose — creating meaningful progress
+                        for our people and our customers.
+                      </p>
                     </div>
                   </div>
 
                   <div className="about-items">
                     <div className="icon">
-                      <img src="/assets/img/icon/07.svg" alt="Expertise" />
+                      <img src="/assets/img/icon/07.svg" alt="Vision" />
                     </div>
                     <div className="content">
-                      <h5>Expertise</h5>
-                      <p>Each business unit is led by experts ensuring sustainability, execution & growth.</p>
+                      <h5>Vision For Lasting Impact</h5>
+                      <p>
+                        Under JP’s guidance, 1 Global Enterprises has evolved into a group of businesses spanning
+                        renewable energy, sustainable supply chain solutions, software innovation, and responsible
+                        product distribution. His vision proves that commercial excellence and social responsibility can
+                        coexist — empowering growth that benefits communities and industries alike.
+                      </p>
                     </div>
                   </div>
                 </div>
