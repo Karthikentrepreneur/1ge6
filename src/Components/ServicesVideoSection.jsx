@@ -20,29 +20,53 @@ const ServicesVideoSection = ({
     const el = leftRef.current;
     if (!el) return;
 
-    const setH = () => {
+    const ro = new ResizeObserver(() => {
       const h = el.getBoundingClientRect().height;
-      setMatchHeight(Math.max(220, Math.round(h)));
-    };
-    const ro = new ResizeObserver(setH);
+      setMatchHeight(Math.max(240, Math.round(h)));
+    });
     ro.observe(el);
-    window.addEventListener("resize", setH);
-    setH();
+
+    const onResize = () => {
+      const h = el.getBoundingClientRect().height;
+      setMatchHeight(Math.max(240, Math.round(h)));
+    };
+    window.addEventListener("resize", onResize);
 
     return () => {
       ro.disconnect();
-      window.removeEventListener("resize", setH);
+      window.removeEventListener("resize", onResize);
     };
   }, []);
 
   return (
     <section className="svs-split">
       <div className="svs-container">
-        {/* RIGHT moves on top for mobile via CSS order */}
+        {/* LEFT SIDE */}
+        <div className="svs-left" ref={leftRef}>
+          <header className="svs-header">
+            <p className="svs-sub">{subheading}</p>
+            <h2 className="svs-title">{heading}</h2>
+          </header>
+
+          <div className="svs-list">
+            {SERVICES.map(({ title, Icon }) => (
+              <div className="svs-item" key={title}>
+                <div className="svs-icon">
+                  <Icon strokeWidth={1.75} />
+                </div>
+                <div className="svs-item-title">{title}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* RIGHT SIDE (Video Section) */}
         <div className="svs-right">
           <div
             className="svs-video-frame"
-            style={{ height: matchHeight ? `${matchHeight}px` : "auto" }}
+            style={{
+              height: matchHeight ? `${matchHeight}px` : "auto",
+            }}
           >
             <video
               src={videoSrc}
@@ -55,41 +79,13 @@ const ServicesVideoSection = ({
             />
           </div>
         </div>
-
-        {/* LEFT SIDE */}
-        <div className="svs-left" ref={leftRef}>
-          <header className="svs-header">
-            <p className="svs-sub">{subheading}</p>
-            <h2 className="svs-title">{heading}</h2>
-          </header>
-
-          <div className="svs-list">
-            {SERVICES.map(({ title, Icon }) => (
-              <button className="svs-item" key={title} type="button">
-                <span className="svs-icon" aria-hidden="true">
-                  <Icon strokeWidth={1.75} />
-                </span>
-                <span className="svs-item-title">{title}</span>
-              </button>
-            ))}
-          </div>
-        </div>
       </div>
 
-      {/* Styles */}
+      {/* ✨ Styles */}
       <style>{`
-        :root {
-          --card-w: 85%;
-          --icon-box: 40px;
-          --icon: 20px;
-          --pad-y: 10px;
-          --pad-x: 14px;
-          --radius: 10px;
-        }
-
         .svs-split {
           background: #fff;
-          padding: clamp(40px, 6vw, 70px) 0;
+          padding: 70px 0;
         }
 
         .svs-container {
@@ -101,37 +97,35 @@ const ServicesVideoSection = ({
           align-items: start;
         }
 
-        /* HEADERS (fluid sizes) */
+        /* LEFT SIDE */
         .svs-header { margin-bottom: 12px; }
-        .svs-sub { margin: 0 0 6px; font-size: clamp(.9rem, .8rem + .3vw, .95rem); color: #5f6b7a; }
-        .svs-title { margin: 0; font-size: clamp(1.6rem, 1.1rem + 2.2vw, 2.6rem); font-weight: 800; color: #0E0F2C; }
+        .svs-sub { margin: 0 0 6px; font-size: .95rem; color: #5f6b7a; }
+        .svs-title { margin: 0; font-size: clamp(1.8rem, 1.2rem + 2vw, 2.6rem); font-weight: 800; color: #0E0F2C; }
 
-        /* LIST */
+        /* Compact but bold cards */
         .svs-list { display: grid; gap: 10px; margin-top: 14px; }
         .svs-item {
           display: flex;
           align-items: center;
           gap: 10px;
-          padding: var(--pad-y) var(--pad-x);
+          padding: 10px 14px;
           border: 1px solid #e2e8f0;
-          border-radius: var(--radius);
+          border-radius: 10px;
           background: #f8fcff;
-          width: var(--card-w);
-          transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease, background .2s ease;
-          text-align: left;
+          width: 85%; /* ✅ Reduced width */
+          transition: all 0.2s ease;
         }
-        .svs-item:hover, .svs-item:focus-visible {
+        .svs-item:hover {
           transform: translateY(-2px);
           box-shadow: 0 8px 18px rgba(10,40,80,.08);
           border-color: #c9e4f5;
           background: #f4fbff;
-          outline: none;
         }
 
         .svs-icon {
-          flex: 0 0 var(--icon-box);
-          width: var(--icon-box);
-          height: var(--icon-box);
+          flex: 0 0 40px; /* ✅ Larger icon box */
+          width: 40px;
+          height: 40px;
           border-radius: 8px;
           display: grid;
           place-items: center;
@@ -139,17 +133,22 @@ const ServicesVideoSection = ({
           border: 1px solid rgba(38,182,224,.35);
           color: #1c99bf;
         }
-        .svs-icon svg { width: var(--icon); height: var(--icon); }
+        .svs-icon svg { width: 20px; height: 20px; }
 
         .svs-item-title {
           font-weight: 700;
           color: #0E0F2C;
-          font-size: clamp(.98rem, .9rem + .4vw, 1.05rem);
-          line-height: 1.35;
+          font-size: 1rem; /* ✅ Bigger text */
+          line-height: 1.4;
         }
 
-        /* VIDEO */
-        .svs-right { display: flex; justify-content: center; align-items: center; }
+        /* RIGHT SIDE */
+        .svs-right {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+        }
+
         .svs-video-frame {
           aspect-ratio: 16 / 9;
           width: 100%;
@@ -164,49 +163,23 @@ const ServicesVideoSection = ({
           margin-bottom: 40px;
           box-shadow: 0 12px 28px rgba(0,0,0,0.15);
         }
-        .svs-video-frame video { width: 100%; height: 100%; object-fit: cover; object-position: center; display: block; }
 
-        /* ====== BREAKPOINTS ====== */
+        .svs-video-frame video {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          object-position: center;
+          display: block;
+        }
 
-        /* Tablet (≤ 1024px): stack columns, full-width cards */
         @media (max-width: 1024px) {
           .svs-container { grid-template-columns: 1fr; }
           .svs-right { order: -1; }
-          .svs-item { width: 100%; }
+          .svs-item { width: 100%; } /* Full width on mobile */
         }
 
-        /* Large phones (≤ 768px): slightly smaller cards/icons */
-        @media (max-width: 768px) {
-          :root {
-            --card-w: 100%;
-            --icon-box: 36px;
-            --icon: 18px;
-            --pad-y: 9px;
-            --pad-x: 12px;
-            --radius: 10px;
-          }
-          .svs-video-frame { max-width: 100%; margin: 28px 0; }
-          .svs-title { letter-spacing: 0; }
-        }
-
-        /* Small phones (≤ 480px): comfy tap targets, no overflow */
-        @media (max-width: 480px) {
-          :root {
-            --icon-box: 34px;
-            --icon: 16px;
-            --pad-y: 10px;   /* keep tap area ≥ 44px total height */
-            --pad-x: 12px;
-            --radius: 9px;
-          }
-          .svs-container { gap: 20px; }
-          .svs-list { gap: 8px; }
-          .svs-item-title { font-size: 1rem; } /* keep readable on small screens */
-        }
-
-        /* Reduce motion for users who prefer it */
-        @media (prefers-reduced-motion: reduce) {
-          .svs-item { transition: none; }
-          .svs-item:hover { transform: none; }
+        @media (max-width: 600px) {
+          .svs-video-frame { max-width: 100%; margin: 28px auto; }
         }
       `}</style>
     </section>
