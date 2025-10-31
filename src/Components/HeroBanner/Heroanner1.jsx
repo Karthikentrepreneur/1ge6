@@ -78,7 +78,7 @@ const HeroBanner1 = ({
         .info-card:hover{ background:linear-gradient(to right,#1e40af,#3b82f6); box-shadow:0 16px 40px rgba(0,0,0,.36); }
 
         .h-sub{ margin:0 0 8px; font-weight:800; letter-spacing:.3px; font-size:clamp(14px,1.3vw,16px); text-transform:uppercase; }
-        .h-sub span{ color:#22C55E; }
+        .h-sub span{ color:#12FF6A; }
 
         .h-title{ margin:0; color:#fff; font-weight:800; line-height:1.3; font-size:clamp(18px,2vw,24px); white-space:normal; }
 
