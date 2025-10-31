@@ -61,7 +61,6 @@ const About1 = () => {
           transition: transform .3s ease, box-shadow .3s ease;
         }
         .about-photo:hover { transform: scale(1.07); box-shadow: 0 22px 66px rgba(0,0,0,.26); }
-
         @media (min-width: 992px) { .about-photo-wrap { margin-right: 40px; } }
 
         /* Title */
@@ -72,7 +71,7 @@ const About1 = () => {
           letter-spacing: -.2px;
         }
 
-        /* Items + dotted connector (desktop/tablet stays same) */
+        /* Items + dotted connector (desktop/tablet) */
         .about-items {
           position: relative;
           display: flex;
@@ -112,70 +111,73 @@ const About1 = () => {
         .brand-logo:hover { transform: translateY(-2px); }
         .brand-link { display:flex; align-items:center; justify-content:center; width:100%; height:100%; }
 
-        /* ===== MOBILE-ONLY LAYOUT (match “Our Reach” style) ===== */
+        /* ===== MOBILE-ONLY (match screenshot layout) ===== */
         @media (max-width: 768px) {
-          .about-section { padding: 32px 0 12px !important; }
+          .about-section { padding: 28px 0 8px !important; }
           .container { padding-left: 18px; padding-right: 18px; }
 
-          /* Stack columns */
-          .about-wrapper .row { flex-direction: column; gap: 24px; }
+          /* stack image then text */
+          .about-wrapper .row { flex-direction: column; gap: 20px; }
           .col-lg-7, .col-lg-5 { width: 100%; max-width: 100%; }
 
-          /* Image tweaks */
-          .about-photo { transform: none; border-radius: 16px; box-shadow: 0 10px 26px rgba(0,0,0,.15); }
-
+          /* title bigger like screenshot */
           .about-content .section-title h2 {
-            font-size: clamp(22px, 5.4vw, 26px);
-            text-align: left;
-            margin-bottom: 16px;
-          }
-
-          /* --- NEW: icon + title on one row, text below (like “Our Reach”) --- */
-          .about-items {
-            display: grid;
-            grid-template-columns: 46px 1fr; /* icon | text */
-            align-items: center;
-            column-gap: 12px;
-            row-gap: 6px;
+            font-size: clamp(26px, 7vw, 30px);
+            line-height: 1.15;
             margin-bottom: 18px;
           }
+
+          /* row = icon (left) + title (right), description below */
+          .about-items {
+            display: grid;
+            grid-template-columns: 52px 1fr; /* icon | text */
+            grid-auto-rows: min-content;
+            column-gap: 14px;
+            row-gap: 6px;
+            margin-bottom: 20px;
+            align-items: center;
+          }
           .about-items .icon {
-            width: 46px; height: 46px; min-width: 46px;
-            box-shadow: 0 3px 8px rgba(38,182,224,0.3);
-            grid-row: 1 / span 2; /* keep icon spanning title + paragraph */
+            width: 52px; height: 52px; min-width: 52px;
+            grid-row: 1 / span 2; /* span title + paragraph */
+            box-shadow: 0 3px 8px rgba(38,182,224,0.28);
           }
           .about-items .icon img { width: 22px; height: 22px; }
 
-          /* keep dotted line as-is; just adjust its anchor since row height changed */
+          /* keep dotted line; just re-anchor to smaller icon */
           .about-items:not(:last-child)::after {
-            left: 23px;              /* centered under the smaller icon */
-            top: 46px;               /* start at bottom of the icon */
-            height: calc(100% - 22px);
+            left: 26px;     /* center under 52px circle */
+            top: 52px;
+            height: calc(100% - 24px);
           }
 
           .about-items .content h5 {
-            font-size: 15px;
+            grid-column: 2 / 3;
+            margin: 0;
+            font-size: 16px;
             line-height: 1.2;
-            margin: 0;               /* title sits on the same row as icon */
           }
           .about-items .content p {
-            font-size: 13.5px;
+            grid-column: 2 / 3;
+            margin-top: 4px;
+            font-size: 14px;
             line-height: 1.45;
-            margin-top: 4px;         /* description directly under title */
           }
 
-          /* Brand row height smaller on mobile */
-          .brand-slide { height: 84px; }
-          .brand-logo { max-height: 68px; }
+          /* image tweaks */
+          .about-photo { transform: none; border-radius: 16px; box-shadow: 0 10px 26px rgba(0,0,0,.15); }
+
+          /* brand logos tighter */
+          .brand-slide { height: 80px; }
+          .brand-logo { max-height: 64px; }
         }
 
-        /* Small phones */
+        /* very small phones */
         @media (max-width: 480px) {
-          .about-items { grid-template-columns: 42px 1fr; column-gap: 10px; }
-          .about-items .icon { width: 42px; height: 42px; min-width: 42px; }
-          .about-items .icon img { width: 20px; height: 20px; }
-          .about-items:not(:last-child)::after { left: 21px; top: 42px; }
-          .about-items .content p { font-size: 13px; }
+          .about-items { grid-template-columns: 46px 1fr; column-gap: 12px; }
+          .about-items .icon { width: 46px; height: 46px; }
+          .about-items:not(:last-child)::after { left: 23px; top: 46px; }
+          .about-items .content p { font-size: 13.5px; }
         }
       `}</style>
 
