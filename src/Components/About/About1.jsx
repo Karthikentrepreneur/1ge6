@@ -111,72 +111,67 @@ const About1 = () => {
         .brand-logo:hover { transform: translateY(-2px); }
         .brand-link { display:flex; align-items:center; justify-content:center; width:100%; height:100%; }
 
-        /* ===== MOBILE-ONLY (match screenshot layout) ===== */
+        /* ===== MOBILE-ONLY CLEAN LAYOUT ===== */
         @media (max-width: 768px) {
-          .about-section { padding: 28px 0 8px !important; }
+          .about-section { padding: 28px 0 10px !important; }
           .container { padding-left: 18px; padding-right: 18px; }
 
           /* stack image then text */
-          .about-wrapper .row { flex-direction: column; gap: 20px; }
+          .about-wrapper .row { flex-direction: column; gap: 22px; }
           .col-lg-7, .col-lg-5 { width: 100%; max-width: 100%; }
 
-          /* title bigger like screenshot */
+          /* Bigger readable title */
           .about-content .section-title h2 {
             font-size: clamp(26px, 7vw, 30px);
             line-height: 1.15;
-            margin-bottom: 18px;
+            margin-bottom: 16px;
           }
 
-          /* row = icon (left) + title (right), description below */
+          /* Hide the dotted connector on mobile to avoid overlap */
+          .about-items:not(:last-child)::after { content: none !important; }
+
+          /* Icon | Title on same row, description below */
           .about-items {
             display: grid;
-            grid-template-columns: 52px 1fr; /* icon | text */
+            grid-template-columns: 54px 1fr;
             grid-auto-rows: min-content;
             column-gap: 14px;
             row-gap: 6px;
-            margin-bottom: 20px;
+            margin-bottom: 18px;
             align-items: center;
           }
           .about-items .icon {
-            width: 52px; height: 52px; min-width: 52px;
-            grid-row: 1 / span 2; /* span title + paragraph */
+            width: 54px; height: 54px; min-width: 54px;
+            grid-row: 1 / span 2; /* span title + text */
             box-shadow: 0 3px 8px rgba(38,182,224,0.28);
           }
           .about-items .icon img { width: 22px; height: 22px; }
-
-          /* keep dotted line; just re-anchor to smaller icon */
-          .about-items:not(:last-child)::after {
-            left: 26px;     /* center under 52px circle */
-            top: 52px;
-            height: calc(100% - 24px);
-          }
 
           .about-items .content h5 {
             grid-column: 2 / 3;
             margin: 0;
             font-size: 16px;
-            line-height: 1.2;
+            line-height: 1.22;
           }
           .about-items .content p {
             grid-column: 2 / 3;
             margin-top: 4px;
             font-size: 14px;
-            line-height: 1.45;
+            line-height: 1.5;
           }
 
-          /* image tweaks */
+          /* Image tweaks */
           .about-photo { transform: none; border-radius: 16px; box-shadow: 0 10px 26px rgba(0,0,0,.15); }
 
-          /* brand logos tighter */
+          /* Brand logos tighter */
           .brand-slide { height: 80px; }
           .brand-logo { max-height: 64px; }
         }
 
-        /* very small phones */
+        /* Very small phones */
         @media (max-width: 480px) {
-          .about-items { grid-template-columns: 46px 1fr; column-gap: 12px; }
-          .about-items .icon { width: 46px; height: 46px; }
-          .about-items:not(:last-child)::after { left: 23px; top: 46px; }
+          .about-items { grid-template-columns: 48px 1fr; column-gap: 12px; }
+          .about-items .icon { width: 48px; height: 48px; }
           .about-items .content p { font-size: 13.5px; }
         }
       `}</style>
