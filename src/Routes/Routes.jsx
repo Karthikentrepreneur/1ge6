@@ -53,7 +53,7 @@ export const router = createBrowserRouter([
         Component: TourDetailsPage,
       },
       {
-        path: "activities",
+        path: "our-business-verticals",
         Component: ActivitiesPage,
       },
       {
