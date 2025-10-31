@@ -62,7 +62,6 @@ const About1 = () => {
         }
         .about-photo:hover { transform: scale(1.07); box-shadow: 0 22px 66px rgba(0,0,0,.26); }
 
-        /* Gap between image & text on desktop */
         @media (min-width: 992px) { .about-photo-wrap { margin-right: 40px; } }
 
         /* Title */
@@ -73,7 +72,7 @@ const About1 = () => {
           letter-spacing: -.2px;
         }
 
-        /* Items with teal icon + dotted connector */
+        /* Items + dotted connector (desktop/tablet stays same) */
         .about-items {
           position: relative;
           display: flex;
@@ -104,7 +103,7 @@ const About1 = () => {
         .about-items .content h5 { font-weight: 800; margin: 2px 0 6px; color: var(--ink); }
         .about-items .content p { margin: 0; line-height: 1.5; color: var(--muted); font-size: 15px; }
 
-        /* Brand slider block */
+        /* Brand slider */
         .brand-block { margin-top: 44px; }
         .brand-title { text-align: center; margin: 0 0 14px; font-weight: 800; color: var(--ink); }
         .brand-slider-wrap { max-width: 1100px; margin: 0 auto; padding: 0 8px; }
@@ -113,7 +112,7 @@ const About1 = () => {
         .brand-logo:hover { transform: translateY(-2px); }
         .brand-link { display:flex; align-items:center; justify-content:center; width:100%; height:100%; }
 
-        /* ===== MOBILE OPTIMIZATION ===== */
+        /* ===== MOBILE-ONLY LAYOUT (match “Our Reach” style) ===== */
         @media (max-width: 768px) {
           .about-section { padding: 32px 0 12px !important; }
           .container { padding-left: 18px; padding-right: 18px; }
@@ -125,25 +124,45 @@ const About1 = () => {
           /* Image tweaks */
           .about-photo { transform: none; border-radius: 16px; box-shadow: 0 10px 26px rgba(0,0,0,.15); }
 
-          /* Title size */
           .about-content .section-title h2 {
             font-size: clamp(22px, 5.4vw, 26px);
             text-align: left;
             margin-bottom: 16px;
           }
 
-          /* Item compact layout */
-          .about-items { gap: 12px; margin-bottom: 20px; }
+          /* --- NEW: icon + title on one row, text below (like “Our Reach”) --- */
+          .about-items {
+            display: grid;
+            grid-template-columns: 46px 1fr; /* icon | text */
+            align-items: center;
+            column-gap: 12px;
+            row-gap: 6px;
+            margin-bottom: 18px;
+          }
           .about-items .icon {
             width: 46px; height: 46px; min-width: 46px;
             box-shadow: 0 3px 8px rgba(38,182,224,0.3);
+            grid-row: 1 / span 2; /* keep icon spanning title + paragraph */
           }
           .about-items .icon img { width: 22px; height: 22px; }
+
+          /* keep dotted line as-is; just adjust its anchor since row height changed */
           .about-items:not(:last-child)::after {
-            left: 23px; top: 46px; height: calc(100% - 22px);
+            left: 23px;              /* centered under the smaller icon */
+            top: 46px;               /* start at bottom of the icon */
+            height: calc(100% - 22px);
           }
-          .about-items .content h5 { font-size: 15px; margin-bottom: 2px; }
-          .about-items .content p { font-size: 13.5px; line-height: 1.4; }
+
+          .about-items .content h5 {
+            font-size: 15px;
+            line-height: 1.2;
+            margin: 0;               /* title sits on the same row as icon */
+          }
+          .about-items .content p {
+            font-size: 13.5px;
+            line-height: 1.45;
+            margin-top: 4px;         /* description directly under title */
+          }
 
           /* Brand row height smaller on mobile */
           .brand-slide { height: 84px; }
@@ -152,6 +171,7 @@ const About1 = () => {
 
         /* Small phones */
         @media (max-width: 480px) {
+          .about-items { grid-template-columns: 42px 1fr; column-gap: 10px; }
           .about-items .icon { width: 42px; height: 42px; min-width: 42px; }
           .about-items .icon img { width: 20px; height: 20px; }
           .about-items:not(:last-child)::after { left: 21px; top: 42px; }
