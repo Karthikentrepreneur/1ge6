@@ -24,7 +24,7 @@ const Footer1 = () => {
             <p className="footer-text">
               1 Global Enterprises Pte Ltd is a Singapore head quartered
               business group having interest in Shipping, Logistics/Supply
-              chain, Product distribution, Software development/IT, Renewal
+              chain, Product distribution, Renewal
               energy supplies/clean energy and trading.
             </p>
 
