@@ -21,15 +21,7 @@ export default function Nav({ setMobileToggle, linkColor }) {
           </Link>
         </li>
 
-      <li>
-        <Link
-          to="/global-presence"
-          onClick={() => setMobileToggle(false)}
-          style={{ color: linkColor }}
-        >
-          Global Presence
-        </Link>
-      </li>
+     
 
 
 
