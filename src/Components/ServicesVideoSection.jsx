@@ -22,7 +22,7 @@ const ServicesVideoSection = ({
 
     const ro = new ResizeObserver(() => {
       const h = el.getBoundingClientRect().height;
-      setMatchHeight(Math.max(240, Math.round(h))); // smaller min height
+      setMatchHeight(Math.max(240, Math.round(h)));
     });
     ro.observe(el);
 
@@ -52,7 +52,7 @@ const ServicesVideoSection = ({
             {SERVICES.map(({ title, Icon }) => (
               <div className="svs-item" key={title}>
                 <div className="svs-icon">
-                  <Icon strokeWidth={1.6} />
+                  <Icon strokeWidth={1.75} />
                 </div>
                 <div className="svs-item-title">{title}</div>
               </div>
@@ -102,41 +102,44 @@ const ServicesVideoSection = ({
         .svs-sub { margin: 0 0 6px; font-size: .95rem; color: #5f6b7a; }
         .svs-title { margin: 0; font-size: clamp(1.8rem, 1.2rem + 2vw, 2.6rem); font-weight: 800; color: #0E0F2C; }
 
-        /* Smaller vertical cards */
-        .svs-list { display: grid; gap: 6px; margin-top: 10px; }
+        /* Compact but bold cards */
+        .svs-list { display: grid; gap: 10px; margin-top: 14px; }
         .svs-item {
           display: flex;
           align-items: center;
-          gap: 8px;
-          padding: 6px 10px;            /* reduced padding */
-          border: 1px solid #e4e8ec;
-          border-radius: 8px;           /* smaller radius */
-          background: #f9fdff;
-          transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease;
+          gap: 10px;
+          padding: 10px 14px;
+          border: 1px solid #e2e8f0;
+          border-radius: 10px;
+          background: #f8fcff;
+          width: 85%; /* ✅ Reduced width */
+          transition: all 0.2s ease;
         }
         .svs-item:hover {
-          transform: translateY(-1px);
-          box-shadow: 0 4px 10px rgba(10,40,80,.06);
-          border-color: #cde2ef;
+          transform: translateY(-2px);
+          box-shadow: 0 8px 18px rgba(10,40,80,.08);
+          border-color: #c9e4f5;
+          background: #f4fbff;
         }
 
         .svs-icon {
-          flex: 0 0 28px;               /* smaller icon box */
-          width: 28px;
-          height: 28px;
-          border-radius: 6px;
+          flex: 0 0 40px; /* ✅ Larger icon box */
+          width: 40px;
+          height: 40px;
+          border-radius: 8px;
           display: grid;
           place-items: center;
           background: rgba(38,182,224,.12);
-          border: 1px solid rgba(38,182,224,.3);
+          border: 1px solid rgba(38,182,224,.35);
           color: #1c99bf;
         }
-        .svs-icon svg { width: 15px; height: 15px; }
+        .svs-icon svg { width: 20px; height: 20px; }
+
         .svs-item-title {
-          font-weight: 600;
+          font-weight: 700;
           color: #0E0F2C;
-          font-size: .9rem;
-          line-height: 1.3;
+          font-size: 1rem; /* ✅ Bigger text */
+          line-height: 1.4;
         }
 
         /* RIGHT SIDE */
@@ -149,16 +152,16 @@ const ServicesVideoSection = ({
         .svs-video-frame {
           aspect-ratio: 16 / 9;
           width: 100%;
-          max-width: 620px;
-          border-radius: 16px;
+          max-width: 640px;
+          border-radius: 18px;
           overflow: hidden;
           background: #000;
           display: flex;
           justify-content: center;
           align-items: center;
-          margin-top: 36px;
-          margin-bottom: 36px;
-          box-shadow: 0 12px 28px rgba(0,0,0,0.12);
+          margin-top: 40px;
+          margin-bottom: 40px;
+          box-shadow: 0 12px 28px rgba(0,0,0,0.15);
         }
 
         .svs-video-frame video {
@@ -172,7 +175,7 @@ const ServicesVideoSection = ({
         @media (max-width: 1024px) {
           .svs-container { grid-template-columns: 1fr; }
           .svs-right { order: -1; }
-          .svs-video-frame { max-width: 720px; margin: 32px auto; }
+          .svs-item { width: 100%; } /* Full width on mobile */
         }
 
         @media (max-width: 600px) {
