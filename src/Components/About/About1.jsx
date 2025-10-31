@@ -39,162 +39,130 @@ const About1 = () => {
   };
 
   return (
-    <section
+   <section
       className="about-section bg-cover"
       data-background="/about-bg.png"
-      style={{ padding: "56px 0 24px", overflow: "hidden", position: "relative" }}
+      style={{ padding: '56px 0 24px', overflow: 'hidden' }}
     >
       <style>{`
-        :root { --accent:#26B6E0; --ink:#0E0F2C; --muted:#444; }
-
         .about-wrapper { width: 100%; }
-        .about-section { overflow-x: hidden; }
 
-        /* subtle bottom-right glow to match second UI */
-        .about-section::after{
-          content:"";
-          position:absolute; inset:auto 0 0 auto;
-          width: 46%; height: 46%;
-          background: radial-gradient(60% 60% at 80% 80%, rgba(200,30,48,.10), transparent 60%);
-          pointer-events:none;
+        /* Add gap between image & content */
+        @media (min-width: 992px) {
+          .about-photo-wrap { margin-right: 40px; }
         }
 
-        /* layout */
-        .about-photo-wrap { width: 100%; display:flex; justify-content:center; }
-        /* framed card look */
-        .about-photo-card{
-          background:#fff;
-          padding:18px;
-          border-radius:24px;
-          box-shadow: 0 22px 60px rgba(0,0,0,.18);
-          display:inline-block;
-        }
+        /* Team Image */
+        .about-photo-wrap { width: 100%; text-align: center; }
         .about-photo {
-          width: min(100%, 980px);
+          width: min(100%, 940px);
           height: auto;
-          display:block;
-          border-radius:16px;
+          border-radius: 22px;
+          object-fit: cover;
+          box-shadow: 0 16px 50px rgba(0,0,0,.24);
+          transform: scale(1.03);
+          transition: transform .3s ease, box-shadow .3s ease;
+        }
+        .about-photo:hover {
+          transform: scale(1.07);
+          box-shadow: 0 22px 66px rgba(0,0,0,.26);
         }
 
-        /* Title like the 2nd image (bigger, right column head) */
-        .section-title h2{
-          color: var(--ink);
-          font-weight: 800;
-          letter-spacing: -0.4px;
-          line-height: 1.1;
-          margin: 0 0 18px;
-          font-size: clamp(28px, 3.5vw, 56px); /* grow big on desktop */
+        /* Section content */
+        .about-content .section-title h2 {
+          margin-bottom: 18px;
         }
 
-        /* items stack with dotted connector */
-        .about-items{
+        /* Full teal circle icons */
+        .about-items {
           position: relative;
-          display:flex; gap: 16px;
-          align-items:flex-start;
-          padding-left: 0;
-          margin-bottom: 26px;
+          display: flex;
+          align-items: flex-start;
+          gap: 16px;
+          margin-bottom: 28px;
         }
-        .about-items .icon{
-          width: 64px; height: 64px; min-width:64px;
+
+        .about-items .icon {
+          position: relative;
+          width: 60px;
+          height: 60px;
+          min-width: 60px;
           border-radius: 50%;
-          background: var(--accent);
-          display:flex; align-items:center; justify-content:center;
-          box-shadow: 0 6px 14px rgba(38,182,224,.32);
-          position: relative;
-          z-index: 2;
-        }
-        .about-items .icon img{ width: 28px; height: 28px; filter: brightness(0) invert(1); }
-
-        /* dotted connector aligned to icon centers */
-        .about-items:not(:last-child)::after{
-          content:"";
-          position:absolute;
-          left: 32px; /* half of icon width */
-          top: 64px;
-          width:2px;
-          height: calc(100% - 18px);
-          background:
-            linear-gradient(var(--accent), var(--accent)) left top / 2px 0 no-repeat,
-            repeating-linear-gradient(to bottom, var(--accent), var(--accent) 4px, transparent 4px, transparent 10px);
-          z-index:1;
-          opacity:.9;
+          background-color: #26B6E0;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          z-index: 1;
+          box-shadow: 0 4px 10px rgba(38,182,224,0.35);
         }
 
-        .about-items .content h5{
-          margin: 4px 0 6px;
-          font-weight: 800;
-          color: var(--ink);
-          font-size: 18px;
-        }
-        .about-items .content p{
-          margin:0; color: var(--muted);
-          line-height: 1.55; font-size: 15.5px;
+        .about-items .icon img {
+          width: 28px;
+          height: 28px;
+          filter: brightness(0) invert(1);
         }
 
-        /* group companies */
-        .brand-block { margin-top: 44px; }
-        .brand-title {
-          text-align:center; margin: 0 0 14px;
-          font-weight: 800; color: var(--ink);
-          letter-spacing: -.2px;
-        }
-        .brand-slider-wrap { max-width: 1100px; margin: 0 auto; padding: 0 8px; }
-        .brand-slide { display:flex; align-items:center; justify-content:center; height:110px; }
-        .brand-logo { max-height: 90px; width:auto; object-fit:contain; transition: transform .2s ease; }
-        .brand-logo:hover { transform: translateY(-2px); }
-
-        /* spacing balance at lg+ to mimic screenshot */
-        @media (min-width: 992px){
-          .about-photo-wrap{ margin-right: 28px; }
-        }
-
-        /* Tablet */
-        @media (max-width: 991.98px){
-          .about-section{ padding: 44px 0 18px !important; }
-          .about-photo-card{ padding:14px; border-radius:20px; }
-          .about-photo{ border-radius:14px; }
-          .brand-block{ margin-top: 36px; }
+        .about-items:not(:last-child)::after {
+          content: "";
+          position: absolute;
+          left: 29px;
+          top: 60px;
+          width: 2px;
+          height: calc(100% - 30px);
+          background: repeating-linear-gradient(
+            to bottom,
+            #26B6E0,
+            #26B6E0 4px,
+            transparent 4px,
+            transparent 8px
+          );
+          z-index: 0;
         }
 
-        /* Mobile */
-        @media (max-width: 768px){
-          .container{ padding-left:16px; padding-right:16px; }
-          .row.g-4{ gap:18px !important; }
-          .section-title h2{ font-size: clamp(24px, 6vw, 32px); }
-          .about-items{ gap:12px; margin-bottom:20px; }
-          .about-items .icon{ width:52px; height:52px; min-width:52px; }
-          .about-items:not(:last-child)::after{ left:26px; top:52px; }
-          .about-items .content h5{ font-size:16px; }
-          .about-items .content p{ font-size:14px; }
-          .brand-slide{ height:84px; }
-          .brand-logo{ max-height:68px; }
+        .about-items .content h5 {
+          font-weight: 700;
+          margin-bottom: 4px;
+          color: #0E0F2C;
+        }
+        .about-items .content p {
+          margin: 0;
+          line-height: 1.5;
+          color: #444;
+          font-size: 15px;
+        }
+
+        /* Responsive */
+        @media (max-width: 1199px) {
+          .about-photo { width: min(100%, 860px); transform: scale(1.02); }
+        }
+        @media (max-width: 991px) {
+          .about-section { padding: 40px 0 16px !important; }
+          .about-photo { width: 100%; transform: scale(1.0); border-radius: 18px; }
         }
       `}</style>
 
       <div className="container">
         <div className="about-wrapper">
           <div className="row g-4 align-items-center">
-            {/* Left: Photo card */}
+            {/* Left Image */}
             <div className="col-lg-7 d-flex justify-content-center">
               <div className="about-photo-wrap">
-                <div className="about-photo-card">
-                  <img
-                    src="/team.jpg"
-                    alt="1 Global Enterprises Group"
-                    className="about-photo"
-                  />
-                </div>
+                <img
+                  src="/team.jpg"
+                  alt="1 Global Enterprises Group"
+                  className="about-photo"
+                />
               </div>
             </div>
 
-            {/* Right: Title + bullets (bigger like reference) */}
+            {/* Right Text */}
             <div className="col-lg-5">
               <div className="about-content">
                 <div className="section-title">
                   <h2>1 Global Enterprises</h2>
                 </div>
 
-                <div className="about-area mt-2">
+                <div className="about-area mt-3">
                   <div className="about-items">
                     <div className="icon">
                       <img src="/assets/img/icon/05.svg" alt="Who We Are" />
@@ -203,7 +171,7 @@ const About1 = () => {
                       <h5>Who We Are</h5>
                       <p>
                         A diversified group with interests in Shipping, Logistics,
-                        Distribution, IT, Clean Energy &amp; Trading.
+                        Distribution, IT, Clean Energy & Trading.
                       </p>
                     </div>
                   </div>
@@ -226,7 +194,7 @@ const About1 = () => {
                       <h5>Expertise</h5>
                       <p>
                         Each business unit is led by experts ensuring sustainability,
-                        execution &amp; growth.
+                        execution & growth.
                       </p>
                     </div>
                   </div>
@@ -234,6 +202,11 @@ const About1 = () => {
               </div>
             </div>
           </div>
+        </div>
+      </div>
+    </section>
+  );
+};
 
           {/* Group Companies Slider */}
           <div className="brand-block">
