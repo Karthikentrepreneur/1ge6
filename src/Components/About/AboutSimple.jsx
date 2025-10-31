@@ -38,7 +38,9 @@ const AboutSimple = () => {
         }
 
         /* Section content */
-        .about-content .section-title h2 { margin-bottom: 18px; }
+        .about-content .section-title h2 {
+          margin-bottom: 18px;
+        }
 
         /* Full teal circle icons */
         .about-items {
@@ -48,83 +50,57 @@ const AboutSimple = () => {
           gap: 16px;
           margin-bottom: 28px;
         }
+
         .about-items .icon {
           position: relative;
-          width: 60px; height: 60px; min-width: 60px;
+          width: 60px;
+          height: 60px;
+          min-width: 60px;
           border-radius: 50%;
           background-color: #26B6E0;
-          display: flex; align-items: center; justify-content: center;
+          display: flex;
+          align-items: center;
+          justify-content: center;
           z-index: 1;
           box-shadow: 0 4px 10px rgba(38,182,224,0.35);
         }
+
         .about-items .icon img {
-          width: 28px; height: 28px; filter: brightness(0) invert(1);
+          width: 28px;
+          height: 28px;
+          filter: brightness(0) invert(1);
         }
+
         .about-items:not(:last-child)::after {
           content: "";
-          position: absolute; left: 29px; top: 60px;
-          width: 2px; height: calc(100% - 30px);
+          position: absolute;
+          left: 29px;
+          top: 60px;
+          width: 2px;
+          height: calc(100% - 30px);
           background: repeating-linear-gradient(
-            to bottom, #26B6E0, #26B6E0 4px, transparent 4px, transparent 8px
+            to bottom,
+            #26B6E0,
+            #26B6E0 4px,
+            transparent 4px,
+            transparent 8px
           );
           z-index: 0;
         }
+
         .about-items .content h5 {
-          font-weight: 700; margin-bottom: 4px; color: #0E0F2C;
+          font-weight: 700;
+          margin-bottom: 4px;
+          color: #0E0F2C;
         }
         .about-items .content p {
-          margin: 0; line-height: 1.5; color: #444; font-size: 15px;
+          margin: 0;
+          line-height: 1.5;
+          color: #444;
+          font-size: 15px;
         }
 
-        /* ===== MOBILE-ONLY LAYOUT (≤768px) ===== */
-        @media (max-width: 768px) {
-          .about-section { padding: 36px 0 14px !important; }
-          .container { padding-left: 18px; padding-right: 18px; }
-
-          /* Stack image then text */
-          .about-wrapper .row { flex-direction: column; gap: 22px; }
-          .about-photo { transform: none; border-radius: 16px; box-shadow: 0 10px 26px rgba(0,0,0,.15); }
-
-          /* Title size for mobile */
-          .about-content .section-title h2 {
-            font-size: clamp(26px, 7vw, 30px);
-            line-height: 1.15;
-            margin-bottom: 16px;
-          }
-
-          /* Icon | Title row, description below; remove dotted line */
-          .about-items {
-            display: grid;
-            grid-template-columns: 52px 1fr; /* icon | text */
-            grid-auto-rows: min-content;
-            column-gap: 14px;
-            row-gap: 6px;
-            margin-bottom: 18px;
-            align-items: center;
-          }
-          .about-items .icon {
-            width: 52px; height: 52px; min-width: 52px;
-            grid-row: 1 / span 2; /* spans title + description */
-            box-shadow: 0 3px 8px rgba(38,182,224,0.28);
-          }
-          .about-items .icon img { width: 22px; height: 22px; }
-          .about-items:not(:last-child)::after { content: none !important; } /* hide the dotted line */
-
-          .about-items .content h5 {
-            grid-column: 2 / 3;
-            margin: 0;
-            font-size: 16px;
-            line-height: 1.22;
-          }
-          .about-items .content p {
-            grid-column: 2 / 3;
-            margin-top: 4px;
-            font-size: 14px;
-            line-height: 1.5;
-          }
-        }
-
-        /* Tablet down image sizing */
+        /* Responsive */
         @media (max-width: 1199px) {
           .about-photo { width: min(100%, 860px); transform: scale(1.02); }
         }
