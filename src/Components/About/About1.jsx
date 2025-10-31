@@ -45,15 +45,11 @@ const About1 = () => {
       style={{ padding: "56px 0 24px", overflow: "hidden" }}
     >
       <style>{`
+        :root { --accent:#26B6E0; --ink:#0E0F2C; --muted:#444; }
         .about-wrapper { width: 100%; }
         .about-section { overflow-x: hidden; }
 
-        /* Add gap between image & content (lg+) */
-        @media (min-width: 992px) {
-          .about-photo-wrap { margin-right: 40px; }
-        }
-
-        /* Team Image */
+        /* Image */
         .about-photo-wrap { width: 100%; text-align: center; }
         .about-photo {
           width: min(100%, 940px);
@@ -64,13 +60,18 @@ const About1 = () => {
           transform: scale(1.03);
           transition: transform .3s ease, box-shadow .3s ease;
         }
-        .about-photo:hover {
-          transform: scale(1.07);
-          box-shadow: 0 22px 66px rgba(0,0,0,.26);
-        }
+        .about-photo:hover { transform: scale(1.07); box-shadow: 0 22px 66px rgba(0,0,0,.26); }
 
-        /* Section content */
-        .about-content .section-title h2 { margin-bottom: 18px; }
+        /* Gap between image & text on desktop */
+        @media (min-width: 992px) { .about-photo-wrap { margin-right: 40px; } }
+
+        /* Title */
+        .about-content .section-title h2 {
+          margin-bottom: 18px;
+          color: var(--ink);
+          font-weight: 800;
+          letter-spacing: -.2px;
+        }
 
         /* Items with teal icon + dotted connector */
         .about-items {
@@ -81,10 +82,9 @@ const About1 = () => {
           margin-bottom: 28px;
         }
         .about-items .icon {
-          position: relative;
           width: 60px; height: 60px; min-width: 60px;
           border-radius: 50%;
-          background-color: #26B6E0;
+          background-color: var(--accent);
           display: flex; align-items: center; justify-content: center;
           z-index: 1;
           box-shadow: 0 4px 10px rgba(38,182,224,0.35);
@@ -97,29 +97,65 @@ const About1 = () => {
           width: 2px;
           height: calc(100% - 30px);
           background: repeating-linear-gradient(
-            to bottom, #26B6E0, #26B6E0 4px, transparent 4px, transparent 8px
+            to bottom, var(--accent), var(--accent) 4px, transparent 4px, transparent 8px
           );
           z-index: 0;
         }
-        .about-items .content h5 { font-weight: 700; margin-bottom: 4px; color: #0E0F2C; }
-        .about-items .content p { margin: 0; line-height: 1.5; color: #444; font-size: 15px; }
+        .about-items .content h5 { font-weight: 800; margin: 2px 0 6px; color: var(--ink); }
+        .about-items .content p { margin: 0; line-height: 1.5; color: var(--muted); font-size: 15px; }
 
         /* Brand slider block */
         .brand-block { margin-top: 44px; }
-        .brand-title { text-align: center; margin: 0 0 14px; font-weight: 700; }
+        .brand-title { text-align: center; margin: 0 0 14px; font-weight: 800; color: var(--ink); }
         .brand-slider-wrap { max-width: 1100px; margin: 0 auto; padding: 0 8px; }
         .brand-slide { display: flex; align-items: center; justify-content: center; height: 110px; }
         .brand-logo { max-height: 90px; width: auto; object-fit: contain; transition: transform .2s ease; }
         .brand-logo:hover { transform: translateY(-2px); }
         .brand-link { display:flex; align-items:center; justify-content:center; width:100%; height:100%; }
 
-        /* Responsive tweaks */
-        @media (max-width: 1199px) {
-          .about-photo { width: min(100%, 860px); transform: scale(1.02); }
+        /* ===== MOBILE OPTIMIZATION ===== */
+        @media (max-width: 768px) {
+          .about-section { padding: 32px 0 12px !important; }
+          .container { padding-left: 18px; padding-right: 18px; }
+
+          /* Stack columns */
+          .about-wrapper .row { flex-direction: column; gap: 24px; }
+          .col-lg-7, .col-lg-5 { width: 100%; max-width: 100%; }
+
+          /* Image tweaks */
+          .about-photo { transform: none; border-radius: 16px; box-shadow: 0 10px 26px rgba(0,0,0,.15); }
+
+          /* Title size */
+          .about-content .section-title h2 {
+            font-size: clamp(22px, 5.4vw, 26px);
+            text-align: left;
+            margin-bottom: 16px;
+          }
+
+          /* Item compact layout */
+          .about-items { gap: 12px; margin-bottom: 20px; }
+          .about-items .icon {
+            width: 46px; height: 46px; min-width: 46px;
+            box-shadow: 0 3px 8px rgba(38,182,224,0.3);
+          }
+          .about-items .icon img { width: 22px; height: 22px; }
+          .about-items:not(:last-child)::after {
+            left: 23px; top: 46px; height: calc(100% - 22px);
+          }
+          .about-items .content h5 { font-size: 15px; margin-bottom: 2px; }
+          .about-items .content p { font-size: 13.5px; line-height: 1.4; }
+
+          /* Brand row height smaller on mobile */
+          .brand-slide { height: 84px; }
+          .brand-logo { max-height: 68px; }
         }
-        @media (max-width: 991px) {
-          .about-section { padding: 40px 0 16px !important; }
-          .about-photo { width: 100%; transform: scale(1.0); border-radius: 18px; }
+
+        /* Small phones */
+        @media (max-width: 480px) {
+          .about-items .icon { width: 42px; height: 42px; min-width: 42px; }
+          .about-items .icon img { width: 20px; height: 20px; }
+          .about-items:not(:last-child)::after { left: 21px; top: 42px; }
+          .about-items .content p { font-size: 13px; }
         }
       `}</style>
 
@@ -129,11 +165,7 @@ const About1 = () => {
             {/* Left Image */}
             <div className="col-lg-7 d-flex justify-content-center">
               <div className="about-photo-wrap">
-                <img
-                  src="/team.jpg"
-                  alt="1 Global Enterprises Group"
-                  className="about-photo"
-                />
+                <img src="/team.jpg" alt="1 Global Enterprises Group" className="about-photo" />
               </div>
             </div>
 
@@ -151,10 +183,7 @@ const About1 = () => {
                     </div>
                     <div className="content">
                       <h5>Who We Are</h5>
-                      <p>
-                        A diversified group with interests in Shipping, Logistics,
-                        Distribution, IT, Clean Energy &amp; Trading.
-                      </p>
+                      <p>A diversified group with interests in Shipping, Logistics, Distribution, IT, Clean Energy & Trading.</p>
                     </div>
                   </div>
 
@@ -174,10 +203,7 @@ const About1 = () => {
                     </div>
                     <div className="content">
                       <h5>Expertise</h5>
-                      <p>
-                        Each business unit is led by experts ensuring sustainability,
-                        execution &amp; growth.
-                      </p>
+                      <p>Each business unit is led by experts ensuring sustainability, execution & growth.</p>
                     </div>
                   </div>
                 </div>
