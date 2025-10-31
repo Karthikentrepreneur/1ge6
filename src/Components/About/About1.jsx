@@ -49,7 +49,7 @@ const About1 = () => {
         .about-wrapper { width: 100%; }
         .about-section { overflow-x: hidden; }
 
-        /* Image */
+        /* ===== Image ===== */
         .about-photo-wrap { width: 100%; text-align: center; }
         .about-photo {
           width: min(100%, 940px);
@@ -63,7 +63,7 @@ const About1 = () => {
         .about-photo:hover { transform: scale(1.07); box-shadow: 0 22px 66px rgba(0,0,0,.26); }
         @media (min-width: 992px) { .about-photo-wrap { margin-right: 40px; } }
 
-        /* Title */
+        /* ===== Title ===== */
         .about-content .section-title h2 {
           margin-bottom: 18px;
           color: var(--ink);
@@ -71,7 +71,7 @@ const About1 = () => {
           letter-spacing: -.2px;
         }
 
-        /* Items + dotted connector (desktop/tablet) */
+        /* ===== Items + dotted connector (desktop/tablet) ===== */
         .about-items {
           position: relative;
           display: flex;
@@ -102,7 +102,7 @@ const About1 = () => {
         .about-items .content h5 { font-weight: 800; margin: 2px 0 6px; color: var(--ink); }
         .about-items .content p { margin: 0; line-height: 1.5; color: var(--muted); font-size: 15px; }
 
-        /* Brand slider */
+        /* ===== Brand slider ===== */
         .brand-block { margin-top: 44px; }
         .brand-title { text-align: center; margin: 0 0 14px; font-weight: 800; color: var(--ink); }
         .brand-slider-wrap { max-width: 1100px; margin: 0 auto; padding: 0 8px; }
@@ -116,24 +116,24 @@ const About1 = () => {
           .about-section { padding: 28px 0 10px !important; }
           .container { padding-left: 18px; padding-right: 18px; }
 
-          /* stack image then text */
+          /* Stack columns */
           .about-wrapper .row { flex-direction: column; gap: 22px; }
           .col-lg-7, .col-lg-5 { width: 100%; max-width: 100%; }
 
-          /* Bigger readable title */
+          /* Readable title */
           .about-content .section-title h2 {
             font-size: clamp(26px, 7vw, 30px);
             line-height: 1.15;
             margin-bottom: 16px;
           }
 
-          /* Hide the dotted connector on mobile to avoid overlap */
+          /* Hide dotted connector on mobile */
           .about-items:not(:last-child)::after { content: none !important; }
 
           /* Icon | Title on same row, description below */
           .about-items {
             display: grid;
-            grid-template-columns: 54px 1fr;
+            grid-template-columns: 54px 1fr; /* icon | text */
             grid-auto-rows: min-content;
             column-gap: 14px;
             row-gap: 6px;
@@ -142,7 +142,7 @@ const About1 = () => {
           }
           .about-items .icon {
             width: 54px; height: 54px; min-width: 54px;
-            grid-row: 1 / span 2; /* span title + text */
+            grid-row: 1 / span 2; /* span title + paragraph */
             box-shadow: 0 3px 8px rgba(38,182,224,0.28);
           }
           .about-items .icon img { width: 22px; height: 22px; }
@@ -168,7 +168,7 @@ const About1 = () => {
           .brand-logo { max-height: 64px; }
         }
 
-        /* Very small phones */
+        /* ===== Small phones ===== */
         @media (max-width: 480px) {
           .about-items { grid-template-columns: 48px 1fr; column-gap: 12px; }
           .about-items .icon { width: 48px; height: 48px; }
@@ -194,6 +194,7 @@ const About1 = () => {
                 </div>
 
                 <div className="about-area mt-3">
+                  {/* Item 1 */}
                   <div className="about-items">
                     <div className="icon">
                       <img src="/assets/img/icon/05.svg" alt="Who We Are" />
@@ -204,6 +205,7 @@ const About1 = () => {
                     </div>
                   </div>
 
+                  {/* Item 2 */}
                   <div className="about-items">
                     <div className="icon">
                       <img src="/assets/img/icon/06.svg" alt="Our Reach" />
@@ -214,6 +216,7 @@ const About1 = () => {
                     </div>
                   </div>
 
+                  {/* Item 3 */}
                   <div className="about-items">
                     <div className="icon">
                       <img src="/assets/img/icon/07.svg" alt="Expertise" />
@@ -243,7 +246,7 @@ const About1 = () => {
                       title={`Open ${item.alt}`}
                       onDragStart={(e) => e.preventDefault()}
                     >
-                      <img src={item.img} alt={item.alt} className="brand-logo" />
+                      <img src={item.img} alt={item.alt} className="brand-logo" loading="lazy" />
                     </a>
                   </div>
                 ))}
