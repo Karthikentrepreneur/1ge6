@@ -96,17 +96,7 @@ export default function Header3({ variant }) {
               </div>
 
               {/* Right: Button only */}
-              <div className="cs_main_header_right">
-                <div className="header-btn d-flex align-items-center">
-                  <div className="main-button">
-                    <Link to="/corporate-sustainability" className="theme-btn" style={{ color: textColor }}>
-                      <span>
-                        Vision & Strategy <i className="bi bi-arrow-right"></i>
-                      </span>
-                    </Link>
-                  </div>
-                </div>
-              </div>
+
 
             </div>
           </div>
