@@ -43,15 +43,14 @@ const VERTICALS = [
 const openLink = (link) =>
   link ? window.open(link, "_blank", "noopener,noreferrer") : null;
 
-const padTo = (arr, len) =>
-  [...arr, ...Array(Math.max(0, len - arr.length)).fill(null)].slice(0, len);
-
 /* ---------- COMPONENT ---------- */
 const Activities = () => {
   return (
     <section className="activities-section">
       <style>{`
-        .activities-section { background:#edf2f7; padding:56px 0; }
+        :root { --ink:#0F172A; --muted:#475569; --border:#E5E7EB; --card:#FFFFFF; --bg:#EDF2F7; --accent:#2563EB; }
+
+        .activities-section { background:var(--bg); padding:56px 0; }
 
         .verticals-wrapper{
           display:grid;
@@ -63,84 +62,84 @@ const Activities = () => {
         .vertical-card{
           display:grid;
           grid-template-rows:auto 1fr;
-          background:#fff;
-          border:1px solid #e5e7eb;
-          border-radius:14px;
+          background:var(--card);
+          border:1px solid var(--border);
+          border-radius:16px;
           overflow:hidden;
           box-shadow:0 2px 8px rgba(2,8,23,.06);
           transition:transform .25s ease, box-shadow .25s ease;
         }
-        .vertical-card:hover{
-          transform:translateY(-4px);
-          box-shadow:0 10px 26px rgba(2,8,23,.12);
-        }
+        .vertical-card:hover{ transform:translateY(-4px); box-shadow:0 10px 26px rgba(2,8,23,.12); }
 
-        /* ✅ Bigger logos, removed white box */
+        /* ---------- Logo strip (flex for perfect centering with any count) ---------- */
         .logos-grid{
-          display:grid;
-          grid-template-columns:repeat(3, 1fr);
-          gap:18px;
-          padding:20px;
-          background:#f8fafc;
-          border-bottom:1px solid #e6eaf0;
+          display:flex;
+          flex-wrap:wrap;
+          gap:18px 28px;              /* row gap | column gap */
+          justify-content:center;     /* center even if 1–2 logos */
+          align-items:center;
+          padding:22px 22px 20px;
+          min-height:132px;           /* gives that airy header look */
+          background:#F8FAFC;
+          border-bottom:1px solid #E6EAF0;
         }
 
         .logo-cell{
-          height:90px;
-          border:none;
-          background:none;
-          display:flex;
-          align-items:center;
-          justify-content:center;
-          transition:transform .2s ease, opacity .2s ease;
+          width:132px;                /* consistent footprint */
+          height:88px;
+          display:flex; align-items:center; justify-content:center;
+          background:none; border:none; padding:0;
+          cursor:default; transition:transform .18s ease;
         }
         .logo-cell.clickable{ cursor:pointer; }
-        .logo-cell.clickable:hover{
-          transform:scale(1.06);
-        }
-        .logo-cell.placeholder{ opacity:.6; }
+        .logo-cell.clickable:hover{ transform:scale(1.06); }
 
         .logo-cell img{
-          max-width:90%;
-          max-height:80%;
+          max-width:100%;
+          max-height:74%;
           object-fit:contain;
           display:block;
-          transition:transform .2s ease;
-        }
-        .logo-cell:hover img{
-          transform:scale(1.05);
+          filter:none;                /* keep original brand colors */
         }
 
-        .card-body{
-          padding:22px 26px 26px;
-          display:flex;
-          flex-direction:column;
-        }
+        /* ---------- Body ---------- */
+        .card-body{ padding:24px 26px 26px; display:flex; flex-direction:column; }
 
         .title-row{
-          display:flex;
-          align-items:center;
-          gap:12px;
-          margin-bottom:10px;
-          min-height:46px;
+          display:flex; align-items:center; gap:12px;
+          margin-bottom:12px;
         }
         .title-icon{
-          width:36px; height:36px;
-          border-radius:999px; background:#2563eb;
-          display:flex; align-items:center; justify-content:center;
+          width:40px; height:40px; border-radius:999px; background:var(--accent);
+          display:flex; align-items:center; justify-content:center; color:#fff;
+          box-shadow:0 6px 14px rgba(37,99,235,.18);
         }
         .title-row h3{
-          margin:0; font-size:1.15rem; color:#111827; font-weight:700;
-          white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
+          margin:0; font-size:1.125rem; font-weight:800; color:var(--ink);
         }
-        .desc{ margin:0; color:#475569; font-size:.98rem; line-height:1.65; flex-grow:1; }
 
-        @media(max-width:768px){
-          .logo-cell{ height:72px; }
-          .logo-cell img{ max-width:95%; max-height:85%; }
+        .desc{
+          margin:0; color:var(--muted); font-size:.98rem; line-height:1.7;
+        }
+
+        /* ---------- Responsive ---------- */
+        @media (max-width: 1024px){
+          .logos-grid{ min-height:120px; gap:16px 22px; }
+          .logo-cell{ width:120px; height:80px; }
+        }
+
+        @media (max-width: 768px){
+          .verticals-wrapper{ gap:22px; }
           .card-body{ padding:20px; }
+          .logo-cell{ width:112px; height:76px; }
+          .title-icon{ width:36px; height:36px; }
           .title-row h3{ font-size:1.05rem; }
-          .desc{ font-size:.95rem; }
+          .desc{ font-size:.95rem; line-height:1.65; }
+        }
+
+        @media (max-width: 420px){
+          .logo-cell{ width:46%; height:70px; } /* two per row on tiny phones */
+          .logos-grid{ gap:14px 10px; }
         }
       `}</style>
 
@@ -148,22 +147,18 @@ const Activities = () => {
         <div className="verticals-wrapper">
           {VERTICALS.map((v) => (
             <article key={v.title} className="vertical-card">
-              {/* ✅ Always 3×2 grid (6 slots) */}
+              {/* Top logos – perfectly centered regardless of count */}
               <div className="logos-grid">
-                {padTo(v.logos, 6).map((L, i) =>
-                  L ? (
-                    <div
-                      key={`${v.title}-logo-${i}`}
-                      className="logo-cell clickable"
-                      onClick={() => openLink(L.link)}
-                      title={L.alt}
-                    >
-                      <img src={L.img} alt={L.alt} loading="lazy" />
-                    </div>
-                  ) : (
-                    <div key={`${v.title}-ph-${i}`} className="logo-cell placeholder" />
-                  )
-                )}
+                {v.logos.map((L, i) => (
+                  <div
+                    key={`${v.title}-logo-${i}`}
+                    className={`logo-cell ${L.link ? "clickable" : ""}`}
+                    onClick={() => L.link && openLink(L.link)}
+                    title={L.alt}
+                  >
+                    <img src={L.img} alt={L.alt} loading="lazy" />
+                  </div>
+                ))}
               </div>
 
               <div className="card-body">
