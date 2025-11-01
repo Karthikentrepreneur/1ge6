@@ -87,10 +87,11 @@ const Activities = () => {
           min-height:180px;
         }
 
-        /* Center horizontally & vertically when fewer than 6 */
-        .logos-grid.centered {
+        /* Center single logo */
+        .logos-grid.single-logo {
+          display:flex;
+          align-items:center;
           justify-content:center;
-          align-content:center;
         }
 
         .logo-item{
@@ -98,7 +99,7 @@ const Activities = () => {
           align-items:center;
           justify-content:center;
           cursor:pointer;
-          transition:transform .18s ease;
+          transition:transform .18s ease, filter .18s ease;
         }
         .logo-item:hover{ transform:scale(1.06); }
         .logo-item img{
@@ -139,28 +140,21 @@ const Activities = () => {
 
       <div className="container">
         <div className="verticals-wrapper">
-          {VERTICALS.map((v, idx) => {
-            const isRenewable = v.title === "Renewable Energy" || idx === 1;
-            const shouldCenter = isRenewable || v.logos.length < 6; // center for Renewable + any with <6 logos
+          {VERTICALS.map((v) => {
+            const singleLogo = v.logos.length === 1;
             return (
               <article key={v.title} className="vertical-card">
-                {/* ---------- Logos (3x2 grid; center for Renewable Energy) ---------- */}
-                <div className={`logos-grid ${shouldCenter ? "centered" : ""}`}>
+                {/* ---------- Logos (3x2 grid) ---------- */}
+                <div className={`logos-grid ${singleLogo ? "single-logo" : ""}`}>
                   {v.logos.map((L, i) => (
                     <div
                       key={`${v.title}-logo-${i}`}
                       className="logo-item"
                       onClick={() => openLink(L.link)}
                       title={L.alt}
-                      role="button"
-                      aria-label={`Open ${L.alt}`}
                     >
                       <img src={L.img} alt={L.alt} loading="lazy" />
                     </div>
-                  ))}
-                  {/* If fewer than 6 logos, empty cells keep grid geometry */}
-                  {Array.from({ length: Math.max(0, 6 - v.logos.length) }).map((_, i) => (
-                    <div key={`${v.title}-ph-${i}`} />
                   ))}
                 </div>
 
