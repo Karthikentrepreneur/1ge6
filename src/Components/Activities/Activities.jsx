@@ -73,7 +73,7 @@ const Activities = () => {
         }
         .vertical-card:hover{ transform:translateY(-4px); box-shadow:0 10px 26px rgba(2,8,23,.12); }
 
-        /* ✅ Default 3×2 logo grid */
+        /* ✅ 3x2 logo grid */
         .logos-grid{
           display:grid;
           grid-template-columns:repeat(3, 1fr);
@@ -87,14 +87,11 @@ const Activities = () => {
           min-height:180px;
         }
 
-        /* ✅ Center Renewable Energy logos */
-        .vertical-card:nth-child(2) .logos-grid {
+        /* Center single logo */
+        .logos-grid.single-logo {
           display:flex;
-          justify-content:center;
           align-items:center;
-          gap:40px;
-          flex-wrap:wrap;
-          min-height:180px;
+          justify-content:center;
         }
 
         .logo-item{
@@ -102,7 +99,7 @@ const Activities = () => {
           align-items:center;
           justify-content:center;
           cursor:pointer;
-          transition:transform .18s ease;
+          transition:transform .18s ease, filter .18s ease;
         }
         .logo-item:hover{ transform:scale(1.06); }
         .logo-item img{
@@ -133,10 +130,6 @@ const Activities = () => {
             padding:20px;
           }
           .logo-item img{ max-width:110px; max-height:60px; }
-          .vertical-card:nth-child(2) .logos-grid {
-            gap:30px;
-            flex-wrap:wrap;
-          }
         }
 
         @media (max-width:480px){
@@ -147,32 +140,35 @@ const Activities = () => {
 
       <div className="container">
         <div className="verticals-wrapper">
-          {VERTICALS.map((v) => (
-            <article key={v.title} className="vertical-card">
-              {/* ---------- Logos ---------- */}
-              <div className="logos-grid">
-                {v.logos.map((L, i) => (
-                  <div
-                    key={`${v.title}-logo-${i}`}
-                    className="logo-item"
-                    onClick={() => openLink(L.link)}
-                    title={L.alt}
-                  >
-                    <img src={L.img} alt={L.alt} loading="lazy" />
-                  </div>
-                ))}
-              </div>
-
-              {/* ---------- Text ---------- */}
-              <div className="card-body">
-                <div className="title-row">
-                  <div className="title-icon">{v.icon}</div>
-                  <h3>{v.title}</h3>
+          {VERTICALS.map((v) => {
+            const singleLogo = v.logos.length === 1;
+            return (
+              <article key={v.title} className="vertical-card">
+                {/* ---------- Logos (3x2 grid) ---------- */}
+                <div className={`logos-grid ${singleLogo ? "single-logo" : ""}`}>
+                  {v.logos.map((L, i) => (
+                    <div
+                      key={`${v.title}-logo-${i}`}
+                      className="logo-item"
+                      onClick={() => openLink(L.link)}
+                      title={L.alt}
+                    >
+                      <img src={L.img} alt={L.alt} loading="lazy" />
+                    </div>
+                  ))}
                 </div>
-                <p className="desc">{v.description}</p>
-              </div>
-            </article>
-          ))}
+
+                {/* ---------- Text ---------- */}
+                <div className="card-body">
+                  <div className="title-row">
+                    <div className="title-icon">{v.icon}</div>
+                    <h3>{v.title}</h3>
+                  </div>
+                  <p className="desc">{v.description}</p>
+                </div>
+              </article>
+            );
+          })}
         </div>
       </div>
     </section>
