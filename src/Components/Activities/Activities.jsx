@@ -1,6 +1,6 @@
 // src/Components/Activities.jsx
 import React from "react";
-import { Truck, Leaf, Package, ExternalLink } from "lucide-react";
+import { Truck, Leaf, Package } from "lucide-react";
 
 /* ---------- DATA ---------- */
 const VERTICALS = [
@@ -56,8 +56,8 @@ const Activities = () => {
         :root {
           --ink:#0F172A; --muted:#475569; --border:#E5E7EB; --card:#FFFFFF;
           --bg:#EDF2F7; --accent:#2563EB;
-          --teal1:#22d3ee; /* cyan-400 */
-          --teal2:#0284c7; /* sky-600 */
+          --teal1:#22d3ee;
+          --teal2:#0284c7;
         }
 
         .activities-section { background:var(--bg); padding:56px 0; }
@@ -81,7 +81,6 @@ const Activities = () => {
         }
         .vertical-card:hover{ transform:translateY(-4px); box-shadow:0 10px 26px rgba(2,8,23,.12); }
 
-        /* ---------- LOGO GRID (two rows) ---------- */
         .logos-grid{
           display:grid;
           grid-template-columns:repeat(3, 1fr);
@@ -102,6 +101,12 @@ const Activities = () => {
           flex-direction:column;
           align-items:center;
           gap:10px;
+          cursor:pointer;
+          transition:transform .18s ease, box-shadow .18s ease;
+        }
+        .logo-card:hover{
+          transform:translateY(-2px);
+          box-shadow:0 10px 20px rgba(2,8,23,.10);
         }
 
         .logo-badge{
@@ -111,12 +116,6 @@ const Activities = () => {
           border:1px solid #E5E7EB;
           border-radius:12px;
           box-shadow:0 2px 6px rgba(15, 23, 42, .06);
-          transition:transform .18s ease, box-shadow .18s ease;
-          cursor:pointer;
-        }
-        .logo-badge:hover{
-          transform:translateY(-2px);
-          box-shadow:0 10px 20px rgba(2,8,23,.10);
         }
         .logo-badge img{
           max-width:86%;
@@ -125,7 +124,6 @@ const Activities = () => {
           display:block;
         }
 
-        /* ✅ Teal–blue gradient pill like the sample image */
         .logo-pill{
           min-width:110px;
           text-align:center;
@@ -139,24 +137,6 @@ const Activities = () => {
           user-select:none;
         }
 
-        .visit-btn{
-          display:inline-flex; align-items:center; gap:6px;
-          margin-top:2px;
-          padding:6px 10px;
-          font-size:.78rem; font-weight:700;
-          color:var(--ink);
-          background:#fff;
-          border:1px solid #e5e7eb;
-          border-radius:8px;
-          cursor:pointer;
-          transition:background .18s ease, transform .18s ease, box-shadow .18s ease;
-        }
-        .visit-btn:hover{
-          background:#f7fbff;
-          transform:translateY(-1px);
-          box-shadow:0 6px 14px rgba(2,8,23,.08);
-        }
-
         .card-body{ padding:24px 26px 26px; display:flex; flex-direction:column; }
         .title-row{ display:flex; align-items:center; gap:12px; margin-bottom:12px; }
         .title-icon{
@@ -167,17 +147,14 @@ const Activities = () => {
         .title-row h3{ margin:0; font-size:1.125rem; font-weight:800; color:var(--ink); }
         .desc{ margin:0; color:var(--muted); font-size:.98rem; line-height:1.7; }
 
-        /* ---------- Responsive ---------- */
         @media (max-width: 768px){
           .logos-grid{
             grid-template-columns:repeat(2, 1fr);
-            grid-template-rows:repeat(2, auto);
             gap:16px 18px;
             padding:20px;
           }
           .logo-badge{ width:96px; height:70px; }
           .logo-pill{ min-width:100px; font-size:.8rem; }
-          .visit-btn{ font-size:.76rem; }
           .card-body{ padding:20px; }
           .title-icon{ width:36px; height:36px; }
           .title-row h3{ font-size:1.05rem; }
@@ -194,35 +171,20 @@ const Activities = () => {
         <div className="verticals-wrapper">
           {VERTICALS.map((v) => (
             <article key={v.title} className="vertical-card">
-              {/* ---------- Logos: 2 rows, teal pill, visit button ---------- */}
+              {/* ---------- Logos ---------- */}
               <div className="logos-grid">
                 {padTo(v.logos, 6).map((L, i) =>
                   L ? (
-                    <div key={`${v.title}-logo-${i}`} className="logo-card">
-                      <div
-                        className="logo-badge"
-                        role="button"
-                        aria-label={`Open ${L.alt}`}
-                        onClick={() => openLink(L.link)}
-                        title={L.alt}
-                      >
+                    <div
+                      key={`${v.title}-logo-${i}`}
+                      className="logo-card"
+                      onClick={() => openLink(L.link)}
+                      title={L.alt}
+                    >
+                      <div className="logo-badge">
                         <img src={L.img} alt={L.alt} loading="lazy" />
                       </div>
-
-                      {/* Gradient pill like sample image */}
-                      <div className="logo-pill">
-                        {L.label ?? L.alt}
-                      </div>
-
-                      {/* Small button also linking out */}
-                      <button
-                        type="button"
-                        className="visit-btn"
-                        onClick={() => openLink(L.link)}
-                        aria-label={`Visit ${L.alt}`}
-                      >
-                        Visit <ExternalLink size={14} />
-                      </button>
+                      <div className="logo-pill">{L.label ?? L.alt}</div>
                     </div>
                   ) : (
                     <div key={`${v.title}-ph-${i}`} className="logo-card" />
