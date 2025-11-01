@@ -47,7 +47,10 @@ const Activities = () => {
   return (
     <section className="activities-section">
       <style>{`
-        :root { --ink:#0F172A; --muted:#475569; --border:#E5E7EB; --card:#FFFFFF; --bg:#EDF2F7; --accent:#2563EB; }
+        :root {
+          --ink:#0F172A; --muted:#475569; --border:#E5E7EB; --card:#FFFFFF;
+          --bg:#EDF2F7; --accent:#2563EB;
+        }
 
         .activities-section { background:var(--bg); padding:56px 0; }
 
@@ -70,16 +73,25 @@ const Activities = () => {
         }
         .vertical-card:hover{ transform:translateY(-4px); box-shadow:0 10px 26px rgba(2,8,23,.12); }
 
-        /* Logos grid with ONLY images (no rectangles, no labels) */
+        /* ✅ 3x2 logo grid */
         .logos-grid{
           display:grid;
           grid-template-columns:repeat(3, 1fr);
+          grid-template-rows:repeat(2, 1fr);
           gap:18px 24px;
           justify-items:center;
           align-items:center;
           padding:22px;
           background:#F8FAFC;
           border-bottom:1px solid #E6EAF0;
+          min-height:180px;
+        }
+
+        /* Center single logo */
+        .logos-grid.single-logo {
+          display:flex;
+          align-items:center;
+          justify-content:center;
         }
 
         .logo-item{
@@ -88,19 +100,16 @@ const Activities = () => {
           justify-content:center;
           cursor:pointer;
           transition:transform .18s ease, filter .18s ease;
-          /* no background, no border, no box */
         }
+        .logo-item:hover{ transform:scale(1.06); }
         .logo-item img{
-          max-width:140px;
-          max-height:68px;
+          max-width:130px;
+          max-height:65px;
           width:auto;
           height:auto;
           object-fit:contain;
           display:block;
-          filter: saturate(1);
         }
-        .logo-item:hover{ transform:translateY(-2px) scale(1.02); }
-        .logo-item:active{ transform:scale(0.98); }
 
         .card-body{ padding:24px 26px 26px; display:flex; flex-direction:column; }
         .title-row{ display:flex; align-items:center; gap:12px; margin-bottom:12px; }
@@ -112,55 +121,54 @@ const Activities = () => {
         .title-row h3{ margin:0; font-size:1.125rem; font-weight:800; color:var(--ink); }
         .desc{ margin:0; color:var(--muted); font-size:.98rem; line-height:1.7; }
 
-        @media (max-width: 768px){
+        /* ✅ Responsive */
+        @media (max-width:768px){
           .logos-grid{
-            grid-template-columns:repeat(2, 1fr);
-            gap:16px 18px;
+            grid-template-columns:repeat(2,1fr);
+            grid-template-rows:repeat(2,1fr);
+            gap:16px;
             padding:20px;
           }
-          .logo-item img{ max-width:120px; max-height:60px; }
-          .card-body{ padding:20px; }
-          .title-icon{ width:36px; height:36px; }
-          .title-row h3{ font-size:1.05rem; }
-          .desc{ font-size:.95rem; }
+          .logo-item img{ max-width:110px; max-height:60px; }
         }
 
         @media (max-width:480px){
-          .logos-grid{ gap:14px; }
-          .logo-item img{ max-width:110px; max-height:54px; }
+          .logos-grid{ grid-template-columns:repeat(2,1fr); gap:14px; }
+          .logo-item img{ max-width:100px; max-height:54px; }
         }
       `}</style>
 
       <div className="container">
         <div className="verticals-wrapper">
-          {VERTICALS.map((v) => (
-            <article key={v.title} className="vertical-card">
-              {/* ---------- Logos: images only, clickable ---------- */}
-              <div className="logos-grid">
-                {v.logos.map((L, i) => (
-                  <div
-                    key={`${v.title}-logo-${i}`}
-                    className="logo-item"
-                    role="button"
-                    aria-label={`Open ${L.alt}`}
-                    title={L.alt}
-                    onClick={() => openLink(L.link)}
-                  >
-                    <img src={L.img} alt={L.alt} loading="lazy" />
-                  </div>
-                ))}
-              </div>
-
-              {/* ---------- Text ---------- */}
-              <div className="card-body">
-                <div className="title-row">
-                  <div className="title-icon">{v.icon}</div>
-                  <h3>{v.title}</h3>
+          {VERTICALS.map((v) => {
+            const singleLogo = v.logos.length === 1;
+            return (
+              <article key={v.title} className="vertical-card">
+                {/* ---------- Logos (3x2 grid) ---------- */}
+                <div className={`logos-grid ${singleLogo ? "single-logo" : ""}`}>
+                  {v.logos.map((L, i) => (
+                    <div
+                      key={`${v.title}-logo-${i}`}
+                      className="logo-item"
+                      onClick={() => openLink(L.link)}
+                      title={L.alt}
+                    >
+                      <img src={L.img} alt={L.alt} loading="lazy" />
+                    </div>
+                  ))}
                 </div>
-                <p className="desc">{v.description}</p>
-              </div>
-            </article>
-          ))}
+
+                {/* ---------- Text ---------- */}
+                <div className="card-body">
+                  <div className="title-row">
+                    <div className="title-icon">{v.icon}</div>
+                    <h3>{v.title}</h3>
+                  </div>
+                  <p className="desc">{v.description}</p>
+                </div>
+              </article>
+            );
+          })}
         </div>
       </div>
     </section>
