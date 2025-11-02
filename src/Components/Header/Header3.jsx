@@ -113,7 +113,7 @@ export default function Header3({ variant }) {
                     <Link 
                       to="/global-presence" 
                       className="theme-btn" 
-                      style={{ color: textColor }}
+                      style={{ color: "#fff" }}
                     >
                       <span>
                         Global Presence <i className="bi bi-arrow-right"></i>
