@@ -2,7 +2,6 @@
 import React from "react";
 import { Truck, Leaf, Package } from "lucide-react";
 
-/* ---------- DATA ---------- */
 const VERTICALS = [
   {
     title: "Supply Chain Solutions",
@@ -40,145 +39,159 @@ const VERTICALS = [
   },
 ];
 
-/* ---------- HELPERS ---------- */
 const openLink = (url) => url && window.open(url, "_blank", "noopener,noreferrer");
 
-/* ---------- COMPONENT ---------- */
 const Activities = () => {
   return (
-    <section className="activities-section">
+    <section className="activities-full">
       <style>{`
         :root {
-          --ink:#0F172A; --muted:#475569; --border:#E5E7EB; --card:#FFFFFF;
-          --bg:#F5F7FB; --accent:#2563EB;
-        }
-        .activities-section { background:var(--bg); padding:56px 0; }
-        .container-narrow { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
-
-        /* ONE-BY-ONE list (no grid) */
-        .zz-list { display:flex; flex-direction:column; gap:28px; }
-
-        /* Card with two panes */
-        .zz-card{
-          background:var(--card);
-          border:1px solid var(--border);
-          border-radius:16px;
-          overflow:hidden;
-          box-shadow:0 2px 10px rgba(2,8,23,.06);
-          transition:transform .25s ease, box-shadow .25s ease;
-          display:grid;
-          grid-template-columns: 1.05fr 1.25fr;
-          min-height: 380px;
-        }
-        .zz-card:hover{ transform:translateY(-4px); box-shadow:0 12px 28px rgba(2,8,23,.12); }
-
-        /* Zig-zag swap */
-        .zz-card.reverse { grid-template-columns: 1.25fr 1.05fr; }
-        .zz-card.reverse .media { order: 2; }
-        .zz-card.reverse .info  { order: 1; }
-
-        .media{
-          background:#0b1220;
-          display:flex; align-items:center; justify-content:center;
-          padding: 16px;
-        }
-        .media-inner{
-          width:100%; height:100%;
-          background:#0b1220;
-          border-right:1px solid var(--border);
-          display:flex; align-items:center; justify-content:center;
-        }
-        .media img{
-          width:100%;
-          height:100%;
-          object-fit:cover;       /* Change to 'contain' if you want full logo view */
-          border-radius:12px;
+          --ink:#0F172A; --muted:#475569; --accent:#2563EB;
         }
 
-        .info{ display:flex; flex-direction:column; padding:24px 26px; background:#fff; }
-        .title-row{ display:flex; align-items:center; gap:12px; margin-bottom:10px; }
-        .title-icon{
-          width:40px; height:40px; border-radius:999px; background:var(--accent);
-          display:flex; align-items:center; justify-content:center; color:#fff;
-          box-shadow:0 6px 14px rgba(37,99,235,.18); flex:0 0 auto;
+        .activities-full {
+          background: #fff;
+          overflow: hidden;
         }
-        .title-row h3{ margin:0; font-size:1.125rem; font-weight:800; color:var(--ink); }
-        .desc{ margin:0 0 16px; color:var(--muted); font-size:.98rem; line-height:1.7; }
 
-        .logos-title{ margin: 8px 0 8px; font-size:.9rem; color:#0f172a; font-weight:700; }
-
-        /* 3x3 logos under content */
-        .logo-grid{
-          display:grid;
-          grid-template-columns:repeat(3, 1fr);
-          grid-auto-rows:minmax(64px, auto);
-          gap:16px 22px;
-          align-items:center;
-          justify-items:center;
-          padding-top:4px;
+        .activity-row {
+          display: grid;
+          grid-template-columns: 1.1fr 1fr;
+          align-items: center;
+          min-height: 520px;
+          width: 100%;
         }
-        .logo-item{
-          display:flex; align-items:center; justify-content:center;
-          width:100%; height:100%;
-          cursor:pointer; border:1px dashed #eef2f7; border-radius:10px;
-          transition:transform .18s ease, box-shadow .18s ease, border-color .18s ease;
-          background:#fafcff; padding:10px;
-        }
-        .logo-item:hover{ transform:scale(1.04); box-shadow:0 6px 20px rgba(2,8,23,.08); border-color:#dbe4f0; }
-        .logo-item img{ max-width:140px; max-height:56px; width:auto; height:auto; object-fit:contain; display:block; }
 
-        /* Mobile: stack image above content */
-        @media (max-width:1024px){
-          .zz-card, .zz-card.reverse{ grid-template-columns: 1fr; min-height: 0; }
-          .media-inner{ border-right:none; }
-          .media img{ height:260px; object-fit:cover; }
+        .activity-row.reverse {
+          grid-template-columns: 1fr 1.1fr;
+        }
+
+        .activity-image {
+          width: 100%;
+          height: 100%;
+        }
+
+        .activity-image img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+        }
+
+        .activity-content {
+          padding: 80px 60px;
+          background: #fff;
+        }
+
+        .activity-row.reverse .activity-content {
+          order: -1;
+        }
+
+        .title-row {
+          display: flex;
+          align-items: center;
+          gap: 12px;
+          margin-bottom: 14px;
+        }
+
+        .title-icon {
+          width: 46px;
+          height: 46px;
+          border-radius: 50%;
+          background: var(--accent);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          color: #fff;
+        }
+
+        .title-row h3 {
+          margin: 0;
+          font-size: 1.5rem;
+          font-weight: 800;
+          color: var(--ink);
+        }
+
+        .activity-description {
+          font-size: 1rem;
+          line-height: 1.7;
+          color: var(--muted);
+          margin-bottom: 24px;
+          max-width: 700px;
+        }
+
+        .logos-grid {
+          display: flex;
+          flex-wrap: wrap;
+          gap: 24px;
+          align-items: center;
+        }
+
+        .logo-item {
+          flex: 0 0 auto;
+          cursor: pointer;
+          transition: transform 0.25s ease;
+        }
+
+        .logo-item:hover {
+          transform: scale(1.06);
+        }
+
+        .logo-item img {
+          max-height: 60px;
+          object-fit: contain;
+          width: auto;
+          display: block;
+        }
+
+        /* Responsive */
+        @media (max-width: 992px) {
+          .activity-row {
+            grid-template-columns: 1fr;
+          }
+
+          .activity-content {
+            padding: 40px 24px;
+          }
+
+          .activity-image img {
+            height: 300px;
+            object-fit: cover;
+          }
         }
       `}</style>
 
-      <div className="container-narrow">
-        <div className="zz-list">
-          {VERTICALS.map((v, idx) => {
-            const coverSrc = v.cover || v?.logos?.[0]?.img || "/placeholder.jpg";
-            const reverse = idx % 2 === 1; // zig-zag order
-            return (
-              <article key={v.title} className={`zz-card ${reverse ? "reverse" : ""}`}>
-                {/* IMAGE pane */}
-                <div className="media">
-                  <div className="media-inner">
-                    <img src={coverSrc} alt={`${v.title} cover`} loading="lazy" />
-                  </div>
-                </div>
+      {VERTICALS.map((v, i) => {
+        const reverse = i % 2 !== 0;
+        return (
+          <div className={`activity-row ${reverse ? "reverse" : ""}`} key={v.title}>
+            <div className="activity-image">
+              <img src={v.cover} alt={v.title} />
+            </div>
 
-                {/* CONTENT pane */}
-                <div className="info">
-                  <div className="title-row">
-                    <div className="title-icon">{v.icon}</div>
-                    <h3>{v.title}</h3>
-                  </div>
-                  <p className="desc">{v.description}</p>
+            <div className="activity-content">
+              <div className="title-row">
+                <div className="title-icon">{v.icon}</div>
+                <h3>{v.title}</h3>
+              </div>
 
-                  <div className="logos-title">Group Companies & Partners</div>
-                  <div className="logo-grid">
-                    {v.logos?.map((L, i) => (
-                      <div
-                        key={`${v.title}-logo-${i}`}
-                        className="logo-item"
-                        onClick={() => openLink(L.link)}
-                        title={L.alt}
-                        role="button"
-                        tabIndex={0}
-                        onKeyDown={(e) => (e.key === "Enter" || e.key === " ") && openLink(L.link)}
-                      >
-                        <img src={L.img} alt={L.alt} loading="lazy" />
-                      </div>
-                    ))}
+              <p className="activity-description">{v.description}</p>
+
+              <div className="logos-grid">
+                {v.logos.map((logo, idx) => (
+                  <div
+                    key={idx}
+                    className="logo-item"
+                    onClick={() => openLink(logo.link)}
+                    title={logo.alt}
+                  >
+                    <img src={logo.img} alt={logo.alt} />
                   </div>
-                </div>
-              </article>
-            );
-          })}
-        </div>
-      </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        );
+      })}
     </section>
   );
 };
