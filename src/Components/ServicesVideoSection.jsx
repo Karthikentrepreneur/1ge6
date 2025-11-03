@@ -48,7 +48,7 @@ const ServicesVideoSection = ({
           </div>
         </div>
 
-        {/* RIGHT (Video like screenshot) */}
+        {/* RIGHT (Video) */}
         <div className="svs-right">
           <div
             className="svs-video-card"
@@ -101,25 +101,28 @@ const ServicesVideoSection = ({
           margin-left: 0;
           border-radius: 20px;
           overflow: hidden;
-          background: transparent;
+          background: transparent !important;
           box-shadow: 0 20px 50px rgba(14, 24, 44, 0.25);
-          display:flex;
-          position: relative;
+          position: relative;              /* make child absolute fill work */
+          isolation: isolate;              /* avoid bleed from ancestors */
         }
         .svs-video-card video {
+          position: absolute; inset: 0;    /* fill the card */
           width: 100%;
           height: 100%;
-          object-fit: contain;
+          object-fit: cover;               /* ✅ removes the white bars */
           object-position: center center;
           display:block;
-          background: transparent;
+          background: transparent !important;
+          outline: none;
+          transform: translateZ(0);        /* prevents sub-pixel seams */
         }
 
         /* Mobile */
         @media (max-width: 992px) {
           .svs-container { grid-template-columns: 1fr; gap: 20px; }
           .svs-right { order: -1; }
-          .svs-video-card { max-width: 100%; border-radius: 14px; box-shadow: 0 12px 28px rgba(0,0,0,.12); }
+          .svs-video-card { border-radius: 14px; box-shadow: 0 12px 28px rgba(0,0,0,.12); }
           .svs-item { width: 100%; }
         }
       `}</style>
