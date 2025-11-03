@@ -2,7 +2,7 @@ import React from 'react';
 import Header3 from '../Header/Header3';
 
 const Heroanner1 = () => {
-  const videoSrc = 'video.mp4‎';
+  const videoSrc = 'video4.mp4';
 
   const heroContent = {
     subtitle: 'Sustainability Through Innovation',
@@ -93,7 +93,7 @@ const Heroanner1 = () => {
         {/* Background video */}
         <div className="video-bg" aria-hidden="true">
           <video
-            src="/video4.mp4"
+            src={videoSrc}
             autoPlay
             muted
             loop
