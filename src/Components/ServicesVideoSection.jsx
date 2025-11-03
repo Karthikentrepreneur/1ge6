@@ -109,7 +109,7 @@ const ServicesVideoSection = ({
         .svs-video-card video {
           width: 100%;
           height: 100%;
-          object-fit: contain;
+          object-fit: cover;
           object-position: center center;
           display:block;
         }
