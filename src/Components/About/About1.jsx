@@ -5,9 +5,7 @@ import { Users2, Globe2, BadgeCheck } from "lucide-react";
 import loadBackgroudImages from "../Common/loadBackgroudImages";
 
 const About1 = () => {
-  useEffect(() => {
-    loadBackgroudImages();
-  }, []);
+  useEffect(() => { loadBackgroudImages(); }, []);
 
   const logos = [
     { img: "/logosss01.png", alt: "Global Gateway Logistics", link: "https://www.ggl.sg/" },
@@ -33,9 +31,9 @@ const About1 = () => {
     responsive: [
       { breakpoint: 1399, settings: { slidesToShow: 5 } },
       { breakpoint: 1199, settings: { slidesToShow: 4 } },
-      { breakpoint: 991, settings: { slidesToShow: 3 } },
-      { breakpoint: 767, settings: { slidesToShow: 2, centerMode: true, centerPadding: "10px" } },
-      { breakpoint: 575, settings: { slidesToShow: 1, centerMode: true, centerPadding: "30px" } },
+      { breakpoint: 991,  settings: { slidesToShow: 3 } },
+      { breakpoint: 767,  settings: { slidesToShow: 2, centerMode: true, centerPadding: "10px" } },
+      { breakpoint: 575,  settings: { slidesToShow: 1, centerMode: true, centerPadding: "30px" } },
     ],
   };
 
@@ -51,7 +49,7 @@ const About1 = () => {
         .about-wrapper { width: 100%; }
         .about-section { overflow-x: hidden; }
 
-        /* ===== Left image (no crop) ===== */
+        /* ===== Left image (original, no crop) ===== */
         .about-image-col { padding-right: 16px; }
         .about-photo-wrap {
           width: 100%;
@@ -61,16 +59,20 @@ const About1 = () => {
         }
         .about-photo {
           display: block;
-          width: 100%;        /* fill column width */
-          height: auto;       /* keep natural aspect ratio */
-          object-fit: contain;/* ensure full image visible (no cropping) */
+          width: 100%;
+          height: auto;           /* preserve original aspect ratio */
+          object-fit: contain;    /* never crop */
+          object-position: center;
           border-radius: 12px;
           border: 2px solid #e6eef3;
           box-shadow: 0 8px 24px rgba(0,0,0,.08);
+          background: #fff;       /* avoids transparency edges on contain */
         }
 
+        /* Right column */
         .about-text-col { position: relative; z-index: 2; padding-left: 16px; }
 
+        /* ===== Title ===== */
         .about-content .section-title h2 {
           margin-bottom: 18px;
           color: var(--ink);
@@ -80,6 +82,7 @@ const About1 = () => {
           line-height: 1.15;
         }
 
+        /* ===== Info Items ===== */
         .about-items {
           display: flex;
           align-items: flex-start;
@@ -97,20 +100,39 @@ const About1 = () => {
         .about-items .content h5 { font-weight: 800; margin: 2px 0 6px; color: var(--ink); }
         .about-items .content p { margin: 0; line-height: 1.55; color: var(--muted); font-size: 15.5px; }
 
-        .brand-block { margin-top: 40px; }
-        .brand-title { text-align: center; margin: 0 0 12px; font-weight: 800; color: var(--ink); }
-        .brand-slider-wrap { max-width: 1100px; margin: 0 auto; padding: 0 8px; }
-        .brand-slide { display: flex; align-items: center; justify-content: center; height: 100px; }
-        .brand-logo { max-height: 80px; width: auto; object-fit: contain; transition: transform .2s ease; }
-        .brand-logo:hover { transform: translateY(-2px); }
+        /* ===== Group Companies (enlarged) ===== */
+        .brand-block {
+          margin-top: 80px;
+          padding: 60px 0;
+          background: linear-gradient(180deg, #f8fbfd 0%, #eef5f9 100%);
+          border-radius: 20px;
+        }
+        .brand-title {
+          text-align: center;
+          margin: 0 0 35px;
+          font-size: 32px;
+          font-weight: 800;
+          color: var(--ink);
+          letter-spacing: -0.3px;
+        }
+        .brand-slider-wrap { max-width: 1200px; margin: 0 auto; padding: 0 8px; }
+        .brand-slide { display: flex; align-items: center; justify-content: center; height: 160px; }
+        .brand-logo { max-height: 110px; width: auto; object-fit: contain; transition: transform .25s ease, filter .25s ease; filter: brightness(.9); }
+        .brand-logo:hover { transform: scale(1.08); filter: brightness(1.05); }
 
+        /* ===== Responsive ===== */
         @media (max-width: 991px) {
           .about-image-col { padding-right: 0; }
           .about-text-col  { padding-left: 0; margin-top: 18px; }
+          .brand-slide { height: 130px; }
+          .brand-logo { max-height: 90px; }
         }
         @media (max-width: 575px) {
           .about-content .section-title h2 { font-size: 28px; }
           .about-items .icon { width: 48px; height: 48px; min-width: 48px; }
+          .brand-title { font-size: 26px; margin-bottom: 25px; }
+          .brand-slide { height: 110px; }
+          .brand-logo { max-height: 80px; }
         }
       `}</style>
 
@@ -163,15 +185,21 @@ const About1 = () => {
             </div>
           </div>
 
-          {/* Group Companies Slider */}
-          {/* (unchanged) */}
+          {/* ===== Group Companies (ENLARGED & CENTERED) ===== */}
           <div className="brand-block">
-            <h4 className="brand-title">Group Companies</h4>
+            <h3 className="brand-title">Group Companies</h3>
             <div className="brand-slider-wrap">
               <Slider {...sliderSettings}>
                 {logos.map((item, i) => (
                   <div key={i} className="brand-slide">
-                    <a className="brand-link" href={item.link} target="_blank" rel="noopener noreferrer" title={`Open ${item.alt}`} onDragStart={(e) => e.preventDefault()}>
+                    <a
+                      className="brand-link"
+                      href={item.link}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      title={`Open ${item.alt}`}
+                      onDragStart={(e) => e.preventDefault()}
+                    >
                       <img src={item.img} alt={item.alt} className="brand-logo" loading="lazy" />
                     </a>
                   </div>
@@ -179,7 +207,6 @@ const About1 = () => {
               </Slider>
             </div>
           </div>
-
         </div>
       </div>
     </section>
