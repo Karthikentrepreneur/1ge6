@@ -8,7 +8,7 @@ const HeroBanner1 = ({
     subtitle: "Sustainability Through Innovation",
     title: "“Where logistics, technology, and energy meet excellence.”",
   },
-  anchorSelector = "#vision-strategy-btn, [data-anchor='vs-btn']" // CTA button selector
+  anchorSelector = "#vision-strategy-btn, [data-anchor='vs-btn']",
 }) => {
   useEffect(() => {
     const anchor =
@@ -111,14 +111,13 @@ const HeroBanner1 = ({
           box-shadow: 0 16px 40px rgba(0, 0, 0, 0.36);
         }
 
+        /* ✅ Enlarged Subtitle */
         .h-sub {
-          margin: 0 0 8px;
-          font-weight: 800;
-          letter-spacing: 0.3px;
-          font-size: clamp(14px, 1.3vw, 16px);
+          margin: 0 0 10px;
+          font-weight: 900;
+          letter-spacing: 0.8px;
+          font-size: clamp(18px, 2vw, 22px);
           text-transform: uppercase;
-        }
-        .h-sub span {
           color: #12ff6a;
         }
 
@@ -127,7 +126,7 @@ const HeroBanner1 = ({
           color: #fff;
           font-weight: 800;
           line-height: 1.3;
-          font-size: clamp(18px, 2vw, 24px);
+          font-size: clamp(20px, 2.2vw, 26px);
           white-space: normal;
         }
 
@@ -138,6 +137,9 @@ const HeroBanner1 = ({
             transform: translateY(-50%);
             width: 92%;
             padding: 20px 26px;
+          }
+          .h-sub {
+            font-size: clamp(16px, 4.8vw, 20px);
           }
           .h-title {
             font-size: clamp(18px, 4.8vw, 22px);
@@ -152,7 +154,7 @@ const HeroBanner1 = ({
         <div className="bg-overlay" />
 
         <div className="info-card">
-          <div className="h-sub"><span>{heroContent.subtitle}</span></div>
+          <div className="h-sub">{heroContent.subtitle}</div>
           <h1 className="h-title">{heroContent.title}</h1>
         </div>
       </div>
