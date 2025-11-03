@@ -51,7 +51,8 @@ const About1 = () => {
         .about-wrapper { width: 100%; }
         .about-section { overflow-x: hidden; }
 
-        /* ===== Left image (safe sizing, no overlap) ===== */
+        /* ===== Left image (no crop) ===== */
+        .about-image-col { padding-right: 16px; }
         .about-photo-wrap {
           width: 100%;
           display: flex;
@@ -59,20 +60,17 @@ const About1 = () => {
           align-items: center;
         }
         .about-photo {
-          width: 100%;
-          max-width: 980px;        /* shrink a bit on large screens */
-          aspect-ratio: 16 / 6;    /* keeps banner shape without stretching */
-          object-fit: cover;
-          object-position: center;
+          display: block;
+          width: 100%;        /* fill column width */
+          height: auto;       /* keep natural aspect ratio */
+          object-fit: contain;/* ensure full image visible (no cropping) */
           border-radius: 12px;
           border: 2px solid #e6eef3;
           box-shadow: 0 8px 24px rgba(0,0,0,.08);
         }
 
-        /* make sure columns never overlap */
-        .about-text-col { position: relative; z-index: 2; }
+        .about-text-col { position: relative; z-index: 2; padding-left: 16px; }
 
-        /* ===== Title ===== */
         .about-content .section-title h2 {
           margin-bottom: 18px;
           color: var(--ink);
@@ -82,7 +80,6 @@ const About1 = () => {
           line-height: 1.15;
         }
 
-        /* ===== Info Items ===== */
         .about-items {
           display: flex;
           align-items: flex-start;
@@ -90,55 +87,26 @@ const About1 = () => {
           margin-bottom: 22px;
         }
         .about-items .icon {
-          width: 54px;
-          height: 54px;
-          min-width: 54px;
+          width: 54px; height: 54px; min-width: 54px;
           border-radius: 50%;
           background-color: var(--accent);
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          box-shadow: 0 4px 10px rgba(38, 182, 224, 0.35);
+          display: flex; align-items: center; justify-content: center;
+          box-shadow: 0 4px 10px rgba(38,182,224,.35);
         }
-        .about-items .icon svg {
-          width: 24px;
-          height: 24px;
-          color: #fff;
-        }
-        .about-items .content h5 {
-          font-weight: 800;
-          margin: 2px 0 6px;
-          color: var(--ink);
-        }
-        .about-items .content p {
-          margin: 0;
-          line-height: 1.55;
-          color: var(--muted);
-          font-size: 15.5px;
-        }
+        .about-items .icon svg { width: 24px; height: 24px; color: #fff; }
+        .about-items .content h5 { font-weight: 800; margin: 2px 0 6px; color: var(--ink); }
+        .about-items .content p { margin: 0; line-height: 1.55; color: var(--muted); font-size: 15.5px; }
 
-        /* ===== Brand Slider ===== */
         .brand-block { margin-top: 40px; }
-        .brand-title {
-          text-align: center;
-          margin: 0 0 12px;
-          font-weight: 800;
-          color: var(--ink);
-        }
+        .brand-title { text-align: center; margin: 0 0 12px; font-weight: 800; color: var(--ink); }
         .brand-slider-wrap { max-width: 1100px; margin: 0 auto; padding: 0 8px; }
         .brand-slide { display: flex; align-items: center; justify-content: center; height: 100px; }
         .brand-logo { max-height: 80px; width: auto; object-fit: contain; transition: transform .2s ease; }
         .brand-logo:hover { transform: translateY(-2px); }
 
-        /* ===== Responsive ===== */
-        @media (min-width: 992px) {
-          /* give breathing space between columns on large screens */
-          .about-image-col { padding-right: 16px; }
-          .about-text-col  { padding-left: 16px; }
-        }
         @media (max-width: 991px) {
-          .about-photo { aspect-ratio: 16 / 8; max-width: 100%; }
-          .about-text-col { margin-top: 18px; }
+          .about-image-col { padding-right: 0; }
+          .about-text-col  { padding-left: 0; margin-top: 18px; }
         }
         @media (max-width: 575px) {
           .about-content .section-title h2 { font-size: 28px; }
@@ -164,19 +132,14 @@ const About1 = () => {
             {/* Right Text */}
             <div className="col-lg-5 about-text-col">
               <div className="about-content pe-lg-4 ps-lg-2 px-3 px-lg-0">
-                <div className="section-title">
-                  <h2>1 Global Enterprises</h2>
-                </div>
+                <div className="section-title"><h2>1 Global Enterprises</h2></div>
 
                 <div className="about-area mt-3">
                   <div className="about-items">
                     <div className="icon"><Users2 /></div>
                     <div className="content">
                       <h5>Who We Are</h5>
-                      <p>
-                        A diversified group with interests in Shipping, Logistics, Distribution,
-                        IT, Clean Energy &amp; Trading.
-                      </p>
+                      <p>A diversified group with interests in Shipping, Logistics, Distribution, IT, Clean Energy &amp; Trading.</p>
                     </div>
                   </div>
 
@@ -192,9 +155,7 @@ const About1 = () => {
                     <div className="icon"><BadgeCheck /></div>
                     <div className="content">
                       <h5>Expertise</h5>
-                      <p>
-                        Each business unit is led by experts ensuring sustainability, execution &amp; growth.
-                      </p>
+                      <p>Each business unit is led by experts ensuring sustainability, execution &amp; growth.</p>
                     </div>
                   </div>
                 </div>
@@ -203,20 +164,14 @@ const About1 = () => {
           </div>
 
           {/* Group Companies Slider */}
+          {/* (unchanged) */}
           <div className="brand-block">
             <h4 className="brand-title">Group Companies</h4>
             <div className="brand-slider-wrap">
               <Slider {...sliderSettings}>
                 {logos.map((item, i) => (
                   <div key={i} className="brand-slide">
-                    <a
-                      className="brand-link"
-                      href={item.link}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      title={`Open ${item.alt}`}
-                      onDragStart={(e) => e.preventDefault()}
-                    >
+                    <a className="brand-link" href={item.link} target="_blank" rel="noopener noreferrer" title={`Open ${item.alt}`} onDragStart={(e) => e.preventDefault()}>
                       <img src={item.img} alt={item.alt} className="brand-logo" loading="lazy" />
                     </a>
                   </div>
@@ -224,6 +179,7 @@ const About1 = () => {
               </Slider>
             </div>
           </div>
+
         </div>
       </div>
     </section>
