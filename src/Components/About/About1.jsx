@@ -81,33 +81,44 @@ const About1 = () => {
         .about-items .content p { margin: 0; line-height: 1.55; color: var(--muted); font-size: 15.5px; }
 
         /* ===== Group Companies ===== */
+        /* Make the whole block transparent and flat */
         .brand-block {
           margin-top: 60px;
-          padding: 35px 0 10px;
-          background: linear-gradient(180deg, #f6fbff 0%, #eef5f9 100%);
-          border-radius: 16px;
+          padding: 20px 0 0;            /* tighten vertical space */
+          background: transparent !important; /* ⬅ kill the blue/white panel */
+          border-radius: 0 !important;
+          box-shadow: none !important;
+          border: none !important;
+          position: relative;
         }
+        .brand-block::before,
+        .brand-block::after { content: none !important; }
+
         .brand-title {
-          text-align: center; margin: 0 0 25px; font-size: 30px; font-weight: 800; color: var(--ink);
+          text-align: center; margin: 0 0 18px; font-size: 30px; font-weight: 800; color: var(--ink);
         }
 
-        /* Slider container & Slick overrides to kill white flashes */
+        /* Slider container & Slick overrides to keep transparency while scrolling */
         .brand-slider-wrap { max-width: 1200px; margin: 0 auto; padding: 0; line-height: 0; }
         .brand-slider-wrap .slick-slider,
         .brand-slider-wrap .slick-list,
         .brand-slider-wrap .slick-track,
         .brand-slider-wrap .slick-slide,
-        .brand-slider-wrap .slick-slide > div {
-          background: transparent !important;   /* ✅ no white background while scrolling */
+        .brand-slider-wrap .slick-slide > div,
+        .brand-slider-wrap .slick-dots {
+          background: transparent !important;
         }
-        .brand-slider-wrap .slick-list { -webkit-backface-visibility: hidden; backface-visibility: hidden; }
+        .brand-slider-wrap .slick-list {
+          -webkit-backface-visibility: hidden; backface-visibility: hidden;
+          overflow: visible; /* avoids clipping shadows when scaling logos */
+        }
         .brand-slider-wrap .slick-track { display: flex; align-items: center; }
 
         .brand-slide {
           display: flex; align-items: center; justify-content: center; height: 150px;
         }
 
-        /* ✅ Logos: transparent on any bg (no white box) */
+        /* Logos: no white box on any bg */
         .brand-logo {
           max-height: 120px; width: auto; object-fit: contain; display: block;
           transition: transform 0.25s ease, filter 0.25s ease;
@@ -122,18 +133,15 @@ const About1 = () => {
         @media (max-width: 991px) {
           .about-image-col { padding-right: 0; }
           .about-text-col { padding-left: 0; margin-top: 12px; }
-          .brand-block { margin-top: 40px; padding: 24px 0 6px; }
           .brand-slide { height: 120px; }
           .brand-logo { max-height: 100px; }
         }
 
-        /* Mobile-specific: make block background transparent & blend safely */
         @media (max-width: 575px) {
           .about-content .section-title h2 { font-size: 26px; }
-          .brand-title { font-size: 24px; margin-bottom: 16px; }
+          .brand-title { font-size: 24px; margin-bottom: 14px; }
           .brand-slide { height: 96px; }
-          .brand-logo { max-height: 78px; mix-blend-mode: darken; } /* better than multiply on phones */
-          .brand-block { background: transparent; box-shadow: none; } /* ✅ section looks transparent */
+          .brand-logo { max-height: 78px; mix-blend-mode: darken; } /* better on some mobile screens */
         }
       `}</style>
 
