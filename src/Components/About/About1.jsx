@@ -51,21 +51,21 @@ const About1 = () => {
         .about-wrapper { width: 100%; }
         .about-section { overflow-x: hidden; }
 
-        /* ===== Image (reduce left space) ===== */
+        /* ===== Image (centered + framed) ===== */
         .about-photo-wrap {
           width: 100%;
           display: flex;
-          justify-content: flex-start; /* align image to left */
+          justify-content: center;
           align-items: center;
+          padding-left: 10px; /* adds subtle frame spacing */
         }
         .about-photo {
-          width: 105%; /* slightly extend image width */
-          max-width: 1300px;
+          width: 100%;
+          max-width: 1180px;
           height: auto;
-          margin-left: -40px; /* pull image left to reduce gap */
-          border: none;
-          border-radius: 0;
-          box-shadow: none;
+          border-radius: 8px; /* subtle rounded edges */
+          border: 4px solid #f0f3f7; /* light frame border */
+          box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1); /* elegant soft shadow */
           object-fit: cover;
           transform: none;
         }
@@ -134,19 +134,19 @@ const About1 = () => {
           .about-photo {
             max-width: 100%;
             max-height: 460px;
-            margin-left: 0;
+            border-width: 3px;
           }
         }
       `}</style>
 
-      <div className="container-fluid" style={{ paddingLeft: "0px" }}>
+      <div className="container">
         <div className="about-wrapper">
           <div className="row g-4 align-items-center">
             {/* Left Image */}
-            <div className="col-lg-7 d-flex justify-content-start">
+            <div className="col-lg-7 d-flex justify-content-center">
               <div className="about-photo-wrap">
                 <img
-                  src="/team.jpg"
+                  src="/team1.jpg"
                   alt="1 Global Enterprises Team"
                   className="about-photo"
                 />
