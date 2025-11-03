@@ -51,33 +51,22 @@ const About1 = () => {
         .about-wrapper { width: 100%; }
         .about-section { overflow-x: hidden; }
 
-        /* ===== Image ===== */
+        /* ===== Image (No Frame + Balanced Size) ===== */
         .about-photo-wrap {
           width: 100%;
-          text-align: center;
           display: flex;
           justify-content: center;
           align-items: center;
         }
         .about-photo {
-          width: min(100%, 1100px); /* ✅ Increased from 940px to 1100px */
-          max-height: 650px; /* ✅ Prevents overflow while making it taller */
+          width: 100%;
+          max-width: 1200px; /* ✅ Larger but not full width */
           height: auto;
-          border-radius: 22px;
+          border: none;
+          border-radius: 0;
           object-fit: cover;
-          box-shadow: 0 20px 60px rgba(0, 0, 0, 0.25);
-          transform: scale(1.05);
-          transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-        .about-photo:hover {
-          transform: scale(1.08);
-          box-shadow: 0 25px 70px rgba(0, 0, 0, 0.3);
-        }
-
-        @media (min-width: 992px) {
-          .about-photo-wrap {
-            margin-right: 40px;
-          }
+          box-shadow: none;
+          transform: none;
         }
 
         /* ===== Title ===== */
@@ -91,7 +80,6 @@ const About1 = () => {
 
         /* ===== Info Items ===== */
         .about-items {
-          position: relative;
           display: flex;
           align-items: flex-start;
           gap: 16px;
@@ -107,22 +95,11 @@ const About1 = () => {
           align-items: center;
           justify-content: center;
           box-shadow: 0 4px 10px rgba(38, 182, 224, 0.35);
-          z-index: 1;
         }
         .about-items .icon svg {
           width: 28px;
           height: 28px;
           color: #fff;
-        }
-        .about-items:not(:last-child)::after {
-          content: "";
-          position: absolute;
-          left: 29px;
-          top: 60px;
-          width: 2px;
-          height: calc(100% - 30px);
-          background: repeating-linear-gradient(to bottom, var(--accent), var(--accent) 4px, transparent 4px, transparent 8px);
-          z-index: 0;
         }
         .about-items .content h5 {
           font-weight: 800;
@@ -136,7 +113,7 @@ const About1 = () => {
           font-size: 15.5px;
         }
 
-        /* ===== Brand slider ===== */
+        /* ===== Brand Slider ===== */
         .brand-block { margin-top: 50px; }
         .brand-title {
           text-align: center;
@@ -149,39 +126,12 @@ const About1 = () => {
         .brand-logo { max-height: 90px; width: auto; object-fit: contain; transition: transform 0.2s ease; }
         .brand-logo:hover { transform: translateY(-2px); }
 
-        /* ===== MOBILE (≤768px) ===== */
+        /* ===== MOBILE ===== */
         @media (max-width: 768px) {
-          .about-section { padding: 28px 0 10px !important; }
-          .container { padding-left: 18px; padding-right: 18px; }
-          .about-wrapper .row { flex-direction: column; gap: 18px; }
-          .col-lg-7, .col-lg-5 { width: 100%; max-width: 100%; }
-
           .about-photo {
-            width: 100%;
-            max-height: 420px;
-            border-radius: 16px;
-            box-shadow: 0 10px 26px rgba(0, 0, 0, 0.15);
-            transform: none;
+            max-width: 100%;
+            max-height: 440px;
           }
-
-          .about-content .section-title h2 {
-            font-size: 26px;
-            line-height: 1.2;
-            margin-bottom: 12px;
-          }
-
-          .about-items .icon {
-            width: 54px;
-            height: 54px;
-            min-width: 54px;
-            box-shadow: 0 3px 8px rgba(38, 182, 224, 0.28);
-          }
-          .about-items .icon svg { width: 22px; height: 22px; }
-          .about-items .content h5 { font-size: 16px; margin: 0 0 6px; }
-          .about-items .content p { font-size: 14px; line-height: 1.5; margin: 0; }
-
-          .brand-slide { height: 80px; }
-          .brand-logo { max-height: 64px; }
         }
       `}</style>
 
