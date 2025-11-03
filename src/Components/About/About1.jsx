@@ -51,23 +51,22 @@ const About1 = () => {
         .about-wrapper { width: 100%; }
         .about-section { overflow-x: hidden; }
 
-        /* ===== Image (centered + framed) ===== */
+        /* ===== Image fills full left side neatly ===== */
         .about-photo-wrap {
           width: 100%;
           display: flex;
-          justify-content: center;
+          justify-content: flex-start;
           align-items: center;
-          padding-left: 10px; /* adds subtle frame spacing */
         }
         .about-photo {
-          width: 100%;
-          max-width: 1180px;
+          width: 115%; /* extend to fill left side completely */
+          max-width: 1300px;
           height: auto;
-          border-radius: 8px; /* subtle rounded edges */
-          border: 4px solid #f0f3f7; /* light frame border */
-          box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1); /* elegant soft shadow */
+          margin-left: -60px; /* pulls to fill the blank area */
+          border-radius: 10px;
+          border: 3px solid #e6eef3; /* visible border frame */
+          box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
           object-fit: cover;
-          transform: none;
         }
 
         /* ===== Title ===== */
@@ -132,18 +131,18 @@ const About1 = () => {
         /* ===== Mobile ===== */
         @media (max-width: 768px) {
           .about-photo {
-            max-width: 100%;
+            width: 100%;
             max-height: 460px;
-            border-width: 3px;
+            margin-left: 0;
           }
         }
       `}</style>
 
-      <div className="container">
+      <div className="container-fluid" style={{ paddingLeft: 0 }}>
         <div className="about-wrapper">
           <div className="row g-4 align-items-center">
             {/* Left Image */}
-            <div className="col-lg-7 d-flex justify-content-center">
+            <div className="col-lg-7 d-flex justify-content-start">
               <div className="about-photo-wrap">
                 <img
                   src="/team1.jpg"
