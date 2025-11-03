@@ -35,7 +35,7 @@ const ServicesVideoSection = ({
   return (
     <section className="svs-split">
       <div className="svs-container">
-        {/* LEFT SIDE */}
+        {/* LEFT */}
         <div className="svs-left" ref={leftRef}>
           <header className="svs-header">
             <p className="svs-sub">{subheading}</p>
@@ -45,20 +45,21 @@ const ServicesVideoSection = ({
           <div className="svs-list">
             {SERVICES.map(({ title, Icon }) => (
               <div className="svs-item" key={title}>
-                <div className="svs-icon">
-                  <Icon strokeWidth={1.75} />
-                </div>
+                <div className="svs-icon"><Icon strokeWidth={1.75} /></div>
                 <div className="svs-item-title">{title}</div>
               </div>
             ))}
           </div>
         </div>
 
-        {/* RIGHT SIDE (Video Section) */}
+        {/* RIGHT (Video) */}
         <div className="svs-right">
           <div
             className="svs-video-frame"
-            style={{ height: matchHeight ? `${matchHeight}px` : "auto" }}
+            style={{
+              height: matchHeight ? `${matchHeight}px` : "auto",
+              width: "100%",
+            }}
           >
             <video
               src={videoSrc}
@@ -73,71 +74,55 @@ const ServicesVideoSection = ({
         </div>
       </div>
 
-      {/* Styles */}
       <style>{`
-        .svs-split {
-          background: #fff;
-          padding: 70px 0;
-          overflow-x: hidden;
-        }
-
+        .svs-split { background:#fff; padding:70px 0; overflow-x:hidden; }
         .svs-container {
-          width: min(1200px, 92%);
-          margin: 0 auto;
-          display: grid;
-          grid-template-columns: 1fr 1fr;
-          gap: 32px;
-          align-items: start;
+          width:min(1200px,92%);
+          margin:0 auto;
+          display:grid;
+          grid-template-columns:1fr 1fr;
+          gap:32px;
+          align-items:start;
         }
 
-        /* LEFT SIDE */
-        .svs-header { margin-bottom: 12px; }
-        .svs-sub { margin: 0 0 6px; font-size: .95rem; color: #5f6b7a; }
-        .svs-title { margin: 0; font-size: clamp(1.8rem, 1.2rem + 2vw, 2.6rem); font-weight: 800; color: #0E0F2C; }
+        /* LEFT */
+        .svs-header{margin-bottom:12px;}
+        .svs-sub{margin:0 0 6px;font-size:.95rem;color:#5f6b7a;}
+        .svs-title{margin:0;font-size:clamp(1.8rem,1.2rem + 2vw,2.6rem);font-weight:800;color:#0E0F2C;}
+        .svs-list{display:grid;gap:10px;margin-top:14px;}
+        .svs-item{display:flex;align-items:center;gap:10px;padding:10px 14px;border:1px solid #e2e8f0;border-radius:10px;background:#f8fcff;width:85%;transition:.2s;}
+        .svs-item:hover{transform:translateY(-2px);box-shadow:0 8px 18px rgba(10,40,80,.08);border-color:#c9e4f5;background:#f4fbff;}
+        .svs-icon{flex:0 0 40px;width:40px;height:40px;border-radius:8px;display:grid;place-items:center;background:rgba(38,182,224,.12);border:1px solid rgba(38,182,224,.35);color:#1c99bf;}
+        .svs-icon svg{width:20px;height:20px;}
+        .svs-item-title{font-weight:700;color:#0E0F2C;font-size:1rem;line-height:1.4;}
 
-        .svs-list { display: grid; gap: 10px; margin-top: 14px; }
-        .svs-item {
-          display: flex; align-items: center; gap: 10px;
-          padding: 10px 14px; border: 1px solid #e2e8f0; border-radius: 10px;
-          background: #f8fcff; width: 85%; transition: all .2s ease;
+        /* RIGHT — fill column, no gap */
+        .svs-right{display:flex;align-items:stretch;justify-content:stretch;}
+        .svs-video-frame{
+          flex:1;                 /* fill available width */
+          width:100%;
+          /* aspect-ratio REMOVED to avoid width shrinking when height is fixed */
+          border-radius:18px;
+          overflow:hidden;
+          background:#000;
+          margin:0;
+          box-shadow:0 12px 28px rgba(0,0,0,.15);
+          display:flex;
         }
-        .svs-item:hover { transform: translateY(-2px); box-shadow: 0 8px 18px rgba(10,40,80,.08); border-color: #c9e4f5; background: #f4fbff; }
-        .svs-icon { flex: 0 0 40px; width: 40px; height: 40px; border-radius: 8px; display: grid; place-items: center; background: rgba(38,182,224,.12); border: 1px solid rgba(38,182,224,.35); color: #1c99bf; }
-        .svs-icon svg { width: 20px; height: 20px; }
-        .svs-item-title { font-weight: 700; color: #0E0F2C; font-size: 1rem; line-height: 1.4; }
-
-        /* RIGHT SIDE — fill column, no gaps */
-        .svs-right {
-          display: flex;
-          align-items: stretch;   /* stretch to full column height */
-          justify-content: stretch;
-        }
-        .svs-video-frame {
-          width: 100%;
-          max-width: none;        /* <-- remove the 640px cap */
-          aspect-ratio: 16 / 9;
-          border-radius: 18px;
-          overflow: hidden;
-          background: #000;
-          margin: 0;              /* <-- remove extra margins */
-          box-shadow: 0 12px 28px rgba(0,0,0,0.15);
-          display: flex;
-        }
-        .svs-video-frame video {
-          width: 100%;
-          height: 100%;
-          object-fit: cover;      /* fill the frame completely */
-          object-position: center;
-          display: block;
+        .svs-video-frame video{
+          width:100%;
+          height:100%;
+          object-fit:cover;       /* fills the frame completely */
+          object-position:center;
+          display:block;
         }
 
-        /* MOBILE */
-        @media (max-width: 768px) {
-          .svs-container { grid-template-columns: 1fr; gap: 20px; }
-          .svs-right { order: -1; width: 100%; }
-          .svs-video-frame { width: 100%; border-radius: 14px; box-shadow: 0 8px 18px rgba(0,0,0,0.1); }
-          .svs-left { width: 100%; text-align: left; padding-inline: 8px; }
-          .svs-item { width: 100%; }
+        @media (max-width:768px){
+          .svs-container{grid-template-columns:1fr;gap:20px;}
+          .svs-right{order:-1;width:100%;}
+          .svs-video-frame{border-radius:14px;box-shadow:0 8px 18px rgba(0,0,0,.1);}
+          .svs-left{width:100%;text-align:left;padding-inline:8px;}
+          .svs-item{width:100%;}
         }
       `}</style>
     </section>
