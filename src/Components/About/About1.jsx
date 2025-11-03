@@ -43,7 +43,7 @@ const About1 = () => {
     <section
       className="about-section bg-cover"
       data-background="/about-bg.png"
-      style={{ padding: "28px 0 0", overflow: "hidden" }}
+      style={{ padding: "80px 0 0", overflow: "hidden" }} // ⬅ increased top padding for space
     >
       <style>{`
         :root {
@@ -129,7 +129,7 @@ const About1 = () => {
 
         /* ===== Group Companies ===== */
         .brand-block {
-          margin-top: 60px; /* moved slightly down */
+          margin-top: 60px;
           padding: 35px 0 10px;
           background: linear-gradient(180deg, #f6fbff 0%, #eef5f9 100%);
           border-radius: 16px;
@@ -166,23 +166,22 @@ const About1 = () => {
           justify-content: center;
           height: 150px;
         }
+
+        /* ✅ Remove white background behind logos */
         .brand-logo {
           max-height: 120px;
           width: auto;
           object-fit: contain;
           display: block;
           transition: transform 0.25s ease, filter 0.25s ease;
-          filter: brightness(.95);
-        }
-        .brand-logo:hover {
-          transform: scale(1.08);
-          filter: brightness(1.05);
+          mix-blend-mode: multiply;
+          background: transparent !important;
         }
 
-        /* No bottom white space */
-        .about-wrapper > *:last-child { margin-bottom: 0 !important; }
-        .brand-block:last-child { padding-bottom: 0; margin-bottom: 0; }
-        .slick-slide > div { height: 100%; }
+        .brand-logo:hover {
+          transform: scale(1.08);
+          filter: brightness(1.1);
+        }
 
         /* Responsive */
         @media (max-width: 991px) {
