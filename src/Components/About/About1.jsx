@@ -51,7 +51,7 @@ const About1 = () => {
         .about-wrapper { width: 100%; }
         .about-section { overflow-x: hidden; }
 
-        /* ===== Image (No Frame + Balanced Size) ===== */
+        /* ===== Image (bigger, no frame, not full width) ===== */
         .about-photo-wrap {
           width: 100%;
           display: flex;
@@ -60,12 +60,12 @@ const About1 = () => {
         }
         .about-photo {
           width: 100%;
-          max-width: 1200px; /* ✅ Larger but not full width */
+          max-width: 1250px; /* Bigger but contained */
           height: auto;
-          border: none;
-          border-radius: 0;
+          border: none;          /* no border/frame */
+          border-radius: 0;      /* no rounded frame */
+          box-shadow: none;      /* remove shadow frame */
           object-fit: cover;
-          box-shadow: none;
           transform: none;
         }
 
@@ -80,6 +80,7 @@ const About1 = () => {
 
         /* ===== Info Items ===== */
         .about-items {
+          position: relative;
           display: flex;
           align-items: flex-start;
           gap: 16px;
@@ -95,11 +96,28 @@ const About1 = () => {
           align-items: center;
           justify-content: center;
           box-shadow: 0 4px 10px rgba(38, 182, 224, 0.35);
+          z-index: 1;
         }
         .about-items .icon svg {
           width: 28px;
           height: 28px;
           color: #fff;
+        }
+        .about-items:not(:last-child)::after {
+          content: "";
+          position: absolute;
+          left: 29px;
+          top: 60px;
+          width: 2px;
+          height: calc(100% - 30px);
+          background: repeating-linear-gradient(
+            to bottom,
+            var(--accent),
+            var(--accent) 4px,
+            transparent 4px,
+            transparent 8px
+          );
+          z-index: 0;
         }
         .about-items .content h5 {
           font-weight: 800;
@@ -113,7 +131,7 @@ const About1 = () => {
           font-size: 15.5px;
         }
 
-        /* ===== Brand Slider ===== */
+        /* ===== Brand slider ===== */
         .brand-block { margin-top: 50px; }
         .brand-title {
           text-align: center;
@@ -126,12 +144,36 @@ const About1 = () => {
         .brand-logo { max-height: 90px; width: auto; object-fit: contain; transition: transform 0.2s ease; }
         .brand-logo:hover { transform: translateY(-2px); }
 
-        /* ===== MOBILE ===== */
+        /* ===== MOBILE (≤768px) ===== */
         @media (max-width: 768px) {
+          .about-section { padding: 28px 0 10px !important; }
+          .container { padding-left: 18px; padding-right: 18px; }
+          .about-wrapper .row { flex-direction: column; gap: 18px; }
+          .col-lg-7, .col-lg-5 { width: 100%; max-width: 100%; }
+
           .about-photo {
             max-width: 100%;
-            max-height: 440px;
+            max-height: 460px; /* keep tall but safe */
           }
+
+          .about-content .section-title h2 {
+            font-size: 26px;
+            line-height: 1.2;
+            margin-bottom: 12px;
+          }
+
+          .about-items .icon {
+            width: 54px;
+            height: 54px;
+            min-width: 54px;
+            box-shadow: 0 3px 8px rgba(38, 182, 224, 0.28);
+          }
+          .about-items .icon svg { width: 22px; height: 22px; }
+          .about-items .content h5 { font-size: 16px; margin: 0 0 6px; }
+          .about-items .content p { font-size: 14px; line-height: 1.5; margin: 0; }
+
+          .brand-slide { height: 80px; }
+          .brand-logo { max-height: 64px; }
         }
       `}</style>
 
@@ -141,7 +183,12 @@ const About1 = () => {
             {/* Left Image */}
             <div className="col-lg-7 d-flex justify-content-center">
               <div className="about-photo-wrap">
-                <img src="/team.jpg" alt="1 Global Enterprises Group" className="about-photo" />
+                {/* Put your uploaded file in /public as team-group.png */}
+                <img
+                  src="/team-group.png"
+                  alt="1 Global Enterprises Team"
+                  className="about-photo"
+                />
               </div>
             </div>
 
@@ -157,7 +204,10 @@ const About1 = () => {
                     <div className="icon"><Users2 /></div>
                     <div className="content">
                       <h5>Who We Are</h5>
-                      <p>A diversified group with interests in Shipping, Logistics, Distribution, IT, Clean Energy & Trading.</p>
+                      <p>
+                        A diversified group with interests in Shipping, Logistics, Distribution,
+                        IT, Clean Energy & Trading.
+                      </p>
                     </div>
                   </div>
 
@@ -173,7 +223,9 @@ const About1 = () => {
                     <div className="icon"><BadgeCheck /></div>
                     <div className="content">
                       <h5>Expertise</h5>
-                      <p>Each business unit is led by experts ensuring sustainability, execution & growth.</p>
+                      <p>
+                        Each business unit is led by experts ensuring sustainability, execution & growth.
+                      </p>
                     </div>
                   </div>
                 </div>
