@@ -44,10 +44,9 @@ const VERTICALS = [
 const openLink = (url) => url && window.open(url, "_blank", "noopener,noreferrer");
 
 /* ---------- COMPONENT ---------- */
-const Activities = () => {
+export default function Activities() {
   const rowRefs = useRef([]);
 
-  // Reveal on scroll
   useEffect(() => {
     const io = new IntersectionObserver(
       (entries) => entries.forEach((e) => e.isIntersecting && e.target.classList.add("show")),
@@ -65,13 +64,13 @@ const Activities = () => {
           --muted:#475569;
           --teal:#10a3a7;
           --blue:#2563eb;
-          --bg1:#f3fbfc; /* light teal */
-          --bg2:#f5f8ff; /* light blue */
+          --bg1:#f3fbfc;  /* light teal */
+          --bg2:#f5f8ff;  /* light blue */
         }
 
         .activities{ background:#fff; }
 
-        /* Each slice gets its own soft background */
+        /* Alternating slices with soft backgrounds */
         .slice{
           position:relative;
           padding: clamp(36px, 6vw, 84px) 0;
@@ -79,7 +78,6 @@ const Activities = () => {
         }
         .slice.alt{ background: var(--bg2); }
 
-        /* subtle radial accents */
         .slice::before{
           content:"";
           position:absolute; inset:-10% -5% auto -5%;
@@ -91,14 +89,11 @@ const Activities = () => {
         }
 
         .container{
-          max-width:1200px;
-          margin:0 auto;
-          padding:0 20px;
-          position:relative;
-          z-index:1;
+          max-width:1200px; margin:0 auto; padding:0 20px;
+          position:relative; z-index:1;
         }
 
-        /* Zig-zag layout */
+        /* Zig-zag */
         .row{
           display:grid;
           grid-template-columns: 1.1fr 1fr;
@@ -108,63 +103,57 @@ const Activities = () => {
           transition: opacity .7s ease, transform .7s cubic-bezier(.2,.65,.16,1);
         }
         .row.show{ opacity:1; transform:none; }
-
         .row.rev{ grid-template-columns: 1fr 1.1fr; }
 
+        /* Media */
         .media{
           border-radius:18px; overflow:hidden;
           box-shadow:0 20px 50px rgba(2,8,23,.15);
         }
         .media img{
-          width:100%; height:100%; aspect-ratio: 16/9;
-          object-fit: cover; display:block;
-          transform: scale(1.02);
-          transition: transform .5s ease;
+          width:100%; height:100%; aspect-ratio:16/9; object-fit:cover; display:block;
+          transform:scale(1.02); transition: transform .5s ease;
         }
-        .media:hover img{ transform: scale(1.05); }
+        .media:hover img{ transform:scale(1.05); }
 
+        /* Content */
         .content{ padding: 6px 6px; }
-
-        .title{
-          display:flex; align-items:center; gap:12px; margin-bottom:12px;
-        }
+        .title{ display:flex; gap:12px; align-items:center; margin-bottom:12px; }
         .bubble{
           width:46px; height:46px; border-radius:50%;
-          display:flex; align-items:center; justify-content:center;
-          color:#fff; background: linear-gradient(135deg, var(--teal), var(--blue));
+          display:flex; align-items:center; justify-content:center; color:#fff;
+          background: linear-gradient(135deg, var(--teal), var(--blue));
           box-shadow:0 10px 24px rgba(16,163,167,.25);
           flex-shrink:0;
         }
-        .title h3{
-          margin:0; color:var(--ink); font-weight:900;
-          font-size: clamp(18px, 2.2vw, 22px);
-        }
+        .title h3{ margin:0; color:var(--ink); font-weight:900; font-size:clamp(18px,2.2vw,22px); }
+        .desc{ margin:0 0 18px; color:var(--muted); line-height:1.75; font-size:clamp(14px,1.2vw,16px); max-width:60ch; }
 
-        .desc{
-          margin:0 0 18px; color:var(--muted);
-          line-height:1.75; font-size: clamp(14px, 1.2vw, 16px);
-          max-width: 60ch;
-        }
-
+        /* Logos — NO white rectangle behind */
         .logos{
           display:grid;
           grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
           gap:14px 18px; max-width:760px; align-items:center;
         }
         .logo{
-          background:#fff; border-radius:12px;
-          padding:10px 14px; display:flex; align-items:center; justify-content:center;
-          box-shadow:0 5px 18px rgba(0,0,0,.08);
-          cursor:pointer; transition: transform .2s ease, box-shadow .25s ease, filter .25s ease;
+          background: transparent;          /* removed white box */
+          border-radius: 0;                 /* no rounded box */
+          padding: 0;                       /* no inner padding */
+          box-shadow: none;                 /* remove shadows */
+          display:flex; align-items:center; justify-content:center;
+          cursor:pointer; transition: transform .18s ease, filter .18s ease;
         }
-        .logo img{ max-height:58px; width:auto; object-fit:contain; filter: grayscale(.05); }
-        .logo:hover{ transform:translateY(-3px); box-shadow:0 12px 28px rgba(0,0,0,.15); }
+        .logo img{
+          max-height:58px; width:auto; object-fit:contain; display:block;
+          filter: grayscale(.08) contrast(1.02);
+        }
+        .logo:hover{ transform: translateY(-2px) scale(1.03); }
         .logo:hover img{ filter:none; }
 
         /* Responsive */
         @media (max-width:1024px){
           .row, .row.rev { grid-template-columns:1fr; }
-          .media img{ aspect-ratio: 16/10; }
+          .media img{ aspect-ratio:16/10; }
         }
         @media (max-width:640px){
           .logo img{ max-height:48px; }
@@ -174,10 +163,7 @@ const Activities = () => {
       {VERTICALS.map((v, i) => (
         <div className={`slice ${i % 2 ? "alt" : ""}`} key={v.title}>
           <div className="container">
-            <div
-              className={`row ${i % 2 ? "rev" : ""}`}
-              ref={(el) => (rowRefs.current[i] = el)}
-            >
+            <div className={`row ${i % 2 ? "rev" : ""}`} ref={(el) => (rowRefs.current[i] = el)}>
               {/* IMAGE */}
               <figure className="media">
                 <img src={v.cover} alt={`${v.title} cover`} loading="lazy" />
@@ -213,6 +199,4 @@ const Activities = () => {
       ))}
     </section>
   );
-};
-
-export default Activities;
+}
