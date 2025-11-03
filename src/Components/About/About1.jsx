@@ -56,9 +56,9 @@ const About1 = () => {
           overflow-x: hidden;
           background: #fff;
         }
-        .about-wrapper {
-          width: 100%;
-        }
+
+        /* Layout */
+        .about-wrapper { width: 100%; }
 
         /* Left image */
         .about-image-col { padding-right: 16px; }
@@ -83,7 +83,6 @@ const About1 = () => {
         /* Right column */
         .about-text-col { padding-left: 16px; position: relative; z-index: 2; }
 
-        /* Text */
         .about-content .section-title h2 {
           margin-bottom: 16px;
           color: var(--ink);
@@ -128,22 +127,22 @@ const About1 = () => {
           font-size: 15.5px;
         }
 
-        /* Group Companies Section */
+        /* ===== Group Companies ===== */
         .brand-block {
-          margin-top: 30px;
-          padding: 20px 0 0;
+          margin-top: 60px; /* moved slightly down */
+          padding: 35px 0 10px;
           background: linear-gradient(180deg, #f6fbff 0%, #eef5f9 100%);
           border-radius: 16px;
         }
         .brand-title {
           text-align: center;
-          margin: 0 0 20px;
+          margin: 0 0 25px;
           font-size: 30px;
           font-weight: 800;
           color: var(--ink);
         }
 
-        /* Slider + logos */
+        /* Slider */
         .brand-slider-wrap {
           max-width: 1200px;
           margin: 0 auto;
@@ -165,10 +164,10 @@ const About1 = () => {
           display: flex;
           align-items: center;
           justify-content: center;
-          height: 150px; /* increased to fit larger logos */
+          height: 150px;
         }
         .brand-logo {
-          max-height: 120px; /* increased from ~70px */
+          max-height: 120px;
           width: auto;
           object-fit: contain;
           display: block;
@@ -180,23 +179,22 @@ const About1 = () => {
           filter: brightness(1.05);
         }
 
-        /* Remove extra space below */
+        /* No bottom white space */
         .about-wrapper > *:last-child { margin-bottom: 0 !important; }
         .brand-block:last-child { padding-bottom: 0; margin-bottom: 0; }
         .slick-slide > div { height: 100%; }
-        .slick-track { align-items: center; }
 
         /* Responsive */
         @media (max-width: 991px) {
           .about-image-col { padding-right: 0; }
           .about-text-col { padding-left: 0; margin-top: 12px; }
+          .brand-block { margin-top: 40px; padding: 25px 0 5px; }
           .brand-slide { height: 120px; }
           .brand-logo { max-height: 100px; }
         }
         @media (max-width: 575px) {
           .about-content .section-title h2 { font-size: 26px; }
-          .about-items .icon { width: 46px; height: 46px; min-width: 46px; }
-          .brand-title { font-size: 24px; margin-bottom: 14px; }
+          .brand-title { font-size: 24px; margin-bottom: 18px; }
           .brand-slide { height: 100px; }
           .brand-logo { max-height: 80px; }
         }
