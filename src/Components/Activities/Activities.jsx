@@ -47,225 +47,166 @@ const openLink = (url) => url && window.open(url, "_blank", "noopener,noreferrer
 const Activities = () => {
   const rowRefs = useRef([]);
 
-  // Scroll animation
+  // Reveal on scroll
   useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) =>
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) entry.target.classList.add("show");
-        }),
-      { threshold: 0.2 }
+    const io = new IntersectionObserver(
+      (entries) => entries.forEach((e) => e.isIntersecting && e.target.classList.add("show")),
+      { threshold: 0.18 }
     );
-
-    rowRefs.current.forEach((el) => el && observer.observe(el));
-    return () => observer.disconnect();
+    rowRefs.current.forEach((el) => el && io.observe(el));
+    return () => io.disconnect();
   }, []);
 
   return (
-    <section className="activities-section">
+    <section className="activities">
       <style>{`
-        :root {
-          --ink: #0f172a;
-          --muted: #475569;
-          --accent: #0ea5e9;
-          --accent2: #2563eb;
+        :root{
+          --ink:#0f172a;
+          --muted:#475569;
+          --teal:#10a3a7;
+          --blue:#2563eb;
+          --bg1:#f3fbfc; /* light teal */
+          --bg2:#f5f8ff; /* light blue */
         }
 
-        .activities-section {
-          background: #fff;
-          overflow: hidden;
+        .activities{ background:#fff; }
+
+        /* Each slice gets its own soft background */
+        .slice{
+          position:relative;
+          padding: clamp(36px, 6vw, 84px) 0;
+          background: var(--bg1);
+        }
+        .slice.alt{ background: var(--bg2); }
+
+        /* subtle radial accents */
+        .slice::before{
+          content:"";
+          position:absolute; inset:-10% -5% auto -5%;
+          height:360px; pointer-events:none;
+          background:
+            radial-gradient(600px 260px at 12% 10%, rgba(16,163,167,.10), transparent 60%),
+            radial-gradient(560px 220px at 88% 0%, rgba(37,99,235,.08), transparent 60%);
+          opacity:.7;
         }
 
-        .section-header {
-          text-align: center;
-          margin: 60px 0 30px;
+        .container{
+          max-width:1200px;
+          margin:0 auto;
+          padding:0 20px;
+          position:relative;
+          z-index:1;
         }
 
-        .section-header small {
-          display: block;
-          text-transform: uppercase;
-          font-weight: 700;
-          color: var(--accent);
-          margin-bottom: 8px;
-          letter-spacing: 1.5px;
-        }
-
-        .section-header h2 {
-          font-size: clamp(26px, 4vw, 38px);
-          color: var(--ink);
-          font-weight: 900;
-          margin: 0;
-        }
-
-        /* Zigzag rows */
-        .activity-row {
-          display: grid;
+        /* Zig-zag layout */
+        .row{
+          display:grid;
           grid-template-columns: 1.1fr 1fr;
-          align-items: center;
-          gap: 48px;
-          max-width: 1200px;
-          margin: 60px auto;
-          padding: 0 20px;
-          opacity: 0;
-          transform: translateY(40px);
-          transition: all 0.8s ease;
+          align-items:center;
+          gap: clamp(20px, 4vw, 48px);
+          opacity:0; transform: translateY(34px);
+          transition: opacity .7s ease, transform .7s cubic-bezier(.2,.65,.16,1);
+        }
+        .row.show{ opacity:1; transform:none; }
+
+        .row.rev{ grid-template-columns: 1fr 1.1fr; }
+
+        .media{
+          border-radius:18px; overflow:hidden;
+          box-shadow:0 20px 50px rgba(2,8,23,.15);
+        }
+        .media img{
+          width:100%; height:100%; aspect-ratio: 16/9;
+          object-fit: cover; display:block;
+          transform: scale(1.02);
+          transition: transform .5s ease;
+        }
+        .media:hover img{ transform: scale(1.05); }
+
+        .content{ padding: 6px 6px; }
+
+        .title{
+          display:flex; align-items:center; gap:12px; margin-bottom:12px;
+        }
+        .bubble{
+          width:46px; height:46px; border-radius:50%;
+          display:flex; align-items:center; justify-content:center;
+          color:#fff; background: linear-gradient(135deg, var(--teal), var(--blue));
+          box-shadow:0 10px 24px rgba(16,163,167,.25);
+          flex-shrink:0;
+        }
+        .title h3{
+          margin:0; color:var(--ink); font-weight:900;
+          font-size: clamp(18px, 2.2vw, 22px);
         }
 
-        .activity-row.show {
-          opacity: 1;
-          transform: translateY(0);
+        .desc{
+          margin:0 0 18px; color:var(--muted);
+          line-height:1.75; font-size: clamp(14px, 1.2vw, 16px);
+          max-width: 60ch;
         }
 
-        .activity-row.reverse {
-          grid-template-columns: 1fr 1.1fr;
+        .logos{
+          display:grid;
+          grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+          gap:14px 18px; max-width:760px; align-items:center;
         }
-
-        /* Image */
-        .activity-image {
-          border-radius: 18px;
-          overflow: hidden;
-          box-shadow: 0 20px 50px rgba(2, 8, 23, 0.15);
-          position: relative;
+        .logo{
+          background:#fff; border-radius:12px;
+          padding:10px 14px; display:flex; align-items:center; justify-content:center;
+          box-shadow:0 5px 18px rgba(0,0,0,.08);
+          cursor:pointer; transition: transform .2s ease, box-shadow .25s ease, filter .25s ease;
         }
-
-        .activity-image img {
-          width: 100%;
-          height: 100%;
-          object-fit: cover;
-          transition: transform 0.5s ease;
-        }
-
-        .activity-image:hover img {
-          transform: scale(1.05);
-        }
-
-        /* Content */
-        .activity-content {
-          padding: 10px;
-        }
-
-        .title-row {
-          display: flex;
-          align-items: center;
-          gap: 12px;
-          margin-bottom: 16px;
-        }
-
-        .title-icon {
-          width: 46px;
-          height: 46px;
-          border-radius: 50%;
-          background: linear-gradient(135deg, var(--accent), var(--accent2));
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          color: #fff;
-          box-shadow: 0 6px 16px rgba(37, 99, 235, 0.25);
-        }
-
-        .title-row h3 {
-          font-size: 1.5rem;
-          font-weight: 800;
-          color: var(--ink);
-          margin: 0;
-        }
-
-        .activity-description {
-          font-size: 1rem;
-          line-height: 1.75;
-          color: var(--muted);
-          margin-bottom: 20px;
-          max-width: 640px;
-        }
-
-        .logos-grid {
-          display: flex;
-          flex-wrap: wrap;
-          gap: 24px;
-          align-items: center;
-        }
-
-        .logo-item {
-          background: #fff;
-          padding: 10px 14px;
-          border-radius: 12px;
-          box-shadow: 0 5px 18px rgba(0, 0, 0, 0.08);
-          cursor: pointer;
-          transition: transform 0.25s ease, box-shadow 0.25s ease;
-        }
-
-        .logo-item:hover {
-          transform: translateY(-4px);
-          box-shadow: 0 10px 26px rgba(0, 0, 0, 0.15);
-        }
-
-        .logo-item img {
-          max-height: 60px;
-          width: auto;
-          object-fit: contain;
-        }
+        .logo img{ max-height:58px; width:auto; object-fit:contain; filter: grayscale(.05); }
+        .logo:hover{ transform:translateY(-3px); box-shadow:0 12px 28px rgba(0,0,0,.15); }
+        .logo:hover img{ filter:none; }
 
         /* Responsive */
-        @media (max-width: 1024px) {
-          .activity-row,
-          .activity-row.reverse {
-            grid-template-columns: 1fr;
-            gap: 30px;
-          }
-
-          .activity-image img {
-            height: 300px;
-            object-fit: cover;
-          }
-
-          .section-header {
-            margin: 40px 0 20px;
-          }
+        @media (max-width:1024px){
+          .row, .row.rev { grid-template-columns:1fr; }
+          .media img{ aspect-ratio: 16/10; }
         }
-
-        @media (max-width: 640px) {
-          .activity-description {
-            font-size: 0.95rem;
-          }
-          .logo-item img {
-            max-height: 48px;
-          }
+        @media (max-width:640px){
+          .logo img{ max-height:48px; }
         }
       `}</style>
 
-      <div className="section-header">
-        <small>Our Verticals</small>
-        <h2>Driving Innovation Across Industries</h2>
-      </div>
-
       {VERTICALS.map((v, i) => (
-        <div
-          className={`activity-row ${i % 2 !== 0 ? "reverse" : ""}`}
-          ref={(el) => (rowRefs.current[i] = el)}
-          key={v.title}
-        >
-          <div className="activity-image">
-            <img src={v.cover} alt={v.title} loading="lazy" />
-          </div>
+        <div className={`slice ${i % 2 ? "alt" : ""}`} key={v.title}>
+          <div className="container">
+            <div
+              className={`row ${i % 2 ? "rev" : ""}`}
+              ref={(el) => (rowRefs.current[i] = el)}
+            >
+              {/* IMAGE */}
+              <figure className="media">
+                <img src={v.cover} alt={`${v.title} cover`} loading="lazy" />
+              </figure>
 
-          <div className="activity-content">
-            <div className="title-row">
-              <div className="title-icon">{v.icon}</div>
-              <h3>{v.title}</h3>
-            </div>
-            <p className="activity-description">{v.description}</p>
-
-            <div className="logos-grid">
-              {v.logos.map((logo, idx) => (
-                <div
-                  key={idx}
-                  className="logo-item"
-                  onClick={() => openLink(logo.link)}
-                  title={logo.alt}
-                >
-                  <img src={logo.img} alt={logo.alt} />
+              {/* CONTENT */}
+              <div className="content">
+                <div className="title">
+                  <span className="bubble">{v.icon}</span>
+                  <h3>{v.title}</h3>
                 </div>
-              ))}
+                <p className="desc">{v.description}</p>
+
+                <div className="logos">
+                  {v.logos.map((L, idx) => (
+                    <div
+                      key={`${v.title}-${idx}`}
+                      className="logo"
+                      title={L.alt}
+                      role="button"
+                      tabIndex={0}
+                      onClick={() => openLink(L.link)}
+                      onKeyDown={(e) => (e.key === "Enter" || e.key === " ") && openLink(L.link)}
+                    >
+                      <img src={L.img} alt={L.alt} loading="lazy" />
+                    </div>
+                  ))}
+                </div>
+              </div>
             </div>
           </div>
         </div>
