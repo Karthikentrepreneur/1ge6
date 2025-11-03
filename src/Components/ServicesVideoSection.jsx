@@ -20,7 +20,7 @@ const ServicesVideoSection = ({
     const el = leftRef.current;
     if (!el) return;
     const update = () =>
-      setMatchHeight(Math.max(650, Math.round(el.getBoundingClientRect().height * 1.5)));
+      setMatchHeight(Math.max(480, Math.round(el.getBoundingClientRect().height * 1.2)));
     const ro = new ResizeObserver(update);
     ro.observe(el);
     window.addEventListener("resize", update);
@@ -101,7 +101,7 @@ const ServicesVideoSection = ({
           margin-left: 0;
           border-radius: 20px;
           overflow: hidden;
-          background: #000;
+          background: transparent;
           box-shadow: 0 20px 50px rgba(14, 24, 44, 0.25);
           display:flex;
           position: relative;
@@ -109,9 +109,10 @@ const ServicesVideoSection = ({
         .svs-video-card video {
           width: 100%;
           height: 100%;
-          object-fit: cover;
+          object-fit: contain;
           object-position: center center;
           display:block;
+          background: transparent;
         }
 
         /* Mobile */
