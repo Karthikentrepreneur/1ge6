@@ -48,7 +48,7 @@ const ServicesVideoSection = ({
           </div>
         </div>
 
-        {/* RIGHT (Video) */}
+        {/* RIGHT */}
         <div className="svs-right">
           <div
             className="svs-video-card"
@@ -68,62 +68,98 @@ const ServicesVideoSection = ({
       </div>
 
       <style>{`
-        .svs-split { background:#fff; padding:72px 0; overflow-x:hidden; }
+        .svs-split { background:#fff; padding:72px 0; overflow:hidden; }
+
         .svs-container {
-          width:min(1400px, 94%);
-          margin:0 auto;
+          width:100%;
+          margin:0;
           display:grid;
-          grid-template-columns:0.7fr 1.3fr;
-          gap:60px;
-          align-items:center;
+          grid-template-columns: 0.7fr 1.3fr;
+          align-items:stretch;
         }
 
-        /* LEFT */
+        /* LEFT SIDE */
+        .svs-left {
+          padding: 0 4vw;
+          display:flex;
+          flex-direction:column;
+          justify-content:center;
+        }
+
         .svs-header { margin-bottom:12px; }
         .svs-sub { margin:0 0 6px; font-size:.95rem; color:#5f6b7a; }
         .svs-title { margin:0; font-size:clamp(1.8rem,1.2rem + 2vw,2.6rem); font-weight:800; color:#0E0F2C; }
         .svs-list { display:grid; gap:10px; margin-top:14px; }
         .svs-item {
           display:flex; align-items:center; gap:10px;
-          padding:10px 14px; border:1px solid #e2e8f0; border-radius:10px;
-          background:#f8fcff; width:95%; transition:all .2s ease;
+          padding:10px 14px;
+          border:1px solid #e2e8f0;
+          border-radius:10px;
+          background:#f8fcff;
+          transition:all .2s ease;
         }
-        .svs-item:hover { transform:translateY(-2px); box-shadow:0 8px 18px rgba(10,40,80,.08); border-color:#c9e4f5; background:#f4fbff; }
-        .svs-icon { flex:0 0 40px; width:40px; height:40px; border-radius:8px; display:grid; place-items:center; background:rgba(38,182,224,.12); border:1px solid rgba(38,182,224,.35); color:#1c99bf; }
+        .svs-item:hover {
+          transform:translateY(-2px);
+          box-shadow:0 8px 18px rgba(10,40,80,.08);
+          border-color:#c9e4f5;
+          background:#f4fbff;
+        }
+        .svs-icon {
+          flex:0 0 40px; width:40px; height:40px;
+          border-radius:8px; display:grid; place-items:center;
+          background:rgba(38,182,224,.12);
+          border:1px solid rgba(38,182,224,.35);
+          color:#1c99bf;
+        }
         .svs-icon svg { width:20px; height:20px; }
         .svs-item-title { font-weight:700; color:#0E0F2C; font-size:1rem; line-height:1.4; }
 
-        /* RIGHT */
-        .svs-right { display:flex; align-items:center; justify-content:flex-start; }
-        .svs-video-card {
-          width: 100%;
-          max-width: 100%;
-          margin-left: 0;
-          border-radius: 20px;
-          overflow: hidden;
-          background: transparent !important;
-          box-shadow: 0 20px 50px rgba(14, 24, 44, 0.25);
-          position: relative;              /* make child absolute fill work */
-          isolation: isolate;              /* avoid bleed from ancestors */
-        }
-        .svs-video-card video {
-          position: absolute; inset: 0;    /* fill the card */
-          width: 100%;
-          height: 100%;
-          object-fit: cover;               /* ✅ removes the white bars */
-          object-position: center center;
-          display:block;
-          background: transparent !important;
-          outline: none;
-          transform: translateZ(0);        /* prevents sub-pixel seams */
+        /* RIGHT SIDE — Full Panel Fill */
+        .svs-right {
+          position:relative;
+          width:100%;
+          height:auto;
+          overflow:hidden;
         }
 
-        /* Mobile */
+        .svs-video-card {
+          position:relative;
+          width:100%;
+          height:100%;
+          border-radius:0;
+          overflow:hidden;
+          background:transparent !important;
+          box-shadow:none !important;
+        }
+
+        .svs-video-card video {
+          position:absolute;
+          inset:0;
+          width:100%;
+          height:100%;
+          object-fit:cover; /* ✅ fills full right panel */
+          object-position:center;
+          background:transparent !important;
+          border:none;
+        }
+
+        /* Mobile responsive */
         @media (max-width: 992px) {
-          .svs-container { grid-template-columns: 1fr; gap: 20px; }
-          .svs-right { order: -1; }
-          .svs-video-card { border-radius: 14px; box-shadow: 0 12px 28px rgba(0,0,0,.12); }
-          .svs-item { width: 100%; }
+          .svs-container {
+            grid-template-columns:1fr;
+            gap:20px;
+          }
+          .svs-right {
+            order:-1;
+            height: 60vh;
+          }
+          .svs-video-card {
+            border-radius:0;
+            height:100%;
+          }
+          .svs-video-card video {
+            object-fit:cover;
+          }
         }
       `}</style>
     </section>
