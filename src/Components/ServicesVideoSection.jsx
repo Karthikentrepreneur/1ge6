@@ -109,10 +109,9 @@ const ServicesVideoSection = ({
         .svs-video-card video {
           width: 100%;
           height: 100%;
-          object-fit: cover;
+          object-fit: contain;
           object-position: center center;
           display:block;
-          min-height: 100%;
         }
 
         /* Mobile */
