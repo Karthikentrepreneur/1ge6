@@ -64,16 +64,19 @@ export default function Activities() {
           --muted:#475569;
           --teal:#10a3a7;
           --blue:#2563eb;
-          --bg1:#f3fbfc;  /* light teal */
-          --bg2:#f5f8ff;  /* light blue */
+          --bg1:#f3fbfc;   /* light teal */
+          --bg2:#f5f8ff;   /* light blue */
+          --logoH:84px;    /* desktop logo height (equal for all) */
+          --logoH-md:72px; /* tablet */
+          --logoH-sm:56px; /* mobile */
         }
 
         .activities{ background:#fff; }
 
-        /* Alternating slices with soft backgrounds */
+        /* Alternating slices with soft gradients */
         .slice{
           position:relative;
-          padding: clamp(36px, 6vw, 84px) 0;
+          padding: clamp(48px, 7vw, 110px) 0;
           background: var(--bg1);
         }
         .slice.alt{ background: var(--bg2); }
@@ -81,82 +84,116 @@ export default function Activities() {
         .slice::before{
           content:"";
           position:absolute; inset:-10% -5% auto -5%;
-          height:360px; pointer-events:none;
+          height:420px; pointer-events:none;
           background:
-            radial-gradient(600px 260px at 12% 10%, rgba(16,163,167,.10), transparent 60%),
-            radial-gradient(560px 220px at 88% 0%, rgba(37,99,235,.08), transparent 60%);
-          opacity:.7;
+            radial-gradient(720px 280px at 10% 10%, rgba(16,163,167,.10), transparent 60%),
+            radial-gradient(680px 260px at 90% 0%, rgba(37,99,235,.08), transparent 60%);
+          opacity:.75;
         }
 
         .container{
-          max-width:1200px; margin:0 auto; padding:0 20px;
+          max-width:1320px; margin:0 auto; padding:0 24px;
           position:relative; z-index:1;
         }
 
-        /* Zig-zag */
+        /* Zig-zag layout — bigger visuals */
         .row{
           display:grid;
-          grid-template-columns: 1.1fr 1fr;
+          grid-template-columns: 1.2fr 1fr;   /* make image column larger */
           align-items:center;
-          gap: clamp(20px, 4vw, 48px);
-          opacity:0; transform: translateY(34px);
+          gap: clamp(24px, 5vw, 56px);
+          opacity:0; transform: translateY(36px);
           transition: opacity .7s ease, transform .7s cubic-bezier(.2,.65,.16,1);
         }
         .row.show{ opacity:1; transform:none; }
-        .row.rev{ grid-template-columns: 1fr 1.1fr; }
+        .row.rev{ grid-template-columns: 1fr 1.2fr; }
 
-        /* Media */
+        /* Media (big, elegant card) */
         .media{
-          border-radius:18px; overflow:hidden;
-          box-shadow:0 20px 50px rgba(2,8,23,.15);
+          border-radius:22px; overflow:hidden;
+          box-shadow:0 28px 70px rgba(2,8,23,.16);
+          background: #fff;
         }
         .media img{
-          width:100%; height:100%; aspect-ratio:16/9; object-fit:cover; display:block;
-          transform:scale(1.02); transition: transform .5s ease;
+          width:100%; height:100%;
+          aspect-ratio: 21 / 9;    /* wide cinematic */
+          object-fit: cover;
+          display:block;
+          transform: scale(1.015);
+          transition: transform .55s ease;
         }
-        .media:hover img{ transform:scale(1.05); }
+        .media:hover img{ transform: scale(1.04); }
 
         /* Content */
-        .content{ padding: 6px 6px; }
-        .title{ display:flex; gap:12px; align-items:center; margin-bottom:12px; }
+        .content{ padding: 4px 6px; }
+        .title{ display:flex; gap:14px; align-items:center; margin-bottom:12px; }
         .bubble{
-          width:46px; height:46px; border-radius:50%;
+          width:52px; height:52px; border-radius:50%;
           display:flex; align-items:center; justify-content:center; color:#fff;
           background: linear-gradient(135deg, var(--teal), var(--blue));
-          box-shadow:0 10px 24px rgba(16,163,167,.25);
+          box-shadow:0 12px 26px rgba(16,163,167,.25);
           flex-shrink:0;
         }
-        .title h3{ margin:0; color:var(--ink); font-weight:900; font-size:clamp(18px,2.2vw,22px); }
-        .desc{ margin:0 0 18px; color:var(--muted); line-height:1.75; font-size:clamp(14px,1.2vw,16px); max-width:60ch; }
+        .title h3{
+          margin:0; color:var(--ink); font-weight:900;
+          font-size:clamp(22px,2.2vw,28px);
+          letter-spacing:.1px;
+        }
+        .desc{
+          margin:0 0 22px; color:var(--muted); line-height:1.8;
+          font-size:clamp(15px,1.1vw,17px); max-width:68ch;
+        }
 
-        /* Logos — NO white rectangle behind */
+        /* Logos — equal size, bigger, no background boxes */
         .logos{
           display:grid;
-          grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-          gap:14px 18px; max-width:760px; align-items:center;
+          grid-template-columns: repeat(5, minmax(120px, 1fr));
+          gap:18px 22px; max-width:900px; align-items:stretch;
         }
         .logo{
-          background: transparent;          /* removed white box */
-          border-radius: 0;                 /* no rounded box */
-          padding: 0;                       /* no inner padding */
-          box-shadow: none;                 /* remove shadows */
+          background: transparent;
+          border-radius: 16px;
+          padding: 12px 10px;
           display:flex; align-items:center; justify-content:center;
-          cursor:pointer; transition: transform .18s ease, filter .18s ease;
+          cursor:pointer;
+          transition: transform .18s ease, filter .18s ease, box-shadow .18s ease, background .18s ease;
+          box-shadow: 0 0 0 rgba(0,0,0,0);
+        }
+        .logo:focus-visible{ outline:2px solid #94d2ff; outline-offset:4px; border-radius:16px; }
+        .logo:hover{
+          transform: translateY(-3px);
+          box-shadow: 0 12px 26px rgba(2,8,23,.10);
+          background: rgba(255,255,255,.65);
         }
         .logo img{
-          max-height:58px; width:auto; object-fit:contain; display:block;
-          filter: grayscale(.08) contrast(1.02);
+          max-height: var(--logoH);
+          width: auto;
+          aspect-ratio: auto;
+          object-fit: contain;
+          display:block;
+          filter: grayscale(.02) contrast(1.04);
+          background: transparent !important;
+          mix-blend-mode: multiply; /* no white boxes on light bg */
         }
-        .logo:hover{ transform: translateY(-2px) scale(1.03); }
-        .logo:hover img{ filter:none; }
 
         /* Responsive */
+        @media (max-width:1200px){
+          .logos{ grid-template-columns: repeat(4, minmax(120px, 1fr)); }
+        }
         @media (max-width:1024px){
           .row, .row.rev { grid-template-columns:1fr; }
-          .media img{ aspect-ratio:16/10; }
+          .media img{ aspect-ratio: 20 / 10; }
+          .logos{ grid-template-columns: repeat(3, minmax(110px, 1fr)); }
         }
-        @media (max-width:640px){
-          .logo img{ max-height:48px; }
+        @media (max-width:768px){
+          :root{ --logoH: var(--logoH-md); }
+          .logos{ grid-template-columns: repeat(3, minmax(100px, 1fr)); gap:14px 16px; }
+          .bubble{ width:46px; height:46px; }
+        }
+        @media (max-width:560px){
+          :root{ --logoH: var(--logoH-sm); }
+          .logos{ grid-template-columns: repeat(2, minmax(120px, 1fr)); }
+          .media{ border-radius:16px; }
         }
       `}</style>
 
@@ -164,7 +201,7 @@ export default function Activities() {
         <div className={`slice ${i % 2 ? "alt" : ""}`} key={v.title}>
           <div className="container">
             <div className={`row ${i % 2 ? "rev" : ""}`} ref={(el) => (rowRefs.current[i] = el)}>
-              {/* IMAGE */}
+              {/* IMAGE — bigger */}
               <figure className="media">
                 <img src={v.cover} alt={`${v.title} cover`} loading="lazy" />
               </figure>
