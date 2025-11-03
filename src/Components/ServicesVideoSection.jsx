@@ -75,7 +75,7 @@ const ServicesVideoSection = ({
           display:grid;
           grid-template-columns:0.7fr 1.3fr;
           gap:60px;
-          align-items:start;
+          align-items:center;
         }
 
         /* LEFT */
