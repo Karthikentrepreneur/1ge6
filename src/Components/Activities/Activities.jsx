@@ -8,7 +8,6 @@ const VERTICALS = [
     title: "Supply Chain Solutions",
     description:
       "1 Global Enterprises invests in and builds high-performing logistics and technology businesses that power global trade. Our portfolio spans 16 countries, covering every major segment of the supply chain — including freight forwarding, warehousing, distribution, and digital logistics infrastructure. Through strategic ownership and operational expertise, we support our group companies in driving innovation, operational excellence, and sustainable growth. Our focus is on strengthening global connectivity and creating long-term value across the supply chain landscape.",
-    // Optional cover; falls back to first logo if omitted
     cover: "/covers/supply-chain.jpg",
     logos: [
       { img: "/logosss01.png", alt: "GGL", link: "https://www.ggl.sg/" },
@@ -53,17 +52,11 @@ const Activities = () => {
           --ink:#0F172A; --muted:#475569; --border:#E5E7EB; --card:#FFFFFF;
           --bg:#F5F7FB; --accent:#2563EB;
         }
-
         .activities-section { background:var(--bg); padding:56px 0; }
+        .container-narrow { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
 
-        /* Grid of cards (3 -> 2 -> 1) */
-        .zz-grid{
-          display:grid;
-          grid-template-columns:repeat(3, minmax(0, 1fr));
-          gap:28px;
-        }
-        @media (max-width:1200px){ .zz-grid{ grid-template-columns:repeat(2, minmax(0, 1fr)); } }
-        @media (max-width:768px){ .zz-grid{ grid-template-columns:1fr; } }
+        /* ONE-BY-ONE list (no grid) */
+        .zz-list { display:flex; flex-direction:column; gap:28px; }
 
         /* Card with two panes */
         .zz-card{
@@ -75,7 +68,7 @@ const Activities = () => {
           transition:transform .25s ease, box-shadow .25s ease;
           display:grid;
           grid-template-columns: 1.05fr 1.25fr;
-          min-height: 360px;
+          min-height: 380px;
         }
         .zz-card:hover{ transform:translateY(-4px); box-shadow:0 12px 28px rgba(2,8,23,.12); }
 
@@ -98,36 +91,23 @@ const Activities = () => {
         .media img{
           width:100%;
           height:100%;
-          object-fit:cover;           /* change to 'contain' if you prefer full logo view */
+          object-fit:cover;       /* Change to 'contain' if you want full logo view */
           border-radius:12px;
         }
 
-        .info{
-          display:flex; flex-direction:column;
-          padding:24px 26px;
-          background:#fff;
-        }
-
+        .info{ display:flex; flex-direction:column; padding:24px 26px; background:#fff; }
         .title-row{ display:flex; align-items:center; gap:12px; margin-bottom:10px; }
         .title-icon{
           width:40px; height:40px; border-radius:999px; background:var(--accent);
           display:flex; align-items:center; justify-content:center; color:#fff;
-          box-shadow:0 6px 14px rgba(37,99,235,.18);
-          flex:0 0 auto;
+          box-shadow:0 6px 14px rgba(37,99,235,.18); flex:0 0 auto;
         }
         .title-row h3{ margin:0; font-size:1.125rem; font-weight:800; color:var(--ink); }
-
         .desc{ margin:0 0 16px; color:var(--muted); font-size:.98rem; line-height:1.7; }
 
-        /* Logo header */
-        .logos-title{
-          margin: 8px 0 8px;
-          font-size:.9rem;
-          color:#0f172a;
-          font-weight:700;
-        }
+        .logos-title{ margin: 8px 0 8px; font-size:.9rem; color:#0f172a; font-weight:700; }
 
-        /* 3x3 logo grid (auto-center if not full) */
+        /* 3x3 logos under content */
         .logo-grid{
           display:grid;
           grid-template-columns:repeat(3, 1fr);
@@ -137,24 +117,17 @@ const Activities = () => {
           justify-items:center;
           padding-top:4px;
         }
-
         .logo-item{
           display:flex; align-items:center; justify-content:center;
           width:100%; height:100%;
           cursor:pointer; border:1px dashed #eef2f7; border-radius:10px;
           transition:transform .18s ease, box-shadow .18s ease, border-color .18s ease;
-          background:#fafcff;
-          padding:10px;
+          background:#fafcff; padding:10px;
         }
-        .logo-item:hover{
-          transform:scale(1.04);
-          box-shadow:0 6px 20px rgba(2,8,23,.08);
-          border-color:#dbe4f0;
-        }
-        .logo-item img{
-          max-width:140px; max-height:56px; width:auto; height:auto; object-fit:contain; display:block;
-        }
+        .logo-item:hover{ transform:scale(1.04); box-shadow:0 6px 20px rgba(2,8,23,.08); border-color:#dbe4f0; }
+        .logo-item img{ max-width:140px; max-height:56px; width:auto; height:auto; object-fit:contain; display:block; }
 
+        /* Mobile: stack image above content */
         @media (max-width:1024px){
           .zz-card, .zz-card.reverse{ grid-template-columns: 1fr; min-height: 0; }
           .media-inner{ border-right:none; }
@@ -162,11 +135,11 @@ const Activities = () => {
         }
       `}</style>
 
-      <div className="container">
-        <div className="zz-grid">
+      <div className="container-narrow">
+        <div className="zz-list">
           {VERTICALS.map((v, idx) => {
             const coverSrc = v.cover || v?.logos?.[0]?.img || "/placeholder.jpg";
-            const reverse = idx % 2 === 1; // zig-zag
+            const reverse = idx % 2 === 1; // zig-zag order
             return (
               <article key={v.title} className={`zz-card ${reverse ? "reverse" : ""}`}>
                 {/* IMAGE pane */}
@@ -199,8 +172,6 @@ const Activities = () => {
                         <img src={L.img} alt={L.alt} loading="lazy" />
                       </div>
                     ))}
-                    {/* If you ever have fewer than 9 logos and want perfect centering,
-                        you can pad with empty grid items (kept out for now). */}
                   </div>
                 </div>
               </article>
