@@ -8,7 +8,7 @@ const VERTICALS = [
     title: "Supply Chain Solutions",
     description:
       "1 Global Enterprises invests in and builds high-performing logistics and technology businesses that power global trade. Our portfolio spans 16 countries, covering every major segment of the supply chain — including freight forwarding, warehousing, distribution, and digital logistics infrastructure. Through strategic ownership and operational expertise, we support our group companies in driving innovation, operational excellence, and sustainable growth. Our focus is on strengthening global connectivity and creating long-term value across the supply chain landscape.",
-    cover: "/image-gen.png", // keep images in /public
+    cover: "/image-gen.png",
     logos: [
       { img: "/logosss01.png", alt: "GGL", link: "https://www.ggl.sg/" },
       { img: "/logosss03.png", alt: "OECL", link: "https://www.oecl.sg/" },
@@ -41,250 +41,237 @@ const VERTICALS = [
 ];
 
 /* ---------- HELPERS ---------- */
-const open = (url) => url && window.open(url, "_blank", "noopener,noreferrer");
+const openLink = (url) => url && window.open(url, "_blank", "noopener,noreferrer");
 
 /* ---------- COMPONENT ---------- */
-export default function Activities() {
-  const rowsRef = useRef([]);
+const Activities = () => {
+  const rowRefs = useRef([]);
 
-  /* Reveal on scroll (reduced motion friendly) */
+  // Scroll animation
   useEffect(() => {
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-    const els = rowsRef.current.filter(Boolean);
-    const io = new IntersectionObserver(
+    const observer = new IntersectionObserver(
       (entries) =>
-        entries.forEach((e) => {
-          if (e.isIntersecting) e.target.classList.add("in");
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) entry.target.classList.add("show");
         }),
-      { rootMargin: "0px 0px -10% 0px", threshold: 0.15 }
+      { threshold: 0.2 }
     );
-    els.forEach((el) => io.observe(el));
-    return () => io.disconnect();
+
+    rowRefs.current.forEach((el) => el && observer.observe(el));
+    return () => observer.disconnect();
   }, []);
 
   return (
-    <section className="vertx">
+    <section className="activities-section">
       <style>{`
-        :root{
-          --ink:#0F172A;
-          --muted:#475569;
-          --accent:#10A3A7; /* teal */
-          --accent-2:#2563EB; /* blue */
-          --bg:#ffffff;
-          --surface:#ffffff;
+        :root {
+          --ink: #0f172a;
+          --muted: #475569;
+          --accent: #0ea5e9;
+          --accent2: #2563eb;
         }
 
-        .vertx{
-          position:relative;
-          background: var(--bg);
-          overflow:hidden;
+        .activities-section {
+          background: #fff;
+          overflow: hidden;
         }
 
-        /* Decorative soft gradient behind the section */
-        .vertx::before{
-          content:"";
-          position:absolute; inset:-20% -10% auto -10%;
-          height:520px;
-          background:
-            radial-gradient(1200px 380px at 20% 10%, rgba(16,163,167,.08), transparent 60%),
-            radial-gradient(800px 320px at 90% 0%, rgba(37,99,235,.08), transparent 60%);
-          pointer-events:none;
-          z-index:0;
+        .section-header {
+          text-align: center;
+          margin: 60px 0 30px;
         }
 
-        .container{
-          position:relative;
-          z-index:1;
-          max-width:1180px;
-          margin:0 auto;
-          padding:40px 20px 64px;
-        }
-
-        /* Section header (optional, looks nice if you keep) */
-        .vh{
-          text-align:center;
-          margin: 18px 0 34px;
-        }
-        .vh small{
-          display:inline-block;
-          font-weight:700;
-          letter-spacing:.14em;
-          text-transform:uppercase;
+        .section-header small {
+          display: block;
+          text-transform: uppercase;
+          font-weight: 700;
           color: var(--accent);
-          opacity:.9;
-          margin-bottom:6px;
+          margin-bottom: 8px;
+          letter-spacing: 1.5px;
         }
-        .vh h2{
-          margin:0;
-          font-size: clamp(22px, 3.8vw, 34px);
+
+        .section-header h2 {
+          font-size: clamp(26px, 4vw, 38px);
           color: var(--ink);
           font-weight: 900;
+          margin: 0;
         }
 
-        /* Row (zig-zag) */
-        .row{
-          display:grid;
-          grid-template-columns: 1.05fr 1.15fr;
-          align-items:center;
-          gap:40px;
-          margin: 38px 0 74px;
-          transform: translateY(28px);
-          opacity:0;
-          transition: transform .7s cubic-bezier(.2,.65,.16,1), opacity .7s ease;
+        /* Zigzag rows */
+        .activity-row {
+          display: grid;
+          grid-template-columns: 1.1fr 1fr;
+          align-items: center;
+          gap: 48px;
+          max-width: 1200px;
+          margin: 60px auto;
+          padding: 0 20px;
+          opacity: 0;
+          transform: translateY(40px);
+          transition: all 0.8s ease;
         }
-        .row.in{ transform:none; opacity:1; }
-        .row.rev{ grid-template-columns: 1.15fr 1.05fr; }
 
-        /* Media block */
-        .media{
-          position:relative;
-          border-radius:18px;
-          overflow:hidden;
-          line-height:0;
-          box-shadow: 0 24px 60px rgba(2,8,23,.18);
-          isolation:isolate;
+        .activity-row.show {
+          opacity: 1;
+          transform: translateY(0);
         }
-        .media img{
-          width:100%;
-          height:100%;
-          max-height:560px;
-          aspect-ratio: 16 / 10;
+
+        .activity-row.reverse {
+          grid-template-columns: 1fr 1.1fr;
+        }
+
+        /* Image */
+        .activity-image {
+          border-radius: 18px;
+          overflow: hidden;
+          box-shadow: 0 20px 50px rgba(2, 8, 23, 0.15);
+          position: relative;
+        }
+
+        .activity-image img {
+          width: 100%;
+          height: 100%;
           object-fit: cover;
-          display:block;
-          transform:scale(1.03);
-          transition: transform .6s ease;
+          transition: transform 0.5s ease;
         }
-        .media::after{
-          /* subtle top-left gradient sheen */
-          content:"";
-          position:absolute; inset:0;
-          background: linear-gradient(180deg, rgba(0,0,0,.0), rgba(0,0,0,.08) 80%);
-          mix-blend-mode:multiply;
-          pointer-events:none;
+
+        .activity-image:hover img {
+          transform: scale(1.05);
         }
-        .media:hover img{ transform:scale(1.06); }
 
         /* Content */
-        .content{
-          padding: 22px 4px;
-        }
-        .title{
-          display:flex; gap:12px; align-items:center;
-          margin-bottom:12px;
-        }
-        .bubble{
-          width:44px; height:44px; border-radius:50%;
-          display:flex; align-items:center; justify-content:center;
-          background: linear-gradient(135deg, var(--accent), var(--accent-2));
-          color:#fff; box-shadow:0 10px 24px rgba(16,163,167,.25);
-          flex-shrink:0;
-        }
-        .title h3{
-          margin:0; color:var(--ink);
-          font-weight:900; letter-spacing:.2px;
-          font-size: clamp(18px, 2.2vw, 22px);
+        .activity-content {
+          padding: 10px;
         }
 
-        .desc{
-          margin:0 0 18px; color:var(--muted);
-          line-height:1.75; font-size: clamp(14px, 1.3vw, 16px);
-          max-width: 54ch;
+        .title-row {
+          display: flex;
+          align-items: center;
+          gap: 12px;
+          margin-bottom: 16px;
         }
 
-        /* Logos */
-        .logos{
-          display:grid;
-          grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-          gap: 14px 18px;
-          align-items:center;
-          margin-top:10px;
-          max-width:720px;
+        .title-icon {
+          width: 46px;
+          height: 46px;
+          border-radius: 50%;
+          background: linear-gradient(135deg, var(--accent), var(--accent2));
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          color: #fff;
+          box-shadow: 0 6px 16px rgba(37, 99, 235, 0.25);
         }
-        .logo{
-          display:flex; align-items:center; justify-content:center;
-          padding:10px 12px;
-          border-radius:12px;
-          background:#fff;
-          transition: transform .2s ease, box-shadow .25s ease, filter .25s ease;
-          box-shadow:0 4px 14px rgba(2,8,23,.06);
-          cursor:pointer;
-        }
-        .logo img{
-          max-height:58px; width:auto; display:block; object-fit:contain;
-          filter: grayscale(.1) contrast(1.05);
-        }
-        .logo:hover{
-          transform: translateY(-3px);
-          box-shadow:0 16px 30px rgba(2,8,23,.12);
-        }
-        .logo:hover img{ filter:none; }
 
-        /* Alternating soft separators to make rows pop without boxes */
-        .row::before{
-          content:"";
-          position:absolute;
-          inset:auto -8vw -34px -8vw;
-          height:1px;
-          background:linear-gradient(90deg, transparent, rgba(15,23,42,.08), transparent);
-          pointer-events:none;
+        .title-row h3 {
+          font-size: 1.5rem;
+          font-weight: 800;
+          color: var(--ink);
+          margin: 0;
+        }
+
+        .activity-description {
+          font-size: 1rem;
+          line-height: 1.75;
+          color: var(--muted);
+          margin-bottom: 20px;
+          max-width: 640px;
+        }
+
+        .logos-grid {
+          display: flex;
+          flex-wrap: wrap;
+          gap: 24px;
+          align-items: center;
+        }
+
+        .logo-item {
+          background: #fff;
+          padding: 10px 14px;
+          border-radius: 12px;
+          box-shadow: 0 5px 18px rgba(0, 0, 0, 0.08);
+          cursor: pointer;
+          transition: transform 0.25s ease, box-shadow 0.25s ease;
+        }
+
+        .logo-item:hover {
+          transform: translateY(-4px);
+          box-shadow: 0 10px 26px rgba(0, 0, 0, 0.15);
+        }
+
+        .logo-item img {
+          max-height: 60px;
+          width: auto;
+          object-fit: contain;
         }
 
         /* Responsive */
-        @media (max-width: 1024px){
-          .row, .row.rev{ grid-template-columns:1fr; gap:22px; }
-          .content{ padding:0; }
-          .media img{ aspect-ratio: 16 / 9; max-height:none; }
+        @media (max-width: 1024px) {
+          .activity-row,
+          .activity-row.reverse {
+            grid-template-columns: 1fr;
+            gap: 30px;
+          }
+
+          .activity-image img {
+            height: 300px;
+            object-fit: cover;
+          }
+
+          .section-header {
+            margin: 40px 0 20px;
+          }
         }
-        @media (max-width: 640px){
-          .logos{ grid-template-columns: repeat(2, minmax(120px, 1fr)); }
-          .logo img{ max-height:50px; }
+
+        @media (max-width: 640px) {
+          .activity-description {
+            font-size: 0.95rem;
+          }
+          .logo-item img {
+            max-height: 48px;
+          }
         }
       `}</style>
 
-      <div className="container">
-        <header className="vh">
-          <small>Our Verticals</small>
-          <h2>Building Reliable, Connected & Sustainable Businesses</h2>
-        </header>
+      <div className="section-header">
+        <small>Our Verticals</small>
+        <h2>Driving Innovation Across Industries</h2>
+      </div>
 
-        {VERTICALS.map((v, i) => (
-          <div
-            key={v.title}
-            ref={(el) => (rowsRef.current[i] = el)}
-            className={`row ${i % 2 ? "rev reveal" : "reveal"}`}
-          >
-            {/* IMAGE */}
-            <figure className="media">
-              <img src={v.cover} alt={`${v.title} cover`} loading="lazy" />
-            </figure>
+      {VERTICALS.map((v, i) => (
+        <div
+          className={`activity-row ${i % 2 !== 0 ? "reverse" : ""}`}
+          ref={(el) => (rowRefs.current[i] = el)}
+          key={v.title}
+        >
+          <div className="activity-image">
+            <img src={v.cover} alt={v.title} loading="lazy" />
+          </div>
 
-            {/* CONTENT */}
-            <div className="content">
-              <div className="title">
-                <span className="bubble">{v.icon}</span>
-                <h3>{v.title}</h3>
-              </div>
-              <p className="desc">{v.description}</p>
+          <div className="activity-content">
+            <div className="title-row">
+              <div className="title-icon">{v.icon}</div>
+              <h3>{v.title}</h3>
+            </div>
+            <p className="activity-description">{v.description}</p>
 
-              <div className="logos">
-                {v.logos.map((L, idx) => (
-                  <div
-                    key={`${v.title}-${idx}`}
-                    className="logo"
-                    title={L.alt}
-                    role="button"
-                    tabIndex={0}
-                    onClick={() => open(L.link)}
-                    onKeyDown={(e) => (e.key === "Enter" || e.key === " ") && open(L.link)}
-                  >
-                    <img src={L.img} alt={L.alt} loading="lazy" />
-                  </div>
-                ))}
-              </div>
+            <div className="logos-grid">
+              {v.logos.map((logo, idx) => (
+                <div
+                  key={idx}
+                  className="logo-item"
+                  onClick={() => openLink(logo.link)}
+                  title={logo.alt}
+                >
+                  <img src={logo.img} alt={logo.alt} />
+                </div>
+              ))}
             </div>
           </div>
-        ))}
-      </div>
+        </div>
+      ))}
     </section>
   );
-}
+};
+
+export default Activities;
