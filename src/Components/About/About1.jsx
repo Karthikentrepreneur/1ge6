@@ -48,85 +48,67 @@ const About1 = () => {
       <style>{`
         :root { --accent:#26B6E0; --ink:#0E0F2C; --muted:#444; }
 
-        .about-wrapper { width: 100%; }
-        .about-section { overflow-x: hidden; }
-
-        /* ===== Image ===== */
-        .about-photo-wrap {
-          width: 100%;
-          text-align: center;
-          display: flex;
-          justify-content: center;
-          align-items: center;
+        .about-section {
+          overflow-x: hidden;
+          background-size: cover;
         }
-        .about-photo {
-          width: min(100%, 1100px); /* ✅ Increased from 940px to 1100px */
-          max-height: 650px; /* ✅ Prevents overflow while making it taller */
-          height: auto;
-          border-radius: 22px;
-          object-fit: cover;
+
+        /* ===== Full-width image ===== */
+        .about-photo-full {
+          width: 100%;
+          max-width: 1300px;
+          margin: 0 auto 50px auto;
+          display: block;
+          border-radius: 18px;
           box-shadow: 0 20px 60px rgba(0, 0, 0, 0.25);
-          transform: scale(1.05);
+          object-fit: cover;
           transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
-        .about-photo:hover {
-          transform: scale(1.08);
+        .about-photo-full:hover {
+          transform: scale(1.02);
           box-shadow: 0 25px 70px rgba(0, 0, 0, 0.3);
         }
 
-        @media (min-width: 992px) {
-          .about-photo-wrap {
-            margin-right: 40px;
-          }
+        /* ===== Title Section Below Image ===== */
+        .about-content {
+          text-align: left;
+          max-width: 1000px;
+          margin: 0 auto;
         }
-
-        /* ===== Title ===== */
         .about-content .section-title h2 {
-          margin-bottom: 18px;
+          margin-bottom: 30px;
           color: var(--ink);
           font-weight: 800;
-          letter-spacing: -0.2px;
-          font-size: 34px;
+          font-size: 36px;
+          text-align: center;
         }
 
-        /* ===== Info Items ===== */
+        /* ===== Info Items in Column ===== */
         .about-items {
-          position: relative;
           display: flex;
           align-items: flex-start;
-          gap: 16px;
-          margin-bottom: 28px;
+          gap: 18px;
+          margin-bottom: 26px;
         }
         .about-items .icon {
-          width: 60px;
-          height: 60px;
-          min-width: 60px;
+          width: 64px;
+          height: 64px;
+          min-width: 64px;
           border-radius: 50%;
           background-color: var(--accent);
           display: flex;
           align-items: center;
           justify-content: center;
           box-shadow: 0 4px 10px rgba(38, 182, 224, 0.35);
-          z-index: 1;
         }
         .about-items .icon svg {
-          width: 28px;
-          height: 28px;
+          width: 30px;
+          height: 30px;
           color: #fff;
-        }
-        .about-items:not(:last-child)::after {
-          content: "";
-          position: absolute;
-          left: 29px;
-          top: 60px;
-          width: 2px;
-          height: calc(100% - 30px);
-          background: repeating-linear-gradient(to bottom, var(--accent), var(--accent) 4px, transparent 4px, transparent 8px);
-          z-index: 0;
         }
         .about-items .content h5 {
           font-weight: 800;
-          margin: 2px 0 6px;
+          margin: 0 0 6px;
           color: var(--ink);
         }
         .about-items .content p {
@@ -137,121 +119,120 @@ const About1 = () => {
         }
 
         /* ===== Brand slider ===== */
-        .brand-block { margin-top: 50px; }
+        .brand-block {
+          margin-top: 50px;
+        }
         .brand-title {
           text-align: center;
           margin: 0 0 14px;
           font-weight: 800;
           color: var(--ink);
         }
-        .brand-slider-wrap { max-width: 1100px; margin: 0 auto; padding: 0 8px; }
-        .brand-slide { display: flex; align-items: center; justify-content: center; height: 110px; }
-        .brand-logo { max-height: 90px; width: auto; object-fit: contain; transition: transform 0.2s ease; }
-        .brand-logo:hover { transform: translateY(-2px); }
+        .brand-slider-wrap {
+          max-width: 1100px;
+          margin: 0 auto;
+          padding: 0 8px;
+        }
+        .brand-slide {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          height: 110px;
+        }
+        .brand-logo {
+          max-height: 90px;
+          width: auto;
+          object-fit: contain;
+          transition: transform 0.2s ease;
+        }
+        .brand-logo:hover {
+          transform: translateY(-2px);
+        }
 
-        /* ===== MOBILE (≤768px) ===== */
+        /* ===== MOBILE ===== */
         @media (max-width: 768px) {
-          .about-section { padding: 28px 0 10px !important; }
-          .container { padding-left: 18px; padding-right: 18px; }
-          .about-wrapper .row { flex-direction: column; gap: 18px; }
-          .col-lg-7, .col-lg-5 { width: 100%; max-width: 100%; }
-
-          .about-photo {
-            width: 100%;
-            max-height: 420px;
-            border-radius: 16px;
-            box-shadow: 0 10px 26px rgba(0, 0, 0, 0.15);
-            transform: none;
+          .about-photo-full {
+            border-radius: 12px;
+            margin-bottom: 30px;
           }
-
           .about-content .section-title h2 {
-            font-size: 26px;
-            line-height: 1.2;
-            margin-bottom: 12px;
+            font-size: 28px;
+            margin-bottom: 18px;
           }
-
           .about-items .icon {
             width: 54px;
             height: 54px;
-            min-width: 54px;
-            box-shadow: 0 3px 8px rgba(38, 182, 224, 0.28);
           }
-          .about-items .icon svg { width: 22px; height: 22px; }
-          .about-items .content h5 { font-size: 16px; margin: 0 0 6px; }
-          .about-items .content p { font-size: 14px; line-height: 1.5; margin: 0; }
-
-          .brand-slide { height: 80px; }
-          .brand-logo { max-height: 64px; }
+          .about-items .icon svg {
+            width: 22px;
+            height: 22px;
+          }
+          .about-items .content h5 {
+            font-size: 16px;
+          }
+          .about-items .content p {
+            font-size: 14px;
+          }
         }
       `}</style>
 
       <div className="container">
-        <div className="about-wrapper">
-          <div className="row g-4 align-items-center">
-            {/* Left Image */}
-            <div className="col-lg-7 d-flex justify-content-center">
-              <div className="about-photo-wrap">
-                <img src="/team.jpg" alt="1 Global Enterprises Group" className="about-photo" />
+        {/* ✅ Full-width team image */}
+        <img src="/team.jpg" alt="1 Global Enterprises Group" className="about-photo-full" />
+
+        {/* ✅ Section below image */}
+        <div className="about-content">
+          <div className="section-title">
+            <h2>1 Global Enterprises</h2>
+          </div>
+
+          <div className="about-area mt-3">
+            <div className="about-items">
+              <div className="icon"><Users2 /></div>
+              <div className="content">
+                <h5>Who We Are</h5>
+                <p>A diversified group with interests in Shipping, Logistics, Distribution, IT, Clean Energy & Trading.</p>
               </div>
             </div>
 
-            {/* Right Text */}
-            <div className="col-lg-5">
-              <div className="about-content">
-                <div className="section-title">
-                  <h2>1 Global Enterprises</h2>
-                </div>
+            <div className="about-items">
+              <div className="icon"><Globe2 /></div>
+              <div className="content">
+                <h5>Our Reach</h5>
+                <p>A global workforce of 700+ professionals.</p>
+              </div>
+            </div>
 
-                <div className="about-area mt-3">
-                  <div className="about-items">
-                    <div className="icon"><Users2 /></div>
-                    <div className="content">
-                      <h5>Who We Are</h5>
-                      <p>A diversified group with interests in Shipping, Logistics, Distribution, IT, Clean Energy & Trading.</p>
-                    </div>
-                  </div>
-
-                  <div className="about-items">
-                    <div className="icon"><Globe2 /></div>
-                    <div className="content">
-                      <h5>Our Reach</h5>
-                      <p>A global workforce of 700+ professionals.</p>
-                    </div>
-                  </div>
-
-                  <div className="about-items">
-                    <div className="icon"><BadgeCheck /></div>
-                    <div className="content">
-                      <h5>Expertise</h5>
-                      <p>Each business unit is led by experts ensuring sustainability, execution & growth.</p>
-                    </div>
-                  </div>
-                </div>
+            <div className="about-items">
+              <div className="icon"><BadgeCheck /></div>
+              <div className="content">
+                <h5>Expertise</h5>
+                <p>Each business unit is led by experts ensuring sustainability, execution & growth.</p>
               </div>
             </div>
           </div>
+        </div>
 
-          {/* Group Companies Slider */}
-          <div className="brand-block">
-            <h4 className="brand-title">Group Companies</h4>
-            <div className="brand-slider-wrap">
-              <Slider {...sliderSettings}>
-                {logos.map((item, i) => (
-                  <div key={i} className="brand-slide">
-                    <a
-                      className="brand-link"
-                      href={item.link}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      title={`Open ${item.alt}`}
-                      onDragStart={(e) => e.preventDefault()}
-                    >
-                      <img src={item.img} alt={item.alt} className="brand-logo" loading="lazy" />
-                    </a>
-                  </div>
-                ))}
-              </Slider>
-            </div>
+        {/* ✅ Brand slider below */}
+        <div className="brand-block">
+          <h4 className="brand-title">Group Companies</h4>
+          <div className="brand-slider-wrap">
+            <Slider {...sliderSettings}>
+              {logos.map((item, i) => (
+                <div key={i} className="brand-slide">
+                  <a
+                    className="brand-link"
+                    href={item.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    title={`Open ${item.alt}`}
+                    onDragStart={(e) => e.preventDefault()}
+                  >
+                    <img src={item.img} alt={item.alt} className="brand-logo" loading="lazy" />
+                  </a>
+                </div>
+              ))}
+            </Slider>
           </div>
         </div>
       </div>
