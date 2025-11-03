@@ -19,17 +19,12 @@ const ServicesVideoSection = ({
   useEffect(() => {
     const el = leftRef.current;
     if (!el) return;
-
-    const update = () => setMatchHeight(Math.max(240, Math.round(el.getBoundingClientRect().height)));
+    const update = () => setMatchHeight(Math.max(260, Math.round(el.getBoundingClientRect().height)));
     const ro = new ResizeObserver(update);
     ro.observe(el);
     window.addEventListener("resize", update);
     update();
-
-    return () => {
-      ro.disconnect();
-      window.removeEventListener("resize", update);
-    };
+    return () => { ro.disconnect(); window.removeEventListener("resize", update); };
   }, []);
 
   return (
@@ -55,11 +50,8 @@ const ServicesVideoSection = ({
         {/* RIGHT (Video) */}
         <div className="svs-right">
           <div
-            className="svs-video-frame"
-            style={{
-              height: matchHeight ? `${matchHeight}px` : "auto",
-              width: "100%",
-            }}
+            className="svs-video-frame svs-video-bleed"
+            style={{ height: matchHeight ? `${matchHeight}px` : "auto" }}
           >
             <video
               src={videoSrc}
@@ -75,8 +67,8 @@ const ServicesVideoSection = ({
       </div>
 
       <style>{`
-        .svs-split { background:#fff; padding:70px 0; overflow-x:hidden; }
-        .svs-container {
+        .svs-split{background:#fff;padding:70px 0;overflow-x:hidden;}
+        .svs-container{
           width:min(1200px,92%);
           margin:0 auto;
           display:grid;
@@ -96,12 +88,16 @@ const ServicesVideoSection = ({
         .svs-icon svg{width:20px;height:20px;}
         .svs-item-title{font-weight:700;color:#0E0F2C;font-size:1rem;line-height:1.4;}
 
-        /* RIGHT — fill column, no gap */
-        .svs-right{display:flex;align-items:stretch;justify-content:stretch;}
+        /* RIGHT — fill & bleed to edge */
+        .svs-right{
+          display:flex;
+          align-items:stretch;
+          justify-content:stretch;
+          padding-right:0; /* no inner padding on the column */
+        }
         .svs-video-frame{
-          flex:1;                 /* fill available width */
           width:100%;
-          /* aspect-ratio REMOVED to avoid width shrinking when height is fixed */
+          height:100%;
           border-radius:18px;
           overflow:hidden;
           background:#000;
@@ -109,20 +105,37 @@ const ServicesVideoSection = ({
           box-shadow:0 12px 28px rgba(0,0,0,.15);
           display:flex;
         }
+        /* Full-bleed to the page edge on large screens */
+        @media (min-width: 1200px){
+          .svs-video-bleed{
+            width: calc(100% + 60px);
+            margin-right: -60px;   /* push to the very edge */
+          }
+        }
+        @media (min-width: 1500px){
+          .svs-video-bleed{
+            width: calc(100% + 90px);
+            margin-right: -90px;
+          }
+        }
+
         .svs-video-frame video{
           width:100%;
           height:100%;
-          object-fit:cover;       /* fills the frame completely */
+          object-fit:cover;   /* 100% fill, no blank */
           object-position:center;
           display:block;
         }
 
+        /* Mobile */
         @media (max-width:768px){
           .svs-container{grid-template-columns:1fr;gap:20px;}
           .svs-right{order:-1;width:100%;}
           .svs-video-frame{border-radius:14px;box-shadow:0 8px 18px rgba(0,0,0,.1);}
           .svs-left{width:100%;text-align:left;padding-inline:8px;}
           .svs-item{width:100%;}
+          /* no bleed on small screens */
+          .svs-video-bleed{width:100%;margin-right:0;}
         }
       `}</style>
     </section>
