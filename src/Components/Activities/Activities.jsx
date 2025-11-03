@@ -7,7 +7,7 @@ const VERTICALS = [
     title: "Supply Chain Solutions",
     description:
       "1 Global Enterprises invests in and builds high-performing logistics and technology businesses that power global trade. Our portfolio spans 16 countries, covering every major segment of the supply chain — including freight forwarding, warehousing, distribution, and digital logistics infrastructure. Through strategic ownership and operational expertise, we support our group companies in driving innovation, operational excellence, and sustainable growth. Our focus is on strengthening global connectivity and creating long-term value across the supply chain landscape.",
-    cover: "/Productdistribution.jpg‎‎",
+    cover: "/image-gen.png",
     logos: [
       { img: "/logosss01.png", alt: "GGL", link: "https://www.ggl.sg/" },
       { img: "/logosss03.png", alt: "OECL", link: "https://www.oecl.sg/" },
@@ -21,7 +21,7 @@ const VERTICALS = [
     title: "Renewable Energy",
     description:
       "We drive sustainable growth through strategic investments across the renewable energy value chain — from feedstock origination to processing and technology enablement. Our portfolio supports the global shift toward renewable fuels and SAF by securing and optimising advanced feedstock supply. Operating across multiple regions, we build ethical, traceable sourcing networks and pre-treatment infrastructure, strengthening transparency, efficiency, and environmental integrity while accelerating the transition to cleaner energy.",
-    cover: "/Productdistribution.jpg‎",
+    cover: "/wind.jpg",
     logos: [
       { img: "/logosss04.png", alt: "Moltech", link: "https://moltechglobal.com/" },
       { img: "/molgen.png", alt: "MoltechGen", link: "https://moltechgen.com/" },
@@ -46,10 +46,13 @@ const Activities = () => {
     <section className="activities-full">
       <style>{`
         :root {
-          --ink:#0F172A; --muted:#475569; --accent:#2563EB;
+          --ink: #0F172A;
+          --muted: #475569;
+          --accent: #2563EB;
         }
 
         .activities-full {
+          width: 100%;
           background: #fff;
           overflow: hidden;
         }
@@ -57,9 +60,9 @@ const Activities = () => {
         .activity-row {
           display: grid;
           grid-template-columns: 1.1fr 1fr;
-          align-items: center;
-          min-height: 520px;
+          align-items: stretch;
           width: 100%;
+          min-height: 480px;
         }
 
         .activity-row.reverse {
@@ -67,18 +70,24 @@ const Activities = () => {
         }
 
         .activity-image {
+          position: relative;
           width: 100%;
           height: 100%;
+          overflow: hidden;
         }
 
         .activity-image img {
           width: 100%;
           height: 100%;
           object-fit: cover;
+          display: block;
         }
 
         .activity-content {
           padding: 80px 60px;
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
           background: #fff;
         }
 
@@ -102,11 +111,12 @@ const Activities = () => {
           align-items: center;
           justify-content: center;
           color: #fff;
+          flex-shrink: 0;
         }
 
         .title-row h3 {
           margin: 0;
-          font-size: 1.5rem;
+          font-size: 1.6rem;
           font-weight: 800;
           color: var(--ink);
         }
@@ -138,24 +148,24 @@ const Activities = () => {
 
         .logo-item img {
           max-height: 60px;
-          object-fit: contain;
           width: auto;
-          display: block;
+          object-fit: contain;
         }
 
-        /* Responsive */
+        /* ✅ Responsive Fix */
         @media (max-width: 992px) {
           .activity-row {
             grid-template-columns: 1fr;
           }
 
-          .activity-content {
-            padding: 40px 24px;
+          .activity-image img {
+            width: 100%;
+            height: 320px;
+            object-fit: cover;
           }
 
-          .activity-image img {
-            height: 300px;
-            object-fit: cover;
+          .activity-content {
+            padding: 40px 24px;
           }
         }
       `}</style>
@@ -165,17 +175,14 @@ const Activities = () => {
         return (
           <div className={`activity-row ${reverse ? "reverse" : ""}`} key={v.title}>
             <div className="activity-image">
-              <img src={v.cover} alt={v.title} />
+              <img src={v.cover} alt={v.title} loading="lazy" />
             </div>
-
             <div className="activity-content">
               <div className="title-row">
                 <div className="title-icon">{v.icon}</div>
                 <h3>{v.title}</h3>
               </div>
-
               <p className="activity-description">{v.description}</p>
-
               <div className="logos-grid">
                 {v.logos.map((logo, idx) => (
                   <div
