@@ -51,23 +51,26 @@ const About1 = () => {
         .about-wrapper { width: 100%; }
         .about-section { overflow-x: hidden; }
 
-        /* ===== Image fills full left side neatly ===== */
+        /* ===== Left image (safe sizing, no overlap) ===== */
         .about-photo-wrap {
           width: 100%;
           display: flex;
-          justify-content: flex-start;
+          justify-content: center;
           align-items: center;
         }
         .about-photo {
-          width: 115%; /* extend to fill left side completely */
-          max-width: 1300px;
-          height: auto;
-          margin-left: -60px; /* pulls to fill the blank area */
-          border-radius: 10px;
-          border: 3px solid #e6eef3; /* visible border frame */
-          box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+          width: 100%;
+          max-width: 980px;        /* shrink a bit on large screens */
+          aspect-ratio: 16 / 6;    /* keeps banner shape without stretching */
           object-fit: cover;
+          object-position: center;
+          border-radius: 12px;
+          border: 2px solid #e6eef3;
+          box-shadow: 0 8px 24px rgba(0,0,0,.08);
         }
+
+        /* make sure columns never overlap */
+        .about-text-col { position: relative; z-index: 2; }
 
         /* ===== Title ===== */
         .about-content .section-title h2 {
@@ -76,31 +79,30 @@ const About1 = () => {
           font-weight: 800;
           letter-spacing: -0.2px;
           font-size: 34px;
+          line-height: 1.15;
         }
 
         /* ===== Info Items ===== */
         .about-items {
-          position: relative;
           display: flex;
           align-items: flex-start;
-          gap: 16px;
-          margin-bottom: 28px;
+          gap: 14px;
+          margin-bottom: 22px;
         }
         .about-items .icon {
-          width: 60px;
-          height: 60px;
-          min-width: 60px;
+          width: 54px;
+          height: 54px;
+          min-width: 54px;
           border-radius: 50%;
           background-color: var(--accent);
           display: flex;
           align-items: center;
           justify-content: center;
           box-shadow: 0 4px 10px rgba(38, 182, 224, 0.35);
-          z-index: 1;
         }
         .about-items .icon svg {
-          width: 28px;
-          height: 28px;
+          width: 24px;
+          height: 24px;
           color: #fff;
         }
         .about-items .content h5 {
@@ -116,45 +118,52 @@ const About1 = () => {
         }
 
         /* ===== Brand Slider ===== */
-        .brand-block { margin-top: 50px; }
+        .brand-block { margin-top: 40px; }
         .brand-title {
           text-align: center;
-          margin: 0 0 14px;
+          margin: 0 0 12px;
           font-weight: 800;
           color: var(--ink);
         }
         .brand-slider-wrap { max-width: 1100px; margin: 0 auto; padding: 0 8px; }
-        .brand-slide { display: flex; align-items: center; justify-content: center; height: 110px; }
-        .brand-logo { max-height: 90px; width: auto; object-fit: contain; transition: transform 0.2s ease; }
+        .brand-slide { display: flex; align-items: center; justify-content: center; height: 100px; }
+        .brand-logo { max-height: 80px; width: auto; object-fit: contain; transition: transform .2s ease; }
         .brand-logo:hover { transform: translateY(-2px); }
 
-        /* ===== Mobile ===== */
-        @media (max-width: 768px) {
-          .about-photo {
-            width: 100%;
-            max-height: 460px;
-            margin-left: 0;
-          }
+        /* ===== Responsive ===== */
+        @media (min-width: 992px) {
+          /* give breathing space between columns on large screens */
+          .about-image-col { padding-right: 16px; }
+          .about-text-col  { padding-left: 16px; }
+        }
+        @media (max-width: 991px) {
+          .about-photo { aspect-ratio: 16 / 8; max-width: 100%; }
+          .about-text-col { margin-top: 18px; }
+        }
+        @media (max-width: 575px) {
+          .about-content .section-title h2 { font-size: 28px; }
+          .about-items .icon { width: 48px; height: 48px; min-width: 48px; }
         }
       `}</style>
 
-      <div className="container-fluid" style={{ paddingLeft: 0 }}>
+      <div className="container-fluid" style={{ paddingLeft: 0, paddingRight: 0 }}>
         <div className="about-wrapper">
-          <div className="row g-4 align-items-center">
+          <div className="row g-4 align-items-center mx-0">
             {/* Left Image */}
-            <div className="col-lg-7 d-flex justify-content-start">
-              <div className="about-photo-wrap">
+            <div className="col-lg-7 about-image-col d-flex">
+              <div className="about-photo-wrap w-100">
                 <img
                   src="/team1.jpg"
                   alt="1 Global Enterprises Team"
                   className="about-photo"
+                  loading="eager"
                 />
               </div>
             </div>
 
             {/* Right Text */}
-            <div className="col-lg-5">
-              <div className="about-content">
+            <div className="col-lg-5 about-text-col">
+              <div className="about-content pe-lg-4 ps-lg-2 px-3 px-lg-0">
                 <div className="section-title">
                   <h2>1 Global Enterprises</h2>
                 </div>
@@ -166,7 +175,7 @@ const About1 = () => {
                       <h5>Who We Are</h5>
                       <p>
                         A diversified group with interests in Shipping, Logistics, Distribution,
-                        IT, Clean Energy & Trading.
+                        IT, Clean Energy &amp; Trading.
                       </p>
                     </div>
                   </div>
@@ -184,7 +193,7 @@ const About1 = () => {
                     <div className="content">
                       <h5>Expertise</h5>
                       <p>
-                        Each business unit is led by experts ensuring sustainability, execution & growth.
+                        Each business unit is led by experts ensuring sustainability, execution &amp; growth.
                       </p>
                     </div>
                   </div>
