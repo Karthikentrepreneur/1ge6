@@ -14,25 +14,24 @@ const ServicesVideoSection = ({
   subheading = "Integrated solutions powered by people, technology, and purpose",
 }) => {
   const leftRef = useRef(null);
-  const [panelH, setPanelH] = useState(560); // default
+  const [sectionHeight, setSectionHeight] = useState("auto");
 
   useEffect(() => {
-    const update = () => {
-      const h = leftRef.current?.getBoundingClientRect().height || 560;
-      // give a little breathing room, but cap to viewport
-      setPanelH(Math.min(Math.round(h * 1.05), window.innerHeight - 120));
+    const updateHeight = () => {
+      if (leftRef.current) {
+        const height = leftRef.current.getBoundingClientRect().height;
+        setSectionHeight(`${height}px`);
+      }
     };
-    const ro = new ResizeObserver(update);
-    if (leftRef.current) ro.observe(leftRef.current);
-    window.addEventListener("resize", update);
-    update();
-    return () => { ro.disconnect(); window.removeEventListener("resize", update); };
+    updateHeight();
+    window.addEventListener("resize", updateHeight);
+    return () => window.removeEventListener("resize", updateHeight);
   }, []);
 
   return (
     <section className="svs-split">
       <div className="svs-container">
-        {/* LEFT */}
+        {/* LEFT COLUMN */}
         <div className="svs-left" ref={leftRef}>
           <header className="svs-header">
             <p className="svs-sub">{subheading}</p>
@@ -49,85 +48,112 @@ const ServicesVideoSection = ({
           </div>
         </div>
 
-        {/* RIGHT — own scroll, video not zoomed */}
-        <div className="svs-right" style={{ maxHeight: panelH }}>
-          <div className="svs-video-card">
-            <video
-              src={videoSrc}
-              autoPlay
-              muted
-              loop
-              playsInline
-              preload="auto"
-              aria-label="Services video"
-            />
-          </div>
-
-          {/* Example extra content to show scroll (remove if not needed) */}
-          {/* <div style={{height:24}}/> */}
+        {/* RIGHT COLUMN — full-size video */}
+        <div className="svs-right" style={{ height: sectionHeight }}>
+          <video
+            src={videoSrc}
+            autoPlay
+            muted
+            loop
+            playsInline
+            preload="auto"
+            aria-label="Services video"
+          />
         </div>
       </div>
 
       <style>{`
-        .svs-split { background:#fff; padding:72px 0; overflow:hidden; }
-        .svs-container {
-          width:min(1400px, 94%);
-          margin:0 auto;
-          display:grid;
-          grid-template-columns:0.7fr 1.3fr;
-          gap:60px;
-          align-items:start;
-        }
-
-        /* LEFT */
-        .svs-left { padding-right: 4px; }
-        .svs-header { margin-bottom:12px; }
-        .svs-sub { margin:0 0 6px; font-size:.95rem; color:#5f6b7a; }
-        .svs-title { margin:0; font-size:clamp(1.8rem,1.2rem + 2vw,2.6rem); font-weight:800; color:#0E0F2C; }
-        .svs-list { display:grid; gap:10px; margin-top:14px; }
-        .svs-item {
-          display:flex; align-items:center; gap:10px;
-          padding:10px 14px; border:1px solid #e2e8f0; border-radius:10px;
-          background:#f8fcff; transition:all .2s ease;
-        }
-        .svs-item:hover { transform:translateY(-2px); box-shadow:0 8px 18px rgba(10,40,80,.08); border-color:#c9e4f5; background:#f4fbff; }
-        .svs-icon { flex:0 0 40px; width:40px; height:40px; border-radius:8px; display:grid; place-items:center; background:rgba(38,182,224,.12); border:1px solid rgba(38,182,224,.35); color:#1c99bf; }
-        .svs-icon svg { width:20px; height:20px; }
-        .svs-item-title { font-weight:700; color:#0E0F2C; font-size:1rem; line-height:1.4; }
-
-        /* RIGHT — independent scroll panel */
-        .svs-right {
-          overflow-y: auto;                  /* 🔹 only this column scrolls */
-          overscroll-behavior: contain;
-          -webkit-overflow-scrolling: touch;
-          padding-right: 6px;                /* room for scrollbar */
-        }
-        /* Optional: subtle scrollbar styling (WebKit) */
-        .svs-right::-webkit-scrollbar { width: 8px; }
-        .svs-right::-webkit-scrollbar-thumb { background: rgba(0,0,0,.15); border-radius: 8px; }
-        .svs-right::-webkit-scrollbar-track { background: transparent; }
-
-        /* Video card like your screenshot */
-        .svs-video-card {
-          border-radius: 16px;
+        .svs-split {
+          background: #fff;
+          padding: 72px 0;
           overflow: hidden;
-          background: #ffffff;               /* card surface */
-          box-shadow: 0 14px 36px rgba(10, 24, 44, .18);
-        }
-        .svs-video-card video {
-          display:block;
-          width:100%;
-          height:auto;
-          aspect-ratio: 16 / 9;              /* keeps tidy; tweak if needed */
-          object-fit: contain;               /* 🔹 not zoomed */
-          background: transparent !important;
         }
 
-        /* Mobile */
+        .svs-container {
+          display: grid;
+          grid-template-columns: 0.7fr 1.3fr;
+          width: min(1400px, 94%);
+          margin: 0 auto;
+          align-items: stretch;
+          gap: 60px;
+        }
+
+        /* LEFT SIDE */
+        .svs-left {
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+        }
+
+        .svs-header { margin-bottom: 12px; }
+        .svs-sub { margin: 0 0 6px; font-size: .95rem; color: #5f6b7a; }
+        .svs-title { margin: 0; font-size: clamp(1.8rem, 1.2rem + 2vw, 2.6rem); font-weight: 800; color: #0E0F2C; }
+
+        .svs-list { display: grid; gap: 10px; margin-top: 14px; }
+        .svs-item {
+          display: flex;
+          align-items: center;
+          gap: 10px;
+          padding: 10px 14px;
+          border: 1px solid #e2e8f0;
+          border-radius: 10px;
+          background: #f8fcff;
+          transition: all .2s ease;
+        }
+        .svs-item:hover {
+          transform: translateY(-2px);
+          box-shadow: 0 8px 18px rgba(10,40,80,.08);
+          border-color: #c9e4f5;
+          background: #f4fbff;
+        }
+        .svs-icon {
+          flex: 0 0 40px;
+          width: 40px; height: 40px;
+          border-radius: 8px;
+          display: grid;
+          place-items: center;
+          background: rgba(38,182,224,.12);
+          border: 1px solid rgba(38,182,224,.35);
+          color: #1c99bf;
+        }
+        .svs-icon svg { width: 20px; height: 20px; }
+        .svs-item-title { font-weight: 700; color: #0E0F2C; font-size: 1rem; line-height: 1.4; }
+
+        /* RIGHT SIDE — full height video panel */
+        .svs-right {
+          position: relative;
+          width: 100%;
+          overflow: hidden;
+          border-radius: 20px;
+          box-shadow: 0 20px 50px rgba(14, 24, 44, 0.25);
+        }
+        .svs-right video {
+          position: absolute;
+          inset: 0;
+          width: 100%;
+          height: 100%;
+          object-fit: cover;  /* 🔹 fills full area */
+          object-position: center;
+          background: transparent;
+          border: none;
+          display: block;
+        }
+
+        /* MOBILE */
         @media (max-width: 992px) {
-          .svs-container { grid-template-columns:1fr; gap:20px; }
-          .svs-right { order:-1; max-height: 62vh; }  /* own scroll on phones as well */
-          .svs-video-card { border-radius: 12px; box-shadow: 0 10px 26px rgba(0,0,0,.12); }
+          .svs-container {
+            grid-template-columns: 1fr;
+            gap: 20px;
+          }
+          .svs-right {
+            order: -1;
+            height: 60vh !important;
+            border-radius: 12px;
+            box-shadow: 0 12px 28px rgba(0,0,0,.15);
+          }
+          .svs-right video {
+            object-fit: cover;
+          }
         }
       `}</style>
     </section>
