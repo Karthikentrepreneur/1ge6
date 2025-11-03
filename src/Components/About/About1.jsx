@@ -33,7 +33,7 @@ const About1 = () => {
       { breakpoint: 1199, settings: { slidesToShow: 4 } },
       { breakpoint: 991,  settings: { slidesToShow: 3 } },
       { breakpoint: 767,  settings: { slidesToShow: 2, centerMode: true, centerPadding: "10px" } },
-      { breakpoint: 575,  settings: { slidesToShow: 1, centerMode: true, centerPadding: "30px" } },
+      { breakpoint: 575,  settings: { slidesToShow: 1, centerMode: true, centerPadding: "20px" } },
     ],
   };
 
@@ -41,98 +41,86 @@ const About1 = () => {
     <section
       className="about-section bg-cover"
       data-background="/about-bg.png"
-      style={{ padding: "40px 0 20px", overflow: "hidden" }}
+      /* ↓ remove section bottom padding completely */
+      style={{ padding: "28px 0 0", overflow: "hidden" }}
     >
       <style>{`
         :root { --accent:#26B6E0; --ink:#0E0F2C; --muted:#444; }
 
         .about-wrapper { width: 100%; }
         .about-section { overflow-x: hidden; }
+        .about-section .container-fluid { padding-bottom: 0; }
 
-        /* ===== Left image (original, no crop) ===== */
+        /* ===== Left image (no crop) ===== */
         .about-image-col { padding-right: 16px; }
-        .about-photo-wrap {
-          width: 100%;
-          display: flex;
-          justify-content: center;
-          align-items: center;
-        }
+        .about-photo-wrap { width: 100%; display: flex; justify-content: center; align-items: center; }
         .about-photo {
-          display: block;
-          width: 100%;
-          height: auto;           /* preserve original aspect ratio */
-          object-fit: contain;    /* never crop */
-          object-position: center;
-          border-radius: 12px;
-          border: 2px solid #e6eef3;
-          box-shadow: 0 8px 24px rgba(0,0,0,.08);
-          background: #fff;       /* avoids transparency edges on contain */
+          display: block; width: 100%; height: auto; object-fit: contain; object-position: center;
+          border-radius: 12px; border: 2px solid #e6eef3; box-shadow: 0 8px 24px rgba(0,0,0,.08);
+          background: #fff;
         }
 
         /* Right column */
         .about-text-col { position: relative; z-index: 2; padding-left: 16px; }
 
-        /* ===== Title ===== */
+        /* ===== Title & items (compact) ===== */
         .about-content .section-title h2 {
-          margin-bottom: 18px;
-          color: var(--ink);
-          font-weight: 800;
-          letter-spacing: -0.2px;
-          font-size: 34px;
-          line-height: 1.15;
+          margin-bottom: 14px; color: var(--ink); font-weight: 800; letter-spacing: -0.2px;
+          font-size: 34px; line-height: 1.15;
         }
-
-        /* ===== Info Items ===== */
-        .about-items {
-          display: flex;
-          align-items: flex-start;
-          gap: 14px;
-          margin-bottom: 22px;
-        }
+        .about-area { margin-bottom: 0; }
+        .about-items { display: flex; align-items: flex-start; gap: 14px; margin-bottom: 16px; }
+        .about-items:last-child { margin-bottom: 0; }
         .about-items .icon {
-          width: 54px; height: 54px; min-width: 54px;
-          border-radius: 50%;
-          background-color: var(--accent);
-          display: flex; align-items: center; justify-content: center;
-          box-shadow: 0 4px 10px rgba(38,182,224,.35);
+          width: 54px; height: 54px; min-width: 54px; border-radius: 50%; background-color: var(--accent);
+          display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 10px rgba(38,182,224,.35);
         }
         .about-items .icon svg { width: 24px; height: 24px; color: #fff; }
         .about-items .content h5 { font-weight: 800; margin: 2px 0 6px; color: var(--ink); }
         .about-items .content p { margin: 0; line-height: 1.55; color: var(--muted); font-size: 15.5px; }
 
-        /* ===== Group Companies (enlarged) ===== */
+        /* ===== Group Companies (super compact) ===== */
         .brand-block {
-          margin-top: 80px;
-          padding: 60px 0;
-          background: linear-gradient(180deg, #f8fbfd 0%, #eef5f9 100%);
-          border-radius: 20px;
+          margin-top: 28px;                /* tighter top gap */
+          padding: 18px 0 0;               /* remove bottom padding */
+          background: linear-gradient(180deg, #f6fbff 0%, #eef5f9 100%);
+          border-radius: 16px;
         }
         .brand-title {
-          text-align: center;
-          margin: 0 0 35px;
-          font-size: 32px;
-          font-weight: 800;
-          color: var(--ink);
-          letter-spacing: -0.3px;
+          text-align: center; margin: 0 0 14px; font-size: 28px; font-weight: 800; color: var(--ink);
         }
-        .brand-slider-wrap { max-width: 1200px; margin: 0 auto; padding: 0 8px; }
-        .brand-slide { display: flex; align-items: center; justify-content: center; height: 160px; }
-        .brand-logo { max-height: 110px; width: auto; object-fit: contain; transition: transform .25s ease, filter .25s ease; filter: brightness(.9); }
-        .brand-logo:hover { transform: scale(1.08); filter: brightness(1.05); }
+
+        /* --- Slick fixes to eliminate hidden extra height --- */
+        .brand-slider-wrap { max-width: 1200px; margin: 0 auto; padding: 0; line-height: 0; }
+        .brand-slider-wrap .slick-slider,
+        .brand-slider-wrap .slick-list,
+        .brand-slider-wrap .slick-track { margin: 0 !important; padding: 0 !important; }
+        .brand-slider-wrap .slick-track { display: flex; align-items: center; }
+        .brand-slider-wrap .slick-slide { height: auto; }
+        .brand-slider-wrap .slick-slide > div { height: 100%; }
+
+        /* Slide box itself – lower height so the blue panel shrinks */
+        .brand-slide { display: flex; align-items: center; justify-content: center; height: 96px; }
+        .brand-logo { max-height: 72px; width: auto; object-fit: contain; display: block; }
+
+        /* Ensure no trailing space after the panel */
+        .brand-block:last-child { margin-bottom: 0; }
+        .about-wrapper > .brand-block:last-child { padding-bottom: 0; }
+        .about-section .about-wrapper > *:last-child { margin-bottom: 0 !important; }
 
         /* ===== Responsive ===== */
         @media (max-width: 991px) {
           .about-image-col { padding-right: 0; }
-          .about-text-col  { padding-left: 0; margin-top: 18px; }
-          .brand-slide { height: 130px; }
-          .brand-logo { max-height: 90px; }
+          .about-text-col  { padding-left: 0; margin-top: 12px; }
+          .brand-slide { height: 88px; }
+          .brand-logo { max-height: 64px; }
         }
         @media (max-width: 575px) {
-          .about-content .section-title h2 { font-size: 28px; }
-          .about-items .icon { width: 48px; height: 48px; min-width: 48px; }
-          .brand-title { font-size: 26px; margin-bottom: 25px; }
-          .brand-slide { height: 110px; }
-          .brand-logo { max-height: 80px; }
+          .about-content .section-title h2 { font-size: 26px; }
+          .about-items .icon { width: 46px; height: 46px; min-width: 46px; }
+          .brand-title { font-size: 24px; margin-bottom: 12px; }
+          .brand-slide { height: 80px; }
+          .brand-logo { max-height: 56px; }
         }
       `}</style>
 
@@ -142,12 +130,7 @@ const About1 = () => {
             {/* Left Image */}
             <div className="col-lg-7 about-image-col d-flex">
               <div className="about-photo-wrap w-100">
-                <img
-                  src="/team1.jpg"
-                  alt="1 Global Enterprises Team"
-                  className="about-photo"
-                  loading="eager"
-                />
+                <img src="/team1.jpg" alt="1 Global Enterprises Team" className="about-photo" loading="eager" />
               </div>
             </div>
 
@@ -185,7 +168,7 @@ const About1 = () => {
             </div>
           </div>
 
-          {/* ===== Group Companies (ENLARGED & CENTERED) ===== */}
+          {/* Group Companies */}
           <div className="brand-block">
             <h3 className="brand-title">Group Companies</h3>
             <div className="brand-slider-wrap">
