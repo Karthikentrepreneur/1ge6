@@ -51,17 +51,18 @@ const About1 = () => {
         .about-wrapper { width: 100%; }
         .about-section { overflow-x: hidden; }
 
-        /* ===== Image (no frame + larger) ===== */
+        /* ===== Image (reduce left space) ===== */
         .about-photo-wrap {
           width: 100%;
           display: flex;
-          justify-content: center;
+          justify-content: flex-start; /* align image to left */
           align-items: center;
         }
         .about-photo {
-          width: 100%;
-          max-width: 1250px; /* Bigger, but contained */
+          width: 105%; /* slightly extend image width */
+          max-width: 1300px;
           height: auto;
+          margin-left: -40px; /* pull image left to reduce gap */
           border: none;
           border-radius: 0;
           box-shadow: none;
@@ -103,22 +104,6 @@ const About1 = () => {
           height: 28px;
           color: #fff;
         }
-        .about-items:not(:last-child)::after {
-          content: "";
-          position: absolute;
-          left: 29px;
-          top: 60px;
-          width: 2px;
-          height: calc(100% - 30px);
-          background: repeating-linear-gradient(
-            to bottom,
-            var(--accent),
-            var(--accent) 4px,
-            transparent 4px,
-            transparent 8px
-          );
-          z-index: 0;
-        }
         .about-items .content h5 {
           font-weight: 800;
           margin: 2px 0 6px;
@@ -149,18 +134,19 @@ const About1 = () => {
           .about-photo {
             max-width: 100%;
             max-height: 460px;
+            margin-left: 0;
           }
         }
       `}</style>
 
-      <div className="container">
+      <div className="container-fluid" style={{ paddingLeft: "0px" }}>
         <div className="about-wrapper">
           <div className="row g-4 align-items-center">
             {/* Left Image */}
-            <div className="col-lg-7 d-flex justify-content-center">
+            <div className="col-lg-7 d-flex justify-content-start">
               <div className="about-photo-wrap">
                 <img
-                  src="/team1.jpg" 
+                  src="/team1.jpg"
                   alt="1 Global Enterprises Team"
                   className="about-photo"
                 />
