@@ -7,7 +7,7 @@ const VERTICALS = [
     title: "Supply Chain Solutions",
     description:
       "1 Global Enterprises invests in and builds high-performing logistics and technology businesses that power global trade. Our portfolio spans 16 countries, covering every major segment of the supply chain — including freight forwarding, warehousing, distribution, and digital logistics infrastructure. Through strategic ownership and operational expertise, we support our group companies in driving innovation, operational excellence, and sustainable growth. Our focus is on strengthening global connectivity and creating long-term value across the supply chain landscape.",
-    cover: "/covers/supply-chain.jpg",
+    cover: "/image-gen.png‎‎",
     logos: [
       { img: "/logosss01.png", alt: "GGL", link: "https://www.ggl.sg/" },
       { img: "/logosss03.png", alt: "OECL", link: "https://www.oecl.sg/" },
@@ -21,7 +21,7 @@ const VERTICALS = [
     title: "Renewable Energy",
     description:
       "We drive sustainable growth through strategic investments across the renewable energy value chain — from feedstock origination to processing and technology enablement. Our portfolio supports the global shift toward renewable fuels and SAF by securing and optimising advanced feedstock supply. Operating across multiple regions, we build ethical, traceable sourcing networks and pre-treatment infrastructure, strengthening transparency, efficiency, and environmental integrity while accelerating the transition to cleaner energy.",
-    cover: "/covers/renewables.jpg",
+    cover: "/wind.jpg‎",
     logos: [
       { img: "/logosss04.png", alt: "Moltech", link: "https://moltechglobal.com/" },
       { img: "/molgen.png", alt: "MoltechGen", link: "https://moltechgen.com/" },
@@ -33,7 +33,7 @@ const VERTICALS = [
     title: "Product Distribution",
     description:
       "Through strategic partnerships, our group company Citygn manages the distribution of ENOC lubricants and other industrial products across key territories. Our focus is on building efficient, customer-centric networks supported by strong logistics capabilities and reliable after-sales service. By combining local market expertise with the strength of global brands, we ensure consistent quality, reach, and value delivery across every channel.",
-    cover: "/covers/distribution.jpg",
+    cover: "/Productdistribution.jpg",
     logos: [{ img: "/logosss05.png", alt: "CityGn", link: "https://citygnenergy.com/" }],
     icon: <Package size={22} strokeWidth={2.2} color="#fff" />,
   },
