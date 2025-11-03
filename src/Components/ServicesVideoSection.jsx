@@ -20,7 +20,7 @@ const ServicesVideoSection = ({
     const el = leftRef.current;
     if (!el) return;
     const update = () =>
-      setMatchHeight(Math.max(320, Math.round(el.getBoundingClientRect().height)));
+      setMatchHeight(Math.max(420, Math.round(el.getBoundingClientRect().height)));
     const ro = new ResizeObserver(update);
     ro.observe(el);
     window.addEventListener("resize", update);
@@ -70,11 +70,11 @@ const ServicesVideoSection = ({
       <style>{`
         .svs-split { background:#fff; padding:72px 0; overflow-x:hidden; }
         .svs-container {
-          width:min(1320px, 92%);          /* a bit wider to match your screenshot scale */
+          width:min(1320px, 92%);
           margin:0 auto;
           display:grid;
           grid-template-columns:1fr 1fr;
-          gap:32px;                         /* spacing between columns */
+          gap:32px;
           align-items:start;
         }
 
@@ -93,25 +93,26 @@ const ServicesVideoSection = ({
         .svs-icon svg { width:20px; height:20px; }
         .svs-item-title { font-weight:700; color:#0E0F2C; font-size:1rem; line-height:1.4; }
 
-        /* RIGHT — card sized like screenshot */
+        /* RIGHT */
         .svs-right { display:flex; align-items:center; justify-content:flex-start; }
         .svs-video-card {
           width: 100%;
-          /* keep it slightly inset like the photo card */
-          max-width: 860px;                 /* controls visual size; tweak if needed */
-          margin-left: 0;                    /* align with column start */
+          max-width: 860px;
+          margin-left: 0;
           border-radius: 18px;
           overflow: hidden;
           background: #000;
           box-shadow: 0 18px 40px rgba(14, 24, 44, 0.18);
           display:flex;
+          position: relative;
         }
         .svs-video-card video {
           width: 100%;
           height: 100%;
-          object-fit: cover;                 /* fills fully with no white gaps */
-          object-position: center;
+          object-fit: cover;
+          object-position: center center;
           display:block;
+          min-height: 100%;
         }
 
         /* Mobile */
