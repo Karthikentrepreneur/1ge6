@@ -146,7 +146,7 @@ const About1 = () => {
             <div className="col-lg-7 d-flex justify-content-start">
               <div className="about-photo-wrap">
                 <img
-                  src="/team1.jpg"
+                  src="/team.jpg"
                   alt="1 Global Enterprises Team"
                   className="about-photo"
                 />
