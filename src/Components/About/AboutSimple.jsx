@@ -20,33 +20,39 @@ const AboutSimple = () => {
         .about-wrapper { width: 100%; }
         .about-section { overflow-x: hidden; }
 
-        /* ===== IMAGE FIXED SIZE ADJUSTMENT ===== */
-        .about-photo-wrap { width: 100%; text-align: center; }
-        .about-photo {
-          display: block;
+        /* ===== IMAGE EXACT SIZE (no white frame, full proportion) ===== */
+        .about-photo-wrap {
           width: 100%;
-          max-width: 1080px; /* new fixed desktop width */
+          display: flex;
+          justify-content: center;
+          align-items: center;
+        }
+
+        .about-photo {
+          width: 100%;
+          max-width: 920px; /* tuned for perfect match to your screenshot */
           height: auto;
-          border-radius: 20px;
-          background: #fff;
-          padding: 18px; /* frame effect */
-          box-shadow: 0 18px 48px rgba(14,24,44,0.18);
-          object-fit: contain;
-          margin: 0 auto;
+          border-radius: 12px; /* subtle rounded edge */
+          object-fit: cover; /* fills horizontally like screenshot */
+          box-shadow: 0 8px 30px rgba(0,0,0,0.1);
         }
 
-        /* tablet scaling */
-        @media (max-width: 1399px) {
-          .about-photo { max-width: 960px; padding: 16px; }
+        /* Keep proportional on large screens */
+        @media (min-width: 1600px) {
+          .about-photo { max-width: 1080px; }
         }
+
+        /* Tablets */
         @media (max-width: 1199px) {
-          .about-photo { max-width: 820px; padding: 14px; }
-        }
-        @media (max-width: 991px) {
-          .about-photo { max-width: 100%; padding: 12px; border-radius: 16px; }
+          .about-photo { max-width: 100%; border-radius: 10px; }
         }
 
-        /* ===== Right Content ===== */
+        /* Mobile: full width, smaller radius */
+        @media (max-width: 768px) {
+          .about-photo { width: 100%; border-radius: 8px; }
+        }
+
+        /* ===== RIGHT CONTENT ===== */
         .about-content .section-title h2 {
           margin-bottom: 18px;
           color: var(--ink);
@@ -55,12 +61,12 @@ const AboutSimple = () => {
         }
 
         .about-items {
-          position: relative;
           display: flex;
           align-items: flex-start;
           gap: 16px;
-          margin-bottom: 32px;
+          margin-bottom: 28px;
         }
+
         .about-items .icon {
           width: 60px;
           height: 60px;
@@ -70,14 +76,14 @@ const AboutSimple = () => {
           display: flex;
           align-items: center;
           justify-content: center;
-          z-index: 1;
           box-shadow: 0 4px 10px rgba(38,182,224,0.35);
         }
-        .about-items .icon svg {
-          width: 28px;
-          height: 28px;
-          color: #fff;
-        }
+
+        .about-items .icon svg { width: 28px; height: 28px; color: #fff; }
+        .about-items .content h5 { font-weight: 800; margin-bottom: 6px; color: var(--ink); }
+        .about-items .content p { margin: 0; line-height: 1.5; color: var(--muted); font-size: 15px; }
+
+        /* Connector line only on desktop */
         .about-items:not(:last-child)::after {
           content: "";
           position: absolute;
@@ -94,23 +100,12 @@ const AboutSimple = () => {
           );
           z-index: 0;
         }
-        .about-items .content h5 {
-          font-weight: 800;
-          margin-bottom: 6px;
-          color: var(--ink);
-        }
-        .about-items .content p {
-          margin: 0;
-          line-height: 1.5;
-          color: var(--muted);
-          font-size: 15px;
-        }
 
-        /* Responsive */
+        /* Mobile adjustments */
         @media (max-width: 768px) {
           .about-wrapper .row { flex-direction: column; gap: 22px; }
-          .about-items { gap: 14px; margin-bottom: 24px; }
-          .about-items .icon { width: 52px; height: 52px; min-width: 52px; }
+          .about-items { gap: 14px; margin-bottom: 22px; }
+          .about-items .icon { width: 52px; height: 52px; }
           .about-items .icon svg { width: 22px; height: 22px; }
           .about-items:not(:last-child)::after { content: none !important; }
           .about-items .content p { font-size: 14px; }
@@ -120,7 +115,7 @@ const AboutSimple = () => {
       <div className="container">
         <div className="about-wrapper">
           <div className="row g-4 align-items-center">
-            {/* Left Image */}
+            {/* LEFT IMAGE */}
             <div className="col-lg-7 d-flex justify-content-center">
               <div className="about-photo-wrap">
                 <img
@@ -131,7 +126,7 @@ const AboutSimple = () => {
               </div>
             </div>
 
-            {/* Right Text */}
+            {/* RIGHT TEXT */}
             <div className="col-lg-5">
               <div className="about-content">
                 <div className="section-title">
@@ -143,7 +138,10 @@ const AboutSimple = () => {
                     <div className="icon"><Users2 /></div>
                     <div className="content">
                       <h5>Who We Are</h5>
-                      <p>A diversified group with interests in Shipping, Logistics, Distribution, IT, Clean Energy & Trading.</p>
+                      <p>
+                        A diversified group with interests in Shipping, Logistics,
+                        Distribution, IT, Clean Energy & Trading.
+                      </p>
                     </div>
                   </div>
 
@@ -159,13 +157,16 @@ const AboutSimple = () => {
                     <div className="icon"><BadgeCheck /></div>
                     <div className="content">
                       <h5>Expertise</h5>
-                      <p>Each business unit is led by experts ensuring sustainability, execution & growth.</p>
+                      <p>
+                        Each business unit is led by experts ensuring sustainability,
+                        execution & growth.
+                      </p>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
-            {/* End Right Text */}
+            {/* END RIGHT */}
           </div>
         </div>
       </div>
