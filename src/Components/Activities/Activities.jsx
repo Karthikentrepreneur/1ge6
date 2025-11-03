@@ -8,7 +8,7 @@ const VERTICALS = [
     title: "Supply Chain Solutions",
     description:
       "1 Global Enterprises invests in and builds high-performing logistics and technology businesses that power global trade. Our portfolio spans 16 countries, covering every major segment of the supply chain — including freight forwarding, warehousing, distribution, and digital logistics infrastructure. Through strategic ownership and operational expertise, we support our group companies in driving innovation, operational excellence, and sustainable growth. Our focus is on strengthening global connectivity and creating long-term value across the supply chain landscape.",
-    cover: "/image-gen.png",
+    cover: "/image1.png",
     logos: [
       { img: "/logosss01.png", alt: "GGL", link: "https://www.ggl.sg/" },
       { img: "/logosss03.png", alt: "OECL", link: "https://www.oecl.sg/" },
