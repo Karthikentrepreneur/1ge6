@@ -51,7 +51,7 @@ const About1 = () => {
         .about-wrapper { width: 100%; }
         .about-section { overflow-x: hidden; }
 
-        /* ===== Image (bigger, no frame, not full width) ===== */
+        /* ===== Image (no frame + larger) ===== */
         .about-photo-wrap {
           width: 100%;
           display: flex;
@@ -60,11 +60,11 @@ const About1 = () => {
         }
         .about-photo {
           width: 100%;
-          max-width: 1250px; /* Bigger but contained */
+          max-width: 1250px; /* Bigger, but contained */
           height: auto;
-          border: none;          /* no border/frame */
-          border-radius: 0;      /* no rounded frame */
-          box-shadow: none;      /* remove shadow frame */
+          border: none;
+          border-radius: 0;
+          box-shadow: none;
           object-fit: cover;
           transform: none;
         }
@@ -131,7 +131,7 @@ const About1 = () => {
           font-size: 15.5px;
         }
 
-        /* ===== Brand slider ===== */
+        /* ===== Brand Slider ===== */
         .brand-block { margin-top: 50px; }
         .brand-title {
           text-align: center;
@@ -144,36 +144,12 @@ const About1 = () => {
         .brand-logo { max-height: 90px; width: auto; object-fit: contain; transition: transform 0.2s ease; }
         .brand-logo:hover { transform: translateY(-2px); }
 
-        /* ===== MOBILE (≤768px) ===== */
+        /* ===== Mobile ===== */
         @media (max-width: 768px) {
-          .about-section { padding: 28px 0 10px !important; }
-          .container { padding-left: 18px; padding-right: 18px; }
-          .about-wrapper .row { flex-direction: column; gap: 18px; }
-          .col-lg-7, .col-lg-5 { width: 100%; max-width: 100%; }
-
           .about-photo {
             max-width: 100%;
-            max-height: 460px; /* keep tall but safe */
+            max-height: 460px;
           }
-
-          .about-content .section-title h2 {
-            font-size: 26px;
-            line-height: 1.2;
-            margin-bottom: 12px;
-          }
-
-          .about-items .icon {
-            width: 54px;
-            height: 54px;
-            min-width: 54px;
-            box-shadow: 0 3px 8px rgba(38, 182, 224, 0.28);
-          }
-          .about-items .icon svg { width: 22px; height: 22px; }
-          .about-items .content h5 { font-size: 16px; margin: 0 0 6px; }
-          .about-items .content p { font-size: 14px; line-height: 1.5; margin: 0; }
-
-          .brand-slide { height: 80px; }
-          .brand-logo { max-height: 64px; }
         }
       `}</style>
 
@@ -183,9 +159,8 @@ const About1 = () => {
             {/* Left Image */}
             <div className="col-lg-7 d-flex justify-content-center">
               <div className="about-photo-wrap">
-                {/* Put your uploaded file in /public as team-group.png */}
                 <img
-                  src="/team-group.png"
+                  src="/Screenshot 2025-11-03 at 12.45.53 PM.png"
                   alt="1 Global Enterprises Team"
                   className="about-photo"
                 />
