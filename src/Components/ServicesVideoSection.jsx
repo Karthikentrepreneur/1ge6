@@ -20,7 +20,7 @@ const ServicesVideoSection = ({
     const el = leftRef.current;
     if (!el) return;
     const update = () =>
-      setMatchHeight(Math.max(420, Math.round(el.getBoundingClientRect().height)));
+      setMatchHeight(Math.max(650, Math.round(el.getBoundingClientRect().height * 1.5)));
     const ro = new ResizeObserver(update);
     ro.observe(el);
     window.addEventListener("resize", update);
@@ -70,11 +70,11 @@ const ServicesVideoSection = ({
       <style>{`
         .svs-split { background:#fff; padding:72px 0; overflow-x:hidden; }
         .svs-container {
-          width:min(1320px, 92%);
+          width:min(1400px, 94%);
           margin:0 auto;
           display:grid;
-          grid-template-columns:1fr 1fr;
-          gap:32px;
+          grid-template-columns:0.7fr 1.3fr;
+          gap:60px;
           align-items:start;
         }
 
@@ -86,7 +86,7 @@ const ServicesVideoSection = ({
         .svs-item {
           display:flex; align-items:center; gap:10px;
           padding:10px 14px; border:1px solid #e2e8f0; border-radius:10px;
-          background:#f8fcff; width:85%; transition:all .2s ease;
+          background:#f8fcff; width:95%; transition:all .2s ease;
         }
         .svs-item:hover { transform:translateY(-2px); box-shadow:0 8px 18px rgba(10,40,80,.08); border-color:#c9e4f5; background:#f4fbff; }
         .svs-icon { flex:0 0 40px; width:40px; height:40px; border-radius:8px; display:grid; place-items:center; background:rgba(38,182,224,.12); border:1px solid rgba(38,182,224,.35); color:#1c99bf; }
@@ -97,12 +97,12 @@ const ServicesVideoSection = ({
         .svs-right { display:flex; align-items:center; justify-content:flex-start; }
         .svs-video-card {
           width: 100%;
-          max-width: 860px;
+          max-width: 100%;
           margin-left: 0;
-          border-radius: 18px;
+          border-radius: 20px;
           overflow: hidden;
           background: #000;
-          box-shadow: 0 18px 40px rgba(14, 24, 44, 0.18);
+          box-shadow: 0 20px 50px rgba(14, 24, 44, 0.25);
           display:flex;
           position: relative;
         }
