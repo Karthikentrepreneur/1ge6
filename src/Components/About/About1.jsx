@@ -43,74 +43,112 @@ const About1 = () => {
     <section
       className="about-section bg-cover"
       data-background="/about-bg.png"
-      style={{ padding: "40px 0 20px", overflow: "hidden" }}
+      style={{ padding: "50px 0 24px", overflow: "hidden" }}
     >
       <style>{`
-        :root { --accent:#26B6E0; --ink:#0E0F2C; --muted:#444; }
+        :root {
+          --accent:#26B6E0;
+          --ink:#0E0F2C;
+          --muted:#444;
+        }
+
+        .about-wrapper {
+          width: 100%;
+        }
 
         .about-section {
           overflow-x: hidden;
-          background-size: cover;
         }
 
-        /* ===== Full-width image ===== */
-        .about-photo-full {
+        /* ===== Enlarged Image ===== */
+        .about-photo-wrap {
           width: 100%;
-          max-width: 1300px;
-          margin: 0 auto 50px auto;
-          display: block;
-          border-radius: 18px;
-          box-shadow: 0 20px 60px rgba(0, 0, 0, 0.25);
+          text-align: center;
+          margin-bottom: 40px;
+        }
+
+        .about-photo {
+          width: 100%;
+          max-width: 1300px; /* ✅ Increased image width to almost full container */
+          height: auto;
+          border-radius: 22px;
           object-fit: cover;
+          box-shadow: 0 20px 60px rgba(0, 0, 0, 0.25);
+          transform: scale(1.04); /* slight enlarge */
           transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
-        .about-photo-full:hover {
-          transform: scale(1.02);
+
+        .about-photo:hover {
+          transform: scale(1.07);
           box-shadow: 0 25px 70px rgba(0, 0, 0, 0.3);
         }
 
-        /* ===== Title Section Below Image ===== */
-        .about-content {
-          text-align: left;
-          max-width: 1000px;
-          margin: 0 auto;
-        }
-        .about-content .section-title h2 {
-          margin-bottom: 30px;
-          color: var(--ink);
-          font-weight: 800;
-          font-size: 36px;
-          text-align: center;
+        @media (min-width: 1400px) {
+          .about-photo {
+            max-width: 1500px; /* ✅ allow more width on ultra-wide screens */
+          }
         }
 
-        /* ===== Info Items in Column ===== */
+        /* ===== Title ===== */
+        .about-content .section-title h2 {
+          margin-bottom: 18px;
+          color: var(--ink);
+          font-weight: 800;
+          letter-spacing: -0.2px;
+          font-size: 36px;
+        }
+
+        /* ===== Info Items ===== */
         .about-items {
+          position: relative;
           display: flex;
           align-items: flex-start;
-          gap: 18px;
-          margin-bottom: 26px;
+          gap: 16px;
+          margin-bottom: 28px;
         }
+
         .about-items .icon {
-          width: 64px;
-          height: 64px;
-          min-width: 64px;
+          width: 60px;
+          height: 60px;
+          min-width: 60px;
           border-radius: 50%;
           background-color: var(--accent);
           display: flex;
           align-items: center;
           justify-content: center;
           box-shadow: 0 4px 10px rgba(38, 182, 224, 0.35);
+          z-index: 1;
         }
+
         .about-items .icon svg {
-          width: 30px;
-          height: 30px;
+          width: 28px;
+          height: 28px;
           color: #fff;
         }
+
+        .about-items:not(:last-child)::after {
+          content: "";
+          position: absolute;
+          left: 29px;
+          top: 60px;
+          width: 2px;
+          height: calc(100% - 30px);
+          background: repeating-linear-gradient(
+            to bottom,
+            var(--accent),
+            var(--accent) 4px,
+            transparent 4px,
+            transparent 8px
+          );
+          z-index: 0;
+        }
+
         .about-items .content h5 {
           font-weight: 800;
-          margin: 0 0 6px;
+          margin: 2px 0 6px;
           color: var(--ink);
         }
+
         .about-items .content p {
           margin: 0;
           line-height: 1.55;
@@ -122,117 +160,200 @@ const About1 = () => {
         .brand-block {
           margin-top: 50px;
         }
+
         .brand-title {
           text-align: center;
           margin: 0 0 14px;
           font-weight: 800;
           color: var(--ink);
         }
+
         .brand-slider-wrap {
           max-width: 1100px;
           margin: 0 auto;
           padding: 0 8px;
         }
+
         .brand-slide {
           display: flex;
           align-items: center;
           justify-content: center;
           height: 110px;
         }
+
         .brand-logo {
           max-height: 90px;
           width: auto;
           object-fit: contain;
           transition: transform 0.2s ease;
         }
+
         .brand-logo:hover {
           transform: translateY(-2px);
         }
 
-        /* ===== MOBILE ===== */
+        /* ===== MOBILE (≤768px) ===== */
         @media (max-width: 768px) {
-          .about-photo-full {
-            border-radius: 12px;
-            margin-bottom: 30px;
+          .about-section {
+            padding: 28px 0 10px !important;
           }
+
+          .container {
+            padding-left: 18px;
+            padding-right: 18px;
+          }
+
+          .about-wrapper .row {
+            flex-direction: column;
+            gap: 18px;
+          }
+
+          .col-lg-7,
+          .col-lg-5 {
+            width: 100%;
+            max-width: 100%;
+          }
+
+          .about-photo {
+            width: 100%;
+            max-width: 100%;
+            border-radius: 16px;
+            box-shadow: 0 10px 26px rgba(0, 0, 0, 0.15);
+            transform: none;
+          }
+
           .about-content .section-title h2 {
             font-size: 28px;
+            line-height: 1.15;
+            margin-bottom: 12px;
+          }
+
+          .about-items:not(:last-child)::after {
+            content: none !important;
+          }
+
+          .about-items {
+            display: flex;
+            align-items: center;
+            gap: 14px;
             margin-bottom: 18px;
           }
+
           .about-items .icon {
             width: 54px;
             height: 54px;
+            min-width: 54px;
+            box-shadow: 0 3px 8px rgba(38, 182, 224, 0.28);
           }
+
           .about-items .icon svg {
             width: 22px;
             height: 22px;
           }
+
           .about-items .content h5 {
             font-size: 16px;
+            margin: 0 0 6px;
           }
+
           .about-items .content p {
             font-size: 14px;
+            line-height: 1.5;
+            margin: 0;
+          }
+
+          .brand-slide {
+            height: 80px;
+          }
+
+          .brand-logo {
+            max-height: 64px;
           }
         }
       `}</style>
 
       <div className="container">
-        {/* ✅ Full-width team image */}
-        <img src="/team.jpg" alt="1 Global Enterprises Group" className="about-photo-full" />
-
-        {/* ✅ Section below image */}
-        <div className="about-content">
-          <div className="section-title">
-            <h2>1 Global Enterprises</h2>
-          </div>
-
-          <div className="about-area mt-3">
-            <div className="about-items">
-              <div className="icon"><Users2 /></div>
-              <div className="content">
-                <h5>Who We Are</h5>
-                <p>A diversified group with interests in Shipping, Logistics, Distribution, IT, Clean Energy & Trading.</p>
+        <div className="about-wrapper">
+          <div className="row g-4 align-items-center">
+            {/* ✅ Enlarged Image */}
+            <div className="col-12">
+              <div className="about-photo-wrap">
+                <img
+                  src="/team.jpg"
+                  alt="1 Global Enterprises Group"
+                  className="about-photo"
+                />
               </div>
             </div>
 
-            <div className="about-items">
-              <div className="icon"><Globe2 /></div>
-              <div className="content">
-                <h5>Our Reach</h5>
-                <p>A global workforce of 700+ professionals.</p>
-              </div>
-            </div>
-
-            <div className="about-items">
-              <div className="icon"><BadgeCheck /></div>
-              <div className="content">
-                <h5>Expertise</h5>
-                <p>Each business unit is led by experts ensuring sustainability, execution & growth.</p>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        {/* ✅ Brand slider below */}
-        <div className="brand-block">
-          <h4 className="brand-title">Group Companies</h4>
-          <div className="brand-slider-wrap">
-            <Slider {...sliderSettings}>
-              {logos.map((item, i) => (
-                <div key={i} className="brand-slide">
-                  <a
-                    className="brand-link"
-                    href={item.link}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    title={`Open ${item.alt}`}
-                    onDragStart={(e) => e.preventDefault()}
-                  >
-                    <img src={item.img} alt={item.alt} className="brand-logo" loading="lazy" />
-                  </a>
+            {/* ✅ Text Section Below Image */}
+            <div className="col-lg-12 col-md-12">
+              <div className="about-content text-center mt-3">
+                <div className="section-title">
+                  <h2>1 Global Enterprises</h2>
                 </div>
-              ))}
-            </Slider>
+
+                <div className="about-area mt-3 d-flex flex-column align-items-center">
+                  <div className="about-items">
+                    <div className="icon"><Users2 /></div>
+                    <div className="content">
+                      <h5>Who We Are</h5>
+                      <p>
+                        A diversified group with interests in Shipping, Logistics,
+                        Distribution, IT, Clean Energy & Trading.
+                      </p>
+                    </div>
+                  </div>
+
+                  <div className="about-items">
+                    <div className="icon"><Globe2 /></div>
+                    <div className="content">
+                      <h5>Our Reach</h5>
+                      <p>A global workforce of 700+ professionals.</p>
+                    </div>
+                  </div>
+
+                  <div className="about-items">
+                    <div className="icon"><BadgeCheck /></div>
+                    <div className="content">
+                      <h5>Expertise</h5>
+                      <p>
+                        Each business unit is led by experts ensuring sustainability,
+                        execution & growth.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* ✅ Brand Slider */}
+            <div className="brand-block">
+              <h4 className="brand-title">Group Companies</h4>
+              <div className="brand-slider-wrap">
+                <Slider {...sliderSettings}>
+                  {logos.map((item, i) => (
+                    <div key={i} className="brand-slide">
+                      <a
+                        className="brand-link"
+                        href={item.link}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        title={`Open ${item.alt}`}
+                        onDragStart={(e) => e.preventDefault()}
+                      >
+                        <img
+                          src={item.img}
+                          alt={item.alt}
+                          className="brand-logo"
+                          loading="lazy"
+                        />
+                      </a>
+                    </div>
+                  ))}
+                </Slider>
+              </div>
+            </div>
           </div>
         </div>
       </div>
