@@ -15,6 +15,11 @@ const VERTICALS = [
       { img: "/logosss02.png", alt: "Global Consol", link: "https://www.globalconsol.com/" },
       { img: "/Haixun_logo.svg", alt: "Hai Xun", link: "https://haixun.co/" },
       { img: "/ogl-logo.png", alt: "ONE Global Logistics", link: "https://oneglobalqatar.com/" },
+      {
+        img: "/logo-2.png",
+        alt: "Future Net Logistics",
+        link: "https://futurenetlogistics.com",
+      },
     ],
     icon: <Truck size={22} strokeWidth={2.2} color="#fff" />,
   },
@@ -66,9 +71,9 @@ export default function Activities() {
           --blue:#2563eb;
           --bg1:#f3fbfc;   /* light teal */
           --bg2:#f5f8ff;   /* light blue */
-          --logoH:84px;    /* desktop logo height (equal for all) */
-          --logoH-md:72px; /* tablet */
-          --logoH-sm:56px; /* mobile */
+          --logoH:112px;    /* desktop logo height (equal for all) */
+          --logoH-md:96px;  /* tablet */
+          --logoH-sm:76px;  /* mobile */
         }
 
         .activities{ background:#fff; }
@@ -76,7 +81,7 @@ export default function Activities() {
         /* Alternating slices with soft gradients */
         .slice{
           position:relative;
-          padding: clamp(48px, 7vw, 110px) 0;
+          padding: clamp(42px, 6vw, 96px) 0;
           background: var(--bg1);
         }
         .slice.alt{ background: var(--bg2); }
@@ -99,9 +104,9 @@ export default function Activities() {
         /* Zig-zag layout — bigger visuals */
         .row{
           display:grid;
-          grid-template-columns: 1.2fr 1fr;   /* make image column larger */
+          grid-template-columns: 1.25fr 1fr;   /* make image column larger */
           align-items:center;
-          gap: clamp(24px, 5vw, 56px);
+          gap: clamp(28px, 6vw, 60px);
           opacity:0; transform: translateY(36px);
           transition: opacity .7s ease, transform .7s cubic-bezier(.2,.65,.16,1);
         }
@@ -110,22 +115,33 @@ export default function Activities() {
 
         /* Media (big, elegant card) */
         .media{
-          border-radius:22px; overflow:hidden;
-          box-shadow:0 28px 70px rgba(2,8,23,.16);
+          position:relative;
+          border-radius:26px; overflow:hidden;
+          box-shadow:0 32px 78px rgba(2,8,23,.18);
           background: #fff;
+        }
+        .media::after{
+          content:"";
+          position:absolute; inset:0;
+          background: linear-gradient(145deg, rgba(15, 23, 42, .05), transparent 55%);
+          pointer-events:none;
+          transition: opacity .45s ease;
+          opacity:.65;
         }
         .media img{
           width:100%; height:100%;
-          aspect-ratio: 21 / 9;    /* wide cinematic */
+          min-height: clamp(240px, 42vw, 420px);
+          aspect-ratio: 16 / 10;    /* taller cinematic */
           object-fit: cover;
           display:block;
-          transform: scale(1.015);
-          transition: transform .55s ease;
+          transform: scale(1.022);
+          transition: transform .6s ease;
         }
-        .media:hover img{ transform: scale(1.04); }
+        .media:hover img{ transform: scale(1.055); }
+        .media:hover::after{ opacity:.4; }
 
         /* Content */
-        .content{ padding: 4px 6px; }
+        .content{ padding: 6px 8px; }
         .title{ display:flex; gap:14px; align-items:center; margin-bottom:12px; }
         .bubble{
           width:52px; height:52px; border-radius:50%;
@@ -147,23 +163,25 @@ export default function Activities() {
         /* Logos — equal size, bigger, no background boxes */
         .logos{
           display:grid;
-          grid-template-columns: repeat(5, minmax(120px, 1fr));
-          gap:18px 22px; max-width:900px; align-items:stretch;
+          grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+          gap: clamp(18px, 3vw, 28px);
+          max-width: 980px;
+          align-items:stretch;
         }
         .logo{
-          background: transparent;
-          border-radius: 16px;
-          padding: 12px 10px;
+          background: rgba(255,255,255,.65);
+          border-radius: 20px;
+          padding: clamp(16px, 2.2vw, 22px) clamp(14px, 2vw, 20px);
           display:flex; align-items:center; justify-content:center;
           cursor:pointer;
-          transition: transform .18s ease, filter .18s ease, box-shadow .18s ease, background .18s ease;
-          box-shadow: 0 0 0 rgba(0,0,0,0);
+          transition: transform .22s ease, filter .18s ease, box-shadow .18s ease, background .18s ease;
+          box-shadow: 0 18px 42px rgba(15, 23, 42, 0.08);
         }
         .logo:focus-visible{ outline:2px solid #94d2ff; outline-offset:4px; border-radius:16px; }
         .logo:hover{
-          transform: translateY(-3px);
-          box-shadow: 0 12px 26px rgba(2,8,23,.10);
-          background: rgba(255,255,255,.65);
+          transform: translateY(-6px) scale(1.015);
+          box-shadow: 0 20px 36px rgba(2,8,23,.15);
+          background: rgba(255,255,255,.9);
         }
         .logo img{
           max-height: var(--logoH);
@@ -178,22 +196,23 @@ export default function Activities() {
 
         /* Responsive */
         @media (max-width:1200px){
-          .logos{ grid-template-columns: repeat(4, minmax(120px, 1fr)); }
+          .logos{ grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); }
         }
         @media (max-width:1024px){
           .row, .row.rev { grid-template-columns:1fr; }
-          .media img{ aspect-ratio: 20 / 10; }
-          .logos{ grid-template-columns: repeat(3, minmax(110px, 1fr)); }
+          .media img{ aspect-ratio: 16 / 11; }
+          .logos{ grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); }
         }
         @media (max-width:768px){
           :root{ --logoH: var(--logoH-md); }
-          .logos{ grid-template-columns: repeat(3, minmax(100px, 1fr)); gap:14px 16px; }
+          .logos{ grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap:16px 18px; }
           .bubble{ width:46px; height:46px; }
         }
         @media (max-width:560px){
           :root{ --logoH: var(--logoH-sm); }
-          .logos{ grid-template-columns: repeat(2, minmax(120px, 1fr)); }
-          .media{ border-radius:16px; }
+          .logos{ grid-template-columns: repeat(2, minmax(140px, 1fr)); }
+          .media{ border-radius:18px; }
+          .slice{ padding: clamp(32px, 12vw, 64px) 0; }
         }
       `}</style>
 
