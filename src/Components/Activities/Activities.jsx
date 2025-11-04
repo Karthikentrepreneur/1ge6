@@ -1,7 +1,6 @@
 import React, { useEffect, useRef } from "react";
 import { Truck, Leaf, Package } from "lucide-react";
 
-/* ---------- DATA ---------- */
 const VERTICALS = [
   {
     title: "Supply Chain Solutions",
@@ -35,18 +34,14 @@ const VERTICALS = [
     description:
       "Through strategic partnerships, our group company Citygn manages the distribution of ENOC lubricants and other industrial products across key territories. Our focus is on building efficient, customer-centric networks supported by strong logistics capabilities and reliable after-sales service. By combining local market expertise with the strength of global brands, we ensure consistent quality, reach, and value delivery across every channel.",
     cover: "/Productdistribution.jpg",
-    logos: [
-      { img: "/logosss05.png", alt: "CityGn", link: "https://citygnenergy.com/" },
-    ],
+    logos: [{ img: "/logosss05.png", alt: "CityGn", link: "https://citygnenergy.com/" }],
     icon: <Package size={20} strokeWidth={2.2} color="#fff" />,
-    hasLogoOnImage: true, // 👈 flag for last category logo placement
+    hasLogoOnImage: true,
   },
 ];
 
-/* ---------- HELPERS ---------- */
 const openLink = (url) => url && window.open(url, "_blank", "noopener,noreferrer");
 
-/* ---------- COMPONENT ---------- */
 export default function Activities() {
   const rowRefs = useRef([]);
 
@@ -88,7 +83,6 @@ export default function Activities() {
           padding: 0 24px;
         }
 
-        /* 50/50 section layout */
         .row {
           display: grid;
           grid-template-columns: 1fr 1fr;
@@ -103,7 +97,6 @@ export default function Activities() {
         .row.rev .media { order: 2; }
         .row.rev .content { order: 1; }
 
-        /* MEDIA - full fit image area */
         .media {
           position: relative;
           border-radius: 20px;
@@ -122,7 +115,6 @@ export default function Activities() {
         }
         .media:hover img { transform: scale(1.035); }
 
-        /* Special logo overlay (for last category) */
         .logo-overlay {
           position: absolute;
           bottom: 20px;
@@ -139,7 +131,6 @@ export default function Activities() {
           mix-blend-mode: multiply;
         }
 
-        /* CONTENT */
         .content { padding: 4px 8px; display: flex; flex-direction: column; justify-content: center; }
         .title { display: flex; gap: 10px; align-items: center; margin-bottom: 10px; }
         .bubble {
@@ -160,7 +151,6 @@ export default function Activities() {
           max-width: 60ch;
         }
 
-        /* LOGOS grid */
         .logos {
           display: grid;
           grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
@@ -183,7 +173,6 @@ export default function Activities() {
           mix-blend-mode: multiply;
         }
 
-        /* RESPONSIVE */
         @media (max-width: 1024px) {
           .row { grid-template-columns: 1fr; }
           .row.rev .media { order: 1; }
@@ -204,8 +193,6 @@ export default function Activities() {
         <div className={`slice ${i % 2 ? "alt" : ""}`} key={v.title}>
           <div className="container">
             <div className={`row ${i % 2 ? "rev" : ""}`} ref={(el) => (rowRefs.current[i] = el)}>
-              
-              {/* IMAGE */}
               <figure className="media">
                 <img src={v.cover} alt={`${v.title} cover`} loading="lazy" />
                 {v.hasLogoOnImage && (
@@ -215,7 +202,6 @@ export default function Activities() {
                 )}
               </figure>
 
-              {/* CONTENT */}
               <div className="content">
                 <div className="title">
                   <span className="bubble">{v.icon}</span>
