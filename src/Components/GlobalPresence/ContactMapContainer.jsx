@@ -51,7 +51,7 @@ const ContactMapContainer = ({ coordinates, selectedCity, hideChrome = false }) 
           </div>
         )}
 
-        {/* 👇 Pure Google Maps embed — no black header */}
+        {/* Pure Google Maps embed — clean view */}
         <iframe
           key={mapVersion}
           src={mapUrl}
@@ -63,17 +63,19 @@ const ContactMapContainer = ({ coordinates, selectedCity, hideChrome = false }) 
         />
       </div>
 
-      <div className="global-map-footer">
+      {/* Footer hidden to remove bottom white space */}
+      {/* <div className="global-map-footer">
         <p>© 2025 Global Presence Map — Data updated quarterly</p>
-      </div>
+      </div> */}
 
       <style>{`
         .global-map-card { 
           border-radius: 16px; 
           overflow: hidden; 
-          background: #fff; 
+          background: transparent; 
           box-shadow: 0 4px 12px rgba(0,0,0,0.05);
         }
+
         .global-map-header {
           display:flex;
           align-items:center;
@@ -81,8 +83,19 @@ const ContactMapContainer = ({ coordinates, selectedCity, hideChrome = false }) 
           padding:14px 16px;
           color:var(--theme-2);
         }
-        .global-map-header h3 { margin:0; font-size:1rem; font-weight:600; color:var(--theme-2); }
-        .global-map-header span { font-weight:600; color:var(--theme); }
+
+        .global-map-header h3 { 
+          margin:0; 
+          font-size:1rem; 
+          font-weight:600; 
+          color:var(--theme-2); 
+        }
+
+        .global-map-header span { 
+          font-weight:600; 
+          color:var(--theme); 
+        }
+
         .global-map-actions button {
           display:inline-flex;
           align-items:center;
@@ -95,25 +108,51 @@ const ContactMapContainer = ({ coordinates, selectedCity, hideChrome = false }) 
           color:var(--theme-2);
           cursor:pointer;
           font-size:0.85rem;
+          transition: all 0.2s ease-in-out;
         }
-        .global-map-actions button:hover { background:var(--theme); color:#fff; }
-        .global-map-frame { position:relative; height:520px; }
-        .global-map-frame iframe { width:100%; height:100%; border:0; display:block; }
+
+        .global-map-actions button:hover { 
+          background:var(--theme); 
+          color:#fff; 
+        }
+
+        .global-map-frame { 
+          position:relative; 
+          height:520px; 
+          margin: 0; 
+          padding: 0; 
+          background: transparent;
+        }
+
+        .global-map-frame iframe { 
+          width:100%; 
+          height:100%; 
+          border:0; 
+          display:block; 
+        }
+
         .global-map-loading { 
           position:absolute; 
           inset:0; 
           display:grid; 
           place-items:center; 
-          background:#fff; 
+          background:transparent; 
         }
+
         .global-map-card.fullscreen { 
           position:fixed; 
           inset:16px; 
           z-index:1000; 
           background:#fff; 
         }
-        .global-map-card.fullscreen .global-map-frame { height: calc(100% - 96px); }
-        @media (max-width: 991px) { .global-map-frame { height:420px; } }
+
+        .global-map-card.fullscreen .global-map-frame { 
+          height: calc(100% - 96px); 
+        }
+
+        @media (max-width: 991px) { 
+          .global-map-frame { height:420px; } 
+        }
       `}</style>
     </div>
   );
