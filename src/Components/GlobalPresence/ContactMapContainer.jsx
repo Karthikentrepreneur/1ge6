@@ -21,10 +21,10 @@ const ContactMapContainer = () => {
   };
 
   return (
-    <div className="w-full h-full flex justify-center bg-transparent">
+    <div className="w-full h-full flex justify-center items-stretch bg-transparent">
       {/* transparent container with same radius as the map to avoid white bleed */}
       <div
-        className={`relative w-full my-3 rounded-2xl overflow-hidden transition-all duration-300 ease-in-out ${
+        className={`relative w-full flex-1 rounded-3xl overflow-hidden transition-all duration-300 ease-in-out ${
           isFullScreen ? "max-w-full" : "max-w-6xl"
         } bg-transparent shadow-none`}
         style={{ background: "transparent" }}
@@ -76,14 +76,14 @@ const ContactMapContainer = () => {
             ref={iframeRef}
             src={MAP_URL}
             title="Interactive Map"
-            className="w-full h-full border-0"
+            className="w-full h-full border-0 bg-transparent"
             loading="eager"
             style={{
-              marginTop: "-125px",
               backgroundColor: "transparent",
               filter: "contrast(1.05) saturate(1.1)",
             }}
             onLoad={() => setIsLoaded(true)}
+            allowFullScreen
           />
           {!isLoaded && (
             <div className="absolute inset-0 z-10 flex items-center justify-center bg-black/5">
