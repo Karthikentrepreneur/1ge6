@@ -5929,6 +5929,7 @@ span {
 }
 .breadcrumb-wrapper {
   position: relative;
+  isolation: isolate;
 }
 .breadcrumb-wrapper::before {
   position: absolute;
@@ -5940,11 +5941,13 @@ span {
   height: 100%;
   content: "";
   background: rgba(10, 31, 36, 0.65);
+  z-index: 0;
 }
 .breadcrumb-wrapper .page-heading {
   padding: 190px 0 170px;
   text-align: center;
   position: relative;
+  z-index: 1;
 }
 @media (max-width: 1199px) {
   .breadcrumb-wrapper .page-heading {
@@ -5986,6 +5989,10 @@ span {
   .breadcrumb-wrapper .page-heading h2 {
     font-size: 34px;
   }
+}
+.breadcrumb-wrapper .container {
+  position: relative;
+  z-index: 1;
 }
 .breadcrumb-wrapper .page-heading .breadcrumb-list {
   display: flex;
