@@ -48,17 +48,19 @@ const ServicesVideoSection = ({
           </div>
         </div>
 
-        {/* RIGHT COLUMN — full-size video */}
-        <div className="svs-right" style={{ height: sectionHeight }}>
-          <video
-            src={videoSrc}
-            autoPlay
-            muted
-            loop
-            playsInline
-            preload="auto"
-            aria-label="Services video"
-          />
+        {/* RIGHT COLUMN — video locked at 16:9 */}
+        <div className="svs-right">
+          <div className="svs-video-wrapper">
+            <video
+              src={videoSrc}
+              autoPlay
+              muted
+              loop
+              playsInline
+              preload="auto"
+              aria-label="Services video"
+            />
+          </div>
         </div>
       </div>
 
@@ -119,24 +121,33 @@ const ServicesVideoSection = ({
         .svs-icon svg { width: 20px; height: 20px; }
         .svs-item-title { font-weight: 700; color: #0E0F2C; font-size: 1rem; line-height: 1.4; }
 
-        /* RIGHT SIDE — full height video panel */
+        /* RIGHT SIDE — 16:9 video panel */
         .svs-right {
           position: relative;
           width: 100%;
-          overflow: hidden;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+
+        .svs-video-wrapper {
+          position: relative;
+          width: 100%;
+          aspect-ratio: 16 / 9;
           border-radius: 20px;
+          overflow: hidden;
           box-shadow: 0 20px 50px rgba(14, 24, 44, 0.25);
         }
-        .svs-right video {
+
+        .svs-video-wrapper video {
           position: absolute;
           inset: 0;
           width: 100%;
           height: 100%;
-          object-fit: cover;  /* 🔹 fills full area */
-          object-position: center;
-          background: transparent;
+          object-fit: cover;
           border: none;
           display: block;
+          background: transparent;
         }
 
         /* MOBILE */
@@ -147,12 +158,11 @@ const ServicesVideoSection = ({
           }
           .svs-right {
             order: -1;
-            height: 60vh !important;
+          }
+          .svs-video-wrapper {
+            aspect-ratio: 16 / 9;
             border-radius: 12px;
             box-shadow: 0 12px 28px rgba(0,0,0,.15);
-          }
-          .svs-right video {
-            object-fit: cover;
           }
         }
       `}</style>
