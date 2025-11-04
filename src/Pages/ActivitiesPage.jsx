@@ -6,7 +6,10 @@ import Activities from '../Components/Activities/Activities';
 const ActivitiesPage = () => {
   return (
     <div>
-      <BreadCumb bgimg="/aboutbg.png" Title="Activities"></BreadCumb>
+      <BreadCumb
+        bgimg="/aboutbg.png"
+        Title="Our Business Verticals"
+      ></BreadCumb>
       <Activities></Activities>
     </div>
   );

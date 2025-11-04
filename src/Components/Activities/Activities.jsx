@@ -52,7 +52,8 @@ export default function Services() {
   return (
     <section className="services-section">
       <style>{`
-        :root {
+        .services-section {
+          background: #fff;
           --ink: #0f172a;
           --muted: #475569;
           --teal: #10a3a7;
@@ -63,56 +64,77 @@ export default function Services() {
           --logoH-sm: 70px;
         }
 
-        .services-section { background: #fff; }
-
-        .slice {
+        .services-section .slice {
           position: relative;
           padding: clamp(40px, 5vw, 80px) 0;
           background: var(--bg1);
         }
-        .slice.alt { background: var(--bg2); }
+        .services-section .slice.alt { background: var(--bg2); }
 
-        .container {
+        .services-section .container {
           max-width: 1320px;
           margin: 0 auto;
           padding: 0 24px;
         }
 
-        .row {
+        .services-section .row {
           display: grid;
           grid-template-columns: 1fr 1fr;
           align-items: center;
           gap: clamp(22px, 4vw, 44px);
         }
-        .row.rev .media { order: 2; }
-        .row.rev .content { order: 1; }
+        .services-section .row.rev .media { order: 2; }
+        .services-section .row.rev .content { order: 1; }
 
-        .media {
+        .services-section .media {
           position: relative;
           border-radius: 20px;
           overflow: hidden;
         }
-        .media img {
+        .services-section .media img {
           width: 100%;
           height: 100%;
           object-fit: contain;
           transition: transform .6s ease;
         }
-        .media:hover img { transform: scale(1.035); }
+        .services-section .media:hover img { transform: scale(1.035); }
 
-        .content { display: flex; flex-direction: column; justify-content: center; }
-        .title { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
-        .bubble {
-          width: 48px; height: 48px; border-radius: 50%;
-          background: linear-gradient(135deg, var(--teal), var(--blue));
-          display: flex; align-items: center; justify-content: center;
-          color: #fff;
-          box-shadow: 0 8px 18px rgba(16,163,167,.22);
+        .services-section .content {
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
         }
-        .title h3 { margin: 0; color: var(--ink); font-weight: 900; font-size: clamp(20px, 1.9vw, 26px); }
-        .desc { color: var(--muted); line-height: 1.7; font-size: clamp(15px, 1vw, 17px); margin-bottom: 18px; }
+        .services-section .title {
+          display: flex;
+          align-items: center;
+          gap: 10px;
+          margin-bottom: 10px;
+        }
+        .services-section .bubble {
+          width: 48px;
+          height: 48px;
+          border-radius: 50%;
+          background: linear-gradient(135deg, var(--teal), var(--blue));
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          color: #fff;
+          box-shadow: 0 8px 18px rgba(16, 163, 167, 0.22);
+        }
+        .services-section .title h3 {
+          margin: 0;
+          color: var(--ink);
+          font-weight: 900;
+          font-size: clamp(20px, 1.9vw, 26px);
+        }
+        .services-section .desc {
+          color: var(--muted);
+          line-height: 1.7;
+          font-size: clamp(15px, 1vw, 17px);
+          margin-bottom: 18px;
+        }
 
-        .logos {
+        .services-section .logos {
           display: flex;
           flex-wrap: wrap;
           justify-content: flex-start;
@@ -120,15 +142,18 @@ export default function Services() {
           margin-top: 16px;
         }
 
-        .logo {
+        .services-section .logo {
           cursor: pointer;
           background: none;
           border: none;
           padding: 0;
-          transition: transform .2s ease, filter .2s ease;
+          transition: transform 0.2s ease, filter 0.2s ease;
         }
-        .logo:hover { transform: scale(1.08); filter: brightness(1.1); }
-        .logo img {
+        .services-section .logo:hover {
+          transform: scale(1.08);
+          filter: brightness(1.1);
+        }
+        .services-section .logo img {
           max-height: var(--logoH);
           width: auto;
           object-fit: contain;
@@ -138,13 +163,21 @@ export default function Services() {
         }
 
         @media (max-width: 1024px) {
-          .row { grid-template-columns: 1fr; }
-          .row.rev .media { order: 1; }
-          .row.rev .content { order: 2; }
+          .services-section .row {
+            grid-template-columns: 1fr;
+          }
+          .services-section .row.rev .media {
+            order: 1;
+          }
+          .services-section .row.rev .content {
+            order: 2;
+          }
         }
 
         @media (max-width: 768px) {
-          :root { --logoH: var(--logoH-sm); }
+          .services-section {
+            --logoH: var(--logoH-sm);
+          }
         }
       `}</style>
 
