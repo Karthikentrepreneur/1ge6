@@ -138,7 +138,7 @@ export default function Services() {
         .logos {
           display: flex;
           flex-wrap: wrap;
-          justify-content: center;
+          justify-content: flex-start;
           gap: 24px;
           margin-top: 16px;
         }
