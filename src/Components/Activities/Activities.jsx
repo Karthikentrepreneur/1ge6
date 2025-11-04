@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React from "react";
 import { Truck, Leaf, Package } from "lucide-react";
 
 /* ---------- DATA ---------- */
@@ -49,25 +49,6 @@ const openLink = (url) => {
 
 /* ---------- COMPONENT ---------- */
 export default function Services() {
-  const sectionRefs = useRef([]);
-
-  useEffect(() => {
-    const items = sectionRefs.current;
-    if (typeof window === "undefined" || !("IntersectionObserver" in window)) {
-      items.forEach((el) => el?.classList.add("show"));
-      return;
-    }
-
-    const io = new IntersectionObserver(
-      (entries) =>
-        entries.forEach((entry) => entry.isIntersecting && entry.target.classList.add("show")),
-      { threshold: 0.18 }
-    );
-
-    items.forEach((el) => el && io.observe(el));
-    return () => io.disconnect();
-  }, []);
-
   return (
     <section className="services-section">
       <style>{`
@@ -102,11 +83,7 @@ export default function Services() {
           grid-template-columns: 1fr 1fr;
           align-items: center;
           gap: clamp(22px, 4vw, 44px);
-          opacity: 0;
-          transform: translateY(22px);
-          transition: opacity .55s ease, transform .55s cubic-bezier(.2,.65,.16,1);
         }
-        .row.show { opacity: 1; transform: none; }
         .row.rev .media { order: 2; }
         .row.rev .content { order: 1; }
 
@@ -174,7 +151,7 @@ export default function Services() {
       {SERVICES.map((s, i) => (
         <div className={`slice ${i % 2 ? "alt" : ""}`} key={s.title}>
           <div className="container">
-            <div className={`row ${i % 2 ? "rev" : ""}`} ref={(el) => (sectionRefs.current[i] = el)}>
+            <div className={`row ${i % 2 ? "rev" : ""}`}>
               <figure className="media">
                 <img src={s.cover} alt={`${s.title} cover`} loading="lazy" />
               </figure>
