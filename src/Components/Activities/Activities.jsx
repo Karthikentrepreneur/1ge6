@@ -60,129 +60,115 @@ export default function Activities() {
   return (
     <section className="activities">
       <style>{`
-        :root {
-          --ink: #0f172a;
-          --muted: #475569;
-          --teal: #10a3a7;
-          --blue: #2563eb;
-          --bg1: #f3fbfc;
-          --bg2: #f5f8ff;
-          --logoH: 90px;
-          --logoH-sm: 70px;
+        :root{
+          --ink:#0f172a;
+          --muted:#475569;
+          --teal:#10a3a7;
+          --blue:#2563eb;
+          --bg1:#f3fbfc;
+          --bg2:#f5f8ff;
+          --logoH:76px;     /* ⬇️ slightly smaller logos */
+          --logoH-sm:58px;  /* ⬇️ smaller on mobile */
         }
 
-        .activities { background: #fff; }
+        .activities{ background:#fff; }
 
-        .slice {
-          position: relative;
+        .slice{
+          position:relative;
           padding: clamp(42px, 6vw, 96px) 0;
           background: var(--bg1);
         }
-        .slice.alt { background: var(--bg2); }
+        .slice.alt{ background: var(--bg2); }
 
-        .container {
-          max-width: 1320px;
-          margin: 0 auto;
-          padding: 0 24px;
-          position: relative;
-          z-index: 1;
+        .container{
+          max-width:1320px; margin:0 auto; padding:0 24px;
+          position:relative; z-index:1;
         }
 
-        .row {
-          display: grid;
-          grid-template-columns: 1.25fr 1fr;
-          align-items: center;
-          gap: clamp(28px, 6vw, 60px);
-          opacity: 0;
-          transform: translateY(36px);
-          transition: opacity .7s ease, transform .7s cubic-bezier(.2,.65,.16,1);
+        /* 50/50 layout */
+        .row{
+          display:grid;
+          grid-template-columns: 1fr 1fr; /* ✅ exact 50/50 split */
+          align-items:center;
+          gap: clamp(24px, 4.5vw, 48px);
+          opacity:0; transform: translateY(24px);
+          transition: opacity .6s ease, transform .6s cubic-bezier(.2,.65,.16,1);
         }
-        .row.show { opacity: 1; transform: none; }
-        .row.rev { grid-template-columns: 1fr 1.2fr; }
+        .row.show{ opacity:1; transform:none; }
 
-        .media {
-          position: relative;
-          border-radius: 26px;
-          overflow: hidden;
-          box-shadow: 0 32px 78px rgba(2,8,23,.15);
+        /* alternate stacking order on large screens */
+        .row.rev .media{ order:2; }
+        .row.rev .content{ order:1; }
+
+        /* IMAGE */
+        .media{
+          position:relative;
+          border-radius:24px; overflow:hidden;
+          box-shadow:0 28px 68px rgba(2,8,23,.14);
+          background:#fff;
         }
-        .media img {
-          width: 100%;
-          height: 100%;
-          object-fit: cover;
+        .media img{
+          width:100%; height:100%;
+          object-fit:cover;
           aspect-ratio: 16 / 10;
           transition: transform .6s ease;
         }
-        .media:hover img { transform: scale(1.04); }
+        .media:hover img{ transform: scale(1.035); }
 
-        .content { padding: 6px 8px; }
-        .title { display: flex; gap: 14px; align-items: center; margin-bottom: 12px; }
-        .bubble {
-          width: 52px; height: 52px;
-          border-radius: 50%;
-          display: flex; align-items: center; justify-content: center;
+        /* CONTENT */
+        .content{ padding: 4px 6px; }
+        .title{ display:flex; gap:12px; align-items:center; margin-bottom:10px; }
+        .bubble{
+          width:48px; height:48px; border-radius:50%;
+          display:flex; align-items:center; justify-content:center; color:#fff;
           background: linear-gradient(135deg, var(--teal), var(--blue));
-          box-shadow: 0 12px 26px rgba(16,163,167,.25);
-          color: #fff;
-          flex-shrink: 0;
+          box-shadow:0 10px 22px rgba(16,163,167,.25);
+          flex-shrink:0;
         }
-        .title h3 {
-          margin: 0;
-          color: var(--ink);
-          font-weight: 900;
-          font-size: clamp(22px, 2.2vw, 28px);
+        .title h3{
+          margin:0; color:var(--ink); font-weight:900;
+          font-size:clamp(22px,2vw,26px);
+          letter-spacing:.1px;
         }
-
-        .desc {
-          margin: 0 0 22px;
-          color: var(--muted);
-          line-height: 1.8;
-          font-size: clamp(15px, 1.1vw, 17px);
-          max-width: 68ch;
+        .desc{
+          margin:0 0 18px; color:var(--muted); line-height:1.75;
+          font-size:clamp(15px,1vw,17px);
+          max-width: 60ch;
         }
 
-        /* Logos - no white box, equal size */
-        .logos {
-          display: grid;
-          grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-          gap: clamp(18px, 3vw, 28px);
-          max-width: 980px;
-          align-items: center;
-          justify-items: center;
+        /* LOGOS — smaller + tidy spacing, no white box */
+        .logos{
+          display:grid;
+          grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+          gap: clamp(14px, 2.2vw, 22px);
+          align-items:center; justify-items:center;
+          max-width: 900px;
         }
-
-        .logo {
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          padding: clamp(10px, 1.5vw, 14px);
-          cursor: pointer;
-          transition: transform .25s ease, filter .2s ease;
+        .logo{
+          display:flex; align-items:center; justify-content:center;
+          padding: clamp(8px, 1.2vw, 12px);
+          cursor:pointer;
+          transition: transform .22s ease, filter .18s ease;
         }
-
-        .logo:hover {
-          transform: scale(1.08);
-          filter: brightness(1.1);
-        }
-
-        .logo img {
+        .logo:hover{ transform: scale(1.06); filter: brightness(1.06); }
+        .logo img{
           max-height: var(--logoH);
-          width: auto;
-          object-fit: contain;
-          display: block;
+          width:auto; object-fit:contain; display:block;
           background: none !important;
-          mix-blend-mode: multiply;
+          mix-blend-mode: multiply; /* keeps white boxes away on light bg */
         }
 
-        /* Responsive */
-        @media (max-width: 1024px) {
-          .row, .row.rev { grid-template-columns: 1fr; }
+        /* RESPONSIVE */
+        @media (max-width:1024px){
+          .row{ grid-template-columns: 1fr; }   /* stack on tablet/mobile */
+          .row.rev .media{ order:1; }
+          .row.rev .content{ order:2; }
         }
-
-        @media (max-width: 768px) {
-          :root { --logoH: var(--logoH-sm); }
-          .bubble { width: 46px; height: 46px; }
-          .logos { grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 16px; }
+        @media (max-width:768px){
+          :root{ --logoH: var(--logoH-sm); }
+          .bubble{ width:44px; height:44px; }
+          .desc{ max-width: unset; }
+          .logos{ grid-template-columns: repeat(auto-fit, minmax(110px, 1fr)); gap:14px; }
         }
       `}</style>
 
@@ -190,12 +176,12 @@ export default function Activities() {
         <div className={`slice ${i % 2 ? "alt" : ""}`} key={v.title}>
           <div className="container">
             <div className={`row ${i % 2 ? "rev" : ""}`} ref={(el) => (rowRefs.current[i] = el)}>
-              {/* IMAGE */}
+              {/* IMAGE - 50% */}
               <figure className="media">
                 <img src={v.cover} alt={`${v.title} cover`} loading="lazy" />
               </figure>
 
-              {/* CONTENT */}
+              {/* CONTENT - 50% */}
               <div className="content">
                 <div className="title">
                   <span className="bubble">{v.icon}</span>
@@ -209,7 +195,10 @@ export default function Activities() {
                       key={`${v.title}-${idx}`}
                       className="logo"
                       title={L.alt}
+                      role="button"
+                      tabIndex={0}
                       onClick={() => openLink(L.link)}
+                      onKeyDown={(e) => (e.key === "Enter" || e.key === " ") && openLink(L.link)}
                     >
                       <img src={L.img} alt={L.alt} loading="lazy" />
                     </div>
