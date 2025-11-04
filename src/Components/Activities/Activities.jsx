@@ -22,7 +22,7 @@ const SERVICES = [
     title: "Renewable Energy",
     description:
       "We drive sustainable growth through strategic investments across the renewable energy value chain — from feedstock origination to processing and technology enablement. Our portfolio supports the global shift toward renewable fuels and SAF by securing and optimising advanced feedstock supply. Operating across multiple regions, we build ethical, traceable sourcing networks and pre-treatment infrastructure, strengthening transparency, efficiency, and environmental integrity while accelerating the transition to cleaner energy.",
-    cover: "/wind.jpg",
+    cover: "/animalfeed.jpg",
     logos: [
       { img: "/logosss04.png", alt: "Moltech", link: "https://moltechglobal.com/" },
       { img: "/molgen.png", alt: "MoltechGen", link: "https://moltechgen.com/" },
@@ -35,7 +35,7 @@ const SERVICES = [
     description:
       "Through strategic partnerships, our group company Citygn manages the distribution of ENOC lubricants and other industrial products across key territories. Our focus is on building efficient, customer-centric networks supported by strong logistics capabilities and reliable after-sales service. By combining local market expertise with the strength of global brands, we ensure consistent quality, reach, and value delivery across every channel.",
     cover: "/Productdistribution.jpg",
-    logos: [{ img: "/logosss05.png", alt: "CityGn", link: "https://citygnenergy.com/" }],
+    logos: [{ img: "/distribution.png", alt: "CityGn", link: "https://citygnenergy.com/" }],
     icon: <Package size={22} strokeWidth={2.2} color="#fff" />,
   },
 ];
