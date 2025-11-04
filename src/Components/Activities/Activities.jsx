@@ -1,5 +1,4 @@
 import React, { useEffect, useRef } from "react";
-import { Truck, Leaf, Package } from "lucide-react";
 
 /* ---------- DATA ---------- */
 const SERVICES = [
@@ -14,7 +13,6 @@ const SERVICES = [
       { img: "/one.png", alt: "ONE Global Logistics", link: "https://oneglobalqatar.com/" },
       { img: "/logo-2.png", alt: "Future Net Logistics", link: "https://futurenetlogistics.com" },
     ],
-    icon: <Truck size={22} strokeWidth={2.2} color="#fff" />,
   },
   {
     title: "Renewable Energy",
@@ -24,7 +22,6 @@ const SERVICES = [
       { img: "/molgen.png", alt: "MoltechGen", link: "https://moltechgen.com/" },
       { img: "/superenergy.png", alt: "Super Energy", link: "https://www.superenergy.sg/" },
     ],
-    icon: <Leaf size={22} strokeWidth={2.2} color="#fff" />,
   },
   {
     title: "Product Distribution",
@@ -32,7 +29,6 @@ const SERVICES = [
     logos: [
       { img: "/logosss05.png", alt: "CityGn", link: "https://citygnenergy.com/" },
     ],
-    icon: <Package size={22} strokeWidth={2.2} color="#fff" />,
   },
 ];
 
@@ -57,7 +53,7 @@ export default function Services() {
     const io = new IntersectionObserver(
       (entries) =>
         entries.forEach((entry) => entry.isIntersecting && entry.target.classList.add("show")),
-      { threshold: 0.18 }
+      { threshold: 0.15 }
     );
 
     items.forEach((el) => el && io.observe(el));
@@ -68,20 +64,16 @@ export default function Services() {
     <section className="services-section">
       <style>{`
         :root {
-          --ink: #0f172a;
-          --muted: #475569;
-          --teal: #10a3a7;
-          --blue: #2563eb;
-          --bg1: #ffffff;
-          --bg2: #ffffff;
           --logoH: 100px;
           --logoH-sm: 70px;
         }
 
-        .services-section { background: transparent; }
+        .services-section {
+          background: transparent;
+          width: 100%;
+        }
 
         .slice {
-          position: relative;
           padding: clamp(40px, 5vw, 80px) 0;
           background: transparent;
         }
@@ -96,10 +88,10 @@ export default function Services() {
           display: flex;
           flex-direction: column;
           align-items: center;
-          gap: clamp(22px, 4vw, 44px);
+          gap: 32px;
           opacity: 0;
-          transform: translateY(22px);
-          transition: opacity .55s ease, transform .55s cubic-bezier(.2,.65,.16,1);
+          transform: translateY(20px);
+          transition: opacity 0.5s ease, transform 0.5s ease;
         }
         .row.show { opacity: 1; transform: none; }
 
@@ -107,85 +99,83 @@ export default function Services() {
           width: 100%;
           border-radius: 20px;
           overflow: hidden;
-          box-shadow: none;
           background: transparent;
+          box-shadow: none;
         }
 
         .media img {
           width: 100%;
-          height: 100%;
+          height: auto;
           object-fit: contain;
           background: transparent;
-          transition: transform .6s ease;
+          transition: transform 0.5s ease;
         }
-        .media:hover img { transform: scale(1.03); }
 
+        .media:hover img {
+          transform: scale(1.02);
+        }
+
+        /* Logos grid */
         .logos {
           display: flex;
           flex-wrap: wrap;
-          justify-content: flex-start;
+          justify-content: center;
+          align-items: center;
           gap: clamp(20px, 3vw, 30px);
           width: 100%;
-          margin-top: 20px;
           background: transparent;
         }
-
-        .logos.centered { justify-content: center; }
 
         .logo {
           background: transparent;
           border: none;
           cursor: pointer;
-          transition: transform .2s ease, filter .2s ease;
           display: flex;
           align-items: center;
           justify-content: center;
+          transition: transform 0.2s ease, filter 0.2s ease;
         }
 
-        .logo:hover { transform: scale(1.08); filter: brightness(1.15); }
+        .logo:hover {
+          transform: scale(1.08);
+          filter: brightness(1.15);
+        }
 
         .logo img {
           max-height: var(--logoH);
           width: auto;
           object-fit: contain;
-          mix-blend-mode: multiply;
           background: transparent;
-        }
-
-        @media (max-width: 1024px) {
-          .logos { justify-content: center; }
-          .media img { object-fit: contain; }
+          mix-blend-mode: multiply;
         }
 
         @media (max-width: 768px) {
           :root { --logoH: var(--logoH-sm); }
+          .logos { gap: 16px; }
         }
       `}</style>
 
-      {SERVICES.map((s, i) => {
-        const hasMultiple = s.logos.length > 1;
-        return (
-          <div className="slice" key={s.title}>
-            <div className="container">
-              <div className="row" ref={(el) => (sectionRefs.current[i] = el)}>
-                {/* IMAGE SECTION */}
-                <figure className="media">
-                  <img src={s.cover} alt={`${s.title} cover`} loading="lazy" />
-                </figure>
+      {SERVICES.map((s, i) => (
+        <div className="slice" key={s.title}>
+          <div className="container">
+            <div className="row" ref={(el) => (sectionRefs.current[i] = el)}>
+              {/* Image Section */}
+              <figure className="media">
+                <img src={s.cover} alt={`${s.title} cover`} loading="lazy" />
+              </figure>
 
-                {/* LOGOS SECTION */}
-                <div className={`logos ${hasMultiple ? "centered" : ""}`}>
-                  {s.logos.map((L, idx) => (
-                    <button key={idx} className="logo" onClick={() => openLink(L.link)}>
-                      <img src={L.img} alt={L.alt} loading="lazy" />
-                    </button>
-                  ))}
-                </div>
+              {/* Logos Section */}
+              <div className="logos">
+                {s.logos.map((L, idx) => (
+                  <button key={idx} className="logo" onClick={() => openLink(L.link)}>
+                    <img src={L.img} alt={L.alt} loading="lazy" />
+                  </button>
+                ))}
               </div>
             </div>
           </div>
-        );
-      })}
+        </div>
+      ))}
     </section>
   );
 }
