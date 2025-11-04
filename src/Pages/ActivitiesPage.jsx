@@ -6,11 +6,11 @@ const ActivitiesPage = () => {
   return (
     <main>
       {/* ✅ Breadcrumb Section */}
-      <BreadCumb
-        bgimg="/activities.png"
-        Title="Our Business Verticals"
-        logo="/logosss05.png" // optional — remove this line if you don't want a logo in breadcrumb
-      />
+<BreadCumb
+  bgimg="/activities.png"
+  Title="Our Business Verticals"
+/>
+
 
       {/* ✅ Activities Section */}
       <Activities />
