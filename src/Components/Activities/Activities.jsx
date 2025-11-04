@@ -35,9 +35,7 @@ const SERVICES = [
     description:
       "Through strategic partnerships, our group company Citygn manages the distribution of ENOC lubricants and other industrial products across key territories. Our focus is on building efficient, customer-centric networks supported by strong logistics capabilities and reliable after-sales service. By combining local market expertise with the strength of global brands, we ensure consistent quality, reach, and value delivery across every channel.",
     cover: "/Productdistribution.jpg",
-    logos: [
-      { img: "/logosss05.png", alt: "CityGn", link: "https://citygnenergy.com/" },
-    ],
+    logos: [{ img: "/logosss05.png", alt: "CityGn", link: "https://citygnenergy.com/" }],
     icon: <Package size={22} strokeWidth={2.2} color="#fff" />,
   },
 ];
@@ -116,15 +114,11 @@ export default function Services() {
           position: relative;
           border-radius: 20px;
           overflow: hidden;
-          height: 100%;
-          box-shadow: none;
-          background: transparent;
         }
         .media img {
           width: 100%;
           height: 100%;
           object-fit: contain;
-          background: transparent;
           transition: transform .6s ease;
         }
         .media:hover img { transform: scale(1.035); }
@@ -144,41 +138,26 @@ export default function Services() {
         .logos {
           display: flex;
           flex-wrap: wrap;
-          gap: 18px;
-          overflow: hidden;
-          position: relative;
-          margin-top: 12px;
-          align-items: center;
-        }
-        .logos.multiple {
           justify-content: center;
-          max-height: 100px;
-        }
-        .logos.single {
-          justify-content: flex-start;
-        }
-        .logos.multiple::after {
-          content: '';
-          position: absolute;
-          right: 0;
-          top: 0;
-          bottom: 0;
-          width: 80px;
-          background: linear-gradient(to right, transparent, #fff);
+          gap: 24px;
+          margin-top: 16px;
         }
 
         .logo {
           cursor: pointer;
-          background: transparent;
+          background: none;
           border: none;
+          padding: 0;
           transition: transform .2s ease, filter .2s ease;
         }
-        .logo:hover { transform: scale(1.08); filter: brightness(1.15); }
+        .logo:hover { transform: scale(1.08); filter: brightness(1.1); }
         .logo img {
           max-height: var(--logoH);
           width: auto;
           object-fit: contain;
-          mix-blend-mode: multiply;
+          background: transparent !important;
+          box-shadow: none !important;
+          border: none !important;
         }
 
         @media (max-width: 1024px) {
@@ -189,38 +168,34 @@ export default function Services() {
 
         @media (max-width: 768px) {
           :root { --logoH: var(--logoH-sm); }
-          .logos.multiple::after { display: none; }
         }
       `}</style>
 
-      {SERVICES.map((s, i) => {
-        const logoClass = s.logos.length > 1 ? "multiple" : "single";
-        return (
-          <div className={`slice ${i % 2 ? "alt" : ""}`} key={s.title}>
-            <div className="container">
-              <div className={`row ${i % 2 ? "rev" : ""}`} ref={(el) => (sectionRefs.current[i] = el)}>
-                <figure className="media">
-                  <img src={s.cover} alt={`${s.title} cover`} loading="lazy" />
-                </figure>
-                <div className="content">
-                  <div className="title">
-                    <span className="bubble">{s.icon}</span>
-                    <h3>{s.title}</h3>
-                  </div>
-                  <p className="desc">{s.description}</p>
-                  <div className={`logos ${logoClass}`}>
-                    {s.logos.map((L, idx) => (
-                      <button key={idx} className="logo" onClick={() => openLink(L.link)}>
-                        <img src={L.img} alt={L.alt} loading="lazy" />
-                      </button>
-                    ))}
-                  </div>
+      {SERVICES.map((s, i) => (
+        <div className={`slice ${i % 2 ? "alt" : ""}`} key={s.title}>
+          <div className="container">
+            <div className={`row ${i % 2 ? "rev" : ""}`} ref={(el) => (sectionRefs.current[i] = el)}>
+              <figure className="media">
+                <img src={s.cover} alt={`${s.title} cover`} loading="lazy" />
+              </figure>
+              <div className="content">
+                <div className="title">
+                  <span className="bubble">{s.icon}</span>
+                  <h3>{s.title}</h3>
+                </div>
+                <p className="desc">{s.description}</p>
+                <div className="logos">
+                  {s.logos.map((L, idx) => (
+                    <button key={idx} className="logo" onClick={() => openLink(L.link)}>
+                      <img src={L.img} alt={L.alt} loading="lazy" />
+                    </button>
+                  ))}
                 </div>
               </div>
             </div>
           </div>
-        );
-      })}
+        </div>
+      ))}
     </section>
   );
 }
