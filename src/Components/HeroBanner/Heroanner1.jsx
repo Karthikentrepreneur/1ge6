@@ -93,14 +93,14 @@ const Heroanner1 = () => {
         }
 
         .hero-content h1 {
-          font-size: 2.8rem;
+          font-size: 2.2rem; /* ⬇️ Decreased from 2.8rem */
           font-weight: 700;
-          line-height: 1.2;
+          line-height: 1.3;
           margin-top: 15px;
         }
 
         .hero-content .sub-title {
-          font-size: 1.5rem; /* ✅ Increased for better visual impact */
+          font-size: 1.4rem;
           font-weight: 600;
           opacity: 0.95;
           color: #e0e0e0;
@@ -113,11 +113,11 @@ const Heroanner1 = () => {
           }
 
           .hero-content h1 {
-            font-size: 2rem;
+            font-size: 1.6rem; /* ⬇️ Reduced mobile size too */
           }
 
           .hero-content .sub-title {
-            font-size: 1.2rem;
+            font-size: 1.1rem;
           }
 
           .video-overlay {
