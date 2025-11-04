@@ -2,7 +2,7 @@ import React, { useEffect, useRef } from "react";
 import { Truck, Leaf, Package } from "lucide-react";
 
 /* ---------- DATA ---------- */
-const VERTICALS = [
+const SERVICES = [
   {
     title: "Supply Chain Solutions",
     description:
@@ -16,7 +16,7 @@ const VERTICALS = [
       { img: "/one.png", alt: "ONE Global Logistics", link: "https://oneglobalqatar.com/" },
       { img: "/logo-2.png", alt: "Future Net Logistics", link: "https://futurenetlogistics.com" },
     ],
-    icon: <Truck size={20} strokeWidth={2.2} color="#fff" />,
+    icon: <Truck size={22} strokeWidth={2.2} color="#fff" />,
   },
   {
     title: "Renewable Energy",
@@ -28,7 +28,7 @@ const VERTICALS = [
       { img: "/molgen.png", alt: "MoltechGen", link: "https://moltechgen.com/" },
       { img: "/superenergy.png", alt: "Super Energy", link: "https://www.superenergy.sg/" },
     ],
-    icon: <Leaf size={20} strokeWidth={2.2} color="#fff" />,
+    icon: <Leaf size={22} strokeWidth={2.2} color="#fff" />,
   },
   {
     title: "Product Distribution",
@@ -38,40 +38,40 @@ const VERTICALS = [
     logos: [
       { img: "/logosss05.png", alt: "CityGn", link: "https://citygnenergy.com/" },
     ],
-    icon: <Package size={20} strokeWidth={2.2} color="#fff" />,
+    icon: <Package size={22} strokeWidth={2.2} color="#fff" />,
   },
 ];
 
 /* ---------- HELPERS ---------- */
 const openLink = (url) => {
-  if (!url) return;
-  if (typeof window !== "undefined") {
+  if (typeof window !== "undefined" && url) {
     window.open(url, "_blank", "noopener,noreferrer");
   }
 };
 
 /* ---------- COMPONENT ---------- */
-export default function Activities() {
-  const rowRefs = useRef([]);
+export default function Services() {
+  const sectionRefs = useRef([]);
 
   useEffect(() => {
-    const rows = rowRefs.current;
-
+    const items = sectionRefs.current;
     if (typeof window === "undefined" || !("IntersectionObserver" in window)) {
-      rows.forEach((el) => el?.classList.add("show"));
+      items.forEach((el) => el?.classList.add("show"));
       return;
     }
 
     const io = new IntersectionObserver(
-      (entries) => entries.forEach((entry) => entry.isIntersecting && entry.target.classList.add("show")),
+      (entries) =>
+        entries.forEach((entry) => entry.isIntersecting && entry.target.classList.add("show")),
       { threshold: 0.18 }
     );
-    rows.forEach((el) => el && io.observe(el));
+
+    items.forEach((el) => el && io.observe(el));
     return () => io.disconnect();
   }, []);
 
   return (
-    <section className="activities">
+    <section className="services-section">
       <style>{`
         :root {
           --ink: #0f172a;
@@ -80,11 +80,11 @@ export default function Activities() {
           --blue: #2563eb;
           --bg1: #f6faff;
           --bg2: #f3fbfc;
-          --logoH: 70px;
-          --logoH-sm: 56px;
+          --logoH: 90px;
+          --logoH-sm: 70px;
         }
 
-        .activities { background: #fff; }
+        .services-section { background: #fff; }
 
         .slice {
           position: relative;
@@ -99,88 +99,85 @@ export default function Activities() {
           padding: 0 24px;
         }
 
-        /* 50/50 layout */
         .row {
           display: grid;
           grid-template-columns: 1fr 1fr;
-          align-items: stretch;
+          align-items: center;
           gap: clamp(22px, 4vw, 44px);
           opacity: 0;
           transform: translateY(22px);
           transition: opacity .55s ease, transform .55s cubic-bezier(.2,.65,.16,1);
         }
         .row.show { opacity: 1; transform: none; }
-
         .row.rev .media { order: 2; }
         .row.rev .content { order: 1; }
 
-        /* IMAGE */
         .media {
           position: relative;
           border-radius: 20px;
           overflow: hidden;
-          box-shadow: 0 26px 60px rgba(2,8,23,.12);
           height: 100%;
-          display: flex;
+          box-shadow: none;
+          background: transparent;
         }
-
         .media img {
           width: 100%;
           height: 100%;
-          object-fit: cover;
-          object-position: center;
+          object-fit: contain;
+          background: transparent;
           transition: transform .6s ease;
         }
         .media:hover img { transform: scale(1.035); }
 
-        /* CONTENT */
-        .content { padding: 4px 8px; display: flex; flex-direction: column; justify-content: center; }
-        .title { display: flex; gap: 10px; align-items: center; margin-bottom: 10px; }
+        .content { display: flex; flex-direction: column; justify-content: center; }
+        .title { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
         .bubble {
-          width: 44px; height: 44px; border-radius: 50%;
-          display: flex; align-items: center; justify-content: center;
+          width: 48px; height: 48px; border-radius: 50%;
           background: linear-gradient(135deg, var(--teal), var(--blue));
+          display: flex; align-items: center; justify-content: center;
           color: #fff;
           box-shadow: 0 8px 18px rgba(16,163,167,.22);
-          flex-shrink: 0;
         }
-        .title h3 {
-          margin: 0; color: var(--ink); font-weight: 900;
-          font-size: clamp(20px, 1.9vw, 26px);
+        .title h3 { margin: 0; color: var(--ink); font-weight: 900; font-size: clamp(20px, 1.9vw, 26px); }
+        .desc { color: var(--muted); line-height: 1.7; font-size: clamp(15px, 1vw, 17px); margin-bottom: 18px; }
+
+        .logos {
+          display: flex;
+          flex-wrap: wrap;
+          gap: 18px;
+          overflow: hidden;
+          position: relative;
+          margin-top: 12px;
+          align-items: center;
         }
-        .desc {
-          margin: 0 0 18px; color: var(--muted); line-height: 1.7;
-          font-size: clamp(14.5px, 1vw, 16.5px);
-          max-width: 60ch;
+        .logos.multiple {
+          justify-content: center;
+          max-height: 100px;
+        }
+        .logos.single {
+          justify-content: flex-start;
+        }
+        .logos.multiple::after {
+          content: '';
+          position: absolute;
+          right: 0;
+          top: 0;
+          bottom: 0;
+          width: 80px;
+          background: linear-gradient(to right, transparent, #fff);
         }
 
-        /* LOGOS grid */
-        .logos {
-          display: grid;
-          grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
-          gap: clamp(12px, 2vw, 18px);
-          align-items: center; justify-items: center;
-          max-width: 860px;
-          margin-top: 12px;
-        }
         .logo {
-          display: inline-flex; align-items: center; justify-content: center;
-          padding: clamp(6px, 1vw, 10px);
           cursor: pointer;
-          transition: transform .2s ease, filter .18s ease;
-          border: none;
           background: transparent;
+          border: none;
+          transition: transform .2s ease, filter .2s ease;
         }
-        .logo:hover { transform: scale(1.05); filter: brightness(1.08); }
-        .logo:focus-visible {
-          outline: 2px solid var(--teal);
-          outline-offset: 4px;
-        }
+        .logo:hover { transform: scale(1.08); filter: brightness(1.15); }
         .logo img {
           max-height: var(--logoH);
           width: auto;
           object-fit: contain;
-          background: none !important;
           mix-blend-mode: multiply;
         }
 
@@ -192,50 +189,38 @@ export default function Activities() {
 
         @media (max-width: 768px) {
           :root { --logoH: var(--logoH-sm); }
-          .bubble { width: 38px; height: 38px; }
-          .desc { max-width: unset; }
-          .logos { grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); gap: 12px; }
+          .logos.multiple::after { display: none; }
         }
       `}</style>
 
-      {VERTICALS.map((v, i) => (
-        <div className={`slice ${i % 2 ? "alt" : ""}`} key={v.title}>
-          <div className="container">
-            <div className={`row ${i % 2 ? "rev" : ""}`} ref={(el) => (rowRefs.current[i] = el)}>
-              
-              {/* IMAGE */}
-              <figure className="media">
-                <img src={v.cover} alt={`${v.title} cover`} loading="lazy" />
-              </figure>
-
-              {/* CONTENT */}
-              <div className="content">
-                <div className="title">
-                  <span className="bubble">{v.icon}</span>
-                  <h3>{v.title}</h3>
-                </div>
-                <p className="desc">{v.description}</p>
-
-                {/* Logos for all sections, including last one */}
-                <div className="logos">
-                  {v.logos.map((L, idx) => (
-                    <button
-                      key={`${v.title}-${idx}`}
-                      type="button"
-                      className="logo"
-                      title={L.alt}
-                      aria-label={`Visit ${L.alt}`}
-                      onClick={() => openLink(L.link)}
-                    >
-                      <img src={L.img} alt={L.alt} loading="lazy" />
-                    </button>
-                  ))}
+      {SERVICES.map((s, i) => {
+        const logoClass = s.logos.length > 1 ? "multiple" : "single";
+        return (
+          <div className={`slice ${i % 2 ? "alt" : ""}`} key={s.title}>
+            <div className="container">
+              <div className={`row ${i % 2 ? "rev" : ""}`} ref={(el) => (sectionRefs.current[i] = el)}>
+                <figure className="media">
+                  <img src={s.cover} alt={`${s.title} cover`} loading="lazy" />
+                </figure>
+                <div className="content">
+                  <div className="title">
+                    <span className="bubble">{s.icon}</span>
+                    <h3>{s.title}</h3>
+                  </div>
+                  <p className="desc">{s.description}</p>
+                  <div className={`logos ${logoClass}`}>
+                    {s.logos.map((L, idx) => (
+                      <button key={idx} className="logo" onClick={() => openLink(L.link)}>
+                        <img src={L.img} alt={L.alt} loading="lazy" />
+                      </button>
+                    ))}
+                  </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
-      ))}
+        );
+      })}
     </section>
   );
 }
