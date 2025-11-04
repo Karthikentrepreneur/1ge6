@@ -15,6 +15,15 @@ const ActivitiesPage = () => {
       {/* ✅ Activities Section */}
       <Activities />
     </main>
+
+            <div>
+            <BreadCumb
+                bgimg="/activities.png"
+                Title="Our Business Verticals"
+            ></BreadCumb>
+            <Activities></Activities>
+        </div>
+
   );
 };
 
