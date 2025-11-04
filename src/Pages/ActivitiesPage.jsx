@@ -1,18 +1,17 @@
 import React from 'react';
 import BreadCumb from '../Components/Common/BreadCumb';
+import ActivitiesIntro from '../Components/Activities/ActivitiesIntro';
 import Activities from '../Components/Activities/Activities';
 
 const ActivitiesPage = () => {
   return (
-   
-            <div>
-            <BreadCumb
-                bgimg="/activities.png"
-                Title="Our Business Verticals"
-            ></BreadCumb>
-            <Activities></Activities>
-        </div>
-
+    <div className="activities-page">
+      <BreadCumb bgimg="/activities.png" Title="Our Business Verticals" />
+      <main>
+        <ActivitiesIntro />
+        <Activities />
+      </main>
+    </div>
   );
 };
 
