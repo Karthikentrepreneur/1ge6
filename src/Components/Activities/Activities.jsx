@@ -5,8 +5,6 @@ import { Truck, Leaf, Package } from "lucide-react";
 const SERVICES = [
   {
     title: "Supply Chain Solutions",
-    description:
-      "1 Global Enterprises invests in and builds high-performing logistics and technology businesses that power global trade. Our portfolio spans 16 countries, covering every major segment of the supply chain — including freight forwarding, warehousing, distribution, and digital logistics infrastructure. Through strategic ownership and operational expertise, we support our group companies in driving innovation, operational excellence, and sustainable growth. Our focus is on strengthening global connectivity and creating long-term value across the supply chain landscape.",
     cover: "/image1.png",
     logos: [
       { img: "/logosss01.png", alt: "GGL", link: "https://www.ggl.sg/" },
@@ -20,8 +18,6 @@ const SERVICES = [
   },
   {
     title: "Renewable Energy",
-    description:
-      "We drive sustainable growth through strategic investments across the renewable energy value chain — from feedstock origination to processing and technology enablement. Our portfolio supports the global shift toward renewable fuels and SAF by securing and optimising advanced feedstock supply. Operating across multiple regions, we build ethical, traceable sourcing networks and pre-treatment infrastructure, strengthening transparency, efficiency, and environmental integrity while accelerating the transition to cleaner energy.",
     cover: "/wind.jpg",
     logos: [
       { img: "/logosss04.png", alt: "Moltech", link: "https://moltechglobal.com/" },
@@ -32,8 +28,6 @@ const SERVICES = [
   },
   {
     title: "Product Distribution",
-    description:
-      "Through strategic partnerships, our group company Citygn manages the distribution of ENOC lubricants and other industrial products across key territories. Our focus is on building efficient, customer-centric networks supported by strong logistics capabilities and reliable after-sales service. By combining local market expertise with the strength of global brands, we ensure consistent quality, reach, and value delivery across every channel.",
     cover: "/Productdistribution.jpg",
     logos: [
       { img: "/logosss05.png", alt: "CityGn", link: "https://citygnenergy.com/" },
@@ -78,20 +72,19 @@ export default function Services() {
           --muted: #475569;
           --teal: #10a3a7;
           --blue: #2563eb;
-          --bg1: #f6faff;
-          --bg2: #f3fbfc;
-          --logoH: 90px;
+          --bg1: #ffffff;
+          --bg2: #ffffff;
+          --logoH: 100px;
           --logoH-sm: 70px;
         }
 
-        .services-section { background: #fff; }
+        .services-section { background: transparent; }
 
         .slice {
           position: relative;
           padding: clamp(40px, 5vw, 80px) 0;
-          background: var(--bg1);
+          background: transparent;
         }
-        .slice.alt { background: var(--bg2); }
 
         .container {
           max-width: 1320px;
@@ -100,8 +93,8 @@ export default function Services() {
         }
 
         .row {
-          display: grid;
-          grid-template-columns: 1fr 1fr;
+          display: flex;
+          flex-direction: column;
           align-items: center;
           gap: clamp(22px, 4vw, 44px);
           opacity: 0;
@@ -109,17 +102,15 @@ export default function Services() {
           transition: opacity .55s ease, transform .55s cubic-bezier(.2,.65,.16,1);
         }
         .row.show { opacity: 1; transform: none; }
-        .row.rev .media { order: 2; }
-        .row.rev .content { order: 1; }
 
         .media {
-          position: relative;
+          width: 100%;
           border-radius: 20px;
           overflow: hidden;
-          height: 100%;
           box-shadow: none;
           background: transparent;
         }
+
         .media img {
           width: 100%;
           height: 100%;
@@ -127,94 +118,68 @@ export default function Services() {
           background: transparent;
           transition: transform .6s ease;
         }
-        .media:hover img { transform: scale(1.035); }
-
-        .content { display: flex; flex-direction: column; justify-content: center; }
-        .title { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
-        .bubble {
-          width: 48px; height: 48px; border-radius: 50%;
-          background: linear-gradient(135deg, var(--teal), var(--blue));
-          display: flex; align-items: center; justify-content: center;
-          color: #fff;
-          box-shadow: 0 8px 18px rgba(16,163,167,.22);
-        }
-        .title h3 { margin: 0; color: var(--ink); font-weight: 900; font-size: clamp(20px, 1.9vw, 26px); }
-        .desc { color: var(--muted); line-height: 1.7; font-size: clamp(15px, 1vw, 17px); margin-bottom: 18px; }
+        .media:hover img { transform: scale(1.03); }
 
         .logos {
           display: flex;
           flex-wrap: wrap;
-          gap: 18px;
-          overflow: hidden;
-          position: relative;
-          margin-top: 12px;
-          align-items: center;
-        }
-        .logos.multiple {
-          justify-content: center;
-          max-height: 100px;
-        }
-        .logos.single {
           justify-content: flex-start;
-        }
-        .logos.multiple::after {
-          content: '';
-          position: absolute;
-          right: 0;
-          top: 0;
-          bottom: 0;
-          width: 80px;
-          background: linear-gradient(to right, transparent, #fff);
+          gap: clamp(20px, 3vw, 30px);
+          width: 100%;
+          margin-top: 20px;
+          background: transparent;
         }
 
+        .logos.centered { justify-content: center; }
+
         .logo {
-          cursor: pointer;
           background: transparent;
           border: none;
+          cursor: pointer;
           transition: transform .2s ease, filter .2s ease;
+          display: flex;
+          align-items: center;
+          justify-content: center;
         }
+
         .logo:hover { transform: scale(1.08); filter: brightness(1.15); }
+
         .logo img {
           max-height: var(--logoH);
           width: auto;
           object-fit: contain;
           mix-blend-mode: multiply;
+          background: transparent;
         }
 
         @media (max-width: 1024px) {
-          .row { grid-template-columns: 1fr; }
-          .row.rev .media { order: 1; }
-          .row.rev .content { order: 2; }
+          .logos { justify-content: center; }
+          .media img { object-fit: contain; }
         }
 
         @media (max-width: 768px) {
           :root { --logoH: var(--logoH-sm); }
-          .logos.multiple::after { display: none; }
         }
       `}</style>
 
       {SERVICES.map((s, i) => {
-        const logoClass = s.logos.length > 1 ? "multiple" : "single";
+        const hasMultiple = s.logos.length > 1;
         return (
-          <div className={`slice ${i % 2 ? "alt" : ""}`} key={s.title}>
+          <div className="slice" key={s.title}>
             <div className="container">
-              <div className={`row ${i % 2 ? "rev" : ""}`} ref={(el) => (sectionRefs.current[i] = el)}>
+              <div className="row" ref={(el) => (sectionRefs.current[i] = el)}>
+                {/* IMAGE SECTION */}
                 <figure className="media">
                   <img src={s.cover} alt={`${s.title} cover`} loading="lazy" />
                 </figure>
-                <div className="content">
-                  <div className="title">
-                    <span className="bubble">{s.icon}</span>
-                    <h3>{s.title}</h3>
-                  </div>
-                  <p className="desc">{s.description}</p>
-                  <div className={`logos ${logoClass}`}>
-                    {s.logos.map((L, idx) => (
-                      <button key={idx} className="logo" onClick={() => openLink(L.link)}>
-                        <img src={L.img} alt={L.alt} loading="lazy" />
-                      </button>
-                    ))}
-                  </div>
+
+                {/* LOGOS SECTION */}
+                <div className={`logos ${hasMultiple ? "centered" : ""}`}>
+                  {s.logos.map((L, idx) => (
+                    <button key={idx} className="logo" onClick={() => openLink(L.link)}>
+                      <img src={L.img} alt={L.alt} loading="lazy" />
+                    </button>
+                  ))}
                 </div>
               </div>
             </div>
