@@ -51,7 +51,7 @@ const ContactMapContainer = ({ coordinates, selectedCity, hideChrome = false }) 
           </div>
         )}
 
-        {/* Pure Google Maps embed — clean view */}
+        {/* Pure Google Maps embed — clean, borderless */}
         <iframe
           key={mapVersion}
           src={mapUrl}
@@ -63,17 +63,14 @@ const ContactMapContainer = ({ coordinates, selectedCity, hideChrome = false }) 
         />
       </div>
 
-      {/* Footer hidden to remove bottom white space */}
-      {/* <div className="global-map-footer">
-        <p>© 2025 Global Presence Map — Data updated quarterly</p>
-      </div> */}
-
+      {/* Footer removed to avoid white space */}
       <style>{`
         .global-map-card { 
-          border-radius: 16px; 
-          overflow: hidden; 
-          background: transparent; 
-          box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+          border-radius: 0;
+          overflow: hidden;
+          background: transparent;
+          box-shadow: none;
+          border: none;
         }
 
         .global-map-header {
@@ -82,6 +79,7 @@ const ContactMapContainer = ({ coordinates, selectedCity, hideChrome = false }) 
           justify-content:space-between;
           padding:14px 16px;
           color:var(--theme-2);
+          background:transparent;
         }
 
         .global-map-header h3 { 
@@ -119,16 +117,18 @@ const ContactMapContainer = ({ coordinates, selectedCity, hideChrome = false }) 
         .global-map-frame { 
           position:relative; 
           height:520px; 
-          margin: 0; 
-          padding: 0; 
+          margin:0; 
+          padding:0; 
           background: transparent;
+          border: none;
         }
 
         .global-map-frame iframe { 
           width:100%; 
           height:100%; 
-          border:0; 
+          border: none; 
           display:block; 
+          background: transparent;
         }
 
         .global-map-loading { 
@@ -143,7 +143,7 @@ const ContactMapContainer = ({ coordinates, selectedCity, hideChrome = false }) 
           position:fixed; 
           inset:16px; 
           z-index:1000; 
-          background:#fff; 
+          background:transparent; 
         }
 
         .global-map-card.fullscreen .global-map-frame { 
