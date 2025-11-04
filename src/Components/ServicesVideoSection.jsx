@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React from "react";
 import { Workflow, Droplets, Code2, Sun } from "lucide-react";
 
 const SERVICES = [
@@ -13,26 +13,11 @@ const ServicesVideoSection = ({
   heading = "Business Verticals",
   subheading = "Integrated solutions powered by people, technology, and purpose",
 }) => {
-  const leftRef = useRef(null);
-  const [sectionHeight, setSectionHeight] = useState("auto");
-
-  useEffect(() => {
-    const updateHeight = () => {
-      if (leftRef.current) {
-        const height = leftRef.current.getBoundingClientRect().height;
-        setSectionHeight(`${height}px`);
-      }
-    };
-    updateHeight();
-    window.addEventListener("resize", updateHeight);
-    return () => window.removeEventListener("resize", updateHeight);
-  }, []);
-
   return (
     <section className="svs-split">
       <div className="svs-container">
         {/* LEFT COLUMN */}
-        <div className="svs-left" ref={leftRef}>
+        <div className="svs-left">
           <header className="svs-header">
             <p className="svs-sub">{subheading}</p>
             <h2 className="svs-title">{heading}</h2>
@@ -48,7 +33,7 @@ const ServicesVideoSection = ({
           </div>
         </div>
 
-        {/* RIGHT COLUMN — video locked at 16:9 */}
+        {/* RIGHT COLUMN — responsive video */}
         <div className="svs-right">
           <div className="svs-video-wrapper">
             <video
@@ -67,31 +52,43 @@ const ServicesVideoSection = ({
       <style>{`
         .svs-split {
           background: #fff;
-          padding: 72px 0;
+          padding: clamp(36px, 6vw, 80px) 0;
           overflow: hidden;
         }
 
         .svs-container {
           display: grid;
-          grid-template-columns: 0.7fr 1.3fr;
-          width: min(1400px, 94%);
+          grid-template-columns: 0.9fr 1.1fr;
+          width: min(1200px, 92vw);
           margin: 0 auto;
           align-items: stretch;
-          gap: 60px;
+          gap: clamp(16px, 4vw, 48px);
         }
 
-        /* LEFT SIDE */
+        /* LEFT */
         .svs-left {
           display: flex;
           flex-direction: column;
           justify-content: center;
         }
-
-        .svs-header { margin-bottom: 12px; }
+        .svs-header { margin-bottom: clamp(8px, 1.2vw, 16px); }
         .svs-sub { margin: 0 0 6px; font-size: .95rem; color: #5f6b7a; }
-        .svs-title { margin: 0; font-size: clamp(1.8rem, 1.2rem + 2vw, 2.6rem); font-weight: 800; color: #0E0F2C; }
+        .svs-title { margin: 0; font-size: clamp(1.6rem, 1.2rem + 2vw, 2.4rem); font-weight: 800; color: #0E0F2C; }
 
-        .svs-list { display: grid; gap: 10px; margin-top: 14px; }
+        /* Turn the list into 2 columns on large screens to reduce height */
+        .svs-list {
+          display: grid;
+          grid-template-columns: 1fr;
+          gap: 10px;
+          margin-top: 12px;
+        }
+        @media (min-width: 1100px) {
+          .svs-list {
+            grid-template-columns: repeat(2, minmax(220px, 1fr));
+            gap: 12px;
+          }
+        }
+
         .svs-item {
           display: flex;
           align-items: center;
@@ -121,43 +118,52 @@ const ServicesVideoSection = ({
         .svs-icon svg { width: 20px; height: 20px; }
         .svs-item-title { font-weight: 700; color: #0E0F2C; font-size: 1rem; line-height: 1.4; }
 
-        /* RIGHT SIDE — 16:9 video panel */
+        /* RIGHT */
         .svs-right {
           position: relative;
           width: 100%;
           display: flex;
-          align-items: center;
-          justify-content: center;
+          align-items: stretch; /* make child fill height */
         }
 
+        /* Default: keep 16:9 on small/medium to avoid tall gaps */
         .svs-video-wrapper {
           position: relative;
           width: 100%;
           aspect-ratio: 16 / 9;
-          border-radius: 20px;
+          border-radius: 16px;
           overflow: hidden;
-          box-shadow: 0 20px 50px rgba(14, 24, 44, 0.25);
+          box-shadow: 0 14px 36px rgba(14, 24, 44, 0.18);
         }
-
         .svs-video-wrapper video {
           position: absolute;
           inset: 0;
           width: 100%;
           height: 100%;
           object-fit: cover;
-          border: none;
           display: block;
           background: transparent;
+          border: none;
         }
 
-        /* MOBILE */
+        /* On large screens: match the left column height (kills dead space) */
+        @media (min-width: 1100px) {
+          .svs-video-wrapper {
+            aspect-ratio: auto;     /* cancel fixed ratio */
+            height: 100%;           /* fill available column height */
+            min-height: 360px;      /* sensible floor */
+            border-radius: 20px;
+            box-shadow: 0 20px 50px rgba(14, 24, 44, 0.25);
+          }
+        }
+
+        /* Tablet / Mobile */
         @media (max-width: 992px) {
           .svs-container {
             grid-template-columns: 1fr;
-            gap: 20px;
           }
           .svs-right {
-            order: -1;
+            order: -1; /* video on top */
           }
           .svs-video-wrapper {
             aspect-ratio: 16 / 9;
