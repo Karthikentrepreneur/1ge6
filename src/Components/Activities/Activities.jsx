@@ -34,8 +34,8 @@ const SERVICES = [
     title: "Product Distribution",
     description:
       "Through strategic partnerships, our group company Citygn manages the distribution of ENOC lubricants and other industrial products across key territories. Our focus is on building efficient, customer-centric networks supported by strong logistics capabilities and reliable after-sales service. By combining local market expertise with the strength of global brands, we ensure consistent quality, reach, and value delivery across every channel.",
-    cover: "/Productdistribution.jpg",
-    logos: [{ img: "/distribution.png", alt: "CityGn", link: "https://citygnenergy.com/" }],
+    cover: "/distribution.png",
+    logos: [{ img: "/logosss05.png", alt: "CityGn", link: "https://citygnenergy.com/" }],
     icon: <Package size={22} strokeWidth={2.2} color="#fff" />,
   },
 ];
