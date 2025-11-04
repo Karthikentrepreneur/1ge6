@@ -1,6 +1,7 @@
 import React, { useEffect, useRef } from "react";
 import { Truck, Leaf, Package } from "lucide-react";
 
+/* ---------- DATA ---------- */
 const VERTICALS = [
   {
     title: "Supply Chain Solutions",
@@ -34,14 +35,18 @@ const VERTICALS = [
     description:
       "Through strategic partnerships, our group company Citygn manages the distribution of ENOC lubricants and other industrial products across key territories. Our focus is on building efficient, customer-centric networks supported by strong logistics capabilities and reliable after-sales service. By combining local market expertise with the strength of global brands, we ensure consistent quality, reach, and value delivery across every channel.",
     cover: "/Productdistribution.jpg",
-    logos: [{ img: "/logosss05.png", alt: "CityGn", link: "https://citygnenergy.com/" }],
+    logos: [
+      { img: "/logosss05.png", alt: "CityGn", link: "https://citygnenergy.com/" },
+    ],
     icon: <Package size={20} strokeWidth={2.2} color="#fff" />,
-    hasLogoOnImage: true,
+    showLogoBelowText: true, // 👈 flag for last category (logo below text)
   },
 ];
 
+/* ---------- HELPERS ---------- */
 const openLink = (url) => url && window.open(url, "_blank", "noopener,noreferrer");
 
+/* ---------- COMPONENT ---------- */
 export default function Activities() {
   const rowRefs = useRef([]);
 
@@ -83,6 +88,7 @@ export default function Activities() {
           padding: 0 24px;
         }
 
+        /* 50/50 layout */
         .row {
           display: grid;
           grid-template-columns: 1fr 1fr;
@@ -97,6 +103,7 @@ export default function Activities() {
         .row.rev .media { order: 2; }
         .row.rev .content { order: 1; }
 
+        /* IMAGE */
         .media {
           position: relative;
           border-radius: 20px;
@@ -115,22 +122,7 @@ export default function Activities() {
         }
         .media:hover img { transform: scale(1.035); }
 
-        .logo-overlay {
-          position: absolute;
-          bottom: 20px;
-          left: 20px;
-          background: rgba(255,255,255,0.8);
-          padding: 10px 14px;
-          border-radius: 12px;
-          box-shadow: 0 6px 20px rgba(0,0,0,0.15);
-        }
-        .logo-overlay img {
-          height: 44px;
-          width: auto;
-          object-fit: contain;
-          mix-blend-mode: multiply;
-        }
-
+        /* CONTENT */
         .content { padding: 4px 8px; display: flex; flex-direction: column; justify-content: center; }
         .title { display: flex; gap: 10px; align-items: center; margin-bottom: 10px; }
         .bubble {
@@ -151,12 +143,14 @@ export default function Activities() {
           max-width: 60ch;
         }
 
+        /* LOGOS grid */
         .logos {
           display: grid;
           grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
           gap: clamp(12px, 2vw, 18px);
           align-items: center; justify-items: center;
           max-width: 860px;
+          margin-top: 12px;
         }
         .logo {
           display: flex; align-items: center; justify-content: center;
@@ -184,8 +178,6 @@ export default function Activities() {
           .bubble { width: 38px; height: 38px; }
           .desc { max-width: unset; }
           .logos { grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); gap: 12px; }
-          .logo-overlay { bottom: 14px; left: 14px; padding: 8px 10px; }
-          .logo-overlay img { height: 36px; }
         }
       `}</style>
 
@@ -193,15 +185,13 @@ export default function Activities() {
         <div className={`slice ${i % 2 ? "alt" : ""}`} key={v.title}>
           <div className="container">
             <div className={`row ${i % 2 ? "rev" : ""}`} ref={(el) => (rowRefs.current[i] = el)}>
+              
+              {/* IMAGE */}
               <figure className="media">
                 <img src={v.cover} alt={`${v.title} cover`} loading="lazy" />
-                {v.hasLogoOnImage && (
-                  <div className="logo-overlay">
-                    <img src={v.logos[0].img} alt={v.logos[0].alt} />
-                  </div>
-                )}
               </figure>
 
+              {/* CONTENT */}
               <div className="content">
                 <div className="title">
                   <span className="bubble">{v.icon}</span>
@@ -209,20 +199,19 @@ export default function Activities() {
                 </div>
                 <p className="desc">{v.description}</p>
 
-                {!v.hasLogoOnImage && (
-                  <div className="logos">
-                    {v.logos.map((L, idx) => (
-                      <div
-                        key={`${v.title}-${idx}`}
-                        className="logo"
-                        title={L.alt}
-                        onClick={() => openLink(L.link)}
-                      >
-                        <img src={L.img} alt={L.alt} loading="lazy" />
-                      </div>
-                    ))}
-                  </div>
-                )}
+                {/* Logos for all sections, including last one */}
+                <div className="logos">
+                  {v.logos.map((L, idx) => (
+                    <div
+                      key={`${v.title}-${idx}`}
+                      className="logo"
+                      title={L.alt}
+                      onClick={() => openLink(L.link)}
+                    >
+                      <img src={L.img} alt={L.alt} loading="lazy" />
+                    </div>
+                  ))}
+                </div>
               </div>
             </div>
           </div>
