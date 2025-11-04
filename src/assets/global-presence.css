@@ -1,11 +1,6 @@
 .global-presence-page {
-  background: linear-gradient(
-    180deg,
-    rgba(28, 168, 203, 0.12) 0%,
-    rgba(11, 30, 53, 0) 62%,
-    rgba(11, 30, 53, 0) 100%
-  );
-  padding: clamp(28px, 6vw, 60px) 0 clamp(40px, 8vw, 72px);
+  background: linear-gradient(180deg, rgba(28, 168, 203, 0.08) 0%, #ffffff 100%);
+  padding: 40px 0 80px;
 }
 
 .global-presence-hero {
@@ -34,8 +29,8 @@
 .global-mobile-toggle {
   display: flex;
   justify-content: center;
-  gap: clamp(12px, 5vw, 20px);
-  margin: 0 auto clamp(20px, 5vw, 28px);
+  gap: 16px;
+  margin: 0 auto 24px;
   width: 100%;
 }
 
@@ -59,24 +54,20 @@
 .global-presence-layout {
   display: flex;
   align-items: stretch;
-  gap: clamp(20px, 5vw, 36px);
+  gap: 32px;
   max-width: 1240px;
   margin: 0 auto;
-  padding: 0 clamp(18px, 4vw, 32px);
-  flex-wrap: wrap;
+  padding: 0 24px;
 }
 
 .global-map-section {
-  flex: 1 1 520px;
-  min-height: clamp(340px, 58vh, 580px);
-  background: transparent;
-  display: flex;
+  flex: 1;
+  min-height: 520px;
 }
 
 .global-sidebar-section {
-  flex: 0 1 380px;
-  max-width: 420px;
-  width: 100%;
+  width: 420px;
+  flex-shrink: 0;
 }
 
 .global-map-card,
@@ -247,21 +238,6 @@
   transition: all 0.3s ease;
 }
 
-.global-country-identity {
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.global-country-flag {
-  width: 24px;
-  height: 18px;
-  border-radius: 4px;
-  object-fit: cover;
-  box-shadow: 0 2px 6px rgba(15, 32, 60, 0.25);
-  border: 1px solid rgba(15, 32, 60, 0.08);
-}
-
 .global-country-trigger.is-selected {
   border-color: var(--theme);
   box-shadow: 0 10px 28px rgba(28, 168, 203, 0.18);
@@ -357,13 +333,11 @@
 @media (max-width: 1200px) {
   .global-presence-layout {
     flex-direction: column;
-    gap: clamp(18px, 6vw, 28px);
   }
 
-  .global-map-section,
-  .global-sidebar-section {
-    flex: 1 1 auto;
-    min-height: auto;
+  .global-sidebar-section,
+  .global-map-section {
+    width: 100%;
   }
 
   .hidden-mobile {
@@ -385,15 +359,11 @@
   }
 
   .global-presence-layout {
-    padding: 0 clamp(12px, 6vw, 18px);
+    padding: 0 16px;
   }
 
   .global-sidebar-content {
     max-height: none;
-  }
-
-  .global-map-section {
-    min-height: clamp(320px, 60vh, 520px);
   }
 }
 
