@@ -39,23 +39,34 @@ const VERTICALS = [
       { img: "/logosss05.png", alt: "CityGn", link: "https://citygnenergy.com/" },
     ],
     icon: <Package size={20} strokeWidth={2.2} color="#fff" />,
-    showLogoBelowText: true, // 👈 flag for last category (logo below text)
   },
 ];
 
 /* ---------- HELPERS ---------- */
-const openLink = (url) => url && window.open(url, "_blank", "noopener,noreferrer");
+const openLink = (url) => {
+  if (!url) return;
+  if (typeof window !== "undefined") {
+    window.open(url, "_blank", "noopener,noreferrer");
+  }
+};
 
 /* ---------- COMPONENT ---------- */
 export default function Activities() {
   const rowRefs = useRef([]);
 
   useEffect(() => {
+    const rows = rowRefs.current;
+
+    if (typeof window === "undefined" || !("IntersectionObserver" in window)) {
+      rows.forEach((el) => el?.classList.add("show"));
+      return;
+    }
+
     const io = new IntersectionObserver(
-      (entries) => entries.forEach((e) => e.isIntersecting && e.target.classList.add("show")),
+      (entries) => entries.forEach((entry) => entry.isIntersecting && entry.target.classList.add("show")),
       { threshold: 0.18 }
     );
-    rowRefs.current.forEach((el) => el && io.observe(el));
+    rows.forEach((el) => el && io.observe(el));
     return () => io.disconnect();
   }, []);
 
@@ -153,12 +164,18 @@ export default function Activities() {
           margin-top: 12px;
         }
         .logo {
-          display: flex; align-items: center; justify-content: center;
+          display: inline-flex; align-items: center; justify-content: center;
           padding: clamp(6px, 1vw, 10px);
           cursor: pointer;
           transition: transform .2s ease, filter .18s ease;
+          border: none;
+          background: transparent;
         }
         .logo:hover { transform: scale(1.05); filter: brightness(1.08); }
+        .logo:focus-visible {
+          outline: 2px solid var(--teal);
+          outline-offset: 4px;
+        }
         .logo img {
           max-height: var(--logoH);
           width: auto;
@@ -202,14 +219,16 @@ export default function Activities() {
                 {/* Logos for all sections, including last one */}
                 <div className="logos">
                   {v.logos.map((L, idx) => (
-                    <div
+                    <button
                       key={`${v.title}-${idx}`}
+                      type="button"
                       className="logo"
                       title={L.alt}
+                      aria-label={`Visit ${L.alt}`}
                       onClick={() => openLink(L.link)}
                     >
                       <img src={L.img} alt={L.alt} loading="lazy" />
-                    </div>
+                    </button>
                   ))}
                 </div>
               </div>
