@@ -5,7 +5,6 @@ const SERVICES = [
   { title: "Supply Chain Solutions", Icon: Workflow },
   { title: "Renewable Energy", Icon: Sun },
   { title: "Product Distribution", Icon: Droplets },
-  { title: "Technology", Icon: Code2 },
 ];
 
 const ServicesVideoSection = ({
