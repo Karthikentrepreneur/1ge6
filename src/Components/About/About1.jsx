@@ -86,11 +86,10 @@ const About1 = () => {
         .about-items .content p { margin: 0; line-height: 1.55; color: var(--muted); font-size: 15.5px; }
 
         /* ===== Group Companies ===== */
-        /* Make the whole block transparent and flat */
         .brand-block {
           margin-top: 60px;
-          padding: 20px 0 0;            /* tighten vertical space */
-          background: transparent !important; /* ⬅ kill the blue/white panel */
+          padding: 20px 0 0;
+          background: transparent !important;
           border-radius: 0 !important;
           box-shadow: none !important;
           border: none !important;
@@ -103,7 +102,6 @@ const About1 = () => {
           text-align: center; margin: 0 0 18px; font-size: 30px; font-weight: 800; color: var(--ink);
         }
 
-        /* Slider container & Slick overrides to keep transparency while scrolling */
         .brand-slider-wrap { max-width: 1200px; margin: 0 auto; padding: 0; line-height: 0; }
         .brand-slider-wrap .slick-slider,
         .brand-slider-wrap .slick-list,
@@ -115,7 +113,7 @@ const About1 = () => {
         }
         .brand-slider-wrap .slick-list {
           -webkit-backface-visibility: hidden; backface-visibility: hidden;
-          overflow: visible; /* avoids clipping shadows when scaling logos */
+          overflow: visible;
         }
         .brand-slider-wrap .slick-track { display: flex; align-items: center; }
 
@@ -123,22 +121,32 @@ const About1 = () => {
           display: flex; align-items: center; justify-content: center; height: 150px;
         }
 
-        /* Logos: no white box on any bg */
         .brand-logo {
           max-height: 120px; width: auto; object-fit: contain; display: block;
           transition: transform 0.25s ease, filter 0.25s ease;
           background: transparent !important;
-          mix-blend-mode: multiply;            /* removes white visually on light bg */
-          pointer-events: none;                 /* smoother finger scroll on mobile */
+          mix-blend-mode: multiply;
+          pointer-events: none;
         }
         .brand-logo:hover { transform: scale(1.08); filter: brightness(1.08); }
         .brand-link { display: inline-flex; align-items: center; justify-content: center; }
 
         /* ===== Responsive tweaks ===== */
         @media (max-width: 991px) {
-          .about-row { flex-direction: column; }
-          .about-image-col { padding-right: 0; }
-          .about-text-col { padding-left: 0; margin-top: 12px; }
+          .about-row { 
+            flex-direction: column !important; 
+          }
+          .about-image-col {
+            order: 1 !important;
+            padding-right: 0;
+          }
+          .about-text-col {
+            order: 2 !important;
+            padding-left: 0;
+            margin-top: 24px;
+            text-align: center;
+          }
+          .about-items { justify-content: center; text-align: left; }
           .brand-slide { height: 120px; }
           .brand-logo { max-height: 100px; }
         }
@@ -147,7 +155,7 @@ const About1 = () => {
           .about-content .section-title h2 { font-size: 26px; }
           .brand-title { font-size: 24px; margin-bottom: 14px; }
           .brand-slide { height: 96px; }
-          .brand-logo { max-height: 78px; mix-blend-mode: darken; } /* better on some mobile screens */
+          .brand-logo { max-height: 78px; mix-blend-mode: darken; }
         }
       `}</style>
 
