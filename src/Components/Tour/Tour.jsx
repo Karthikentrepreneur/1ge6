@@ -164,7 +164,7 @@ const Tour = () => {
 
                                 <div className="single-sidebar-widget">
                                     <div className="wid-title">
-                                        <h3>Our Business Verticals</h3>
+                                        <h3>Business Verticals</h3>
                                     </div>
                                     <div className="categories-list">
                                         <label className="checkbox-single d-flex justify-content-between align-items-center">

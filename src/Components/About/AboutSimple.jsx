@@ -27,6 +27,7 @@ const About1 = () => {
         }
 
         .about-wrapper { width: 100%; }
+        .about-row { display: flex; flex-wrap: wrap; }
 
         .about-image-col { padding-right: 16px; }
         .about-photo-wrap {
@@ -55,6 +56,15 @@ const About1 = () => {
           font-weight: 800;
           font-size: 34px;
           line-height: 1.15;
+        }
+
+        .about-area::before,
+        .about-area::after {
+          display: none !important;
+          content: none !important;
+        }
+        .about-area .line-image {
+          display: none !important;
         }
 
         .about-items {
@@ -94,6 +104,7 @@ const About1 = () => {
         }
 
         @media (max-width: 991px) {
+          .about-row { flex-direction: column; }
           .about-image-col { padding-right: 0; }
           .about-text-col { padding-left: 0; margin-top: 12px; }
         }
@@ -105,9 +116,9 @@ const About1 = () => {
 
       <div className="container-fluid" style={{ paddingLeft: 0, paddingRight: 0 }}>
         <div className="about-wrapper">
-          <div className="row g-4 align-items-center mx-0">
+          <div className="row g-4 align-items-center mx-0 about-row">
             {/* Left Image */}
-            <div className="col-lg-7 about-image-col d-flex">
+            <div className="col-12 col-lg-7 about-image-col d-flex">
               <div className="about-photo-wrap w-100">
                 <img
                   src="/team1.jpg"
@@ -119,7 +130,7 @@ const About1 = () => {
             </div>
 
             {/* Right Text */}
-            <div className="col-lg-5 about-text-col">
+            <div className="col-12 col-lg-5 about-text-col">
               <div className="about-content pe-lg-4 ps-lg-2 px-3 px-lg-0">
                 <div className="section-title">
                   <h2>1 Global Enterprises</h2>
