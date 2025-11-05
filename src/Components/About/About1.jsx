@@ -70,20 +70,48 @@ const About1 = () => {
           margin-bottom: 16px; color: var(--ink); font-weight: 800; font-size: 34px; line-height: 1.15;
         }
 
+        /* Remove any theme pseudo elements */
         .about-area::before,
         .about-area::after { display: none !important; content: none !important; }
         .about-area .line-image { display: none !important; }
 
-        .about-items { display: flex; align-items: flex-start; gap: 14px; margin-bottom: 16px; }
+        /* ===== PERFECT ALIGNMENT BLOCK ===== */
+        /* Use a grid: [icon | text] with shared variables */
+        .about-area {
+          --icon: 56px;     /* icon circle size */
+          --gap:  16px;     /* space between icon and text */
+        }
+
+        /* Align the section title to the text column (not the icon) on >=576px */
+        @media (min-width: 576px) {
+          .about-content .section-title { margin-left: calc(var(--icon) + var(--gap)); }
+        }
+
+        /* Each row: icon column + text column */
+        .about-items {
+          display: grid;
+          grid-template-columns: var(--icon) 1fr;
+          column-gap: var(--gap);
+          align-items: center;             /* vertically center icon with its text block */
+          margin: 0 0 18px;
+        }
         .about-items:last-child { margin-bottom: 0; }
+
         .about-items .icon {
-          width: 54px; height: 54px; min-width: 54px; border-radius: 50%;
-          background-color: var(--accent); display: flex; align-items: center; justify-content: center;
+          width: var(--icon); height: var(--icon);
+          border-radius: 50%;
+          background-color: var(--accent);
+          display: flex; align-items: center; justify-content: center;
           box-shadow: 0 4px 10px rgba(38,182,224,.35);
         }
         .about-items .icon svg { width: 24px; height: 24px; color: #fff; }
-        .about-items .content h5 { font-weight: 800; margin: 2px 0 6px; color: var(--ink); }
-        .about-items .content p { margin: 0; line-height: 1.55; color: var(--muted); font-size: 15.5px; }
+
+        .about-items .content h5 {
+          font-weight: 800; margin: 0 0 6px; color: var(--ink);
+        }
+        .about-items .content p {
+          margin: 0; line-height: 1.6; color: var(--muted); font-size: 15.5px;
+        }
 
         /* ===== Group Companies ===== */
         .brand-block {
@@ -111,15 +139,10 @@ const About1 = () => {
         .brand-slider-wrap .slick-dots {
           background: transparent !important;
         }
-        .brand-slider-wrap .slick-list {
-          -webkit-backface-visibility: hidden; backface-visibility: hidden;
-          overflow: visible;
-        }
+        .brand-slider-wrap .slick-list { -webkit-backface-visibility: hidden; backface-visibility: hidden; overflow: visible; }
         .brand-slider-wrap .slick-track { display: flex; align-items: center; }
 
-        .brand-slide {
-          display: flex; align-items: center; justify-content: center; height: 150px;
-        }
+        .brand-slide { display: flex; align-items: center; justify-content: center; height: 150px; }
 
         .brand-logo {
           max-height: 120px; width: auto; object-fit: contain; display: block;
@@ -131,19 +154,22 @@ const About1 = () => {
         .brand-logo:hover { transform: scale(1.08); filter: brightness(1.08); }
         .brand-link { display: inline-flex; align-items: center; justify-content: center; }
 
-        /* ===== Responsive tweaks ===== */
-        /* Stack up to 1199px (covers iPad & 1024px laptops) */
+        /* ===== Responsive layout rules ===== */
+        /* Stack until 1199px so iPad/1024 show image on top */
         @media (max-width: 1199px) {
           .about-row { flex-direction: column !important; }
           .about-image-col { order: 1 !important; padding-right: 0; }
-          .about-text-col  { order: 2 !important; padding-left: 0; margin-top: 24px; text-align: center; }
-          .about-items { justify-content: center; text-align: left; }
+          .about-text-col  { order: 2 !important; padding-left: 0; margin-top: 24px; }
+          /* Keep left alignment for neat column look */
+          .about-content, .about-items .content { text-align: left; }
           .brand-slide { height: 120px; }
           .brand-logo { max-height: 100px; }
         }
 
         @media (max-width: 575px) {
           .about-content .section-title h2 { font-size: 26px; }
+          /* On very small phones, don't indent the title */
+          .about-content .section-title { margin-left: 0; }
           .brand-title { font-size: 24px; margin-bottom: 14px; }
           .brand-slide { height: 96px; }
           .brand-logo { max-height: 78px; mix-blend-mode: darken; }
