@@ -25,7 +25,7 @@ const SERVICES = [
     cover: "/animalfeed.jpg",
     logos: [
       { img: "/logosss04.png", alt: "Moltech", link: "https://moltechglobal.com/" },
-      { img: "/molgen.png", alt: "MoltechGen", link: "https://moltechgen.com/" },
+      { img: "/molgen.png", alt: "MoltechGen", link: "https://moltechglobal.com/" },
       { img: "/superenergy.png", alt: "Super Energy", link: "https://www.superenergy.sg/" },
     ],
     icon: <Leaf size={22} strokeWidth={2.2} color="#fff" />,
