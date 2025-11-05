@@ -132,20 +132,11 @@ const About1 = () => {
         .brand-link { display: inline-flex; align-items: center; justify-content: center; }
 
         /* ===== Responsive tweaks ===== */
-        @media (max-width: 991px) {
-          .about-row { 
-            flex-direction: column !important; 
-          }
-          .about-image-col {
-            order: 1 !important;
-            padding-right: 0;
-          }
-          .about-text-col {
-            order: 2 !important;
-            padding-left: 0;
-            margin-top: 24px;
-            text-align: center;
-          }
+        /* Stack up to 1199px (covers iPad & 1024px laptops) */
+        @media (max-width: 1199px) {
+          .about-row { flex-direction: column !important; }
+          .about-image-col { order: 1 !important; padding-right: 0; }
+          .about-text-col  { order: 2 !important; padding-left: 0; margin-top: 24px; text-align: center; }
           .about-items { justify-content: center; text-align: left; }
           .brand-slide { height: 120px; }
           .brand-logo { max-height: 100px; }
@@ -162,8 +153,8 @@ const About1 = () => {
       <div className="container-fluid" style={{ paddingLeft: 0, paddingRight: 0 }}>
         <div className="about-wrapper">
           <div className="row g-4 align-items-center mx-0 about-row">
-            {/* Left Image */}
-            <div className="col-12 col-lg-7 about-image-col d-flex">
+            {/* Image */}
+            <div className="col-12 col-xl-7 about-image-col d-flex">
               <div className="about-photo-wrap w-100">
                 <img
                   src="/team1.jpg"
@@ -174,9 +165,9 @@ const About1 = () => {
               </div>
             </div>
 
-            {/* Right Text */}
-            <div className="col-12 col-lg-5 about-text-col">
-              <div className="about-content pe-lg-4 ps-lg-2 px-3 px-lg-0">
+            {/* Text */}
+            <div className="col-12 col-xl-5 about-text-col">
+              <div className="about-content pe-xl-4 ps-xl-2 px-3 px-xl-0">
                 <div className="section-title">
                   <h2>1 Global Enterprises</h2>
                 </div>
